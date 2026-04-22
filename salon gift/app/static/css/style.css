@@ -1,0 +1,269 @@
+/* --- 1. RESET Y VARIABLES --- */
+:root {
+    --primary-color: #ff6bad;    /* Rosa principal */
+    --secondary-color: #f8a5c2;  /* Rosa claro */
+    --accent-color: #82d8b0;     /* Verde menta/Acento */
+    --dark-text: #2d3436;
+    --light-bg: #fff5f8;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+}
+
+/* --- 2. NAVBAR (MENÚ SUPERIOR) --- */
+.nav-container {
+    background: var(--white);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(255, 107, 173, 0.1);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.nav-logo a {
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.nav-logo span {
+    color: var(--accent-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px; /* Espacio entre Inicio e Iniciar Sesión */
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark-text);
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+/* --- FONDO ESPECÍFICO PARA LOGIN --- */
+/* 1. EL PADRE: Forzamos que sea un contenedor de pantalla completa */
+.login-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+                      url('../img/fondo.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column; /* Organiza la barra arriba y el login abajo */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* 2. LA BARRA DE NAVEGACIÓN (SalonGift): La hacemos flotar para que no empuje */
+/* Reemplaza '.navbar' o '.header' por la clase real de tu barra blanca */
+.login-page header, 
+.login-page .navbar,
+.login-page nav { 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+/* 3. EL CENTRADOR: Esto ignorará la barra y pondrá el login en el centro puro */
+.login-page .content-wrapper {
+    flex: 1;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100%;
+    background: transparent !important;
+    margin: 0 !important;
+}
+
+/* 4. LA TARJETA BLANCA: Más ancha y con el estilo de tu foto */
+.login-form {
+    background: #f8f6f8; /* El tono blanquecino de tu imagen */
+    padding: 60px 50px;  /* Más espacio interno */
+    border-radius: 40px; /* Bordes muy redondeados como en la foto */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    
+    /* ANCHO GRANDE */
+    width: 100%;
+    max-width: 550px;    /* <--- Aquí controlas que sea bien ancho */
+    
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* 5. INPUTS: Redondeados y elegantes */
+.login-form input {
+    width: 100%;
+    padding: 18px;       /* Inputs más altos */
+    margin: 10px 0 25px 0;
+    border: none;
+    border-radius: 15px; /* Bordes redondeados como en tu imagen */
+    background: white;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    font-size: 16px;
+}
+
+/* 6. BOTÓN ENTRAR (Rosa chicle) */
+.login-form__button, 
+.btn-login {
+    width: 100%;
+    padding: 18px;
+    background: #ff75b5; /* El rosa de tu imagen */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(255, 117, 181, 0.3);
+    margin-top: 10px;
+}
+
+/* 7. LINK CREAR CUENTA */
+.login-form a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #6a1b9a;
+    text-decoration: none;
+    font-weight: bold;
+}
+/* --- ESTILOS PARA FORMULARIOS DE REGISTRO --- */
+.form-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.form-card {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 107, 173, 0.1);
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid var(--secondary-color);
+}
+
+.form-card__title {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group__label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--dark-text);
+}
+
+.form-group__input {
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group__input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-card__actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-submit {
+    flex: 2;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-submit:hover {
+    background: var(--accent-color);
+}
+
+.btn-cancel {
+    flex: 1;
+    text-align: center;
+    background: #eee;
+    color: var(--dark-text);
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+.contenedor-notificaciones {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: 90%;
+    max-width: 400px;
+}
+
+.alerta {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    color: white; /* Texto blanco */
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Colores según el tipo de mensaje de Flask */
+.alerta-success { background-color: #4CAF50; } /* Verde */
+.alerta-danger { background-color: #ff4d9a; }  /* Rosa/Rojo */
+
+.cerrar-alerta {
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 20px;
+}
