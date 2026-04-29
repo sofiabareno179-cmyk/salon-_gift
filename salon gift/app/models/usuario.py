@@ -17,8 +17,8 @@ class User(db.Model, UserMixin):
     perfil = db.relationship('Perfil', backref='usuario', uselist=False)
 
     def __repr__(self):
-        return f'<Usuario {self.nombreuser} - Rol {self.rol}>' # Corregido
-
+        return f'<Usuario {self.nombreuser} - Rol {self.rol}>' 
+    
     def get_id(self):
         return str(self.idusuario)
 
