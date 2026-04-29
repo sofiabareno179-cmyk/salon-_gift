@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Nueva Cita{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h4 class="mb-0">Agendar Cita</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form action="{{ url_for('citas.nueva_cita') }}" method="POST">
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Fecha y Hora de la Cita</label>
+                            <input type="datetime-local" name="fechahora" class="form-control form-control-lg" required>
+                            <div class="form-text">Selecciona el día y la hora prevista.</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Estado Inicial</label>
+                            <select name="estado" class="form-select">
+                                <option value="Pendiente" selected>Pendiente</option>
+                                <option value="Confirmada">Confirmada</option>
+                                <option value="Cancelada">Cancelada</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">Confirmar Cita</button>
+                            <a href="{{ url_for('citas.listar_citas') }}" class="btn btn-light text-muted">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

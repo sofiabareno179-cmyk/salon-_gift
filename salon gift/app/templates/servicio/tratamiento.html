@@ -1,0 +1,18 @@
+<section class="services-container">
+    <h1>Tratamientos Especializados</h1>
+    <div class="grid-servicios">
+        {% for servicio in servicios if 'tratamiento' in servicio.nombre.lower() or 'hidratacion' in servicio.nombre.lower() %}
+        <div class="card-horizontal">
+            <div class="info">
+                <h3>{{ servicio.nombre }}</h3>
+                <p>Recupera la salud de tu cabello con productos de alta calidad.</p>
+                <span class="tag">{{ servicio.duracion }}</span>
+            </div>
+            <div class="action">
+                <p class="precio">${{ servicio.precio }}</p>
+                <button class="btn-primary">Añadir al carrito</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>

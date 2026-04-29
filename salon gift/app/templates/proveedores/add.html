@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo Proveedor{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0 text-center"><i class="fas fa-building me-2"></i>Alta de Proveedor</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form action="{{ url_for('proveedores.nuevo_proveedor') }}" method="POST">
+                        
+                        <h6 class="text-muted text-uppercase mb-3 small fw-bold">Datos de la Empresa</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Nombre de la Empresa *</label>
+                                <input type="text" name="nombre_empresa" class="form-control" placeholder="Ej: Distribuidora Norte" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Nombre del Contacto *</label>
+                                <input type="text" name="contacto_nombre" class="form-control" placeholder="Ej: Juan Pérez" required>
+                            </div>
+                        </div>
+
+                        <h6 class="text-muted text-uppercase mb-3 small fw-bold">Información de Contacto</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">Teléfono *</label>
+                                <input type="tel" name="telefono" class="form-control" placeholder="+123456789" required>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold">Correo Electrónico</label>
+                                <input type="email" name="email" class="form-control" placeholder="contacto@empresa.com">
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Dirección Física</label>
+                            <textarea name="direccion" class="form-control" rows="2" placeholder="Calle, Ciudad, Estado..."></textarea>
+                        </div>
+
+                        <div class="alert alert-light border small text-muted">
+                            Los campos marcados con (*) son obligatorios.
+                        </div>
+
+                        <div class="d-flex justify-content-between pt-3">
+                            <a href="{{ url_for('proveedores.listar_proveedores') }}" class="btn btn-outline-secondary px-4">Volver</a>
+                            <button type="submit" class="btn btn-primary px-5">Guardar Proveedor</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
