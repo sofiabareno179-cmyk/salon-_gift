@@ -1,27 +1,36 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from app.models.usuario import User
-
+from werkzeug.security import check_password_hash
+import os
+from dotenv import load_dotenv
+load_dotenv()
 bp = Blueprint('auth', __name__)
-
 @bp.route('/', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        # Redirigir según el rol si ya está logueado
+        return redirect(url_for('user.admin_dashboard' if current_user.rol == 'admin' else 'user.index'))
+
     if request.method == 'POST':
         email_input = request.form.get('email')
-        password = request.form['password']
+        password = request.form.get('password')
+        
         user = User.query.filter_by(email=email_input).first()
+
         if user and user.check_password(password):
             login_user(user)
-            
             flash("¡Inicio de sesión exitoso!", "success")
-            return redirect(url_for('usuario.index'))
-    
-        flash('Invalid credentials. Please try again.', 'danger')
-    
-    if current_user.is_authenticated:
-        return redirect(url_for('auth.dashboard'))
-    return render_template("login.html")
 
+            # Redirección basada en rol
+            if user.rol == 'admin':
+                return redirect(url_for('auth.admin_dashboard'))
+            else:
+                return redirect(url_for('user.index'))
+        
+        flash('Credenciales inválidas. Inténtalo de nuevo.', 'danger')
+
+    return render_template("login.html")
 @bp.route('/dashboard')
 @login_required
 def dashboard():    
@@ -35,8 +44,8 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-@bp.route('/pruebajs')
-def pruebajs():
+@bp.route('/register')
+def register():
     example_data = {
         'title': 'Bienvenido a Flet',
         'message': 'Este es un mensaje desde Flask.'
