@@ -1,0 +1,213 @@
+:root {
+    --rosa-principal: #fce4ec; /* Rosa muy suave */
+    --rosa-fuerte: #f8bbd0;    /* Rosa para acentos */
+    --verde-menta: #e8f5e9;    /* Verde fondo */
+    --verde-fuerte: #a5d6a7;   /* Verde para acentos */
+    --texto: #4f4f4f;
+    --blanco: #ffffff;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --transition: all 0.4s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--texto);
+    line-height: 1.8;
+    
+    /* CONFIGURACIÓN PARA TODA LA PÁGINA */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
+                      url('../img/glitt.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* La imagen se queda fija al hacer scroll */
+    background-color: #fafafa; /* Color de respaldo */
+}
+    font-family: 'Poppins', sans-serif;
+    color: var(--texto);
+    line-height: 1.8;
+    background-color: #fafafa;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--texto);
+    line-height: 1.8;
+    
+    /* Imagen de fondo configurada para cubrir TODO */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
+                      url('../img/glitt.png'); 
+    
+    background-size: cover;      /* La imagen se estira para cubrir todo el ancho y alto */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* La imagen no se mueve al hacer scroll */
+    
+    /* Si la imagen no carga, este color llenará el fondo */
+    background-color: #fafafa;
+}
+/* --- SECCIÓN HERO --- */
+.hero {
+    height: 90vh;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    text-align: center;
+    background: transparent;
+}
+
+.hero-content {
+    max-width: 800px;
+    /* Fondo semi-transparente para asegurar que el texto sea legible */
+    background: rgba(255, 255, 255, 0.7);
+    padding: 40px;
+    border-radius: 30px;
+    backdrop-filter: blur(5px); /* Efecto de desenfoque moderno */
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #333;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #444;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--rosa-fuerte);
+    color: var(--blanco);
+    padding: 18px 45px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px);
+    background-color: var(--blanco);
+    color: var(--texto);
+    border: 2px solid var(--rosa-fuerte);
+}
+
+/* --- SECCIÓN SERVICIOS --- */
+.services-grid {
+    padding: 120px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.services-grid h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.services-grid h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--verde-fuerte);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+.cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+/* --- TARJETAS INDIVIDUALES --- */
+/* Contenedor principal */
+.cards-wrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilo base de la tarjeta (convertida en botón) */
+.service-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    width: 250px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Colores Pastel Personalizados */
+.pastel-pink { background-color: #FCE4EC; color: #AD1457; }   /* Rosa suave */
+.pastel-blue { background-color: #E3F2FD; color: #1565C0; }   /* Azul nube */
+.pastel-green { background-color: #E8F5E9; color: #2E7D32; }  /* Menta */
+
+/* Iconos y Texto */
+.service-card i {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.service-card h3 {
+    margin: 10px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #555; /* Gris suave para lectura */
+}
+
+/* Efecto al pasar el mouse */
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    filter: brightness(0.95); /* Se oscurece ligeramente */
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .services-grid {
+        padding: 70px 0;
+    }
+    
+    .cards-wrapper {
+        gap: 25px;
+    }
+    
+    .hero {
+        height: 70vh;
+    }
+}
