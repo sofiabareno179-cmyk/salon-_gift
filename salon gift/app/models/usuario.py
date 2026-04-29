@@ -6,6 +6,7 @@ import os
 from flask import url_for, current_app
 from werkzeug.security import generate_password_hash,check_password_hash
 class User(db.Model, UserMixin): 
+    
     __tablename__='usuario'
     idusuario = db.Column(db.Integer, primary_key=True)
     nombreuser = db.Column(db.String(100), unique=True, nullable=False)
