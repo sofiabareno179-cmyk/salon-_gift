@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="cliente-container">
+    <h1 style="color: #f06292;">Bienvenida, {{ current_user.username }}</h1>
+    <p>¿Qué servicio quieres hoy?</p>
+    <button class="btn-salon">Ver Catálogo</button>
+</div>
+{% endblock %}
