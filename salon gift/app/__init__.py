@@ -14,17 +14,26 @@ def create_app():
     login_manager.login_view = 'auth.login'
  
     @login_manager.user_loader
-    def load_user(idUser):
+    def load_user(idusuario):
         from .models.usuario import User
-        return User.query.get(int(idUser))
+        return User.query.get(int(idusuario))
 
     # Register blueprints
     from app.routes import (
-        auth,usuarios_route, 
+        auth,agenda_route,citas_route,inventario_route,
+        producto_route,proveedores_route,recordatorios_route,
+        usuarios_route, servicios_route
     
     )
     app.register_blueprint(auth.bp)
+    app.register_blueprint(agenda_route.bp)
+    app.register_blueprint(citas_route.bp)
+    app.register_blueprint(inventario_route.bp)
+    app.register_blueprint(producto_route.bp)
+    app.register_blueprint(proveedores_route.bp)
+    app.register_blueprint(recordatorios_route.bp)
     app.register_blueprint(usuarios_route.bp)
+    app.register_blueprint(servicios_route.bp)
 
 
     @app.errorhandler(Exception)
