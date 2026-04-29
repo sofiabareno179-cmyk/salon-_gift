@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-layout">
+    <aside class="sidebar">
+        <h3 class="sidebar__title">Admin Salon</h3>
+       <nav class="sidebar__nav">
+    <a href="{{ url_for('user.index') }}" class="sidebar__link">
+        <i class="fas fa-users"></i> Gestión Usuarios
+    </a>
+    <hr class="sidebar__divider">
+    <a href="{{ url_for('auth.logout') }}" class="sidebar__link sidebar__link--logout">
+        Cerrar Sesión
+    </a>
+</nav>
+    </aside>
+
+    <main class="dashboard">
+        <header class="dashboard__header">
+            <h2 class="dashboard__title">Panel de Control</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert--{{ category }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+        </header>
+
+        <section class="dashboard__stats">
+            <div class="card-stat card-stat--pink">
+                <h4 class="card-stat__label">Ingresos del día</h4>
+                <p class="card-stat__value">$ 150.000</p>
+            </div>
+            
+            <div class="card-stat card-stat--green">
+                <h4 class="card-stat__label">Servicios Realizados</h4>
+                <p class="card-stat__value">12</p>
+            </div>
+        </section>
+    </main>
+</div>
+{% endblock %}
