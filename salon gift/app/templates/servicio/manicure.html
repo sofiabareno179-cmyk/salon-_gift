@@ -1,0 +1,18 @@
+<section class="services-container">
+    <h1>Manicure & Pedicure</h1>
+    <div class="gallery-grid">
+        {% for servicio in servicios if 'manicure' in servicio.nombre.lower() or 'uñas' in servicio.nombre.lower() %}
+        <div class="card-nail">
+            <div class="img-placeholder" style="background-color: #fce4ec;">
+                </div>
+            <h3>{{ servicio.nombre }}</h3>
+            <hr>
+            <div class="details">
+                <span><strong>Precio:</strong> ${{ servicio.precio }}</span>
+                <span><strong>Tiempo:</strong> {{ servicio.duracion }}</span>
+            </div>
+            <button class="btn-manicure">Elegir Diseño</button>
+        </div>
+        {% endfor %}
+    </div>
+</section>

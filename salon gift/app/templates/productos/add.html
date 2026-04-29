@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo Producto{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow border-0">
+                <div class="card-header bg-success text-white py-3 text-center">
+                    <h5 class="mb-0">Añadir Producto al Inventario</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form action="{{ url_for('productos.nuevo_producto') }}" method="POST">
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-7">
+                                <label class="form-label fw-bold">Nombre del Producto</label>
+                                <input type="text" name="nombre" class="form-control" placeholder="Ej: Jabón Artesanal" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="form-label fw-bold">Precio</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" name="precio" class="form-control" step="0.01" min="0" placeholder="0.00" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Categoría</label>
+                            <input type="text" name="categoria" class="form-control" placeholder="Ej: Cuidado Personal" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Descripción</label>
+                            <textarea name="descripcion" class="form-control" rows="3" placeholder="Breve detalle del producto..."></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('productos.listar_productos') }}" class="btn btn-light border me-md-2">Cancelar</a>
+                            <button type="submit" class="btn btn-success px-5">Guardar Producto</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

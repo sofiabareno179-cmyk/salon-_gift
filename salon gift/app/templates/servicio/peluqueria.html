@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Servicios de Peluquería{% endblock %}
+
+{% block content %}
+
+<section class="services-container">
+    <div class="header-section">
+        <h1>Corte y Peinado</h1>
+        <p>Transformamos tu look con las últimas tendencias.</p>
+    </div>
+    
+    <div class="grid-servicios">
+        {% for servicio in servicios if 'corte' in servicio.nombre.lower() or 'peinado' in servicio.nombre.lower() %}
+        <div class="card">
+            <div class="card-image">
+                <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?q=80&w=500" alt="Peluquería">
+            </div>
+            <div class="card-body">
+                <h3>{{ servicio.nombre }}</h3>
+                <p class="precio">${{ "{:,.0f}".format(servicio.precio) }}</p> 
+                <p class="duracion">🕒 {{ servicio.duracion }}</p>
+                <button class="btn-reservar">Reservar Cita</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
