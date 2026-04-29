@@ -8,8 +8,6 @@ from werkzeug.security import generate_password_hash,check_password_hash
 
 class User(db.Model, UserMixin): 
 
-    __tablename__='usuario'
-
     __tablename__ = 'usuario'  # Nombre de la tabla
 
     idusuario = db.Column(db.Integer, primary_key=True)
