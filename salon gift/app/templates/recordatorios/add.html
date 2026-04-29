@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo Recordatorio{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-warning py-3">
+                    <h5 class="mb-0 text-center fw-bold"><i class="fas fa-sticky-note me-2"></i>Nueva Tarea / Recordatorio</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form action="{{ url_for('recordatorios.nuevo_recordatorio') }}" method="POST">
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Título del Recordatorio</label>
+                            <input type="text" name="titulo" class="form-control" placeholder="Ej: Llamar al proveedor de insumos" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Detalles (Opcional)</label>
+                            <textarea name="mensaje" class="form-control" rows="4" placeholder="Escribe aquí notas adicionales..."></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Fecha y Hora de Aviso</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="fas fa-calendar-alt text-warning"></i></span>
+                                <input type="datetime-local" name="fecha_recordatorio" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="prioridad" value="Media">
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning fw-bold text-dark">Programar Recordatorio</button>
+                            <a href="{{ url_for('recordatorios.listar_recordatorios') }}" class="btn btn-link text-muted text-decoration-none">
+                                <i class="fas fa-arrow-left"></i> Volver al listado
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
