@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Mis Recordatorios{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary"><i class="fas fa-bell"></i> Recordatorios Pendientes</h2>
+        <a href="{{ url_for('recordatorios.nuevo_recordatorio') }}" class="btn btn-warning shadow-sm">
+            <i class="fas fa-plus-circle"></i> Crear Recordatorio
+        </a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="card shadow border-0">
+        <div class="card-body p-0">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="ps-4">Título</th>
+                        <th>Mensaje</th>
+                        <th>Fecha Programada</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rec in recordatorios %}
+                    <tr>
+                        <td class="ps-4">
+                            <span class="fw-bold">{{ rec.titulo }}</span>
+                        </td>
+                        <td class="text-muted small">
+                            {{ rec.mensaje if rec.mensaje else '<span class="fst-italic text-light">Sin descripción</span>'|safe }}
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark border">
+                                <i class="far fa-clock me-1 text-primary"></i> {{ rec.fecha_recordatorio }}
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="{{ url_for('recordatorios.editar_recordatorio', id=rec.idrecordatorios) }}" class="btn btn-sm btn-outline-info">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                                <form action="{{ url_for('recordatorios.eliminar_recordatorio', id=rec.idrecordatorios) }}" method="POST" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Deseas eliminar este recordatorio?')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center py-5">
+                            <div class="text-muted">
+                                <i class="fas fa-check-double fa-3x mb-3"></i>
+                                <p>¡Todo al día! No tienes recordatorios pendientes.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
