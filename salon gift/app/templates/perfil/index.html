@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Lista de Perfiles</h1>
+    
+    <table class="table table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Bio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for perfil in perfiles %}
+            <tr>
+                <td><strong>{{ perfil.user.nombreuser }}</strong></td>
+                <td>{{ perfil.nombre }}</td>
+                <td>{{ perfil.apellido }}</td>
+                <td><small>{{ perfil.bio[:50] }}{% if perfil.bio|length > 50 %}...{% endif %}</small></td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <a href="{{ url_for('perfil.edit', id=perfil.id) }}" class="btn btn-sm btn-primary">Editar</a>
+                        
+                        <form action="{{ url_for('perfil.delete', id=perfil.id) }}" method="POST" onsubmit="return confirm('¿Eliminar perfil?')">
+                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" class="text-center text-muted">No hay perfiles registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{{ url_for('perfil.add') }}" class="btn btn-success rounded-pill mt-4"> 
+    + Agregar Nuevo Perfil 
+</a>
+</div>
+{% endblock %}

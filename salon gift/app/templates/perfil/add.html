@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="display-4 mb-4">Agregar Perfil</h1>
+            
+            <form action="{{ url_for('perfil.add') }}" method="POST" class="form-group p-4 border rounded shadow-sm bg-white">
+                
+                <!-- Selector de Usuario (Obligatorio según tu Python) -->
+                <div class="mb-3">
+                    <label for="idusuario" class="form-label fw-bold">Seleccionar Usuario Asociado:</label>
+                    <select name="idusuario" id="idusuario" class="form-select rounded-pill" required>
+                        <option value="" disabled selected>Selecciona un usuario...</option>
+                        {% for user in users %}
+                            <option value="{{ user.idusuario }}">{{ user.nombreuser }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="form-text">Primero debes elegir a qué cuenta pertenece este perfil.</div>
+                </div>
+
+                <hr>
+
+                <!-- Campo: Nombre -->
+                <div class="mb-3">
+                    <label for="nombre" class="form-label fw-bold">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control rounded-pill" placeholder="Ej. Juan" required>
+                </div>
+
+                <!-- Campo: Apellido -->
+                <div class="mb-3">
+                    <label for="apellido" class="form-label fw-bold">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" class="form-control rounded-pill" placeholder="Ej. Pérez">
+                </div>
+
+                <!-- Campo: Biografía -->
+                <div class="mb-3">
+                    <label for="bio" class="form-label fw-bold">Biografía:</label>
+                    <textarea id="bio" name="bio" class="form-control" rows="3" placeholder="Cuéntanos algo sobre ti..."></textarea>
+                </div>
+
+                <div class="mt-4 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary rounded-pill px-4">Crear Perfil</button>
+                    <a href="{{ url_for('perfil.index') }}" class="btn btn-light rounded-pill px-4 border">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

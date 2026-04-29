@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Editar Usuario {{ user.nombreuser }}{% endblock %}
+
+{% block content %}
+<h1>Editar Usuario</h1>
+<!-- Usamos id=user.idusuario para que Flask encuentre el registro -->
+<form action="{{ url_for('user.edit', id=user.idusuario) }}" method="post">
+    <div class="form-group mb-3">
+        <label for="nombreuser" class="form-label">Nombre:</label>
+        <!-- Cambié nameUser por nombreuser para que coincida con tu modelo -->
+        <input type="text" id="nombreuser" name="nombreuser" value="{{ user.nombreuser }}" required class="form-control">
+    </div>
+   
+    <div class="form-group mb-3">
+        <label for="password" class="form-label">Nueva Contraseña:</label>
+        <!-- Cambié passwordUser por password -->
+        <input type="password" id="password" name="password" placeholder="Escribe la nueva contraseña" required class="form-control">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
+    <a href="{{ url_for('user.index') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
