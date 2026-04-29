@@ -5,3 +5,4 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///salongift.sqlite'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secrets.token_urlsafe(24)
+    
