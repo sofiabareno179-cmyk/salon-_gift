@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Salon Gift{% endblock %}</title>
+    <title>{% block title %}Salon Glitt{% endblock %}</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
-     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
-         <link rel="stylesheet" href="{{ url_for('static', filename='css/tablas.css') }}">
            <link rel="stylesheet" href="{{ url_for('static', filename='css/dasbo.css') }}">
-           <link rel="stylesheet" href="{{ url_for('static', filename='css/clie.css') }}">
-           <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
-   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/js.js') }}"></script>
     {% block extra_css %}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
@@ -20,12 +16,14 @@
     <header class="main-header">
         <nav class="nav-container">
             <div class="nav-logo">
-             <a href="{{ url_for('user.inicio') }}">
+             <a href="{{ url_for('user.home') }}">
                     <i class="fas fa-scissors"></i> Salon<span>Gift</span>
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="{{ url_for('user.inicio') }}">Inicio</a></li>
+                <li><a href="{{ url_for('user.index') }}">Inicio</a></li>
+                <li><a href="{{ url_for('perfil.index') }}">Perfil</a></li>
+                
                 {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a></li>
                 {% else %}

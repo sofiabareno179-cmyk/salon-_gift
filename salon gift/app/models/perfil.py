@@ -1,3 +1,5 @@
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 from app import db
 
 class Perfil(db.Model):
@@ -9,7 +11,11 @@ class Perfil(db.Model):
     bio = db.Column(db.Text, nullable=True)
     
     # Llave foránea que conecta con el modelo User
-    idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False, unique=True)
+    idusuario = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False, unique=True)
+<<<<<<< Updated upstream
+    user = db.relationship("User", back_populates= "perfil")
+=======
+>>>>>>> Stashed changes
 
     def __init__(self, nombre, apellido, bio, idusuario):
         self.nombre = nombre

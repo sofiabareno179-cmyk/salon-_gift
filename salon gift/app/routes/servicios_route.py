@@ -24,72 +24,48 @@ def manicure():
 def get_servicio(id):
     servicio = Servicio.query.get_or_404(id)
     return jsonify(servicio.to_dict()), 200
-from flask import render_template, request, redirect, url_for, flash, jsonify
 
-@bp.route('/add', methods=['GET', 'POST'])
+@bp.route('/servicios', methods=['POST'])
 def add():
-    if request.method == 'POST':
-        nombre = request.form.get('nombre')
-        precio = request.form.get('precio')
-        duracion = request.form.get('duracion')
-
-        # Validación: evitar servicios con el mismo nombre si es necesario
-        if Servicio.query.filter_by(nombre=nombre).first():
-            flash(f"El servicio '{nombre}' ya existe.", "danger")
-            return redirect(url_for('servicio.add'))
-
-        try:
-            nuevo_servicio = Servicio(
-                nombre=nombre, 
-                precio=precio, 
-                duracion=duracion
-            )
-            db.session.add(nuevo_servicio)
-            db.session.commit()
-            flash(f"Servicio '{nombre}' creado con éxito.", "success")
-            return redirect(url_for('servicio.index')) # Ajusta 'servicio.index' a tu ruta principal
-        except Exception as e:
-            db.session.rollback()
-            flash(f"Error al crear el servicio: {str(e)}", "danger")
-            
-    return render_template('servicios/add.html')
-
-@bp.route('/edit/<int:id>', methods=['GET', 'POST'])
+    data = request.get_json()
+    
+    if not data or 'nombre' not in data or 'precio' not in data:
+        return jsonify({"error": "Faltan datos obligatorios"}), 400
+    
+    nuevo_servicio = Servicio(
+        nombre=data['nombre'],
+        precio=data['precio'],
+        duracion=data['duracion']
+    )
+    
+    try:
+        nuevo_servicio.save()
+        return jsonify(nuevo_servicio.to_dict()), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+@bp.route('/servicios/<int:id>', methods=['PUT'])
 def edit(id):
-    servicio = Servicio.query.get_or_404(id)  
-    if request.method == 'POST':
-        servicio.nombre = request.form.get('nombre')
-        servicio.precio = request.form.get('precio')
-        servicio.duracion = request.form.get('duracion')
-        
-        try:
-            db.session.commit()
-            flash("Servicio actualizado correctamente.", "success")
-            return redirect(url_for('servicio.index'))
-        except Exception as e:
-            db.session.rollback()
-            flash(f"Error al actualizar: {str(e)}", "danger")
+    servicio = Servicio.query.get_or_404(id)
+    data = request.get_json()
+    
+    servicio.nombre = data.get('nombre', servicio.nombre)
+    servicio.precio = data.get('precio', servicio.precio)
+    servicio.duracion = data.get('duracion', servicio.duracion)
+    
+    try:
+        db.session.commit()
+        return jsonify(servicio.to_dict()), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
 
-    return render_template('servicios/edit.html', servicio=servicio)
-
-@bp.route('/delete/<int:id>')
+@bp.route('/servicios/<int:id>', methods=['DELETE'])
 def delete(id):
     servicio = Servicio.query.get_or_404(id)
     try:
         db.session.delete(servicio)
         db.session.commit()
-        flash(f"Servicio '{servicio.nombre}' eliminado.", "warning")
+        return jsonify({"message": "Servicio eliminado correctamente"}), 200
     except Exception as e:
         db.session.rollback()
-        flash(f"No se pudo eliminar el servicio: {str(e)}", "danger")
-        
-    return redirect(url_for('servicio.index'))
-
-# --- API / JSON (Igual que el de usuarios) ---
-
-@bp.route('/js')
-def indexjs():
-    data = Servicio.query.all()
-    # Asegúrate de tener el método to_dict() en tu modelo Servicio
-    result = [s.to_dict() for s in data] 
-    return jsonify(result)
+        return jsonify({"error": str(e)}), 500

@@ -1,321 +1,83 @@
-/* Variables para facilitar cambios de color */
+/* Paleta de colores sugerida: Tonos pastel y neutros */
 :root {
-    --rosa-metalico-light: #f5d0cc;
-    --rosa-metalico-base: #e5b0a3;
-    --rosa-metalico-dark: #c58e7f;
-    --rosa-metalico-gradient: linear-gradient(135deg, #e5b0a3 0%, #f5d0cc 50%, #c58e7f 100%);
-    --text-color: #4a4a4a;
-    --bg-body: #faf7f7;
+    --primary-color: #7c34c5e8;   /* Violeta suave */
+    --secondary-color: #2b9bc1; /* Violeta claro */
+    --bg-color: #ece9fd;
+    --text-color: #1d8b8ae4;
+    --accent-success: #248085dc;
+    --accent-danger: #e05df4;
 }
 
-.profile-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 90vh;
-    padding: 20px;
-    background-color: var(--bg-body);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.container {
+    background: #aca4f5;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
-/* Tarjeta Principal */
-.profile-card {
-    background: #ffffff;
-    width: 100%;
-    max-width: 480px;
-    border-radius: 25px;
-    box-shadow: 0 15px 35px rgba(197, 142, 127, 0.2);
+h1 {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+/* Tabla con diseño moderno */
+.table {
+    border-collapse: separate !important;
+    border-spacing: 0;
+    border-radius: 10px;
     overflow: hidden;
-    border: 1px solid rgba(229, 176, 163, 0.3);
 }
 
-/* Encabezado Metálico */
-.profile-card__header {
-    background: var(--rosa-metalico-gradient);
-    padding: 40px 20px;
-    text-align: center;
-    box-shadow: inset 0 -5px 15px rgba(0,0,0,0.05);
-}
-
-.profile-card__title {
-    margin: 0;
-    font-size: 1.6rem;
-    color: #fff;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    font-weight: 700;
-}
-
-.profile-card__subtitle {
-    margin-top: 8px;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-}
-
-/* Formulario */
-.profile-form {
-    padding: 35px;
-}
-
-.profile-form__group {
-    margin-bottom: 22px;
-}
-
-.profile-form__label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--rosa-metalico-dark);
+.table thead th {
+    background-color: var(--primary-color) !important;
+    color: rgb(249, 245, 252);
+    text-transform: uppercase;
+    font-size: 0.85rem;
     letter-spacing: 1px;
 }
 
-.profile-form__input, 
-.profile-form__textarea {
-    width: 100%;
-    padding: 12px 18px;
-    border: 2px solid #f0e4e1;
-    border-radius: 12px;
-    font-size: 1rem;
-    color: var(--text-color);
-    background-color: #fff;
-    transition: all 0.3s ease;
+.table tbody tr:hover {
+    background-color: #9eabe1;
+    transition: background 0.3s ease;
 }
 
-/* Efecto al seleccionar campo */
-.profile-form__input:focus, 
-.profile-form__textarea:focus {
-    outline: none;
-    border-color: var(--rosa-metalico-base);
-    box-shadow: 0 0 8px rgba(229, 176, 163, 0.4);
+/* Botones con estilo elegante */
+.btn-primary {
+    background-color: var(--secondary-color) !important;
+    border: none !important;
+    border-radius: 6px !important;
 }
 
-/* Campo Deshabilitado */
-.profile-form__input--readonly {
-    background-color: #fcf9f8;
-    border-color: #f0e4e1;
-    color: #bbb;
-    cursor: not-allowed;
+.btn-danger {
+    background-color: var(--accent-danger) !important;
+    border: none !important;
+    border-radius: 6px !important;
 }
 
-.profile-form__help {
-    font-size: 0.75rem;
-    color: #a5a5a5;
-    margin-top: 6px;
-    display: block;
+.btn-success {
+    background-color: var(--accent-success) !important;
+    border: none !important;
+    padding: 10px 25px;
+    transition: transform 0.2s;
 }
 
-/* Botones con efecto metálico */
-.profile-form__actions {
-    margin-top: 35px;
-    text-align: center;
-}
-
-.btn-submit {
-    width: 100%;
-    background: var(--rosa-metalico-gradient);
-    color: white;
-    border: none;
-    padding: 15px;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(197, 142, 127, 0.4);
-    transition: all 0.3s ease;
-}
-
-.btn-submit:hover {
+.btn-success:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(197, 142, 127, 0.6);
-    filter: brightness(1.05);
+    box-shadow: 0 5px 10px rgba(0, 184, 147, 0.297);
 }
 
-.btn-cancel {
-    display: inline-block;
-    margin-top: 15px;
-    text-decoration: none;
-    color: var(--rosa-metalico-dark);
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.btn-cancel:hover {
-    color: #8c5e52;
-}
-/* ver perfiles 
-/* Importar fuentes elegantes */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-:root {
-  /* Nuevos tonos rosa metálico y dorado */
-  --metallic-pink: #e0b0b0; /* Rosa metálico suave */
-  --gold-accent: #d4a373; /* Dorado (manteniendo el tono original, combina bien) */
-  --glass-bg: rgba(255, 250, 250, 0.75); /* Fondo ligeramente rosado */
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --shadow: 0 8px 32px rgba(224, 176, 176, 0.1); /* Sombra con toque rosado */
-}
-
-.profile-clean {
-  font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
-  padding: 40px 20px;
-  /* Aquí pones la imagen de las flores de fondo */
-  background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)),
-              url('/static/img/fondo-salon.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-.profile-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 25px;
-  align-items: start;
-}
-
-/* --- SIDEBAR TRASLÚCIDO --- */
-.profile-sidebar {
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px); /* Efecto cristal */
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  padding: 40px 20px;
-  box-shadow: var(--shadow);
-  text-align: center;
-}
-
-.avatar-container {
-  width: 140px;
-  height: 140px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  padding: 5px;
-  border: 3px solid var(--gold-accent); /* Borde dorado */
-  background: white;
-}
-
-.avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.user-name {
-  font-size: 1.5rem;
-  color: #555; /* Un tono más suave */
-  text-transform: capitalize;
-  margin-bottom: 5px;
-}
-
-.user-status {
-  font-size: 0.8rem;
-  background: var(--gold-accent); /* Fondo dorado */
-  color: white;
-  padding: 5px 15px;
-  border-radius: 50px;
-  display: inline-block;
-}
-
-/* Menú lateral */
-.profile-nav {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.nav-item {
-  text-decoration: none;
-  color: #777; /* Un tono más suave */
-  padding: 12px 20px;
-  border-radius: 12px;
-  transition: 0.3s;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.nav-item:hover, .nav-item.active {
-  background: rgba(224, 176, 176, 0.2); /* Fondo rosa metálico translúcido */
-  color: var(--gold-accent); /* Texto dorado */
-  transform: translateX(5px);
-}
-
-/* --- CONTENIDO PRINCIPAL --- */
-.main-header {
-  background: var(--glass-bg);
-  backdrop-filter: blur(8px);
-  padding: 25px;
-  border-radius: 15px;
-  margin-bottom: 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid var(--glass-border);
-}
-
-.main-header h1 { color: #666; margin: 0; } /* Un tono más suave */
-
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.info-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(8px);
-  padding: 30px;
-  border-radius: 20px;
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow);
-}
-
-.bio-card { grid-column: span 1; text-align: center; }
-
-/* Estilo de los botones */
-.btn-edit-top, .btn-primary {
-  background: linear-gradient(135deg, var(--metallic-pink), var(--gold-accent)); /* Degradado rosa metálico a dorado */
-  color: white;
-  padding: 10px 25px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 4px 15px rgba(224, 176, 176, 0.3); /* Sombra rosa metálico */
-  transition: 0.3s;
-  display: inline-block;
-  border: none;
-}
-
-.btn-edit-top:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(224, 176, 176, 0.4); /* Sombra rosa metálico más intensa */
-}
-
-/* Filas de detalles */
-.detail-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(224, 176, 176, 0.1); /* Borde rosa metálico suave */
-}
-
-.label { font-weight: 600; color: #999; } /* Un tono más suave */
-.value { color: #555; } /* Un tono más suave */
-
-/* Responsive */
-@media (max-width: 900px) {
-  .profile-wrapper { grid-template-columns: 1fr; }
-  .info-grid { grid-template-columns: 1fr; }
-}
-
-.bio-card {
-  grid-column: span 1;
+/* 6. BOTÓN ENTRAR (morado) */
+.login-form__button, 
+.btn-login {
+    width: 100%;
+    padding: 18px;
+    background: #cf75ff; /* El rosa de tu imagen */
+    color: rgb(190, 159, 225);
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(255, 117, 181, 0.3);
+    margin-top: 10px;
 }
