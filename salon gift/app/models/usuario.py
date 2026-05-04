@@ -7,9 +7,13 @@ from flask import url_for, current_app
 from werkzeug.security import generate_password_hash,check_password_hash
 
 class User(db.Model, UserMixin): 
+<<<<<<< Updated upstream
 
     __tablename__ = 'usuario'  # Nombre de la tabla
 
+=======
+    __tablename__='usuario'
+>>>>>>> Stashed changes
     idusuario = db.Column(db.Integer, primary_key=True)
     nombreuser = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -21,6 +25,7 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'<Usuario {self.nombreuser} - Rol {self.rol}>' # Corregido
 
+<<<<<<< Updated upstream
 
     # El back_populates debe apuntar al nombre de la VARIABLE en la clase Perfil (que es 'user')
     perfil = db.relationship("Perfil", back_populates="user", uselist=False)
@@ -33,6 +38,8 @@ class User(db.Model, UserMixin):
         self.set_password(password)
 
 
+=======
+>>>>>>> Stashed changes
     def get_id(self):
         return str(self.idusuario)
 

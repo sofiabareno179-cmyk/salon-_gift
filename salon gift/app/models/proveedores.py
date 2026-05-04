@@ -19,7 +19,6 @@ class Proveedores(db.Model, UserMixin):
         self.direccion = direccion
 
     def get_id(self):
-        # Retorna el ID único de la tabla proveedores
         return str(self.idproveedores)
 
     def save(self):

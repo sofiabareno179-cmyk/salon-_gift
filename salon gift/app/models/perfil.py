@@ -3,7 +3,7 @@ from flask_login import UserMixin
 from app import db
 
 class Perfil(db.Model):
-    __tablename__ = 'perfil'
+    __tablename__ = 'perfiles'
 
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
@@ -12,7 +12,10 @@ class Perfil(db.Model):
     
     # Llave foránea que conecta con el modelo User
     idusuario = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False, unique=True)
+<<<<<<< Updated upstream
     user = db.relationship("User", back_populates= "perfil")
+=======
+>>>>>>> Stashed changes
 
     def __init__(self, nombre, apellido, bio, idusuario):
         self.nombre = nombre
