@@ -111,4 +111,35 @@
     color: white;
     transform: scale(1.02);
     box-shadow: 0 6px 20px rgba(248, 187, 208, 0.4);
+<<<<<<< Updated upstream
+=======
+}
+/* Botón de Perfil (El azul) */
+.perfil-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    right: 40px;   /* Mantenemos la derecha */
+    bottom: 120px; /* <--- Subimos este para que no choque con el otro */
+    background-color: #ff99cc; /* Un tono pastel quedaría genial aquí */
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+/* Tu botón de WhatsApp (El verde) */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    right: 40px;
+    bottom: 40px; /* Este se queda abajo */
+    /* ... resto de tu código ... */
+>>>>>>> Stashed changes
 }
