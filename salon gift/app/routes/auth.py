@@ -24,7 +24,7 @@ def login():
 
             # Redirección basada en rol
             if user.rol == 'admin':
-                return redirect(url_for('auth.admin_dashboard'))
+                return redirect(url_for('user.admin_dashboard'))
             else:
                 return redirect(url_for('user.index'))
         

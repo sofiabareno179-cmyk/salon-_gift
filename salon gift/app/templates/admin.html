@@ -2,22 +2,26 @@
 
 {% block content %}
 <div class="admin-layout">
+    <!-- BARRA LATERAL -->
     <aside class="sidebar">
         <h3 class="sidebar__title">Admin Salon</h3>
-       <nav class="sidebar__nav">
-    <a href="{{ url_for('user.index') }}" class="sidebar__link">
-        <i class="fas fa-users"></i> Gestión Usuarios
-    </a>
-    <hr class="sidebar__divider">
-    <a href="{{ url_for('auth.logout') }}" class="sidebar__link sidebar__link--logout">
-        Cerrar Sesión
-    </a>
-</nav>
+        <nav class="sidebar__nav">
+            <a href="{{ url_for('user.index') }}" class="sidebar__link">
+                <i class="fas fa-users"></i> Gestión Usuarios
+            </a>
+            <hr class="sidebar__divider">
+            <a href="{{ url_for('auth.logout') }}" class="sidebar__link sidebar__link--logout">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </a>
+        </nav>
     </aside>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <main class="dashboard">
         <header class="dashboard__header">
             <h2 class="dashboard__title">Panel de Control</h2>
+            
+            {# Mensajes de Feedback #}
             {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
                 {% for category, message in messages %}
@@ -28,15 +32,77 @@
         </header>
 
         <section class="dashboard__stats">
-            <div class="card-stat card-stat--pink">
-                <h4 class="card-stat__label">Ingresos del día</h4>
-                <p class="card-stat__value">$ 150.000</p>
-            </div>
             
-            <div class="card-stat card-stat--green">
-                <h4 class="card-stat__label">Servicios Realizados</h4>
-                <p class="card-stat__value">12</p>
+            <!-- CITAS -->
+            <div class="card-wrapper">
+                <a href="{{ url_for('citas.listar_citas') }}" class="card-stat card-stat--pink">
+                    <i class="fas fa-calendar-check card-stat__icon"></i>
+                    <div class="card-stat__info">
+                        <h4 class="card-stat__label">Citas</h4>
+                        <p class="card-stat__value">8 Hoy</p>
+                    </div>
+                </a>
+                <a href="{{ url_for('citas.nueva_cita') }}" class="card-quick-add" title="Agendar Cita">
+                    <i class="fas fa-plus"></i>
+                </a>
             </div>
+
+            <!-- SERVICIOS -->
+            <div class="card-wrapper">
+                <a href="{{ url_for('servicio.get_servicios') }}" class="card-stat card-stat--green">
+                    <i class="fas fa-cut card-stat__icon"></i>
+                    <div class="card-stat__info">
+                        <h4 class="card-stat__label">Servicios</h4>
+                        <p class="card-stat__value">Catálogo</p>
+                    </div>
+                </a>
+                <a href="{{ url_for('servicio.add') }}" class="card-quick-add" title="Crear Servicio">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+
+            <!-- PRODUCTOS -->
+            <div class="card-wrapper">
+                <a href="{{ url_for('productos.listar_productos') }}" class="card-stat card-stat--purple">
+                    <i class="fas fa-shopping-bag card-stat__icon"></i>
+                    <div class="card-stat__info">
+                        <h4 class="card-stat__label">Productos</h4>
+                        <p class="card-stat__value">Retail</p>
+                    </div>
+                </a>
+                <a href="{{ url_for('productos.nuevo_producto') }}" class="card-quick-add" title="Añadir Producto">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+
+            <!-- PROVEEDORES -->
+            <div class="card-wrapper">
+                <a href="{{ url_for('proveedores.listar_proveedores') }}" class="card-stat card-stat--blue">
+                    <i class="fas fa-truck-loading card-stat__icon"></i>
+                    <div class="card-stat__info">
+                        <h4 class="card-stat__label">Proveedores</h4>
+                        <p class="card-stat__value">Contactos</p>
+                    </div>
+                </a>
+                <a href="{{ url_for('proveedores.nuevo_proveedor') }}" class="card-quick-add" title="Nuevo Proveedor">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+
+            <!-- INVENTARIO -->
+            <div class="card-wrapper">
+                <a href="#" class="card-stat card-stat--orange">
+                    <i class="fas fa-boxes card-stat__icon"></i>
+                    <div class="card-stat__info">
+                        <h4 class="card-stat__label">Inventario</h4>
+                        <p class="card-stat__value">Insumos</p>
+                    </div>
+                </a>
+                <a href="#" class="card-quick-add" title="Cargar Stock">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+
         </section>
     </main>
 </div>
