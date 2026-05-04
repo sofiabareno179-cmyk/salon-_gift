@@ -1,41 +1,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <!-- Mostramos el username del dueño del perfil -->
-            <h1 class="display-5 mb-4">Editar Perfil de: <span class="text-primary">{{ perfil.user.nombreuser }}</span></h1>
+<div class="profile-container">
+    <div class="profile-card">
+        <!-- Encabezado -->
+        <header class="profile-card__header">
+            <h1 class="profile-card__title">Editar Perfil</h1>
+            <p class="profile-card__subtitle">@{{ perfil.user.nombreuser }}</p>
+        </header>
+
+        <!-- Formulario -->
+        <form method="POST" class="profile-form">
             
-            <form method="POST" class="p-4 border rounded shadow-sm bg-white">
-                <div class="mb-3">
-                    <label for="nombre" class="form-label fw-bold">Nombre:</label>
-                    <input type="text" name="nombre" id="nombre" class="form-control rounded-pill" value="{{ perfil.nombre }}" required>
-                </div>
+            <div class="profile-form__group">
+                <label for="nombre" class="profile-form__label">Nombre</label>
+                <input type="text" name="nombre" id="nombre" 
+                       class="profile-form__input" 
+                       value="{{ perfil.nombre }}" required>
+            </div>
 
-                <div class="mb-3">
-                    <label for="apellido" class="form-label fw-bold">Apellido:</label>
-                    <input type="text" name="apellido" id="apellido" class="form-control rounded-pill" value="{{ perfil.apellido }}">
-                </div>
+            <div class="profile-form__group">
+                <label for="apellido" class="profile-form__label">Apellido</label>
+                <input type="text" name="apellido" id="apellido" 
+                       class="profile-form__input" 
+                       value="{{ perfil.apellido }}">
+            </div>
 
-                <div class="mb-3">
-                    <label for="bio" class="form-label fw-bold">Biografía:</label>
-                    <textarea name="bio" id="bio" class="form-control" rows="4">{{ perfil.bio }}</textarea>
-                </div>
+            <div class="profile-form__group">
+                <label for="bio" class="profile-form__label">Biografía</label>
+                <textarea name="bio" id="bio" 
+                          class="profile-form__textarea" 
+                          rows="4">{{ perfil.bio }}</textarea>
+            </div>
 
-                <!-- Campo informativo (no editable) -->
-                <div class="mb-3">
-                    <label class="form-label text-muted">ID de Usuario vinculado:</label>
-                    <input type="text" class="form-control rounded-pill bg-light" value="{{ perfil.idusuario }}" readonly>
-                    <div class="form-text">La cuenta de usuario asociada no puede cambiarse desde aquí.</div>
-                </div>
+            <div class="profile-form__group">
+                <label class="profile-form__label profile-form__label--disabled">ID de Usuario</label>
+                <input type="text" class="profile-form__input profile-form__input--readonly" 
+                       value="{{ perfil.idusuario }}" readonly>
+                <small class="profile-form__help">Este campo es informativo y no se puede editar.</small>
+            </div>
 
-                <div class="mt-4 d-flex gap-2">
-                    <button type="submit" class="btn btn-success rounded-pill px-4">Guardar Cambios</button>
-                    <a href="{{ url_for('perfil.index') }}" class="btn btn-outline-secondary rounded-pill px-4">Cancelar</a>
-                </div>
-            </form>
-        </div>
+            <!-- Acciones -->
+            <div class="profile-form__actions">
+                <button type="submit" class="btn-submit">Guardar Cambios</button>
+                <a href="{{ url_for('perfil.perfil_usuario') }}" class="btn-cancel">Cancelar</a>
+            </div>
+            
+        </form>
     </div>
 </div>
 {% endblock %}

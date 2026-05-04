@@ -8,6 +8,10 @@ class Perfil(db.Model):
     apellido = db.Column(db.String(50), nullable=True)
     bio = db.Column(db.Text, nullable=True)
     
+<<<<<<< Updated upstream
+=======
+    # Llave foránea que conecta con el modelo User
+>>>>>>> Stashed changes
     idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False, unique=True)
 
     def __init__(self, nombre, apellido, bio, idusuario):

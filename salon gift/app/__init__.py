@@ -22,7 +22,11 @@ def create_app():
     from app.routes import (
         auth,agenda_route,citas_route,inventario_route,
         producto_route,proveedores_route,recordatorios_route,
+<<<<<<< Updated upstream
         usuarios_route, servicios_route
+=======
+        usuarios_route, servicios_route,perfil_route
+>>>>>>> Stashed changes
     
     )
     app.register_blueprint(auth.bp)
@@ -34,8 +38,12 @@ def create_app():
     app.register_blueprint(recordatorios_route.bp)
     app.register_blueprint(usuarios_route.bp)
     app.register_blueprint(servicios_route.bp)
+<<<<<<< Updated upstream
 
 
+=======
+    app.register_blueprint(perfil_route.bp)
+>>>>>>> Stashed changes
     @app.errorhandler(Exception)
     def handle_error(e):
         print(f"An error occurred: {str(e)}")
