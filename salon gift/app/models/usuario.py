@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     rol = db.Column(db.String(20), nullable=False, default='cliente')
 
 
-    perfil = db.relationship('Perfil', backref='usuario', uselist=False)
+    perfil = db.relationship('Perfil', backref='user', uselist=False)
 
     def __repr__(self):
         return f'<Usuario {self.nombreuser} - Rol {self.rol}>' 
