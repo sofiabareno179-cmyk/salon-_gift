@@ -1,9 +1,61 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
 <div class="cliente-container">
-    <h1 style="color: #f06292;">Bienvenida, {{ current_user.username }}</h1>
-    <p>¿Qué servicio quieres hoy?</p>
-    <button class="btn-salon">Ver Catálogo</button>
+    <h1 style="color: var(--dark-pink);">¡Hola de nuevo, {{ current_user.username }}!</h1>
+    <p>Haz de hoy un día para brillar. ¿Qué servicio te gustaría reservar?</p>
+    <a href="#catalogo" class="btn-salon">Explorar Catálogo</a>
 </div>
+
+<div class="container">
+    <!-- Recordatorio de Citas (Dinámico) -->
+    {% if current_user.citas %}
+    <div class="appointments-reminder">
+        <div>
+            <span style="color: var(--accent-purple); font-weight: bold;"><i class="far fa-calendar-check"></i> Próxima cita:</span>
+            <p style="margin: 0;">{{ current_user.citas[0].servicio }} - {{ current_user.citas[0].fecha.strftime('%d %b, %H:%M') }}</p>
+        </div>
+        <a href="#" style="color: var(--dark-pink); font-size: 0.9rem;">Ver detalles</a>
+    </div>
+    {% endif %}
+
+    <section class="services-grid" id="catalogo">
+        <h2>Nuestros Servicios</h2>
+        <div class="cards-wrapper">
+            
+            <a href="{{ url_for('servicio.ver_peluqueria') }}" class="service-card">
+                <i class="fas fa-cut"></i> 
+                <h3>Peluquería</h3>
+                <p>Cortes, colorimetría y estilos modernos para transformar tu look.</p>
+            </a>
+
+            <a href="{{ url_for('servicio.tratamientos') }}" class="service-card">
+                <i class="fas fa-spa"></i>
+                <h3>Tratamientos</h3>
+                <p>Cuidado especializado con productos premium y masajes capilares.</p>
+            </a>
+
+            <a href="{{ url_for('servicio.manicure') }}" class="service-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>Manicura</h3>
+                <p>Uñas perfectas con acabados profesionales y diseños tendencia.</p>
+            </a>
+            
+        </div>
+    </section>
+
+    <!-- Banner de Promoción -->
+    <div class="promo-banner">
+        <h3 style="color: #c2185b;">✨ Promo del Mes ✨</h3>
+        <p>Trae a una amiga y ambas obtienen un <strong>15% de descuento</strong> en tratamientos de hidratación.</p>
+    </div>
+</div>
+
+<!-- Botón Flotante de WhatsApp -->
+<a href="https://wa.me/tu_numero" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
 {% endblock %}
