@@ -1,3 +1,5 @@
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 from app import db
 
 class Perfil(db.Model):
@@ -8,7 +10,9 @@ class Perfil(db.Model):
     apellido = db.Column(db.String(50), nullable=True)
     bio = db.Column(db.Text, nullable=True)
     
+    # Llave foránea que conecta con el modelo User
     idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False, unique=True)
+    user = db.relationship("User", back_populates="perfil")
 
     def __init__(self, nombre, apellido, bio, idusuario):
         self.nombre = nombre
