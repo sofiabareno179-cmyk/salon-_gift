@@ -9,7 +9,8 @@ class Perfil(db.Model):
     bio = db.Column(db.Text, nullable=True)
     
     idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False, unique=True)
-
+    usuario = db.relationship('User', back_populates='perfil')
+    
     def __init__(self, nombre, apellido, bio, idusuario):
         self.nombre = nombre
         self.apellido = apellido
