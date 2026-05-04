@@ -22,7 +22,7 @@ def create_app():
     from app.routes import (
         auth,agenda_route,citas_route,inventario_route,
         producto_route,proveedores_route,recordatorios_route,
-        usuarios_route, servicios_route
+        usuarios_route, servicios_route, perfil_route
     
     )
     app.register_blueprint(auth.bp)
@@ -34,6 +34,7 @@ def create_app():
     app.register_blueprint(recordatorios_route.bp)
     app.register_blueprint(usuarios_route.bp)
     app.register_blueprint(servicios_route.bp)
+    app.register_blueprint(perfil_route.bp)
 
 
     @app.errorhandler(Exception)
