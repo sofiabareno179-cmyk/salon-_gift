@@ -10,7 +10,7 @@ class Perfil(db.Model):
     
     idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False, unique=True)
     usuario = db.relationship('User', back_populates='perfil')
-    
+
     def __init__(self, nombre, apellido, bio, idusuario):
         self.nombre = nombre
         self.apellido = apellido
