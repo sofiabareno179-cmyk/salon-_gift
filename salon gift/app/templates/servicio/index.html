@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Gestión de Servicios</h2>
+        <a href="{{ url_for('servicio.add') }}" class="btn btn-primary">Nuevo Servicio</a>
+    </div>
+
+    <!-- Bloque para mostrar mensajes Flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Duración</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in servicios %}
+            <tr>
+                <td>{{ s.id }}</td>
+                <td>{{ s.nombre }}</td>
+                <td>${{ s.precio }}</td>
+                <td>{{ s.duracion }} min</td>
+                <td>
+                    <a href="{{ url_for('servicio.edit', id=s.id) }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ url_for('servicio.delete', id=s.id) }}" 
+                       class="btn btn-sm btn-danger" 
+                       onclick="return confirm('¿Estás seguro de eliminar este servicio?')">Eliminar</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" class="text-center">No hay servicios registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
