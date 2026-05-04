@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Salon Glitt{% endblock %}</title>
-    
+    <title>{% block title %}Salon Gift{% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/tablas.css') }}">
            <link rel="stylesheet" href="{{ url_for('static', filename='css/dasbo.css') }}">
+           <link rel="stylesheet" href="{{ url_for('static', filename='css/clie.css') }}">
     <script src="{{ url_for('static', filename='js/js.js') }}"></script>
     {% block extra_css %}{% endblock %}
 </head>
@@ -16,14 +19,12 @@
     <header class="main-header">
         <nav class="nav-container">
             <div class="nav-logo">
-             <a href="{{ url_for('user.home') }}">
+             <a href="{{ url_for('user.inicio') }}">
                     <i class="fas fa-scissors"></i> Salon<span>Gift</span>
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="{{ url_for('user.index') }}">Inicio</a></li>
-                <li><a href="{{ url_for('perfil.index') }}">Perfil</a></li>
-                
+                <li><a href="{{ url_for('user.inicio') }}">Inicio</a></li>
                 {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a></li>
                 {% else %}
