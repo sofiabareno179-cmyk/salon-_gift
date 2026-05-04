@@ -24,12 +24,6 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'<Usuario {self.nombreuser} - Rol {self.rol}>' 
     
-=======
-    #relacion perfil
-    perfil = db.relationship('Perfil', backref='user', uselist=False)
-    def __repr__(self):
-        return f'<Usuario {self.nombreuser} - Rol {self.rol}>' # Corregido
-
 >>>>>>> Stashed changes
     def get_id(self):
         return str(self.idusuario)
