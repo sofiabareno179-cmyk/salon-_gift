@@ -1,18 +1,177 @@
-<section class="services-container">
+<style>
+    @import url('https://googleapis.com');
+
+    .spa-services-container {
+        padding: 100px 20px;
+        text-align: center;
+        background: #f4f7f6; /* Fondo gris verdoso muy suave */
+        background-image: 
+            linear-gradient(120deg, rgba(255,255,255,0.8) 0%, rgba(224, 242, 241, 0.4) 100%);
+        font-family: 'Montserrat', sans-serif;
+        position: relative;
+    }
+
+    .spa-services-container h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    .spa-subtitle {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: #78a083; /* Verde relajante */
+        font-size: 1.1rem;
+        margin-bottom: 60px;
+        display: block;
+        letter-spacing: 1px;
+    }
+
+    .spa-subtitle::after {
+        content: "✦";
+        display: block;
+        color: #78a083;
+        margin-top: 10px;
+        font-size: 0.8rem;
+    }
+
+    .spa-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .card-spa {
+        background: #ffffff;
+        border-radius: 50px 50px 20px 20px; /* Diseño orgánico */
+        padding: 25px;
+        transition: all 0.4s ease;
+        border: 1px solid rgba(120, 160, 131, 0.1);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    }
+
+    .card-spa:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(120, 160, 131, 0.15);
+    }
+
+    .img-spa {
+        width: 100%;
+        height: 280px;
+        border-radius: 40px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        background: #e0f2f1;
+    }
+
+    .img-spa img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(20%);
+        transition: 0.5s;
+    }
+
+    .card-spa:hover .img-spa img {
+        filter: grayscale(0%);
+        transform: scale(1.05);
+    }
+
+    .card-spa h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        color: #34495e;
+        margin-bottom: 15px;
+    }
+
+    .spa-details {
+        background: #f9fbfb;
+        border-radius: 15px;
+        padding: 15px;
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+
+    .spa-details span {
+        font-size: 0.85rem;
+        color: #7f8c8d;
+    }
+
+    .spa-details strong {
+        display: block;
+        color: #78a083;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+    }
+
+    .btn-spa {
+        background: #78a083;
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 30px;
+        width: 100%;
+        font-weight: 500;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-spa:hover {
+        background: #2c3e50;
+        box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+    }
+</style>
+
+<section class="spa-services-container">
     <h1>Tratamientos Especializados</h1>
-    <div class="grid-servicios">
-        {% for servicio in servicios if 'tratamiento' in servicio.nombre.lower() or 'hidratacion' in servicio.nombre.lower() %}
-        <div class="card-horizontal">
-            <div class="info">
-                <h3>{{ servicio.nombre }}</h3>
-                <p>Recupera la salud de tu cabello con productos de alta calidad.</p>
-                <span class="tag">{{ servicio.duracion }}</span>
+    <span class="spa-subtitle">La ciencia de cuidarte, el arte de sanarte</span>
+
+    <div class="spa-grid">
+        <!-- Tratamiento 1 -->
+        <div class="card-spa">
+            <div class="img-spa">
+                <!-- Imagen de Limpieza Facial -->
+                <img src="https://unsplash.com" alt="Limpieza Facial Profunda">
             </div>
-            <div class="action">
-                <p class="precio">${{ servicio.precio }}</p>
-                <button class="btn-primary">Añadir al carrito</button>
+            <h3>Limpieza Facial Profunda</h3>
+            <div class="spa-details">
+                <span><strong>Inversión</strong> $90.000</span>
+                <span><strong>Duración</strong> 75 min</span>
             </div>
+            <button class="btn-spa">Reservar Cita</button>
         </div>
-        {% endfor %}
+
+        <!-- Tratamiento 2 -->
+        <div class="card-spa">
+            <div class="img-spa">
+                <!-- Imagen de Sonoterapia/Relajación -->
+                <img src="https://unsplash.com" alt="Sona Terapia">
+            </div>
+            <h3>Sona Terapia</h3>
+            <div class="spa-details">
+                <span><strong>Inversión</strong> $110.000</span>
+                <span><strong>Duración</strong> 60 min</span>
+            </div>
+            <button class="btn-spa">Reservar Cita</button>
+        </div>
+
+        <!-- Tratamiento 3 -->
+        <div class="card-spa">
+            <div class="img-spa">
+                <!-- Imagen de Radiofrecuencia/Aparatología -->
+                <img src="https://www.clinicabayon.com/explorando-los-beneficios-de-la-radiofrecuencia-corporal-y-facial/" alt="Radio Frecuencia">
+            </div>
+            <h3>Radio Frecuencia</h3>
+            <div class="spa-details">
+                <span><strong>Inversión</strong> $150.000</span>
+                <span><strong>Duración</strong> 90 min</span>
+            </div>
+            <button class="btn-spa">Reservar Cita</button>
+        </div>
     </div>
 </section>
