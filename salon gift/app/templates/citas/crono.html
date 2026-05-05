@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Agenda{% endblock %}
+
+{% block content %}
+<section class="schedule">
+    <div class="schedule__nav">
+        <a href="{{ url_for('citas.crono_citas', fecha=anterior) }}" class="btn-nav">« Anterior</a>
+        <div class="schedule__header-info">
+            <h2 class="schedule__title">Calendario de Citas</h2>
+            <span class="schedule__date-range">Semana del {{ lunes.strftime('%d de %b, %Y') }}</span>
+            <br>
+            <a href="{{ url_for('citas.crono_citas', fecha=hoy) }}" class="btn-today">Hoy</a>
+        </div>
+        <a href="{{ url_for('citas.crono_citas', fecha=siguiente) }}" class="btn-nav">Siguiente »</a>
+    </div>
+
+    <div class="schedule__container">
+        <!-- Encabezado de Días -->
+        <div class="schedule__header">
+            <div class="schedule__day-name">Hora</div>
+            {% set nombres_dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'] %}
+            {% for i in range(5) %}
+                <div class="schedule__day-name">
+                    {{ nombres_dias[i] }}
+                    <small>{{ (lunes + timedelta(days=i)).strftime('%d/%m') }}</small>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Cuerpo del Calendario -->
+        <div class="schedule__grid">
+            {% for hora in horas %}
+                <div class="schedule__time">{{ hora }}</div>
+                
+                {% for dia in range(5) %}
+                    <div class="schedule__slot">
+                        {% set cita = agenda.get((dia, hora)) %}
+                        {% if cita %}
+                            <div class="schedule__appointment status-{{ cita.estado.lower() }}">
+                                <a href="{{ url_for('citas.editar_cita', id=cita.idcita) }}">
+                                    <span class="appt__time">{{ cita.fechahora.strftime('%H:%M') }}</span>
+                                    <strong class="appt__service">{{ cita.servicio }}</strong>
+                                    <span class="appt__status">{{ cita.estado }}</span>
+                                </a>
+                            </div>
+                        {% else %}
+                            <a href="{{ url_for('citas.nueva_cita', fecha=(lunes + timedelta(days=dia)).strftime('%Y-%m-%d')) }}" class="appt__add">+</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -6,10 +6,6 @@ import os
 from flask import url_for, current_app
 from werkzeug.security import generate_password_hash,check_password_hash
 class User(db.Model, UserMixin): 
-<<<<<<< Updated upstream
-    
-=======
->>>>>>> Stashed changes
     __tablename__='usuario'
     idusuario = db.Column(db.Integer, primary_key=True)
     nombreuser = db.Column(db.String(100), unique=True, nullable=False)
@@ -17,20 +13,12 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(250), nullable=False)
     telefono = db.Column(db.String(20), nullable=True)
     rol = db.Column(db.String(20), nullable=False, default='cliente')
-<<<<<<< Updated upstream
-
-    perfil = db.relationship('Perfil', backref='usuario', uselist=False)
-
-    def __repr__(self):
-        return f'<Usuario {self.nombreuser} - Rol {self.rol}>' 
-    
-=======
     #relacion perfil
     perfil = db.relationship('Perfil', backref='user', uselist=False)
+    citas = db.relationship('Citas', backref='user', uselist=True)
     def __repr__(self):
         return f'<Usuario {self.nombreuser} - Rol {self.rol}>' # Corregido
 
->>>>>>> Stashed changes
     def get_id(self):
         return str(self.idusuario)
 
