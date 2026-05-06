@@ -48,8 +48,6 @@ def admin_dashboard():
     return render_template('admin.html')
 
 @bp.route('/add', methods=['GET', 'POST'])
-@login_required
-@admin_required
 def add():
     if request.method == 'POST':
         nombreuser = request.form.get('nombreuser')
