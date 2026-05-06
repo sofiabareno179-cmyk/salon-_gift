@@ -1,40 +1,45 @@
 {% extends "base.html" %}
 
-{% block title %}Nueva Cita{% endblock %}
+{% block title %}Nueva Cita | Salon Gift{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-            <div class="card shadow border-0">
-                <div class="card-header bg-primary text-white text-center py-3">
-                    <h4 class="mb-0">Agendar Cita</h4>
-                </div>
-                <div class="card-body p-4">
-                    <form action="{{ url_for('citas.nueva_cita') }}" method="POST">
-                        
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Fecha y Hora de la Cita</label>
-                            <input type="datetime-local" name="fechahora" class="form-control form-control-lg" required>
-                            <div class="form-text">Selecciona el día y la hora prevista.</div>
-                        </div>
+<div class="appointment-form-container">
+    <div class="glass-card">
+        <div class="glass-card__header">
+            <h4>Agendar Nueva Cita</h4>
+            <p>Completa los detalles para el servicio</p>
+        </div>
 
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Estado Inicial</label>
-                            <select name="estado" class="form-select">
-                                <option value="Pendiente" selected>Pendiente</option>
-                                <option value="Confirmada">Confirmada</option>
-                                <option value="Cancelada">Cancelada</option>
-                            </select>
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-success btn-lg">Confirmar Cita</button>
-                            <a href="{{ url_for('citas.listar_citas') }}" class="btn btn-light text-muted">Cancelar</a>
-                        </div>
-                    </form>
+        <div class="glass-card__body">
+            <form action="{{ url_for('citas.nueva_cita') }}" method="POST">
+                
+                <!-- Campo de Servicio (¡Importante para tu calendario!) -->
+                <div class="form-group">
+                    <label class="form-label">Servicio</label>
+                    <input type="text" name="servicio" class="form-control-glass" 
+                           placeholder="Ej: Corte de cabello, Manicura..." required>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <label class="form-label">Fecha y Hora</label>
+                    <!-- El value captura la fecha si viene del calendario -->
+                    <input type="datetime-local" name="fechahora" class="form-control-glass" 
+                           value="{{ request.args.get('fecha') }}T{{ request.args.get('hora') }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Estado</label>
+                    <select name="estado" class="form-control-glass">
+                        <option value="Pendiente" selected>Pendiente</option>
+                        <option value="Confirmada">Confirmada</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-confirm">Agendar Cita</button>
+                    <a href="{{ url_for('citas.crono_citas') }}" class="btn-cancel">Volver</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
