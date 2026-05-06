@@ -7,7 +7,8 @@ class Servicio(db.Model):
     nombre = db.Column(db.String(100), unique=True, nullable=False)
     precio = db.Column(db.Numeric(10, 2), nullable=False) 
     duracion = db.Column(db.String(250), nullable=False)
-
+    #relaciones 
+    citas = db.relationship('Citas', backref='servicio', uselist=True)
     def __init__(self, nombre, precio, duracion):
         self.nombre = nombre
         self.precio = precio
