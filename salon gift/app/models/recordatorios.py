@@ -8,6 +8,9 @@ class Recordatorios(db.Model, UserMixin):
     titulo = db.Column(db.String(150), nullable=False)
     mensaje = db.Column(db.String(500), nullable=True)
     fecha_recordatorio = db.Column(db.String(100), nullable=False) 
+
+    idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False)
+
     def __init__(self, titulo, mensaje, fecha_recordatorio, prioridad):
         self.titulo = titulo
         self.mensaje = mensaje
