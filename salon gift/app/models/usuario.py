@@ -6,7 +6,6 @@ import os
 from flask import url_for, current_app
 from werkzeug.security import generate_password_hash,check_password_hash
 class User(db.Model, UserMixin): 
-    
     __tablename__='usuario'
     idusuario = db.Column(db.Integer, primary_key=True)
     nombreuser = db.Column(db.String(100), unique=True, nullable=False)
@@ -22,8 +21,7 @@ class User(db.Model, UserMixin):
     recordatorios = db.relationship('Recordatorios', backref='cliente', lazy=True)
 
     def __repr__(self):
-        return f'<Usuario {self.nombreuser} - Rol {self.rol}>' 
-    
+        return f'<Usuario {self.nombreuser} - Rol {self.rol}>' # Corregido
 
     def get_id(self):
         return str(self.idusuario)
