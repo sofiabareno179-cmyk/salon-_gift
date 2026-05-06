@@ -8,6 +8,10 @@ class Citas(db.Model, UserMixin):
     fechahora = db.Column(db.String(100), nullable=False) 
     estado = db.Column(db.String(100), nullable=False) 
 
+    idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False)
+    # Relación 1:1 con Servicio
+    servicios = db.relationship('Servicio', back_populates='citas', uselist=False)
+
     def __init__(self, fechahora, estado):
         self.fechahora = fechahora
         self.estado = estado
