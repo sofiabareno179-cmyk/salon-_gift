@@ -2,8 +2,6 @@
 
 {% block content %}
 
-<<<<<<< Updated upstream
-=======
 <!-- Nueva Sección Hero Integrada -->
 <div class="hero-content" style="text-align: center; padding: 50px 20px; background: var(--light-pink-bg, #fff5f8); border-radius: 15px; margin-bottom: 30px;">
     <h1>Reserva tu Estilo</h1>
@@ -12,15 +10,8 @@
     {% if not current_user.is_authenticated %}
         <a href="{{ url_for('auth.login') }}" class="btn-primary">Empieza Ahora</a>
     {% else %}
-        <a href="{{ url_for('user.index') }}" class="btn-primary">Mis Citas</a>
+        <a href="{{ url_for('citas.crono_citas') }}" class="btn-primary">Mis Citas</a>
     {% endif %}
-</div>
->>>>>>> Stashed changes
-
-<div class="cliente-container">
-    <h1 style="color: var(--dark-pink);">¡Hola de nuevo, {{ current_user.username }}!</h1>
-    <p>Haz de hoy un día para brillar. ¿Qué servicio te gustaría reservar?</p>
-    <a href="#catalogo" class="btn-salon">Explorar Catálogo</a>
 </div>
 
 <div class="container">
@@ -67,20 +58,13 @@
     </div>
 </div>
 
-<<<<<<< Updated upstream
-<!-- Botón Flotante de WhatsApp -->
-=======
 <!-- Botones Flotantes -->
->>>>>>> Stashed changes
 <a href="https://wa.me/tu_numero" class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
 
-<<<<<<< Updated upstream
-=======
 <a href="{{ url_for('perfil.perfil_usuario') }}" class="perfil-float">
     <i class="fas fa-user"></i>
 </a>
 
->>>>>>> Stashed changes
 {% endblock %}
