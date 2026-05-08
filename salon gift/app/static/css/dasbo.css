@@ -1,93 +1,57 @@
-:root {
-    --rosa-principal: #fce4ec; /* Rosa muy suave */
-    --rosa-fuerte: #f8bbd0;    /* Rosa para acentos */
-    --verde-menta: #e8f5e9;    /* Verde fondo */
-    --verde-fuerte: #a5d6a7;   /* Verde para acentos */
+body.dashboard-page {
+    --rosa-principal: #fce4ec;
+    --rosa-fuerte: #f8bbd0;
+    --verde-menta: #e8f5e9;
+    --verde-fuerte: #a5d6a7;
     --texto: #4f4f4f;
     --blanco: #ffffff;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     --transition: all 0.4s ease;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    body {
     font-family: 'Poppins', sans-serif;
     color: var(--texto);
     line-height: 1.8;
-    
-    /* CONFIGURACIÓN PARA TODA LA PÁGINA */
     background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
                       url('../img/glitt.png'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* La imagen se queda fija al hacer scroll */
-    background-color: #fafafa; /* Color de respaldo */
-}
-    font-family: 'Poppins', sans-serif;
-    color: var(--texto);
-    line-height: 1.8;
+    background-attachment: fixed;
     background-color: #fafafa;
 }
-body {
-    font-family: 'Poppins', sans-serif;
-    color: var(--texto);
-    line-height: 1.8;
-    
-    /* Imagen de fondo configurada para cubrir TODO */
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
-                      url('../img/glitt.png'); 
-    
-    background-size: cover;      /* La imagen se estira para cubrir todo el ancho y alto */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* La imagen no se mueve al hacer scroll */
-    
-    /* Si la imagen no carga, este color llenará el fondo */
-    background-color: #fafafa;
+
+body.dashboard-page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 /* --- SECCIÓN HERO --- */
-.hero {
+body.dashboard-page .hero {
     height: 90vh;
-    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 20px;
     text-align: center;
-    background: transparent;
 }
 
-.hero-content {
+.dashboard-page .hero-content {
     max-width: 800px;
-    /* Fondo semi-transparente para asegurar que el texto sea legible */
     background: rgba(255, 255, 255, 0.7);
-    padding: 40px;
+    padding: 60px 40px;
     border-radius: 30px;
-    backdrop-filter: blur(5px); /* Efecto de desenfoque moderno */
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow);
 }
 
-.hero-content h1 {
+.dashboard-page .hero-content h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     color: #333;
-    line-height: 1.2;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     font-weight: 700;
 }
 
-.hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 40px;
-    color: #444;
-}
-
-.btn-primary {
+.dashboard-page .btn-primary {
     display: inline-block;
     background-color: var(--rosa-fuerte);
     color: var(--blanco);
@@ -95,37 +59,35 @@ body {
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
-    box-shadow: var(--shadow);
     transition: var(--transition);
     border: 2px solid transparent;
 }
 
-.btn-primary:hover {
+.dashboard-page .btn-primary:hover {
     transform: translateY(-5px);
     background-color: var(--blanco);
-    color: var(--texto);
+    color: var(--rosa-fuerte);
     border: 2px solid var(--rosa-fuerte);
 }
 
 /* --- SECCIÓN SERVICIOS --- */
-.services-grid {
-    padding: 120px 0;
+.dashboard-page .services-grid {
+    padding: 100px 0;
 }
 
-.container {
+.dashboard-page .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 20px;
 }
 
-.services-grid h2 {
+.dashboard-page .services-grid h2 {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 80px;
-    position: relative;
+    margin-bottom: 60px;
 }
 
-.services-grid h2::after {
+.dashboard-page .services-grid h2::after {
     content: '';
     display: block;
     width: 60px;
@@ -135,79 +97,56 @@ body {
     border-radius: 2px;
 }
 
-.cards-wrapper {
+/* Manejo de Tarjetas con Grid para mejor respuesta */
+.dashboard-page .cards-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-items: center;
 }
 
-/* --- TARJETAS INDIVIDUALES --- */
-/* Contenedor principal */
-.cards-wrapper {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    padding: 40px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Estilo base de la tarjeta (convertida en botón) */
-.service-card {
+.dashboard-page .service-card {
     text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px;
-    width: 250px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 350px;
     border-radius: 20px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: var(--blanco); /* Fondo base */
 }
 
-/* Colores Pastel Personalizados */
-.pastel-pink { background-color: #FCE4EC; color: #AD1457; }   /* Rosa suave */
-.pastel-blue { background-color: #E3F2FD; color: #1565C0; }   /* Azul nube */
-.pastel-green { background-color: #E8F5E9; color: #2E7D32; }  /* Menta */
+/* Colores Pastel */
+.dashboard-page .pastel-pink { background-color: #FCE4EC; color: #AD1457; }
+.dashboard-page .pastel-blue { background-color: #E3F2FD; color: #1565C0; }
+.dashboard-page .pastel-green { background-color: #E8F5E9; color: #2E7D32; }
 
-/* Iconos y Texto */
-.service-card i {
-    font-size: 2.5rem;
+.dashboard-page .service-card i {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.dashboard-page .service-card h3 {
     margin-bottom: 15px;
-    opacity: 0.8;
+    font-size: 1.5rem;
 }
 
-.service-card h3 {
-    margin: 10px 0;
-    font-size: 1.4rem;
-    font-weight: 600;
-}
-
-.service-card p {
+.dashboard-page .service-card p {
     font-size: 0.95rem;
-    line-height: 1.5;
-    color: #555; /* Gris suave para lectura */
+    color: #555;
 }
 
-/* Efecto al pasar el mouse */
-.service-card:hover {
+.dashboard-page .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    filter: brightness(0.95); /* Se oscurece ligeramente */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-    .services-grid {
-        padding: 70px 0;
-    }
-    
-    .cards-wrapper {
-        gap: 25px;
-    }
-    
-    .hero {
-        height: 70vh;
-    }
+    .dashboard-page .hero { height: auto; padding: 100px 20px; }
+    .dashboard-page .services-grid { padding: 60px 0; }
 }

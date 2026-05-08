@@ -1,225 +1,30 @@
-<style>
-    @import url('https://googleapis.com');
+{% extends "base.html" %}
 
-    .services-container {
-        padding: 100px 20px;
-        text-align: center;
-        background: #fffafa;
-        /* Fondo con diseño de "ondas" sutiles que recuerdan al líquido del esmalte */
-        background-image: 
-            radial-gradient(at 0% 0%, rgba(244, 207, 223, 0.3) 0, transparent 50%), 
-            radial-gradient(at 100% 100%, rgba(252, 228, 236, 0.4) 0, transparent 50%);
-        font-family: 'Montserrat', sans-serif;
-        position: relative;
-        overflow: hidden;
-    }
+{% block title %}Manicure & Pedicure{% endblock %}
 
-    /* Decoraciones de "Manchas de Esmalte" Artísticas */
-    .services-container::before, .services-container::after {
-        content: "";
-        position: absolute;
-        border-radius: 50% 20% 50% 70%;
-        filter: blur(60px);
-        z-index: 0;
-        opacity: 0.6;
-    }
+{% block body_class %}servicios-page{% endblock %}
 
-    .services-container::before {
-        width: 400px;
-        height: 400px;
-        background: #f4cfdf;
-        top: -100px;
-        left: -100px;
-        animation: drift 10s infinite alternate;
-    }
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
+{% endblock %}
 
-    .services-container::after {
-        width: 350px;
-        height: 350px;
-        background: #fce4ec;
-        bottom: -50px;
-        right: -50px;
-        animation: drift 15s infinite alternate-reverse;
-    }
-
-    @keyframes drift {
-        from { transform: translate(0,0) rotate(0deg); }
-        to { transform: translate(30px, 50px) rotate(15deg); }
-    }
-
-    .services-container h1 {
-        position: relative;
-        z-index: 1;
-        font-family: 'Playfair Display', serif;
-        font-size: 3.5rem;
-        color: #333;
-        margin-bottom: 5px;
-        font-weight: 700;
-    }
-
-    /* Subtítulo con línea decorativa */
-    .services-subtitle {
-        position: relative;
-        z-index: 1;
-        font-family: 'Playfair Display', serif;
-        font-style: italic;
-        color: #d4a5b9;
-        font-size: 1.2rem;
-        margin-bottom: 60px;
-        display: block;
-    }
-
-    .services-subtitle::after {
-        content: "";
-        display: block;
-        width: 60px;
-        height: 2px;
-        background: #f4cfdf;
-        margin: 15px auto;
-    }
-
-    .gallery-grid {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .card-nail {
-        background: white;
-        border-radius: 30px 30px 5px 5px; /* Diseño asimétrico elegante */
-        padding: 20px;
-        transition: all 0.5s ease;
-        border: none;
-        box-shadow: 0 15px 35px rgba(244, 207, 223, 0.3);
-    }
-
-    .card-nail:hover {
-        transform: translateY(-15px);
-        box-shadow: 0 25px 50px rgba(212, 165, 185, 0.4);
-    }
-
-    /* Contenedor de imagen con efecto de "marco" */
-    .img-placeholder {
-        width: 100%;
-        height: 300px;
-        border-radius: 25px 25px 0 0;
-        margin-bottom: 25px;
-        background: #fce4ec;
-        position: relative;
-        overflow: hidden;
-    }
-
-    /* Simulación de brillo de esmalte en la imagen */
-    .img-placeholder::after {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-        transform: rotate(45deg);
-        transition: 0.8s;
-    }
-
-    .card-nail:hover .img-placeholder::after {
-        left: 100%;
-    }
-
-    .card-nail h3 {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.6rem;
-        color: #4a4a4a;
-        margin: 10px 0;
-    }
-
-    .details {
-        border-top: 1px solid #fdf0f5;
-        border-bottom: 1px solid #fdf0f5;
-        padding: 15px 0;
-        margin: 20px 0;
-        display: flex;
-        justify-content: space-around;
-        color: #888;
-        font-size: 0.9rem;
-    }
-
-    .details strong {
-        display: block;
-        color: #d4a5b9;
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .btn-manicure {
-        background: linear-gradient(135deg, #f4cfdf 0%, #d4a5b9 100%);
-        color: white;
-        border: none;
-        padding: 18px 30px;
-        border-radius: 15px;
-        text-transform: uppercase;
-        font-size: 0.8rem;
-        letter-spacing: 2px;
-        cursor: pointer;
-        transition: 0.4s;
-        width: 100%;
-        font-weight: 600;
-    }
-
-    .btn-manicure:hover {
-        letter-spacing: 3px;
-        filter: brightness(1.1);
-        box-shadow: 0 10px 20px rgba(212, 165, 185, 0.4);
-    }
-</style>
+{% block content %}
 <section class="services-container">
     <h1>Manicure & Pedicure</h1>
-    <span class="services-subtitle">Elegancia en cada detalle</span>
-
     <div class="gallery-grid">
-        <!-- Tarjeta de ejemplo 1 -->
+        {% for servicio in servicios if 'manicure' in servicio.nombre.lower() or 'uñas' in servicio.nombre.lower() %}
         <div class="card-nail">
-            <div class="img-placeholder">
-                <!-- He puesto una imagen real de ejemplo para que veas el efecto -->
-                <img src="https://unsplash.com" alt="Manicure" style="width:100%; height:100%; object-fit:cover;">
-            </div>
-            <h3>Manicure Semi-Permanente</h3>
+            <div class="img-placeholder" style="background-color: #fce4ec;">
+                </div>
+            <h3>{{ servicio.nombre }}</h3>
+            <hr>
             <div class="details">
-                <span><strong>Precio</strong> $45.000</span>
-                <span><strong>Tiempo</strong> 60 min</span>
+                <span><strong>Precio:</strong> ${{ servicio.precio }}</span>
+                <span><strong>Tiempo:</strong> {{ servicio.duracion }}</span>
             </div>
-            <button class="btn-manicure">Reservar Experiencia</button>
+            <button class="btn-manicure">Elegir Diseño</button>
         </div>
-
-        <!-- Tarjeta de ejemplo 2 -->
-        <div class="card-nail">
-            <div class="img-placeholder">
-                <img src="https://unsplash.com" alt="Pedicure" style="width:100%; height:100%; object-fit:cover;">
-            </div>
-            <h3>Pedicure Spa Premium</h3>
-            <div class="details">
-                <span><strong>Precio</strong> $60.000</span>
-                <span><strong>Tiempo</strong> 90 min</span>
-            </div>
-            <button class="btn-manicure">Reservar Experiencia</button>
-        </div>
-
-        <!-- Tarjeta de ejemplo 3 -->
-        <div class="card-nail">
-            <div class="img-placeholder">
-                <img src="https://unsplash.com" alt="Uñas Acrílicas" style="width:100%; height:100%; object-fit:cover;">
-            </div>
-            <h3>Uñas Acrílicas</h3>
-            <div class="details">
-                <span><strong>Precio</strong> $85.000</span>
-                <span><strong>Tiempo</strong> 120 min</span>
-            </div>
-            <button class="btn-manicure">Reservar Experiencia</button>
-        </div>
+        {% endfor %}
     </div>
 </section>
+{% endblock %}

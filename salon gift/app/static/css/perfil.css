@@ -1,26 +1,36 @@
-/* Variables para facilitar cambios de color */
-:root {
-    --rosa-metalico-light: #f5d0cc;
-    --rosa-metalico-base: #e5b0a3;
-    --rosa-metalico-dark: #c58e7f;
-    --rosa-metalico-gradient: linear-gradient(135deg, #e5b0a3 0%, #f5d0cc 50%, #c58e7f 100%);
-    --text-color: #4a4a4a;
-    --bg-body: #faf7f7;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body.profile-page {
+  --rosa-metalico-light: #f5d0cc;
+  --rosa-metalico-base: #e5b0a3;
+  --rosa-metalico-dark: #c58e7f;
+  --rosa-metalico-gradient: linear-gradient(135deg, #e5b0a3 0%, #f5d0cc 50%, #c58e7f 100%);
+  --text-color: #4a4a4a;
+  --bg-body: #faf7f7;
+  --gold-accent: #d4a373;
+  --glass-bg: rgba(255, 250, 250, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --shadow: 0 8px 32px rgba(224, 176, 176, 0.1);
+  font-family: 'Poppins', sans-serif;
+  background-color: #faf7f7;
 }
 
-.profile-container {
+body.profile-page .profile-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 90vh;
     padding: 20px;
     background-color: var(--bg-body);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Tarjeta Principal */
+<<<<<<< Updated upstream
 
 .profile-card {
+=======
+body.profile-page .profile-card {
+>>>>>>> Stashed changes
     background: #ffffff;
     width: 100%;
     max-width: 480px;
@@ -31,14 +41,14 @@
 }
 
 /* Encabezado Metálico */
-.profile-card__header {
+body.profile-page .profile-card__header {
     background: var(--rosa-metalico-gradient);
     padding: 40px 20px;
     text-align: center;
     box-shadow: inset 0 -5px 15px rgba(0,0,0,0.05);
 }
 
-.profile-card__title {
+body.profile-page .profile-card__title {
     margin: 0;
     font-size: 1.6rem;
     color: #fff;
@@ -46,7 +56,7 @@
     font-weight: 700;
 }
 
-.profile-card__subtitle {
+body.profile-page .profile-card__subtitle {
     margin-top: 8px;
     color: rgba(255, 255, 255, 0.9);
     font-size: 0.95rem;
@@ -54,15 +64,15 @@
 }
 
 /* Formulario */
-.profile-form {
+body.profile-page .profile-form {
     padding: 35px;
 }
 
-.profile-form__group {
+body.profile-page .profile-form__group {
     margin-bottom: 22px;
 }
 
-.profile-form__label {
+body.profile-page .profile-form__label {
     display: block;
     margin-bottom: 8px;
     font-size: 0.8rem;
@@ -71,8 +81,8 @@
     letter-spacing: 1px;
 }
 
-.profile-form__input, 
-.profile-form__textarea {
+body.profile-page .profile-form__input,
+body.profile-page .profile-form__textarea {
     width: 100%;
     padding: 12px 18px;
     border: 2px solid #f0e4e1;
@@ -84,22 +94,22 @@
 }
 
 /* Efecto al seleccionar campo */
-.profile-form__input:focus, 
-.profile-form__textarea:focus {
+body.profile-page .profile-form__input:focus,
+body.profile-page .profile-form__textarea:focus {
     outline: none;
     border-color: var(--rosa-metalico-base);
     box-shadow: 0 0 8px rgba(229, 176, 163, 0.4);
 }
 
 /* Campo Deshabilitado */
-.profile-form__input--readonly {
+body.profile-page .profile-form__input--readonly {
     background-color: #fcf9f8;
     border-color: #f0e4e1;
     color: #bbb;
     cursor: not-allowed;
 }
 
-.profile-form__help {
+body.profile-page .profile-form__help {
     font-size: 0.75rem;
     color: #a5a5a5;
     margin-top: 6px;
@@ -107,12 +117,12 @@
 }
 
 /* Botones con efecto metálico */
-.profile-form__actions {
+body.profile-page .profile-form__actions {
     margin-top: 35px;
     text-align: center;
 }
 
-.btn-submit {
+body.profile-page .btn-submit {
     width: 100%;
     background: var(--rosa-metalico-gradient);
     color: white;
@@ -127,13 +137,13 @@
     transition: all 0.3s ease;
 }
 
-.btn-submit:hover {
+body.profile-page .btn-submit:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(197, 142, 127, 0.6);
     filter: brightness(1.05);
 }
 
-.btn-cancel {
+body.profile-page .btn-cancel {
     display: inline-block;
     margin-top: 15px;
     text-decoration: none;
@@ -143,33 +153,20 @@
     transition: color 0.3s;
 }
 
-.btn-cancel:hover {
+body.profile-page .btn-cancel:hover {
     color: #8c5e52;
 }
-/* ver perfiles 
-/* Importar fuentes elegantes */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-:root {
-  /* Nuevos tonos rosa metálico y dorado */
-  --metallic-pink: #e0b0b0; /* Rosa metálico suave */
-  --gold-accent: #d4a373; /* Dorado (manteniendo el tono original, combina bien) */
-  --glass-bg: rgba(255, 250, 250, 0.75); /* Fondo ligeramente rosado */
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --shadow: 0 8px 32px rgba(224, 176, 176, 0.1); /* Sombra con toque rosado */
-}
-
-.profile-clean {
+body.profile-page .profile-clean {
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
   padding: 40px 20px;
-  /* Aquí pones la imagen de las flores de fondo */
   background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)),
               url('/static/img/fondo-salon.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
-.profile-wrapper {
+body.profile-page .profile-wrapper {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
@@ -179,9 +176,9 @@
 }
 
 /* --- SIDEBAR TRASLÚCIDO --- */
-.profile-sidebar {
+body.profile-page .profile-sidebar {
   background: var(--glass-bg);
-  backdrop-filter: blur(10px); /* Efecto cristal */
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
   border-radius: 20px;
@@ -190,50 +187,49 @@
   text-align: center;
 }
 
-.avatar-container {
+body.profile-page .avatar-container {
   width: 140px;
   height: 140px;
   margin: 0 auto 20px;
   border-radius: 50%;
   padding: 5px;
-  border: 3px solid var(--gold-accent); /* Borde dorado */
+  border: 3px solid var(--gold-accent);
   background: white;
 }
 
-.avatar-img {
+body.profile-page .avatar-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
 }
 
-.user-name {
+body.profile-page .user-name {
   font-size: 1.5rem;
-  color: #555; /* Un tono más suave */
+  color: #555;
   text-transform: capitalize;
   margin-bottom: 5px;
 }
 
-.user-status {
+body.profile-page .user-status {
   font-size: 0.8rem;
-  background: var(--gold-accent); /* Fondo dorado */
+  background: var(--gold-accent);
   color: white;
   padding: 5px 15px;
   border-radius: 50px;
   display: inline-block;
 }
 
-/* Menú lateral */
-.profile-nav {
+body.profile-page .profile-nav {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.nav-item {
+body.profile-page .nav-item {
   text-decoration: none;
-  color: #777; /* Un tono más suave */
+  color: #777;
   padding: 12px 20px;
   border-radius: 12px;
   transition: 0.3s;
@@ -243,46 +239,51 @@
   gap: 10px;
 }
 
-.nav-item:hover, .nav-item.active {
-  background: rgba(224, 176, 176, 0.2); /* Fondo rosa metálico translúcido */
-  color: var(--gold-accent); /* Texto dorado */
+body.profile-page .nav-item:hover,
+body.profile-page .nav-item.active {
+  background: rgba(224, 176, 176, 0.2);
+  color: var(--gold-accent);
   transform: translateX(5px);
 }
 
-/* --- CONTENIDO PRINCIPAL --- */
-.main-header {
+body.profile-page .main-header {
   background: var(--glass-bg);
   backdrop-filter: blur(8px);
   padding: 25px;
   border-radius: 15px;
   margin-bottom: 25px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   border: 1px solid var(--glass-border);
 }
 
-.main-header h1 { color: #666; margin: 0; } /* Un tono más suave */
+body.profile-page .main-header h1 {
+  color: #666;
+  margin: 0;
+}
 
-.info-grid {
+body.profile-page .info-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
-.info-card {
+body.profile-page .info-card {
   background: var(--glass-bg);
   backdrop-filter: blur(8px);
   padding: 30px;
   border-radius: 20px;
   border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.bio-card { grid-column: span 1; text-align: center; }
+body.profile-page .bio-card { grid-column: span 1; text-align: center; }
 
 /* Estilo de los botones */
-.btn-edit-top, .btn-primary {
+body.profile-page .btn-edit-top,
+body.profile-page .btn-primary {
+  --metallic-pink: #e0b0b0;
   background: linear-gradient(135deg, var(--metallic-pink), var(--gold-accent)); /* Degradado rosa metálico a dorado */
   color: white;
   padding: 10px 25px;
@@ -295,28 +296,28 @@
   border: none;
 }
 
-.btn-edit-top:hover {
+body.profile-page .btn-edit-top:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(224, 176, 176, 0.4); /* Sombra rosa metálico más intensa */
 }
 
 /* Filas de detalles */
-.detail-row {
+body.profile-page .detail-row {
   display: flex;
   justify-content: space-between;
   padding: 12px 0;
   border-bottom: 1px solid rgba(224, 176, 176, 0.1); /* Borde rosa metálico suave */
 }
 
-.label { font-weight: 600; color: #999; } /* Un tono más suave */
-.value { color: #555; } /* Un tono más suave */
+body.profile-page .label { font-weight: 600; color: #999; } /* Un tono más suave */
+body.profile-page .value { color: #555; } /* Un tono más suave */
 
 /* Responsive */
 @media (max-width: 900px) {
-  .profile-wrapper { grid-template-columns: 1fr; }
-  .info-grid { grid-template-columns: 1fr; }
+  body.profile-page .profile-wrapper { grid-template-columns: 1fr; }
+  body.profile-page .info-grid { grid-template-columns: 1fr; }
 }
 
-.bio-card {
+body.profile-page .bio-card {
   grid-column: span 1;
 }

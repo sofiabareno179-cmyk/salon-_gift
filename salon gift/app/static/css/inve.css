@@ -1,0 +1,295 @@
+/* --- Estilos para la Barra de Navegación --- */
+body.inventory-page .navbar-custom {
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 10px 5%; /* 5% de espacio a los lados */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Expande a lo ancho */
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between; /* Logo a la izquierda, links a la derecha */
+    align-items: center;
+}
+
+body.inventory-page .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+body.inventory-page .brand-logo {
+    color: var(--pink-accent);
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+body.inventory-page .brand-text-green {
+    color: #4db6ac; /* El color verde de tu logo SalonGift */
+    font-weight: bold;
+}
+
+body.inventory-page .nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+}
+
+body.inventory-page .nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+body.inventory-page .nav-links a:hover {
+    color: var(--pink-accent);
+}
+
+/* --- Ajuste para el contenido --- */
+body.inventory-page {
+    padding-top: 100px; /* Evita que la navbar tape el formulario */
+    background-color: #fff5f7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* --- Variables y Reset --- */
+body.inventory-page {
+    --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f9e2af 50%, #b8860b 100%);
+    --pink-accent: #ff85a2; /* Rosa de tu logo */
+    --gold-text: #5d4b1a; /* Dorado oscuro para texto legible */
+    --card-shadow: 0 15px 40px rgba(212, 175, 55, 0.1);
+    --metallic-pink: linear-gradient(135deg, #ff85a2 0%, #ffb3c1 50%, #ff6b9d 100%);
+    --soft-gold: linear-gradient(135deg, #f9e2af 0%, #d4af37 100%);
+}
+
+body.inventory-page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.inventory-page {
+    background: linear-gradient(135deg, #fff5f7 0%, #fef5f8 50%, #fff8f9 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+}
+
+body.inventory-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 133, 162, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+body.inventory-page .container {
+    max-width: 450px;
+    width: 100%;
+}
+
+body.inventory-page .card-luxury {
+    border: none;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    background: linear-gradient(145deg, #ffffff 0%, #fefefe 50%, #f8f8f8 100%);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.inventory-page .card-luxury:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 60px rgba(212, 175, 55, 0.15);
+}
+
+/* --- Encabezado Arreglado (Integrado en la tarjeta) --- */
+body.inventory-page .card-header-gold {
+    background: var(--gold-gradient);
+    padding: 2rem 1rem; /* Más espacio */
+    text-align: center;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+}
+
+body.inventory-page .card-header-gold::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+    pointer-events: none;
+}
+
+body.inventory-page .card-header-gold h5 {
+    color: var(--gold-text);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espacio entre corona y texto */
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Cuerpo del Formulario Arreglado --- */
+body.inventory-page .card-body {
+    padding: 2.5rem; /* Mucho más aire */
+}
+
+/* Etiquetas (Labels) alineadas y claras */
+body.inventory-page .form-label {
+    display: block;
+    color: var(--pink-accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    text-align: center; /* Centradas, como en tu imagen */
+}
+
+body.inventory-page .input-luxury-wrapper {
+    border: 2px solid #fce4ec; /* Rosa muy suave */
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    display: flex;
+    align-items: center;
+    padding: 0 15px; /* Padding interno */
+    margin-bottom: 25px; /* Espacio entre campos */
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 133, 162, 0.1);
+}
+
+body.inventory-page .input-luxury-wrapper:focus-within {
+    border-color: #d4af37; /* Borde dorado al enfocar */
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), 0 4px 12px rgba(255, 133, 162, 0.15);
+    transform: translateY(-2px);
+}
+
+body.inventory-page .input-luxury-wrapper i {
+    color: #d4af37; /* Iconos dorados */
+    font-size: 1.2rem;
+    margin-right: 15px; /* Espacio con el input */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+body.inventory-page .input-luxury-wrapper:focus-within i {
+    transform: scale(1.1);
+    color: #b8860b;
+}
+
+body.inventory-page .input-luxury-wrapper input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 12px 0; /* Espacio vertical */
+    font-size: 1rem;
+    color: #555;
+    outline: none;
+}
+
+/* Corregir el color de los iconos de fecha (Chrome/Safari) */
+body.inventory-page .input-luxury-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(75%) sepia(50%) saturate(1000%) hue-rotate(15deg) brightness(95%) contrast(85%); /* Un dorado sutil */
+    cursor: pointer;
+}
+
+/* --- Botones Arreglados (En fila y organizados) --- */
+body.inventory-page .action-buttons {
+    display: flex;
+    gap: 15px; /* Espacio entre botones */
+    margin-top: 30px;
+}
+
+body.inventory-page .btn {
+    flex: 1; /* Para que ocupen el mismo ancho */
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+body.inventory-page .btn-gold {
+    background: var(--gold-gradient);
+    color: var(--gold-text);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+body.inventory-page .btn-gold::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+body.inventory-page .btn-gold:hover::before {
+    left: 100%;
+}
+
+body.inventory-page .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(184, 134, 11, 0.4);
+}
+
+body.inventory-page .btn-pink-outline {
+    border: 2px solid var(--pink-accent);
+    color: var(--pink-accent);
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+body.inventory-page .btn-pink-outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,133,162,0.1), transparent);
+    transition: left 0.5s;
+}
+
+body.inventory-page .btn-pink-outline:hover::before {
+    left: 100%;
+}
+
+body.inventory-page .btn-pink-outline:hover {
+    background: var(--metallic-pink);
+    color: white;
+    border-color: #ff6b9d;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 133, 162, 0.4);
+}

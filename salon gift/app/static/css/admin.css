@@ -16,6 +16,9 @@
     display: flex;
     flex-direction: column;
     border-right: 1px solid #2d2d2d;
+    position: sticky;
+    top: 0;
+    height: 100vh;
 }
 
 .sidebar__title {
@@ -68,14 +71,17 @@
 /* --- Grid de Tarjetas --- */
 .dashboard__stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2.5rem;
 }
 
+/* Contenedor relativo para que el botón "+" se posicione bien */
 .card-wrapper {
     position: relative;
+    transition: transform 0.3s ease;
 }
 
+/* La tarjeta principal es un enlace */
 .card-stat {
     display: flex;
     align-items: center;
@@ -86,12 +92,20 @@
     color: #000000;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: none;
-    height: 100%; /* Asegura que todas midan lo mismo */
+    height: 100%;
+    position: relative;
+    z-index: 1; /* Capa base */
+    overflow: hidden; /* Para que el brillo/efectos no se salgan */
+    cursor: pointer;
 }
 
 .card-stat:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(255, 133, 161, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-stat:active {
+    transform: translateY(-5px) scale(0.98);
 }
 
 .card-stat__icon {
@@ -105,25 +119,22 @@
 }
 
 .card-stat__label {
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0;
 }
 
 .card-stat__value {
     font-size: 1rem;
     font-weight: 500;
-    opacity: 0.9;
+    opacity: 0.8;
+    margin: 0;
 }
 
-/* --- Colores y Mezclas (Arreglado) --- */
-
-/* 
-   Para que la imagen funcione con el color, 
-   usamos background: linear-gradient(...), url(...) 
-*/
+/* --- Colores y Fondos --- */
 
 .card-stat--pink { 
-    background: linear-gradient(135deg, rgba(255,194,209,0.85), rgba(255,133,161,0.85)), url('/static/img/fondopanel.jpg');
+    background: linear-gradient(135deg, rgba(255,194,209,0.9), rgba(255,133,161,0.9)), url('/static/img/fondopanel.jpg');
     background-size: cover;
     background-blend-mode: overlay;
 }
@@ -140,17 +151,17 @@
     background: linear-gradient(135deg, #a0c4ff, #9ad1ff); 
 }
 
-.card-stat--orange { 
-    background: linear-gradient(135deg, #ffd6a5, #fdffb6); 
+.card-stat--gold { 
+    background: linear-gradient(135deg, #ffd700, #ffed4e); 
 }
 
 /* --- Botón Quick Add (+) --- */
 .card-quick-add {
     position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 40px;
-    height: 40px;
+    top: -12px;
+    right: -12px;
+    width: 42px;
+    height: 42px;
     background-color: #000000;
     color: #ff85a1;
     border-radius: 50%;
@@ -158,17 +169,18 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    z-index: 5;
-    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    z-index: 10; /* Siempre por encima de la tarjeta */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 2px solid #ff85a1;
 }
 
 .card-quick-add:hover {
     background-color: #ff85a1;
     color: #000000;
-    transform: scale(1.1) rotate(90deg);
+    transform: scale(1.2) rotate(90deg);
 }
 
 /* --- Alertas --- */
@@ -187,11 +199,16 @@
         grid-template-columns: 1fr; 
     }
     .sidebar { 
+        height: auto;
+        position: relative;
         padding: 1rem;
         border-right: none; 
         border-bottom: 1px solid #2d2d2d; 
     }
     .dashboard {
         padding: 1.5rem;
+    }
+    .dashboard__stats {
+        gap: 2rem;
     }
 }

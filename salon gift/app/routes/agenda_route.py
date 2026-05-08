@@ -44,7 +44,7 @@ def editar_agenda(id):
         flash('Agenda actualizada', 'info')
         return redirect(url_for('agenda.listar_agendas'))
     
-    return render_template('agenda/index.html', agenda=agenda)
+    return render_template('agenda/edit.html', agenda=agenda)
 
 @bp.route('/agenda/eliminar/<int:id>', methods=['POST'])
 @login_required

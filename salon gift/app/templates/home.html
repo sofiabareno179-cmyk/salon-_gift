@@ -1,38 +1,46 @@
 {% extends "base.html" %}
 
 {% block title %}Inicio - Salon Gift{% endblock %}
+
+{% block body_class %}dashboard-page{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dasbo.css') }}">
+{% endblock %}
+
 {% block content %}
 <section class="hero">
-<div class="hero-content">
-    <h1>Reserva tu Estilo</h1>
-    <p>Gestiona tus citas con la delicadeza que mereces.</p>
-    
-    <a href="{{ url_for('auth.login') }}" class="btn-primary">Empieza Ahora</a>
-</div>
+    <div class="hero-content">
+        <h1>Reserva tu Estilo</h1>
+        <p>Gestiona tus citas con la delicadeza que mereces.</p>
+        <a href="{{ url_for('auth.login') }}" class="btn-primary">Empieza Ahora</a>
+    </div>
 </section>
 
 <section class="services-grid">
     <div class="container">
         <h2>Nuestros Servicios</h2>
-       <div class="cards-wrapper">
-    
-    <a href="{{ url_for('servicio.ver_peluqueria') }}" class="service-card pastel-pink">
-    <i class="fas fa-cut"></i> 
-    <h3>Peluquería</h3>
-    <p>Cortes y estilos modernos...</p>
-</a>
+        <div class="cards-wrapper">
+            <!-- Peluquería -->
+            <a href="{{ url_for('servicio.ver_peluqueria') }}" class="service-card pastel-pink">
+                <i class="fas fa-cut"></i> 
+                <h3>Peluquería</h3>
+                <p>Cortes y estilos modernos diseñados para resaltar tu belleza natural.</p>
+            </a>
 
-    <a href="{{ url_for('servicio.tratamientos') }}" class="service-card pastel-pink">
-        <i class="fas fa-spa"></i>
-        <h3>Tratamientos</h3>
-        <p>Cuidado especializado con productos premium en un ambiente relajante.</p>
-    </a>
+            <!-- Tratamientos (Cambiado a azul para variar) -->
+            <a href="{{ url_for('servicio.tratamientos') }}" class="service-card pastel-blue">
+                <i class="fas fa-spa"></i>
+                <h3>Tratamientos</h3>
+                <p>Cuidado especializado con productos premium en un ambiente relajante.</p>
+            </a>
 
-    <a href="{{ url_for('servicio.manicure') }}" class="service-card pastel-pink">
-        <i class="fas fa-paint-brush"></i>
-        <h3>Manicura</h3>
-        <p>Detalles que marcan la diferencia con acabados profesionales y duraderos.</p>
-    </a>
+            <!-- Manicura (Cambiado a verde para variar) -->
+            <a href="{{ url_for('servicio.manicure') }}" class="service-card pastel-green">
+                <i class="fas fa-paint-brush"></i>
+                <h3>Manicura</h3>
+                <p>Detalles que marcan la diferencia con acabados profesionales y duraderos.</p>
+            </a>
         </div>
     </div>
 </section>

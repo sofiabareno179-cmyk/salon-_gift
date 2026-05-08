@@ -1,0 +1,271 @@
+/* --- Variables y Reset --- */
+body.supplier-page {
+    --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f9e2af 50%, #b8860b 100%);
+    --pink-accent: #ff85a2; /* Rosa de tu logo */
+    --gold-text: #5d4b1a; /* Dorado oscuro para texto legible */
+    --card-shadow: 0 15px 40px rgba(212, 175, 55, 0.1);
+    --metallic-pink: linear-gradient(135deg, #ff85a2 0%, #ffb3c1 50%, #ff6b9d 100%);
+    --soft-gold: linear-gradient(135deg, #f9e2af 0%, #d4af37 100%);
+}
+
+body.supplier-page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.supplier-page {
+    background: linear-gradient(135deg, #fff5f7 0%, #fef5f8 50%, #fff8f9 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+}
+
+body.supplier-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 133, 162, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+body.supplier-page .container {
+    max-width: 700px;
+    width: 100%;
+    padding: 2rem;
+}
+
+body.supplier-page .card-luxury {
+    border: none;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    background: linear-gradient(145deg, #ffffff 0%, #fefefe 50%, #f8f8f8 100%);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.supplier-page .card-luxury:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 60px rgba(212, 175, 55, 0.15);
+}
+
+/* --- Encabezado --- */
+body.supplier-page .card-header-gold {
+    background: var(--gold-gradient);
+    padding: 2rem 1rem;
+    text-align: center;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+}
+
+body.supplier-page .card-header-gold::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+    pointer-events: none;
+}
+
+body.supplier-page .card-header-gold h5 {
+    color: var(--gold-text);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Cuerpo del Formulario --- */
+body.supplier-page .card-body {
+    padding: 2.5rem;
+}
+
+/* Encabezados de sección */
+body.supplier-page .section-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #fce4ec;
+}
+
+body.supplier-page .section-header h6 {
+    color: var(--pink-accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+/* Etiquetas */
+body.supplier-page .form-label {
+    display: block;
+    color: var(--pink-accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+body.supplier-page .form-group {
+    margin-bottom: 25px;
+}
+
+/* Inputs de lujo */
+body.supplier-page .input-luxury-wrapper {
+    border: 2px solid #fce4ec;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 133, 162, 0.1);
+}
+
+body.supplier-page .input-luxury-wrapper:focus-within {
+    border-color: #d4af37;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), 0 4px 12px rgba(255, 133, 162, 0.15);
+    transform: translateY(-2px);
+}
+
+body.supplier-page .input-luxury-wrapper i {
+    color: #d4af37;
+    font-size: 1.2rem;
+    margin-right: 15px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+body.supplier-page .input-luxury-wrapper:focus-within i {
+    transform: scale(1.1);
+    color: #b8860b;
+}
+
+body.supplier-page .input-luxury-wrapper input,
+body.supplier-page .input-luxury-wrapper textarea {
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+    color: #555;
+    outline: none;
+    resize: vertical;
+}
+
+body.supplier-page .input-luxury-wrapper textarea {
+    min-height: 60px;
+}
+
+/* Aviso de campos obligatorios */
+body.supplier-page .required-notice {
+    background: linear-gradient(135deg, #fff8f9 0%, #fef5f8 100%);
+    border: 1px solid #fce4ec;
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin: 20px 0;
+    text-align: center;
+    color: var(--pink-accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Botones */
+body.supplier-page .action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+body.supplier-page .btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+body.supplier-page .btn-gold {
+    background: var(--gold-gradient);
+    color: var(--gold-text);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+body.supplier-page .btn-gold::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+body.supplier-page .btn-gold:hover::before {
+    left: 100%;
+}
+
+body.supplier-page .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(184, 134, 11, 0.4);
+}
+
+body.supplier-page .btn-pink-outline {
+    border: 2px solid var(--pink-accent);
+    color: var(--pink-accent);
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+body.supplier-page .btn-pink-outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,133,162,0.1), transparent);
+    transition: left 0.5s;
+}
+
+body.supplier-page .btn-pink-outline:hover::before {
+    left: 100%;
+}
+
+body.supplier-page .btn-pink-outline:hover {
+    background: var(--metallic-pink);
+    color: white;
+    border-color: #ff6b9d;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 133, 162, 0.4);
+}
