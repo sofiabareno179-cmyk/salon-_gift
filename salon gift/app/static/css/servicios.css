@@ -1,24 +1,21 @@
-:root {
+body.servicios-page {
     --pink-pastel: #fce4ec;
     --mint-green: #e0f2f1;
     --dark-text: #4a4a4a;
     --accent-pink: #f06292;
-}
-
-body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #fdfdfd;
     color: var(--dark-text);
 }
 
-.grid-servicios {
+body.servicios-page .grid-servicios {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
 }
 
-.card {
+body.servicios-page .card {
     background: white;
     border-radius: 15px;
     border: 2px solid var(--mint-green);
@@ -27,12 +24,12 @@ body {
     transition: transform 0.3s ease;
 }
 
-.card:hover {
+body.servicios-page .card:hover {
     transform: translateY(-5px);
     border-color: var(--pink-pastel);
 }
 
-.btn-primary {
+body.servicios-page .btn-primary {
     background-color: var(--accent-pink);
     color: white;
     border: none;
@@ -41,7 +38,7 @@ body {
     cursor: pointer;
 }
 
-h1 {
+body.servicios-page h1 {
     color: #ce93d8; /* Un lila suave que combina con el rosa y verde */
     text-align: center;
 }

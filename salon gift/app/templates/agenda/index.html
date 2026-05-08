@@ -2,11 +2,17 @@
 
 {% block title %}Gestión de Agenda{% endblock %}
 
+{% block body_class %}schedule-list-page{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agenda_lista.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-primary"><i class="fas fa-calendar-alt"></i> Horarios Registrados</h2>
-        <a href="{{ url_for('crear_agenda') }}" class="btn btn-success">
+<div class="container py-5">
+    <div class="page-header">
+        <h2 class="page-title"><i class="fas fa-calendar-alt"></i> Horarios Registrados</h2>
+        <a href="{{ url_for('agenda.crear_agenda') }}" class="btn btn-gold">
             <i class="fas fa-plus"></i> Agregar Nuevo Horario
         </a>
     </div>
@@ -22,49 +28,47 @@
       {% endif %}
     {% endwith %}
 
-    <div class="card shadow-sm">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="ps-4">Día de la Semana</th>
-                            <th>Hora Inicio</th>
-                            <th>Hora Fin</th>
-                            <th class="text-center">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in agendas %}
-                        <tr>
-                            <td class="ps-4 fw-bold text-dark">{{ item.diasemana }}</td>
-                            <td><span class="badge bg-light text-dark border">{{ item.horainicio }}</span></td>
-                            <td><span class="badge bg-light text-dark border">{{ item.horafin }}</span></td>
-                            <td class="text-center">
-                                <div class="btn-group" role="group">
-                                    <a href="{{ url_for('editar_agenda', id=item.idagenda) }}" class="btn btn-sm btn-outline-warning" title="Editar">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                    
-                                    <form action="{{ url_for('eliminar_agenda', id=item.idagenda) }}" method="POST" class="d-inline">
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" 
-                                                onclick="return confirm('¿Estás seguro de eliminar este horario?')" title="Eliminar">
-                                            <i class="fas fa-trash"></i> Borrar
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td colspan="4" class="text-center py-4 text-muted">
-                                <p class="mb-0">No hay horarios configurados en la agenda.</p>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+    <div class="card-table">
+        <div class="table-wrapper">
+            <table class="luxury-table">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-calendar-day"></i> Día de la Semana</th>
+                        <th><i class="fas fa-clock"></i> Hora Inicio</th>
+                        <th><i class="fas fa-hourglass-end"></i> Hora Fin</th>
+                        <th><i class="fas fa-cogs"></i> Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in agendas %}
+                    <tr>
+                        <td class="day-cell"><strong>{{ item.diasemana }}</strong></td>
+                        <td class="time-cell"><span class="time-badge">{{ item.horainicio }}</span></td>
+                        <td class="time-cell"><span class="time-badge">{{ item.horafin }}</span></td>
+                        <td class="actions-cell">
+                            <div class="btn-group">
+                                <a href="{{ url_for('agenda.editar_agenda', id=item.idagenda) }}" class="btn-action edit" title="Editar">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+                                
+                                <form action="{{ url_for('agenda.eliminar_agenda', id=item.idagenda) }}" method="POST" class="d-inline">
+                                    <button type="submit" class="btn-action delete" 
+                                            onclick="return confirm('¿Estás seguro de eliminar este horario?')" title="Eliminar">
+                                        <i class="fas fa-trash"></i> Borrar
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="empty-message">
+                            <p class="mb-0">No hay horarios configurados en la agenda.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

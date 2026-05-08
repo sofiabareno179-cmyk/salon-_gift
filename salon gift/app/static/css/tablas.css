@@ -38,7 +38,7 @@
 }
 
 /* Estilo para los Badges (Estados) */
-.badge {
+.table .badge {
     padding: 6px 12px;
     border-radius: 8px;
     font-weight: 500;
@@ -46,29 +46,29 @@
 }
 
 /* Botones de acción */
-.btn-group .btn {
+.table .btn-group .btn {
     margin: 0 2px;
     border-radius: 6px !important; /* Forzamos redondeado incluso en grupos */
     border: 1px solid #e2e8f0;
 }
 
-.btn-outline-primary:hover {
+.table .btn-outline-primary:hover {
     background-color: #7b1fa2; /* Color morado acorde a tu marca */
     border-color: #7b1fa2;
 }
 
-.btn-outline-danger:hover {
+.table .btn-outline-danger:hover {
     background-color: #e53e3e;
     border-color: #e53e3e;
 }
 
 /* Personalización de iconos dentro de la tabla */
-.text-muted {
+.table .text-muted {
     color: #a0aec0 !important;
 }
 
 /* Mensaje cuando no hay datos */
-.text-center.text-muted {
+.table .text-center.text-muted {
     padding: 40px;
     font-style: italic;
 }

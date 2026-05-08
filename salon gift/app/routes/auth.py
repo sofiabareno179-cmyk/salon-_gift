@@ -6,7 +6,12 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 bp = Blueprint('auth', __name__)
+
 @bp.route('/', methods=['GET', 'POST'])
+def inicio():
+    return render_template('home.html')
+
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         # Redirigir según el rol si ya está logueado

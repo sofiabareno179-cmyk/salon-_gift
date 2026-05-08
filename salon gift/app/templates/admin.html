@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block body_class %}admin-page{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="admin-layout">
     <!-- BARRA LATERAL -->
@@ -46,20 +52,20 @@
                     <i class="fas fa-plus"></i>
                 </a>
             </div>
-
-            <!-- SERVICIOS -->
-            <div class="card-wrapper">
-                <a href="{{ url_for('servicio.get_servicios') }}" class="card-stat card-stat--green">
-                    <i class="fas fa-cut card-stat__icon"></i>
-                    <div class="card-stat__info">
-                        <h4 class="card-stat__label">Servicios</h4>
-                        <p class="card-stat__value">Catálogo</p>
-                    </div>
-                </a>
-                <a href="{{ url_for('servicio.add') }}" class="card-quick-add" title="Crear Servicio">
-                    <i class="fas fa-plus"></i>
-                </a>
-            </div>
+<!-- SERVICIOS -->
+<div class="card-wrapper">
+    <a href="{{ url_for('servicio.index') }}" class="card-stat card-stat--green">
+        <i class="fas fa-cut card-stat__icon"></i>
+        <div class="card-stat__info">
+            <h4 class="card-stat__label">Servicios</h4>
+            <p class="card-stat__value">Catálogo</p>
+        </div>
+    </a>
+    <!-- Se agrega el parámetro categoria='peluqueria' para evitar el error de Flask -->
+    <a href="{{ url_for('servicio.add', categoria='peluqueria') }}" class="card-quick-add" title="Crear Servicio">
+        <i class="fas fa-plus"></i>
+    </a>
+</div>
 
             <!-- PRODUCTOS -->
             <div class="card-wrapper">
@@ -91,14 +97,28 @@
 
             <!-- INVENTARIO -->
             <div class="card-wrapper">
-                <a href="#" class="card-stat card-stat--orange">
+                <a href="{{ url_for('inventario.listar_inventario') }}" class="card-stat card-stat--orange">
                     <i class="fas fa-boxes card-stat__icon"></i>
                     <div class="card-stat__info">
                         <h4 class="card-stat__label">Inventario</h4>
                         <p class="card-stat__value">Insumos</p>
                     </div>
                 </a>
-                <a href="#" class="card-quick-add" title="Cargar Stock">
+                <a href="{{ url_for('inventario.nuevo_item') }}" class="card-quick-add" title="Cargar Stock">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+
+            <!-- AGENDA -->
+            <div class="card-wrapper">
+                <a href="{{ url_for('agenda.listar_agendas') }}" class="card-stat card-stat--gold">
+                    <i class="fas fa-calendar-alt card-stat__icon"></i>
+                    <div class="card-stat__info">
+                        <h4 class="card-stat__label">Agenda</h4>
+                        <p class="card-stat__value">Horarios</p>
+                    </div>
+                </a>
+                <a href="{{ url_for('agenda.crear_agenda') }}" class="card-quick-add" title="Crear Horario">
                     <i class="fas fa-plus"></i>
                 </a>
             </div>

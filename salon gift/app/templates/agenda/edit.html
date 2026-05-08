@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Nueva Agenda{% endblock %}
+{% block title %}Editar Agenda{% endblock %}
 
 {% block body_class %}agenda-page{% endblock %}
 
@@ -15,25 +15,24 @@
             <div class="card card-luxury">
                 
                 <div class="card-header-gold">
-                    <h5 class="mb-0"><i class="fas fa-calendar"></i> Nuevo Registro</h5>
+                    <h5 class="mb-0"><i class="fas fa-calendar"></i> Editar Horario</h5>
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ url_for('agenda.crear_agenda') }}" method="POST">
+                    <form action="{{ url_for('agenda.editar_agenda', id=agenda.idagenda) }}" method="POST">
                         
                         <div class="form-group">
                             <label class="form-label">Día</label>
                             <div class="input-luxury-wrapper">
                                 <i class="fas fa-calendar-week"></i>
                                 <select name="diasemana" required>
-                                    <option value="" selected disabled>Seleccionar día...</option>
-                                    <option>Lunes</option>
-                                    <option>Martes</option>
-                                    <option>Miércoles</option>
-                                    <option>Jueves</option>
-                                    <option>Viernes</option>
-                                    <option>Sábado</option>
-                                    <option>Domingo</option>
+                                    <option value="Lunes" {% if agenda.diasemana == 'Lunes' %}selected{% endif %}>Lunes</option>
+                                    <option value="Martes" {% if agenda.diasemana == 'Martes' %}selected{% endif %}>Martes</option>
+                                    <option value="Miércoles" {% if agenda.diasemana == 'Miércoles' %}selected{% endif %}>Miércoles</option>
+                                    <option value="Jueves" {% if agenda.diasemana == 'Jueves' %}selected{% endif %}>Jueves</option>
+                                    <option value="Viernes" {% if agenda.diasemana == 'Viernes' %}selected{% endif %}>Viernes</option>
+                                    <option value="Sábado" {% if agenda.diasemana == 'Sábado' %}selected{% endif %}>Sábado</option>
+                                    <option value="Domingo" {% if agenda.diasemana == 'Domingo' %}selected{% endif %}>Domingo</option>
                                 </select>
                             </div>
                         </div>
@@ -44,7 +43,7 @@
                                     <label class="form-label">Desde</label>
                                     <div class="input-luxury-wrapper">
                                         <i class="fas fa-clock"></i>
-                                        <input type="time" name="horainicio" required>
+                                        <input type="time" name="horainicio" value="{{ agenda.horainicio }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +52,7 @@
                                     <label class="form-label">Hasta</label>
                                     <div class="input-luxury-wrapper">
                                         <i class="fas fa-hourglass-end"></i>
-                                        <input type="time" name="horafin" required>
+                                        <input type="time" name="horafin" value="{{ agenda.horafin }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +63,7 @@
                                 Cancelar
                             </a>
                             <button type="submit" class="btn btn-gold">
-                                Guardar
+                                Actualizar
                             </button>
                         </div>
                     </form>
