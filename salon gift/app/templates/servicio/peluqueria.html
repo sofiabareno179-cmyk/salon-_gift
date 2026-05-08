@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 {% extends "base.html" %}
 
 {% block title %}Servicios de Peluquería{% endblock %}
@@ -7,13 +8,202 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
 {% endblock %}
+=======
+<style>
+    /* Importación correcta de fuentes de Google */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+
+    .hair-services-container {
+        padding: 80px 20px;
+        text-align: center;
+        background: #fdfdfd;
+        /* Fondo con degradado sutil de salón premium */
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.08) 0, transparent 50%), 
+            radial-gradient(at 100% 100%, rgba(20, 20, 20, 0.04) 0, transparent 50%);
+        font-family: 'Montserrat', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hair-services-container h1 {
+        position: relative;
+        z-index: 1;
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        color: #1a1a1a;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .hair-subtitle {
+        position: relative;
+        z-index: 1;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: #b8973d; /* Dorado */
+        font-size: 1.1rem;
+        margin-bottom: 60px;
+        display: block;
+    }
+>>>>>>> Stashed changes
 
 {% block content %}
 
+<<<<<<< Updated upstream
 <section class="services-container">
     <div class="header-section">
         <h1>Corte y Peinado</h1>
         <p>Transformamos tu look con las últimas tendencias.</p>
+=======
+    .hair-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .card-hair {
+        background: white;
+        border-radius: 5px 40px 5px 40px;
+        padding: 20px;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid #f0f0f0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-hair:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(184, 151, 61, 0.2);
+        border-color: #b8973d;
+    }
+
+    .img-hair {
+        width: 100%;
+        height: 350px;
+        border-radius: 0 30px 0 30px;
+        margin-bottom: 25px;
+        background: #222;
+        overflow: hidden;
+    }
+
+    .img-hair img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+    }
+
+    .card-hair:hover .img-hair img {
+        transform: scale(1.1);
+    }
+
+    .card-hair h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.6rem;
+        color: #1a1a1a;
+        margin: 10px 0;
+    }
+
+    .hair-details {
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        padding: 15px 0;
+        margin: 20px 0;
+        display: flex;
+        justify-content: space-around;
+        color: #666;
+    }
+
+    .hair-details strong {
+        display: block;
+        color: #b8973d;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-hair {
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+        padding: 18px 30px;
+        border-radius: 0 20px 0 20px;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: 0.4s;
+        width: 100%;
+        font-weight: 600;
+        margin-top: auto; /* Mantiene los botones alineados abajo */
+    }
+
+    .btn-hair:hover {
+        background: #b8973d;
+        color: white;
+        box-shadow: 0 10px 20px rgba(184, 151, 61, 0.3);
+    }
+</style>
+
+<section class="hair-services-container">
+    <h1>Peluquería & Estilo</h1>
+    <span class="hair-subtitle">El arte de crear belleza en cada fibra de tu cabello</span>
+
+    <div class="hair-grid">
+        <div class="card-hair">
+            <div class="img-hair">
+                <img src="https://images.pexels.com/photos/3356201/pexels-photo-3356201.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Peinado Profesional">
+            </div>
+            <h3>Peinado</h3>
+            <div class="hair-details">
+                <span><strong>Precio</strong> Desde $35.000</span>
+                <span><strong>Tiempo</strong> 45 min</span>
+            </div>
+            <button class="btn-hair">Reservar Cita</button>
+        </div>
+
+        <div class="card-hair">
+            <div class="img-hair">
+                <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Corte de Cabello">
+            </div>
+            <h3>Corte</h3>
+            <div class="hair-details">
+                <span><strong>Precio</strong> Desde $45.000</span>
+                <span><strong>Tiempo</strong> 60 min</span>
+            </div>
+            <button class="btn-hair">Reservar Cita</button>
+        </div>
+
+        <div class="card-hair">
+            <div class="img-hair">
+                <img src="https://images.pexels.com/photos/3992870/pexels-photo-3992870.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tintura y Color">
+            </div>
+            <h3>Tinturar</h3>
+            <div class="hair-details">
+                <span><strong>Precio</strong> Desde $120.000</span>
+                <span><strong>Tiempo</strong> 180 min</span>
+            </div>
+            <button class="btn-hair">Reservar Cita</button>
+        </div>
+
+        <div class="card-hair">
+            <div class="img-hair">
+                <img src="https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tratamiento Capilar">
+            </div>
+            <h3>Mascarilla</h3>
+            <div class="hair-details">
+                <span><strong>Precio</strong> $65.000</span>
+                <span><strong>Tiempo</strong> 60 min</span>
+            </div>
+            <button class="btn-hair">Reservar Cita</button>
+        </div>
+>>>>>>> Stashed changes
     </div>
     
     <div class="grid-servicios">
