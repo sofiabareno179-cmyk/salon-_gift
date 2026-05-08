@@ -1,28 +1,248 @@
+<<<<<<< Updated upstream
 {% extends "base.html" %}
 
 {% block title %}Manicure & Pedicure{% endblock %}
 
 {% block body_class %}servicios-page{% endblock %}
+=======
+<style>
+    /* Importación correcta de fuentes */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+
+    .services-container {
+        padding: 80px 20px;
+        text-align: center;
+        background: #fffafa;
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(244, 207, 223, 0.3) 0, transparent 50%), 
+            radial-gradient(at 100% 100%, rgba(252, 228, 236, 0.4) 0, transparent 50%);
+        font-family: 'Montserrat', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Decoraciones animadas de fondo */
+    .services-container::before, .services-container::after {
+        content: "";
+        position: absolute;
+        border-radius: 50% 20% 50% 70%;
+        filter: blur(60px);
+        z-index: 0;
+        opacity: 0.5;
+    }
+>>>>>>> Stashed changes
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
 {% endblock %}
 
+<<<<<<< Updated upstream
 {% block content %}
+=======
+    .services-container::after {
+        width: 350px;
+        height: 350px;
+        background: #fce4ec;
+        bottom: -50px;
+        right: -50px;
+        animation: drift 15s infinite alternate-reverse;
+    }
+
+    @keyframes drift {
+        from { transform: translate(0,0) rotate(0deg); }
+        to { transform: translate(30px, 50px) rotate(15deg); }
+    }
+
+    .services-container h1 {
+        position: relative;
+        z-index: 1;
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        color: #333;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .services-subtitle {
+        position: relative;
+        z-index: 1;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: #d4a5b9;
+        font-size: 1.2rem;
+        margin-bottom: 50px;
+        display: block;
+    }
+
+    .services-subtitle::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 2px;
+        background: #f4cfdf;
+        margin: 15px auto;
+    }
+
+    .gallery-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .card-nail {
+        background: white;
+        border-radius: 30px 30px 10px 10px;
+        padding: 20px;
+        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: none;
+        box-shadow: 0 10px 30px rgba(244, 207, 223, 0.2);
+    }
+
+    .card-nail:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(212, 165, 185, 0.3);
+    }
+
+    .img-placeholder {
+        width: 100%;
+        height: 280px;
+        border-radius: 25px 25px 10px 10px;
+        margin-bottom: 20px;
+        background: #fce4ec;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Efecto de brillo de esmalte */
+    .img-placeholder::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -100%;
+        width: 50%;
+        height: 200%;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+        transform: rotate(30deg);
+        transition: 0.6s;
+    }
+
+    .card-nail:hover .img-placeholder::after {
+        left: 150%;
+    }
+
+    .img-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+    }
+
+    .card-nail:hover .img-placeholder img {
+        transform: scale(1.1);
+    }
+
+    .card-nail h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        color: #4a4a4a;
+        margin: 10px 0;
+    }
+
+    .details {
+        border-top: 1px solid #fdf0f5;
+        border-bottom: 1px solid #fdf0f5;
+        padding: 12px 0;
+        margin: 15px 0;
+        display: flex;
+        justify-content: space-around;
+        color: #777;
+        font-size: 0.85rem;
+    }
+
+    .details strong {
+        display: block;
+        color: #d4a5b9;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-manicure {
+        background: linear-gradient(135deg, #f4cfdf 0%, #d4a5b9 100%);
+        color: white;
+        border: none;
+        padding: 16px;
+        border-radius: 12px;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: 0.4s;
+        width: 100%;
+        font-weight: 600;
+    }
+
+    .btn-manicure:hover {
+        filter: brightness(1.05);
+        box-shadow: 0 8px 15px rgba(212, 165, 185, 0.4);
+    }
+</style>
+
+>>>>>>> Stashed changes
 <section class="services-container">
     <h1>Manicure & Pedicure</h1>
     <div class="gallery-grid">
+<<<<<<< Updated upstream
         {% for servicio in servicios if 'manicure' in servicio.nombre.lower() or 'uñas' in servicio.nombre.lower() %}
         <div class="card-nail">
             <div class="img-placeholder" style="background-color: #fce4ec;">
                 </div>
             <h3>{{ servicio.nombre }}</h3>
             <hr>
+=======
+        <div class="card-nail">
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Semi-Permanente">
+            </div>
+            <h3>Semi-Permanente</h3>
+>>>>>>> Stashed changes
             <div class="details">
                 <span><strong>Precio:</strong> ${{ servicio.precio }}</span>
                 <span><strong>Tiempo:</strong> {{ servicio.duracion }}</span>
             </div>
+<<<<<<< Updated upstream
             <button class="btn-manicure">Elegir Diseño</button>
+=======
+            <button class="btn-manicure">Reservar Experiencia</button>
+        </div>
+
+        <div class="card-nail">
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/3997389/pexels-photo-3997389.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pedicure Spa">
+            </div>
+            <h3>Pedicure Spa</h3>
+            <div class="details">
+                <span><strong>Precio</strong> $60.000</span>
+                <span><strong>Tiempo</strong> 90 min</span>
+            </div>
+            <button class="btn-manicure">Reservar Experiencia</button>
+        </div>
+
+        <div class="card-nail">
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/3997348/pexels-photo-3997348.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uñas Acrílicas">
+            </div>
+            <h3>Uñas Acrílicas</h3>
+            <div class="details">
+                <span><strong>Precio</strong> $85.000</span>
+                <span><strong>Tiempo</strong> 120 min</span>
+            </div>
+            <button class="btn-manicure">Reservar Experiencia</button>
+>>>>>>> Stashed changes
         </div>
         {% endfor %}
     </div>
