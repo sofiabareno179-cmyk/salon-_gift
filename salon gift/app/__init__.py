@@ -35,7 +35,9 @@ def create_app():
     app.register_blueprint(usuarios_route.bp)
     app.register_blueprint(servicios_route.bp)
     app.register_blueprint(perfil_route.bp)
+
     @app.errorhandler(Exception)
+    
     def handle_error(e):
         print(f"An error occurred: {str(e)}")
         return {"error": str(e)}, 500
