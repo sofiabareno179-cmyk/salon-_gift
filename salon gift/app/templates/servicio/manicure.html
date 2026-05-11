@@ -1,12 +1,7 @@
-<<<<<<< Updated upstream
-{% extends "base.html" %}
-
-{% block title %}Manicure & Pedicure{% endblock %}
-
-{% block body_class %}servicios-page{% endblock %}
-=======
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
 <style>
-    /* Importación correcta de fuentes */
+    /* Importación de fuentes */
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
 
     .services-container {
@@ -22,24 +17,13 @@
     }
 
     /* Decoraciones animadas de fondo */
-    .services-container::before, .services-container::after {
+    .services-container::after {
         content: "";
         position: absolute;
         border-radius: 50% 20% 50% 70%;
         filter: blur(60px);
         z-index: 0;
         opacity: 0.5;
-    }
->>>>>>> Stashed changes
-
-{% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
-{% endblock %}
-
-<<<<<<< Updated upstream
-{% block content %}
-=======
-    .services-container::after {
         width: 350px;
         height: 350px;
         background: #fce4ec;
@@ -117,7 +101,6 @@
         overflow: hidden;
     }
 
-    /* Efecto de brillo de esmalte */
     .img-placeholder::after {
         content: "";
         position: absolute;
@@ -191,35 +174,28 @@
         box-shadow: 0 8px 15px rgba(212, 165, 185, 0.4);
     }
 </style>
+{% endblock %}
 
->>>>>>> Stashed changes
+{% block content %}
 <section class="services-container">
     <h1>Manicure & Pedicure</h1>
+    <span class="services-subtitle">El arte de consentir tus manos</span>
+    
     <div class="gallery-grid">
-<<<<<<< Updated upstream
-        {% for servicio in servicios if 'manicure' in servicio.nombre.lower() or 'uñas' in servicio.nombre.lower() %}
-        <div class="card-nail">
-            <div class="img-placeholder" style="background-color: #fce4ec;">
-                </div>
-            <h3>{{ servicio.nombre }}</h3>
-            <hr>
-=======
+        <!-- Servicio 1 -->
         <div class="card-nail">
             <div class="img-placeholder">
                 <img src="https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Semi-Permanente">
             </div>
             <h3>Semi-Permanente</h3>
->>>>>>> Stashed changes
             <div class="details">
-                <span><strong>Precio:</strong> ${{ servicio.precio }}</span>
-                <span><strong>Tiempo:</strong> {{ servicio.duracion }}</span>
+                <span><strong>Precio</strong> $45.000</span>
+                <span><strong>Tiempo</strong> 60 min</span>
             </div>
-<<<<<<< Updated upstream
-            <button class="btn-manicure">Elegir Diseño</button>
-=======
             <button class="btn-manicure">Reservar Experiencia</button>
         </div>
 
+        <!-- Servicio 2 -->
         <div class="card-nail">
             <div class="img-placeholder">
                 <img src="https://images.pexels.com/photos/3997389/pexels-photo-3997389.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pedicure Spa">
@@ -232,6 +208,7 @@
             <button class="btn-manicure">Reservar Experiencia</button>
         </div>
 
+        <!-- Servicio 3 -->
         <div class="card-nail">
             <div class="img-placeholder">
                 <img src="https://images.pexels.com/photos/3997348/pexels-photo-3997348.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uñas Acrílicas">
@@ -242,9 +219,7 @@
                 <span><strong>Tiempo</strong> 120 min</span>
             </div>
             <button class="btn-manicure">Reservar Experiencia</button>
->>>>>>> Stashed changes
         </div>
-        {% endfor %}
     </div>
 </section>
 {% endblock %}
