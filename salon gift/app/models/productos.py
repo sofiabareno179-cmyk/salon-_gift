@@ -1,12 +1,14 @@
 from flask_login import UserMixin
 from app import db
-# Tabla intermedia para Productos y Proveedores
+
+
+# Tabla intermedia para la relación Muchos a Muchos
 producto_proveedores = db.Table('producto_proveedores',
     db.Column('producto_id', db.Integer, db.ForeignKey('productos.idproductos'), primary_key=True),
     db.Column('proveedor_id', db.Integer, db.ForeignKey('proveedores.idproveedores'), primary_key=True)
 )
 
-class Productos(db.Model, UserMixin): 
+class Productos(db.Model): 
     __tablename__ = 'productos'
     
     idproductos = db.Column(db.Integer, primary_key=True)
@@ -15,10 +17,12 @@ class Productos(db.Model, UserMixin):
     precio = db.Column(db.Float, nullable=False) 
     categoria = db.Column(db.String(100), nullable=False)
 
+    # Relaciones
+    # Nota: backref='productos' crea automáticamente el atributo .productos en la clase Proveedores
     proveedores = db.relationship('Proveedores', secondary=producto_proveedores, backref='productos')
-
     inventario = db.relationship('Inventario', back_populates='producto', uselist=False)
 
+    
     def __init__(self, nombre, descripcion, precio, categoria):
         self.nombre = nombre
         self.descripcion = descripcion
@@ -27,7 +31,7 @@ class Productos(db.Model, UserMixin):
 
     def get_id(self):
         return str(self.idproductos)
-
+    
     def save(self):
         db.session.add(self)
         db.session.commit()
