@@ -1,203 +1,226 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
 {% extends "base.html" %}
 
-{% block title %}Tratamientos Especializados{% endblock %}
-
-{% block body_class %}servicios-page{% endblock %}
+{% block title %}Tratamientos & Renovación{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
-{% endblock %}
-
-{% block content %}
->>>>>>> Stashed changes
-<section class="services-container">
-    <h1>Tratamientos Especializados</h1>
-    <div class="grid-servicios">
-        {% for servicio in servicios if 'tratamiento' in servicio.nombre.lower() or 'hidratacion' in servicio.nombre.lower() %}
-        <div class="card-horizontal">
-            <div class="info">
-                <h3>{{ servicio.nombre }}</h3>
-                <p>Recupera la salud de tu cabello con productos de alta calidad.</p>
-                <span class="tag">{{ servicio.duracion }}</span>
-=======
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+    /* Importación de fuentes */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
 
-    .hair-services-container {
-        padding: 60px 20px;
+    .services-container {
+        padding: 80px 20px;
         text-align: center;
-        background: #fdfdfd;
-        background-image: radial-gradient(at 0% 0%, rgba(184, 151, 61, 0.05) 0, transparent 50%);
+        background: #f7faf9; /* Fondo menta muy sutil */
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(200, 230, 220, 0.3) 0, transparent 50%), 
+            radial-gradient(at 100% 100%, rgba(220, 240, 235, 0.4) 0, transparent 50%);
         font-family: 'Montserrat', sans-serif;
+        position: relative;
+        overflow: hidden;
     }
 
-    .hair-services-container h1 {
+    /* Decoraciones animadas (Estilo gotas de agua o spa) */
+    .services-container::after {
+        content: "";
+        position: absolute;
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        filter: blur(70px);
+        z-index: 0;
+        opacity: 0.3;
+        width: 450px;
+        height: 450px;
+        background: #b2dfdb;
+        bottom: -100px;
+        left: -100px;
+        animation: float-spa 20s infinite alternate;
+    }
+
+    @keyframes float-spa {
+        from { transform: translate(0,0) scale(1); }
+        to { transform: translate(50px, -40px) scale(1.1); }
+    }
+
+    .services-container h1 {
+        position: relative;
+        z-index: 1;
         font-family: 'Playfair Display', serif;
-        font-size: 2.8rem;
-        color: #1a1a1a;
+        font-size: 3rem;
+        color: #1a3a34; /* Verde muy oscuro botánico */
         margin-bottom: 5px;
+        font-weight: 700;
     }
 
-    .hair-subtitle {
+    .services-subtitle {
+        position: relative;
+        z-index: 1;
         font-family: 'Playfair Display', serif;
         font-style: italic;
-        color: #b8973d;
-        font-size: 1.1rem;
+        color: #4db6ac; /* Verde menta principal */
+        font-size: 1.2rem;
         margin-bottom: 50px;
         display: block;
     }
 
-    .hair-subtitle::after {
+    .services-subtitle::after {
         content: "";
         display: block;
-        width: 40px;
-        height: 1px;
-        background: #b8973d;
-        margin: 10px auto;
+        width: 60px;
+        height: 2px;
+        background: #b2dfdb;
+        margin: 15px auto;
     }
 
-    .hair-grid {
+    .gallery-grid {
+        position: relative;
+        z-index: 1;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 30px;
-        max-width: 1200px;
+        max-width: 1100px;
         margin: 0 auto;
     }
 
-    .card-hair {
-        background: #fff;
-        border-radius: 8px 45px 8px 45px;
+    .card-treatment {
+        background: white;
+        border-radius: 30px 30px 15px 15px;
         padding: 20px;
-        border: 1px solid #eee;
-        transition: all 0.4s ease;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid rgba(178, 223, 219, 0.2);
+        box-shadow: 0 10px 30px rgba(77, 182, 172, 0.08);
     }
 
-    .card-hair:hover {
-        transform: translateY(-8px);
-        border-color: #b8973d;
-        box-shadow: 0 15px 30px rgba(184, 151, 61, 0.1);
+    .card-treatment:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(77, 182, 172, 0.15);
     }
 
-    .img-hair {
+    .img-wrapper {
         width: 100%;
-        height: 250px;
-        border-radius: 4px 35px 4px 35px;
-        overflow: hidden;
+        height: 280px;
+        border-radius: 25px 25px 15px 15px;
         margin-bottom: 20px;
+        background: #e0f2f1;
+        position: relative;
+        overflow: hidden;
     }
 
-    .img-hair img {
+    /* Efecto de frescura acuática */
+    .img-wrapper::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -100%;
+        width: 50%;
+        height: 200%;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+        transform: rotate(20deg);
+        transition: 0.8s;
+    }
+
+    .card-treatment:hover .img-wrapper::after {
+        left: 150%;
+    }
+
+    .img-wrapper img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: transform 1.2s ease;
     }
 
-    .card-hair h3 {
+    .card-treatment:hover .img-wrapper img {
+        transform: scale(1.05);
+    }
+
+    .card-treatment h3 {
         font-family: 'Playfair Display', serif;
         font-size: 1.5rem;
-        color: #222;
-        margin-bottom: 10px;
+        color: #264653;
+        margin: 10px 0;
     }
 
-    .card-hair p {
-        font-size: 0.85rem;
-        color: #666;
-        line-height: 1.5;
-        margin-bottom: 20px;
-        min-height: 40px;
-    }
-
-    .hair-details {
-        border-top: 1px solid #f5f5f5;
-        border-bottom: 1px solid #f5f5f5;
+    .details {
+        border-top: 1px solid #e0f2f1;
+        border-bottom: 1px solid #e0f2f1;
         padding: 12px 0;
-        margin-bottom: 20px;
+        margin: 15px 0;
         display: flex;
         justify-content: space-around;
+        color: #666;
+        font-size: 0.85rem;
     }
 
-    .hair-details span {
-        display: flex;
-        flex-direction: column;
-        font-size: 0.8rem;
-    }
-
-    .hair-details strong {
-        color: #b8973d;
-        font-size: 0.65rem;
+    .details strong {
+        display: block;
+        color: #4db6ac;
+        font-size: 0.7rem;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
 
-    .btn-hair {
-        background: #1a1a1a;
+    .btn-treatment {
+        background: linear-gradient(135deg, #80cbc4 0%, #4db6ac 100%);
         color: white;
         border: none;
-        padding: 15px;
-        border-radius: 0 15px 0 15px;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 0.75rem;
-        letter-spacing: 1px;
+        padding: 16px;
+        border-radius: 12px;
         text-transform: uppercase;
-        transition: 0.3s;
-        margin-top: auto;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: 0.4s;
+        width: 100%;
+        font-weight: 600;
     }
 
-    .btn-hair:hover {
-        background: #b8973d;
+    .btn-treatment:hover {
+        filter: brightness(1.05);
+        box-shadow: 0 8px 15px rgba(77, 182, 172, 0.3);
     }
 </style>
+{% endblock %}
 
-<section class="hair-services-container">
-    <h1>Tratamiento</h1>
-    <span class="hair-subtitle">Salud y vitalidad para tu cabello</span>
-
-    <div class="hair-grid">
-        <div class="card-hair">
-            <div class="img-hair">
-                <img src="https://images.pexels.com/photos/4465121/pexels-photo-4465121.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Hidratación">
->>>>>>> Stashed changes
+{% block content %}
+<section class="services-container">
+    <h1>Tratamientos & Bienestar</h1>
+    <span class="services-subtitle">Renueva tu piel, revitaliza tu espíritu</span>
+    
+    <div class="gallery-grid">
+        <div class="card-treatment">
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Limpieza Facial">
             </div>
-            <h3>Hidratación Óptima</h3>
-            <p>Tratamiento intensivo con aceites esenciales para recuperar la sedosidad natural.</p>
-            <div class="hair-details">
-                <span><strong>Inversión</strong> $85.000</span>
-                <span><strong>Sesión</strong> 60 min</span>
+            <h3>Limpieza Profunda</h3>
+            <div class="details">
+                <span><strong>Precio</strong> $75.000</span>
+                <span><strong>Tiempo</strong> 60 min</span>
             </div>
-            <button class="btn-hair">Agendar Evaluación</button>
+            <button class="btn-treatment">Reservar Experiencia</button>
         </div>
 
-        <div class="card-hair">
-            <div class="img-hair">
-                <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Keratina">
+        <div class="card-treatment">
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Masaje Relajante">
             </div>
-            <h3>Keratina Orgánica</h3>
-            <p>Alineación capilar avanzada para un liso perfecto y sin químicos agresivos.</p>
-            <div class="hair-details">
-                <span><strong>Desde</strong> $180.000</span>
-                <span><strong>Sesión</strong> 150 min</span>
+            <h3>Masaje de Piedras</h3>
+            <div class="details">
+                <span><strong>Precio</strong> $95.000</span>
+                <span><strong>Tiempo</strong> 90 min</span>
             </div>
-            <button class="btn-hair">Agendar Evaluación</button>
+            <button class="btn-treatment">Reservar Experiencia</button>
         </div>
 
-        <div class="card-hair">
-            <div class="img-hair">
-                <img src="https://images.pexels.com/photos/7052551/pexels-photo-7052551.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Botox">
+        <div class="card-treatment">
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/6663571/pexels-photo-6663571.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Exfoliación Corporal">
             </div>
-            <h3>Botox Capilar</h3>
-            <p>Relleno de la hebra dañada para eliminar el frizz y aportar cuerpo al cabello.</p>
-            <div class="hair-details">
-                <span><strong>Inversión</strong> $120.000</span>
-                <span><strong>Sesión</strong> 90 min</span>
+            <h3>Exfoliación Orgánica</h3>
+            <div class="details">
+                <span><strong>Precio</strong> $80.000</span>
+                <span><strong>Tiempo</strong> 75 min</span>
             </div>
-            <button class="btn-hair">Agendar Evaluación</button>
+            <button class="btn-treatment">Reservar Experiencia</button>
         </div>
     </div>
 </section>
