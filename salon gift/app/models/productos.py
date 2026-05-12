@@ -1,5 +1,10 @@
 from flask_login import UserMixin
 from app import db
+# Tabla intermedia para Productos y Proveedores
+producto_proveedores = db.Table('producto_proveedores',
+    db.Column('producto_id', db.Integer, db.ForeignKey('productos.idproductos'), primary_key=True),
+    db.Column('proveedor_id', db.Integer, db.ForeignKey('proveedores.idproveedores'), primary_key=True)
+)
 
 class Productos(db.Model, UserMixin): 
     __tablename__ = 'productos'
@@ -9,6 +14,10 @@ class Productos(db.Model, UserMixin):
     descripcion = db.Column(db.String(500), nullable=True)
     precio = db.Column(db.Float, nullable=False) 
     categoria = db.Column(db.String(100), nullable=False)
+
+    proveedores = db.relationship('Proveedor', secondary=producto_proveedores, backref='productos')
+
+    inventario = db.relationship('Inventario', back_populates='producto', uselist=False)
 
     def __init__(self, nombre, descripcion, precio, categoria):
         self.nombre = nombre

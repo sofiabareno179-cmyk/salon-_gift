@@ -13,9 +13,13 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(250), nullable=False)
     telefono = db.Column(db.String(20), nullable=True)
     rol = db.Column(db.String(20), nullable=False, default='cliente')
-    #relacion perfil
+
+        # Relaciones
+    citas = db.relationship('Citas', backref='cliente', lazy=True)
     perfil = db.relationship('Perfil', backref='user', uselist=False)
-    citas = db.relationship('Citas', backref='user', uselist=True)
+    agenda = db.relationship('Agenda', back_populates='usuario', uselist=False)
+    recordatorios = db.relationship('Recordatorios', backref='cliente', lazy=True)
+
     def __repr__(self):
         return f'<Usuario {self.nombreuser} - Rol {self.rol}>' # Corregido
 

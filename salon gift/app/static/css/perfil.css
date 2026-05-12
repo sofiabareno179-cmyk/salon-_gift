@@ -25,12 +25,7 @@ body.profile-page .profile-container {
 }
 
 /* Tarjeta Principal */
-<<<<<<< Updated upstream
-
-.profile-card {
-=======
 body.profile-page .profile-card {
->>>>>>> Stashed changes
     background: #ffffff;
     width: 100%;
     max-width: 480px;
@@ -316,8 +311,4 @@ body.profile-page .value { color: #555; } /* Un tono más suave */
 @media (max-width: 900px) {
   body.profile-page .profile-wrapper { grid-template-columns: 1fr; }
   body.profile-page .info-grid { grid-template-columns: 1fr; }
-}
-
-body.profile-page .bio-card {
-  grid-column: span 1;
 }

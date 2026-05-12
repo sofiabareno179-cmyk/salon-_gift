@@ -1,9 +1,5 @@
 /* 1. Variables de Marca - Estética Boutique/Soft */
-<<<<<<< Updated upstream
 :root {
-=======
-body.client-page {
->>>>>>> Stashed changes
     --pastel-pink: #fce4ec;   /* Rosa muy suave */
     --soft-pink: #f8bbd0;     /* Rosa medio delicado */
     --dark-pink: #d81b60;     /* Fucsia elegante para acentos */
@@ -12,13 +8,9 @@ body.client-page {
     --white: #ffffff;
     --whatsapp-green: #25d366;
 }
-<<<<<<< Updated upstream
-/* Contenedor Principal (Hero Section) */
-.hero-content {
-=======
 
+/* Contenedor Principal (Hero Section) */
 body.client-page .hero-content {
->>>>>>> Stashed changes
     display: flex;
     flex-direction: column; /* Alinea los elementos en vertical */
     align-items: center;    /* Centra horizontalmente */
@@ -35,11 +27,7 @@ body.client-page .hero-content {
 }
 
 /* Título */
-<<<<<<< Updated upstream
-.hero-content h1 {
-=======
 body.client-page .hero-content h1 {
->>>>>>> Stashed changes
     font-family: 'Playfair Display', serif; /* Opcional: una fuente elegante */
     font-size: 2.5rem;
     color: #333;
@@ -47,22 +35,14 @@ body.client-page .hero-content h1 {
 }
 
 /* Párrafo */
-<<<<<<< Updated upstream
-.hero-content p {
-=======
 body.client-page .hero-content p {
->>>>>>> Stashed changes
     font-size: 1.1rem;
     color: #666;
     margin-bottom: 30px;
 }
 
 /* Botón Principal */
-<<<<<<< Updated upstream
-.btn-primary {
-=======
 body.client-page .btn-primary {
->>>>>>> Stashed changes
     display: inline-block;
     background-color: #d81b60; /* Un rosa fuerte/fucsia elegante */
     color: white !important;
@@ -76,21 +56,13 @@ body.client-page .btn-primary {
 }
 
 /* Efecto al pasar el mouse por el botón */
-<<<<<<< Updated upstream
-.btn-primary:hover {
-=======
 body.client-page .btn-primary:hover {
->>>>>>> Stashed changes
     background-color: #ad1457;
     transform: translateY(-2px); /* Pequeño salto hacia arriba */
     box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
 }
 /* 3. Sección de Citas Próximas */
-<<<<<<< Updated upstream
-.appointments-reminder {
-=======
 body.client-page .appointments-reminder {
->>>>>>> Stashed changes
     max-width: 800px;
     margin: -20px auto 30px;
     background: var(--white);
@@ -104,11 +76,7 @@ body.client-page .appointments-reminder {
 }
 
 /* 4. Grid de Servicios */
-<<<<<<< Updated upstream
-.services-grid { 
-=======
-body.client-page .services-grid { 
->>>>>>> Stashed changes
+body.client-page .services-grid {
     padding: 40px 0; 
 }
 
@@ -145,11 +113,7 @@ body.client-page .service-card i {
 }
 
 /* 5. Banner Promocional */
-<<<<<<< Updated upstream
-.promo-banner {
-=======
 body.client-page .promo-banner {
->>>>>>> Stashed changes
     background: linear-gradient(135deg, #fff5f8, var(--pastel-pink));
     padding: 30px;
     border-radius: 20px;
@@ -160,11 +124,7 @@ body.client-page .promo-banner {
 }
 
 /* 6. Botones Generales */
-<<<<<<< Updated upstream
-.btn-rosa {
-=======
 body.client-page .btn-rosa {
->>>>>>> Stashed changes
     display: inline-block;
     background: var(--dark-pink);
     color: var(--white);
@@ -188,11 +148,7 @@ body.client-page .btn-rosa:hover {
 }
 
 /* 7. Botones Flotantes (WhatsApp y Perfil) */
-<<<<<<< Updated upstream
-.whatsapp-float, .perfil-float {
-=======
 body.client-page .whatsapp-float, body.client-page .perfil-float {
->>>>>>> Stashed changes
     position: fixed;
     right: 25px; /* Alineados a la derecha */
     width: 60px;
@@ -207,32 +163,20 @@ body.client-page .whatsapp-float, body.client-page .perfil-float {
     text-decoration: none;
 }
 
-<<<<<<< Updated upstream
-.whatsapp-float {
-=======
 body.client-page .whatsapp-float {
->>>>>>> Stashed changes
     bottom: 25px; /* Abajo del todo */
     background-color: var(--whatsapp-green);
     color: var(--white);
     box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
 }
 
-<<<<<<< Updated upstream
-.perfil-float {
-=======
 body.client-page .perfil-float {
->>>>>>> Stashed changes
     bottom: 100px; /* Más arriba para no chocar */
     background-color: var(--soft-pink);
     color: var(--white);
     box-shadow: 0 8px 20px rgba(248, 187, 208, 0.4);
 }
 
-<<<<<<< Updated upstream
-.whatsapp-float:hover, .perfil-float:hover {
-=======
 body.client-page .whatsapp-float:hover, body.client-page .perfil-float:hover {
->>>>>>> Stashed changes
     transform: scale(1.1);
 }

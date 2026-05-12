@@ -11,6 +11,7 @@ class Perfil(db.Model):
     # Llave foránea que conecta con el modelo User
     idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False, unique=True)
 
+
     def __init__(self, nombre, apellido, bio, idusuario):
         self.nombre = nombre
         self.apellido = apellido
