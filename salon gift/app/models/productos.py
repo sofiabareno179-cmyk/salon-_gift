@@ -15,7 +15,7 @@ class Productos(db.Model, UserMixin):
     precio = db.Column(db.Float, nullable=False) 
     categoria = db.Column(db.String(100), nullable=False)
 
-    proveedores = db.relationship('Proveedores', secondary=producto_proveedores, backref='productos')
+    proveedores = db.relationship('Proveedor', secondary=producto_proveedores, backref='productos')
 
     inventario = db.relationship('Inventario', back_populates='producto', uselist=False)
 

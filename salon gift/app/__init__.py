@@ -1,6 +1,7 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from sqlalchemy import text
 import os
 
 db = SQLAlchemy()
@@ -12,6 +13,16 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
+
+    def ensure_citas_servicio_column():
+        with app.app_context():
+            with db.engine.begin() as conn:
+                result = conn.execute(text("PRAGMA table_info(citas)"))
+                cols = [row[1] for row in result]
+                if 'servicio' not in cols:
+                    conn.execute(text("ALTER TABLE citas ADD COLUMN servicio VARCHAR(100)"))
+
+    ensure_citas_servicio_column()
  
     @login_manager.user_loader
     def load_user(idusuario):
@@ -36,6 +47,12 @@ def create_app():
     app.register_blueprint(servicios_route.bp)
     app.register_blueprint(perfil_route.bp)
 
+<<<<<<< Updated upstream
+=======
+    @app.route('/favicon.ico')
+    def favicon():
+        return send_from_directory(app.static_folder, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+>>>>>>> Stashed changes
 
     @app.errorhandler(Exception)
     def handle_error(e):

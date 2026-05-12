@@ -5,14 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Salon Gift{% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='img/glitt.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
+<<<<<<< Updated upstream
      <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
          <link rel="stylesheet" href="{{ url_for('static', filename='css/tablas.css') }}">
            <link rel="stylesheet" href="{{ url_for('static', filename='css/dasbo.css') }}">
            <link rel="stylesheet" href="{{ url_for('static', filename='css/clie.css') }}">
            <link rel="stylesheet" href="{{ url_for('static', filename='css/crono.css') }}">
            <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+=======
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tablas.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dasbo.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/clie.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crono.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/provee.css') }}">
+>>>>>>> Stashed changes
    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block extra_css %}{% endblock %}
 </head>

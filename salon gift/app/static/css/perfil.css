@@ -19,8 +19,12 @@
 }
 
 /* Tarjeta Principal */
+<<<<<<< Updated upstream
 
 .profile-card {
+=======
+body.profile-page .profile-card {
+>>>>>>> Stashed changes
     background: #ffffff;
     width: 100%;
     max-width: 480px;
@@ -313,10 +317,15 @@
 
 /* Responsive */
 @media (max-width: 900px) {
+<<<<<<< Updated upstream
   .profile-wrapper { grid-template-columns: 1fr; }
   .info-grid { grid-template-columns: 1fr; }
 }
 
 .bio-card {
   grid-column: span 1;
+=======
+  body.profile-page .profile-wrapper { grid-template-columns: 1fr; }
+  body.profile-page .info-grid { grid-template-columns: 1fr; }
+>>>>>>> Stashed changes
 }

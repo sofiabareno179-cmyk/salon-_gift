@@ -45,3 +45,74 @@ h1 {
     color: #ce93d8; /* Un lila suave que combina con el rosa y verde */
     text-align: center;
 }
+
+/* Estilos para cards horizontales */
+body.servicios-page .card-horizontal {
+    background: white;
+    border-radius: 15px;
+    border: 2px solid var(--mint-green);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 15px;
+}
+
+body.servicios-page .card-horizontal:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(240, 98, 146, 0.15);
+    border-color: var(--accent-pink);
+}
+
+body.servicios-page .card-horizontal .info {
+    flex: 1;
+}
+
+body.servicios-page .card-horizontal .info h3 {
+    margin: 0 0 8px 0;
+    color: var(--dark-text);
+    font-size: 1.2rem;
+}
+
+body.servicios-page .card-horizontal .info p {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+body.servicios-page .card-horizontal .tag {
+    background: var(--pink-pastel);
+    color: var(--accent-pink);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+body.servicios-page .card-horizontal .action {
+    text-align: right;
+    min-width: 150px;
+}
+
+body.servicios-page .card-horizontal .precio {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--accent-pink);
+    margin-bottom: 10px;
+}
+
+body.servicios-page .card-horizontal .btn-primary {
+    background: linear-gradient(135deg, var(--accent-pink), #e91e63);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+body.servicios-page .card-horizontal .btn-primary:hover {
+    transform: scale(1.05);
+}
