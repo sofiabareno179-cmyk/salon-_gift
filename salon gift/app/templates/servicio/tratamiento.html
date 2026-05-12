@@ -1,33 +1,227 @@
-<<<<<<< Updated upstream
-=======
 {% extends "base.html" %}
 
-{% block title %}Tratamientos Especializados{% endblock %}
-
-{% block body_class %}servicios-page{% endblock %}
+{% block title %}Tratamientos & Renovación{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
+<style>
+    /* Importación de fuentes */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+
+    .services-container {
+        padding: 80px 20px;
+        text-align: center;
+        background: #f7faf9; /* Fondo menta muy sutil */
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(200, 230, 220, 0.3) 0, transparent 50%), 
+            radial-gradient(at 100% 100%, rgba(220, 240, 235, 0.4) 0, transparent 50%);
+        font-family: 'Montserrat', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Decoraciones animadas (Estilo gotas de agua o spa) */
+    .services-container::after {
+        content: "";
+        position: absolute;
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        filter: blur(70px);
+        z-index: 0;
+        opacity: 0.3;
+        width: 450px;
+        height: 450px;
+        background: #b2dfdb;
+        bottom: -100px;
+        left: -100px;
+        animation: float-spa 20s infinite alternate;
+    }
+
+    @keyframes float-spa {
+        from { transform: translate(0,0) scale(1); }
+        to { transform: translate(50px, -40px) scale(1.1); }
+    }
+
+    .services-container h1 {
+        position: relative;
+        z-index: 1;
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        color: #1a3a34; /* Verde muy oscuro botánico */
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .services-subtitle {
+        position: relative;
+        z-index: 1;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: #4db6ac; /* Verde menta principal */
+        font-size: 1.2rem;
+        margin-bottom: 50px;
+        display: block;
+    }
+
+    .services-subtitle::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 2px;
+        background: #b2dfdb;
+        margin: 15px auto;
+    }
+
+    .gallery-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .card-treatment {
+        background: white;
+        border-radius: 30px 30px 15px 15px;
+        padding: 20px;
+        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid rgba(178, 223, 219, 0.2);
+        box-shadow: 0 10px 30px rgba(77, 182, 172, 0.08);
+    }
+
+    .card-treatment:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(77, 182, 172, 0.15);
+    }
+
+    .img-wrapper {
+        width: 100%;
+        height: 280px;
+        border-radius: 25px 25px 15px 15px;
+        margin-bottom: 20px;
+        background: #e0f2f1;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Efecto de frescura acuática */
+    .img-wrapper::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -100%;
+        width: 50%;
+        height: 200%;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+        transform: rotate(20deg);
+        transition: 0.8s;
+    }
+
+    .card-treatment:hover .img-wrapper::after {
+        left: 150%;
+    }
+
+    .img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.2s ease;
+    }
+
+    .card-treatment:hover .img-wrapper img {
+        transform: scale(1.05);
+    }
+
+    .card-treatment h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        color: #264653;
+        margin: 10px 0;
+    }
+
+    .details {
+        border-top: 1px solid #e0f2f1;
+        border-bottom: 1px solid #e0f2f1;
+        padding: 12px 0;
+        margin: 15px 0;
+        display: flex;
+        justify-content: space-around;
+        color: #666;
+        font-size: 0.85rem;
+    }
+
+    .details strong {
+        display: block;
+        color: #4db6ac;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-treatment {
+        background: linear-gradient(135deg, #80cbc4 0%, #4db6ac 100%);
+        color: white;
+        border: none;
+        padding: 16px;
+        border-radius: 12px;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: 0.4s;
+        width: 100%;
+        font-weight: 600;
+    }
+
+    .btn-treatment:hover {
+        filter: brightness(1.05);
+        box-shadow: 0 8px 15px rgba(77, 182, 172, 0.3);
+    }
+</style>
 {% endblock %}
 
 {% block content %}
->>>>>>> Stashed changes
 <section class="services-container">
-    <h1>Tratamientos Especializados</h1>
-    <div class="grid-servicios">
-        {% for servicio in servicios if 'tratamiento' in servicio.nombre.lower() or 'hidratacion' in servicio.nombre.lower() %}
-        <div class="card-horizontal">
-            <div class="info">
-                <h3>{{ servicio.nombre }}</h3>
-                <p>Recupera la salud de tu cabello con productos de alta calidad.</p>
-                <span class="tag">{{ servicio.duracion }}</span>
+    <h1>Tratamientos & Bienestar</h1>
+    <span class="services-subtitle">Renueva tu piel, revitaliza tu espíritu</span>
+    
+    <div class="gallery-grid">
+        <div class="card-treatment">
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Limpieza Facial">
             </div>
-            <div class="action">
-                <p class="precio">${{ servicio.precio }}</p>
-                <button class="btn-primary">Añadir al carrito</button>
+            <h3>Limpieza Profunda</h3>
+            <div class="details">
+                <span><strong>Precio</strong> $75.000</span>
+                <span><strong>Tiempo</strong> 60 min</span>
             </div>
+            <button class="btn-treatment">Reservar Experiencia</button>
         </div>
-        {% endfor %}
+
+        <div class="card-treatment">
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Masaje Relajante">
+            </div>
+            <h3>Masaje de Piedras</h3>
+            <div class="details">
+                <span><strong>Precio</strong> $95.000</span>
+                <span><strong>Tiempo</strong> 90 min</span>
+            </div>
+            <button class="btn-treatment">Reservar Experiencia</button>
+        </div>
+
+        <div class="card-treatment">
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/6663571/pexels-photo-6663571.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Exfoliación Corporal">
+            </div>
+            <h3>Exfoliación Orgánica</h3>
+            <div class="details">
+                <span><strong>Precio</strong> $80.000</span>
+                <span><strong>Tiempo</strong> 75 min</span>
+            </div>
+            <button class="btn-treatment">Reservar Experiencia</button>
+        </div>
     </div>
 </section>
 {% endblock %}

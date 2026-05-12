@@ -47,11 +47,8 @@ def create_app():
     app.register_blueprint(servicios_route.bp)
     app.register_blueprint(perfil_route.bp)
 
-    @app.route('/favicon.ico')
-    def favicon():
-        return send_from_directory(app.static_folder, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
     @app.errorhandler(Exception)
+    
     def handle_error(e):
         print(f"An error occurred: {str(e)}")
         return {"error": str(e)}, 500

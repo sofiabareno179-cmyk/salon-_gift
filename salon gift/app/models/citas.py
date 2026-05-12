@@ -15,7 +15,7 @@ class Citas(db.Model, UserMixin):
     # Relación 1:1 con Servicio
     servicios = db.relationship('Servicio', back_populates='citas', uselist=False)
 
-    def __init__(self, fechahora, servicio=None, estado='Pendiente', idusuario=None):
+    def __init__(self, fechahora, servicio=None, estado='Pendiente', idusuario=None)
         self.fechahora = fechahora
         self.servicio = servicio
         self.estado = estado
