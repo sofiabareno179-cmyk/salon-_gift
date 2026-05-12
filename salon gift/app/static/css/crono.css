@@ -1,25 +1,14 @@
-<<<<<<< Updated upstream
-/* Definición de Variables y Reset */
-:root {
-    --pink-pastel: #ffd1dc;
-    --mint-pastel: #e0faf1;
-    --rose-gold: linear-gradient(135deg, #e1b1b9 0%, #b76e79 100%);
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.4);
-    --text-dark: #4a3337;
-    --shadow: 0 8px 32px 0 rgba(183, 110, 121, 0.15);
-}
-
-.schedule {
-=======
 /* --- Definición de Variables y Reset --- */
 body.schedule-page {
     --pink-pastel: #ffd1dc;
     --mint-pastel: #e0faf1;
+    --mint-green: #a8e6cf;
     --rose-gold: linear-gradient(135deg, #e1b1b9 0%, #b76e79 100%);
+    --rose-gold-gradient: linear-gradient(135deg, #e1b1b9 0%, #b76e79 100%);
     --glass-bg: rgba(255, 255, 255, 0.75);
     --glass-border: rgba(255, 255, 255, 0.4);
     --text-dark: #4a3337;
+    --text-main: #4a3337;
     --shadow: 0 10px 35px rgba(183, 110, 121, 0.15);
     background-color: #fdf5f6;
     color: var(--text-dark);
@@ -27,26 +16,13 @@ body.schedule-page {
 }
 
 body.schedule-page .schedule {
->>>>>>> Stashed changes
     padding: 2rem;
     background-color: #fcf8f9;
     min-height: 100vh;
 }
 
-<<<<<<< Updated upstream
-/* Contenedor Principal con Glassmorphism */
-.schedule__container {
-    max-width: 1100px;
-    margin: 0 auto;
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px); /* Efecto de desenfoque */
-=======
 body.schedule-page .schedule__container {
-    max-width: 1100px;
-    margin: 0 auto;
-    background: var(--glass-bg);
     backdrop-filter: blur(10px);
->>>>>>> Stashed changes
     -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
     border: 1px solid var(--glass-border);
@@ -54,12 +30,7 @@ body.schedule-page .schedule__container {
     overflow: hidden;
 }
 
-<<<<<<< Updated upstream
-/* Navegación Superior */
-.schedule__nav {
-=======
 body.schedule-page .schedule__nav {
->>>>>>> Stashed changes
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -67,16 +38,8 @@ body.schedule-page .schedule__nav {
     padding: 0 1rem;
 }
 
-<<<<<<< Updated upstream
-.btn-nav, .btn-today {
-=======
-body.schedule-page .schedule__header-info {
-    text-align: center;
-}
-
 body.schedule-page .btn-nav,
 body.schedule-page .btn-today {
->>>>>>> Stashed changes
     padding: 0.6rem 1.2rem;
     border-radius: 50px;
     text-decoration: none;
@@ -85,102 +48,56 @@ body.schedule-page .btn-today {
     border: 1px solid var(--pink-pastel);
 }
 
-<<<<<<< Updated upstream
-.btn-nav {
-=======
 body.schedule-page .btn-nav {
->>>>>>> Stashed changes
     background: white;
     color: var(--text-dark);
 }
 
-<<<<<<< Updated upstream
+
 .btn-nav:hover {
     background: var(--pink-pastel);
 }
 
 /* Encabezados del Calendario */
-.schedule__header {
-=======
-body.schedule-page .btn-nav:hover {
-    background: var(--pink-pastel);
-}
-
-body.schedule-page .schedule__title {
-    margin: 0;
-    font-size: 2rem;
-}
-
-body.schedule-page .schedule__date-range {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.95rem;
-    color: #7a5b64;
-}
-
 body.schedule-page .schedule__header {
->>>>>>> Stashed changes
     display: grid;
     grid-template-columns: 100px repeat(5, 1fr);
     background: var(--rose-gold);
     color: white;
 }
 
-<<<<<<< Updated upstream
-.schedule__day-name {
-=======
 body.schedule-page .schedule__day-name {
->>>>>>> Stashed changes
     padding: 20px 10px;
     text-align: center;
     font-weight: 700;
 }
 
-<<<<<<< Updated upstream
-.schedule__day-name small {
-=======
 body.schedule-page .schedule__day-name small {
->>>>>>> Stashed changes
     display: block;
     font-weight: 300;
     opacity: 0.9;
     font-size: 0.75rem;
 }
 
-<<<<<<< Updated upstream
+
 /* Cuadrícula de Horas */
-.schedule__grid {
-=======
 body.schedule-page .schedule__grid {
->>>>>>> Stashed changes
     display: grid;
     grid-template-columns: 100px repeat(5, 1fr);
 }
 
-<<<<<<< Updated upstream
-.schedule__time {
-=======
 body.schedule-page .schedule__time {
->>>>>>> Stashed changes
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.5);
-<<<<<<< Updated upstream
-    border-bottom: 1px solid var(--border-color);
-=======
     border-bottom: 1px solid var(--glass-border);
->>>>>>> Stashed changes
     font-weight: bold;
     color: var(--text-dark);
     font-size: 0.85rem;
 }
 
-<<<<<<< Updated upstream
-.schedule__slot {
-=======
 body.schedule-page .schedule__slot {
->>>>>>> Stashed changes
     min-height: 100px;
     border-bottom: 1px solid #f2ecee;
     border-right: 1px solid #f2ecee;
@@ -188,16 +105,11 @@ body.schedule-page .schedule__slot {
     transition: 0.2s;
 }
 
-<<<<<<< Updated upstream
-/* Tarjetas de Citas Mejoradas */
-.schedule__appointment {
-=======
 body.schedule-page .schedule__slot:hover {
     background: rgba(255, 255, 255, 0.4);
 }
 
 body.schedule-page .schedule__appointment {
->>>>>>> Stashed changes
     margin: 6px;
     padding: 10px;
     border-radius: 12px;
@@ -206,58 +118,43 @@ body.schedule-page .schedule__appointment {
     flex-direction: column;
     justify-content: space-between;
     border: 1px solid rgba(255, 255, 255, 0.3);
-<<<<<<< Updated upstream
+
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 /* Variaciones de Color Pastel para las Citas */
-.status-pendiente {
-=======
+body.schedule-page .status-pendiente {
+    background-color: var(--pink-pastel);
+    color: #8c5e67;
+    border-left: 4px solid #e1b1b9;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-body.schedule-page .status-pendiente {
->>>>>>> Stashed changes
-    background-color: var(--pink-pastel);
-    color: #8c5e67;
-}
-
-<<<<<<< Updated upstream
-.status-confirmada {
-=======
 body.schedule-page .status-confirmada {
->>>>>>> Stashed changes
     background-color: var(--mint-pastel);
     color: #4a7a6a;
+    border-left: 4px solid #a8e6cf;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-<<<<<<< Updated upstream
+
 /* Contenido dentro de la cita */
 .appt__link {
-=======
-body.schedule-page .appt__link {
->>>>>>> Stashed changes
     text-decoration: none;
     color: inherit;
+    display: flex;
+    flex-direction: column;
     height: 100%;
 }
 
-<<<<<<< Updated upstream
-.appt__service {
-=======
 body.schedule-page .appt__service {
->>>>>>> Stashed changes
     display: block;
     font-size: 0.9rem;
     font-weight: 800;
     margin-bottom: 4px;
 }
 
-<<<<<<< Updated upstream
-.appt__time {
-=======
 body.schedule-page .appt__time {
->>>>>>> Stashed changes
     font-size: 0.75rem;
     background: rgba(255, 255, 255, 0.4);
     padding: 2px 6px;
@@ -265,12 +162,9 @@ body.schedule-page .appt__time {
     font-weight: bold;
 }
 
-<<<<<<< Updated upstream
+
 /* Botón flotante para celdas vacías */
-.appt__add {
-=======
 body.schedule-page .appt__add {
->>>>>>> Stashed changes
     position: absolute;
     top: 50%;
     left: 50%;
@@ -288,51 +182,20 @@ body.schedule-page .appt__add {
     transition: 0.3s;
 }
 
-<<<<<<< Updated upstream
-.schedule__slot:hover .appt__add {
+body.schedule-page .schedule__slot:hover .appt__add {
     opacity: 1;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .schedule__header, .schedule__grid {
+    body.schedule-page .schedule__header, body.schedule-page .schedule__grid {
         grid-template-columns: 60px repeat(5, 1fr);
     }
-    .schedule__day-name { font-size: 0.7rem; }
-} 
-/*add
-/* --- CONFIGURACIÓN DE VARIABLES (Paleta Pastel & Glass) --- */
-:root {
-    --pink-pastel: #ffd1dc;
-    --mint-green: #e0faf1;
-    --rose-gold-gradient: linear-gradient(135deg, #e1b1b9 0%, #b76e79 100%);
-    --glass-bg: rgba(255, 255, 255, 0.65);
-    --glass-border: rgba(255, 255, 255, 0.4);
-    --text-main: #5a3d42;
-    --shadow-soft: 0 8px 32px rgba(183, 110, 121, 0.12);
-}
-
-/* --- ESTILOS GENERALES --- */
-body {
-    background-color: #fdf5f6; /* Un fondo rosa casi blanco muy suave */
-    color: var(--text-main);
-    font-family: 'Segoe UI', Roboto, sans-serif;
-}
-
-/* --- CONTENEDOR GLASSMORPHISM --- */
-.schedule__container, 
-.glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    box-shadow: var(--shadow-soft);
-    overflow: hidden;
+    body.schedule-page .schedule__day-name { font-size: 0.7rem; }
 }
 
 /* --- CALENDARIO: CUADRÍCULA Y CELDAS --- */
-.schedule__header {
+body.schedule-page .schedule__header {
     display: grid;
     grid-template-columns: 80px repeat(5, 1fr);
     background: var(--rose-gold-gradient);
@@ -341,17 +204,17 @@ body {
     font-weight: 600;
 }
 
-.schedule__day-name {
+body.schedule-page .schedule__day-name {
     padding: 1.2rem 0.5rem;
     border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.schedule__grid {
+body.schedule-page .schedule__grid {
     display: grid;
     grid-template-columns: 80px repeat(5, 1fr);
 }
 
-.schedule__time {
+body.schedule-page .schedule__time {
     background: rgba(255, 255, 255, 0.3);
     display: flex;
     align-items: center;
@@ -362,7 +225,7 @@ body {
     border-right: 1px solid var(--glass-border);
 }
 
-.schedule__slot {
+body.schedule-page .schedule__slot {
     min-height: 90px;
     border-bottom: 1px solid rgba(183, 110, 121, 0.1);
     border-right: 1px solid rgba(183, 110, 121, 0.1);
@@ -370,12 +233,12 @@ body {
     transition: background 0.3s ease;
 }
 
-.schedule__slot:hover {
+body.schedule-page .schedule__slot:hover {
     background: rgba(255, 255, 255, 0.4);
 }
 
 /* --- TARJETAS DE CITA (DENTRO DEL CALENDARIO) --- */
-.schedule__appointment {
+body.schedule-page .schedule__appointment {
     margin: 5px;
     padding: 8px;
     border-radius: 10px;
@@ -385,13 +248,6 @@ body {
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-/* Colores Dinámicos por Estado */
-.status-pendiente {
-=======
-body.schedule-page .schedule__slot:hover .appt__add {
-    opacity: 1;
 }
 
 @media (max-width: 768px) {
@@ -404,49 +260,19 @@ body.schedule-page .schedule__slot:hover .appt__add {
     }
 }
 
-/* Colores Dinámicos por Estado */
-body.schedule-page .status-pendiente {
->>>>>>> Stashed changes
-    background-color: var(--pink-pastel);
-    border-left: 4px solid #e1b1b9;
-    color: #8c5e67;
-}
-
-<<<<<<< Updated upstream
-.status-confirmada {
-=======
-body.schedule-page .status-confirmada {
->>>>>>> Stashed changes
-    background-color: var(--mint-green);
-    border-left: 4px solid #a8e6cf;
-    color: #4a7a6a;
-}
-
 /* --- FORMULARIO DE NUEVA CITA --- */
-<<<<<<< Updated upstream
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-label {
-=======
 body.schedule-page .form-group {
     margin-bottom: 1.5rem;
 }
 
 body.schedule-page .form-label {
->>>>>>> Stashed changes
     display: block;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: var(--text-main);
 }
 
-<<<<<<< Updated upstream
-.form-control-glass {
-=======
 body.schedule-page .form-control-glass {
->>>>>>> Stashed changes
     width: 100%;
     padding: 12px 15px;
     border-radius: 12px;
@@ -456,11 +282,7 @@ body.schedule-page .form-control-glass {
     transition: 0.3s all;
 }
 
-<<<<<<< Updated upstream
-.form-control-glass:focus {
-=======
 body.schedule-page .form-control-glass:focus {
->>>>>>> Stashed changes
     outline: none;
     border-color: #b76e79;
     background: white;
@@ -468,13 +290,9 @@ body.schedule-page .form-control-glass:focus {
 }
 
 /* --- BOTONES --- */
-<<<<<<< Updated upstream
-.btn-confirm {
-    background: var(--rose-gold-gradient);
-=======
+
 body.schedule-page .btn-confirm {
     background: var(--rose-gold);
->>>>>>> Stashed changes
     color: white;
     border: none;
     padding: 12px 25px;
@@ -485,20 +303,12 @@ body.schedule-page .btn-confirm {
     width: 100%;
 }
 
-<<<<<<< Updated upstream
-.btn-confirm:hover {
-=======
 body.schedule-page .btn-confirm:hover {
->>>>>>> Stashed changes
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(183, 110, 121, 0.4);
 }
 
-<<<<<<< Updated upstream
-.btn-nav {
-=======
 body.schedule-page .btn-nav {
->>>>>>> Stashed changes
     background: white;
     color: #b76e79;
     padding: 8px 18px;
@@ -506,4 +316,279 @@ body.schedule-page .btn-nav {
     text-decoration: none;
     border: 1px solid var(--pink-pastel);
     font-size: 0.9rem;
+}
+
+/* Estilos para slots bloqueados */
+.schedule__blocked {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 8px rgba(238, 90, 82, 0.3);
+}
+
+.schedule__blocked i {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.btn-unblock {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    margin-top: 4px;
+    transition: 0.3s;
+}
+
+.btn-unblock:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Estilos para acciones en slots libres */
+.schedule__actions {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-block {
+    background: #ff9500;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.btn-block:hover {
+    background: #e8850b;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.form-actions {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn-confirm, .btn-cancel {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-confirm {
+    background: #28a745;
+    color: white;
+}
+
+.btn-cancel {
+    background: #6c757d;
+    color: white;
+}
+
+/* Estilos adicionales para el cliente en las citas */
+.appt__client {
+    display: block;
+    font-size: 0.7rem;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+/* Estilos para slots bloqueados */
+.schedule__blocked {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 8px rgba(238, 90, 82, 0.3);
+}
+
+.schedule__blocked i {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.btn-unblock {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    margin-top: 4px;
+    transition: 0.3s;
+}
+
+.btn-unblock:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Estilos para acciones en slots libres */
+.schedule__actions {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-block {
+    background: #ff9500;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.btn-block:hover {
+    background: #e8850b;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.form-actions {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn-confirm, .btn-cancel {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-confirm {
+    background: #28a745;
+    color: white;
+}
+
+.btn-cancel {
+    background: #6c757d;
+    color: white;
+}
+
+/* Estilos adicionales para el cliente en las citas */
+.appt__client {
+    display: block;
+    font-size: 0.7rem;
+    opacity: 0.8;
+    margin-top: 2px;
 }

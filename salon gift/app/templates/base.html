@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Salon Glitt{% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='img/glitt.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    {% block extra_css %}{% endblock %}
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tablas.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dasbo.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/clie.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crono.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/provee.css') }}">
+   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 </head>
 <body class="{% block body_class %}{% endblock %}">
 
