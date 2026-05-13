@@ -42,3 +42,65 @@ body.servicios-page h1 {
     color: #ce93d8; /* Un lila suave que combina con el rosa y verde */
     text-align: center;
 }
+/* Extensiones para el Formulario en servicios.css */
+
+/* Contenedor de la tarjeta de formulario */
+body.servicios-page .custom-card {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+/* Cabeceras dinámicas usando tus variables y tonos derivados */
+body.servicios-page .header-peluqueria { background-color: var(--accent-pink) !important; }
+body.servicios-page .header-tratamiento { background-color: #80deea !important; } /* Un celeste pastel que combina con tu mint-green */
+body.servicios-page .header-manicure { background-color: #ffab91 !important; }    /* Un salmón suave */
+
+/* Estilos de los campos de entrada (Inputs) */
+body.servicios-page .custom-input {
+    border: 2px solid var(--mint-green);
+    border-radius: 12px;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+body.servicios-page .custom-input:focus {
+    border-color: var(--accent-pink);
+    box-shadow: 0 0 8px rgba(240, 98, 146, 0.2);
+    outline: none;
+}
+
+/* Etiquetas y adornos de grupo */
+body.servicios-page .custom-label {
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-bottom: 8px;
+    display: block;
+}
+
+body.servicios-page .custom-addon {
+    background-color: var(--pink-pastel);
+    border: 2px solid var(--mint-green);
+    border-right: none;
+    color: var(--accent-pink);
+    font-weight: bold;
+}
+
+/* Botón de guardar personalizado */
+body.servicios-page .btn-save-custom {
+    background-color: var(--accent-pink);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.3s shadow 0.3s;
+}
+
+body.servicios-page .btn-save-custom:hover {
+    background-color: #ec407a; /* Un tono más intenso de rosa */
+    box-shadow: 0 5px 15px rgba(240, 98, 146, 0.3);
+}
