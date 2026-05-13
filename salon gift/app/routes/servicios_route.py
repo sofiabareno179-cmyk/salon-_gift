@@ -4,7 +4,7 @@ from app import db
 
 bp = Blueprint('servicio', __name__, url_prefix='/Servicio')
 
-# --- VISTAS PARA EL FRONTEND ---
+#  VISTAS PARA EL FRONTEND 
 
 @bp.route('/peluqueria')
 def ver_peluqueria():
@@ -21,7 +21,7 @@ def manicure():
     servicios = Servicio.query.filter_by(categoria='manicure').all() 
     return render_template('servicio/manicure.html', servicios=servicios)
 
-# --- OPERACIONES CRUD ---
+# OPERACIONES CRUD 
 
 @bp.route('/servicios/add/<categoria>', methods=['GET', 'POST'])
 def add(categoria):
@@ -89,7 +89,7 @@ def delete(id):
         
     return redirect(url_for('servicio.index'))
 
-# --- VISTA GENERAL Y API ---
+#  VISTA GENERAL Y API 
 
 @bp.route('/')
 def index():
