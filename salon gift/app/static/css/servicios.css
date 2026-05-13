@@ -42,65 +42,74 @@ body.servicios-page h1 {
     color: #ce93d8; /* Un lila suave que combina con el rosa y verde */
     text-align: center;
 }
-/* Extensiones para el Formulario en servicios.css */
 
-/* Contenedor de la tarjeta de formulario */
-body.servicios-page .custom-card {
-    border: none;
-    border-radius: 20px;
-    overflow: hidden;
-    background-color: #ffffff;
-}
-
-/* Cabeceras dinámicas usando tus variables y tonos derivados */
-body.servicios-page .header-peluqueria { background-color: var(--accent-pink) !important; }
-body.servicios-page .header-tratamiento { background-color: #80deea !important; } /* Un celeste pastel que combina con tu mint-green */
-body.servicios-page .header-manicure { background-color: #ffab91 !important; }    /* Un salmón suave */
-
-/* Estilos de los campos de entrada (Inputs) */
-body.servicios-page .custom-input {
+/* Estilos para cards horizontales */
+body.servicios-page .card-horizontal {
+    background: white;
+    border-radius: 15px;
     border: 2px solid var(--mint-green);
-    border-radius: 12px;
-    padding: 12px;
-    transition: all 0.3s ease;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 15px;
 }
 
-body.servicios-page .custom-input:focus {
+body.servicios-page .card-horizontal:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(240, 98, 146, 0.15);
     border-color: var(--accent-pink);
-    box-shadow: 0 0 8px rgba(240, 98, 146, 0.2);
-    outline: none;
 }
 
-/* Etiquetas y adornos de grupo */
-body.servicios-page .custom-label {
-    font-weight: 600;
+body.servicios-page .card-horizontal .info {
+    flex: 1;
+}
+
+body.servicios-page .card-horizontal .info h3 {
+    margin: 0 0 8px 0;
     color: var(--dark-text);
-    margin-bottom: 8px;
-    display: block;
+    font-size: 1.2rem;
 }
 
-body.servicios-page .custom-addon {
-    background-color: var(--pink-pastel);
-    border: 2px solid var(--mint-green);
-    border-right: none;
+body.servicios-page .card-horizontal .info p {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+body.servicios-page .card-horizontal .tag {
+    background: var(--pink-pastel);
     color: var(--accent-pink);
-    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
-/* Botón de guardar personalizado */
-body.servicios-page .btn-save-custom {
-    background-color: var(--accent-pink);
+body.servicios-page .card-horizontal .action {
+    text-align: right;
+    min-width: 150px;
+}
+
+body.servicios-page .card-horizontal .precio {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--accent-pink);
+    margin-bottom: 10px;
+}
+
+body.servicios-page .card-horizontal .btn-primary {
+    background: linear-gradient(135deg, var(--accent-pink), #e91e63);
     color: white;
     border: none;
-    padding: 15px;
-    border-radius: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: background 0.3s shadow 0.3s;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s ease;
 }
 
-body.servicios-page .btn-save-custom:hover {
-    background-color: #ec407a; /* Un tono más intenso de rosa */
-    box-shadow: 0 5px 15px rgba(240, 98, 146, 0.3);
+body.servicios-page .card-horizontal .btn-primary:hover {
+    transform: scale(1.05);
 }
