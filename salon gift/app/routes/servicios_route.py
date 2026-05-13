@@ -4,11 +4,10 @@ from app import db
 
 bp = Blueprint('servicio', __name__, url_prefix='/Servicio')
 
-# --- VISTAS PARA EL FRONTEND ---
+#  VISTAS PARA EL FRONTEND 
 
 @bp.route('/peluqueria')
 def ver_peluqueria():
-    # Filtramos por categoría para que la página sea específica
     servicios = Servicio.query.filter_by(categoria='peluqueria').all() 
     return render_template('servicio/peluqueria.html', servicios=servicios)
 
@@ -22,7 +21,7 @@ def manicure():
     servicios = Servicio.query.filter_by(categoria='manicure').all() 
     return render_template('servicio/manicure.html', servicios=servicios)
 
-# --- OPERACIONES CRUD ---
+# OPERACIONES CRUD 
 
 @bp.route('/servicios/add/<categoria>', methods=['GET', 'POST'])
 def add(categoria):
@@ -37,29 +36,25 @@ def add(categoria):
             duracion=duracion, 
             categoria=categoria
         )
-        db.session.add(nuevo_servicio)
-        db.session.commit()
         
-        flash(f'Servicio "{nombre}" agregado exitosamente a {categoria}', 'success')
-        # Redirige a la vista de la categoría que acabas de agregar
-        if categoria == 'peluqueria':
-            return redirect(url_for('servicio.ver_peluqueria'))
+        try:
+            db.session.add(nuevo_servicio)
+            db.session.commit()
+            flash(f'Servicio "{nombre}" agregado exitosamente', 'success')
             
-        elif categoria == 'tratamiento':
-            # Esto lo enviará a la función tratamientos() que carga tratamiento.html
-            if categoria == 'peluqueria':
-               return redirect(url_for('servicio.ver_peluqueria'))
+            # Redirección dinámica basada en la categoría
+            vistas = {
+                'peluqueria': 'servicio.ver_peluqueria',
+                'tratamiento': 'servicio.tratamientos',
+                'manicure': 'servicio.manicure'
+            }
+            # Si la categoría no está en el mapa, vuelve al index
+            return redirect(url_for(vistas.get(categoria, 'servicio.index')))
             
-        elif categoria == 'tratamiento':
-            # Esto lo enviará a la función tratamientos() que carga tratamiento.html
-             return redirect(url_for('servicio.tratamientos'))
-            
-        elif categoria == 'manicure':
-             return redirect(url_for('servicio.manicure'))
-            
-        elif categoria == 'manicure':
-            return redirect(url_for('servicio.manicure'))
-        return redirect(url_for('servicio.index'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Error al guardar: {str(e)}", "danger")
+
     return render_template('servicio/add_servicio.html', categoria=categoria)
 
 @bp.route('/edit/<int:id>', methods=['GET', 'POST'])
@@ -73,12 +68,13 @@ def edit(id):
         try:
             db.session.commit()
             flash("Servicio actualizado correctamente.", "success")
-            return redirect(url_for('servicio.indexjs')) # Ajustado al nombre real de la función
+            # Cambié 'indexjs' por 'index' que es la ruta que tienes definida abajo
+            return redirect(url_for('servicio.index')) 
         except Exception as e:
             db.session.rollback()
             flash(f"Error al actualizar: {str(e)}", "danger")
 
-    return render_template('servicios/edit.html', servicio=servicio)
+    return render_template('servicio/edit.html', servicio=servicio)
 
 @bp.route('/delete/<int:id>')
 def delete(id):
@@ -91,16 +87,17 @@ def delete(id):
         db.session.rollback()
         flash(f"No se pudo eliminar el servicio: {str(e)}", "danger")
         
-    return redirect(url_for('servicio.indexjs'))
+    return redirect(url_for('servicio.index'))
 
-# --- API / JSON ---
+#  VISTA GENERAL Y API 
 
 @bp.route('/')
 def index():
-    # Traemos todos los servicios sin filtrar por categoría
     servicios = Servicio.query.all() 
     return render_template('servicio/index.html', servicios=servicios)
-@bp.route('/servicios/<int:id>', methods=['GET'])
+
+@bp.route('/api/servicios/<int:id>', methods=['GET'])
 def get_servicio(id):
     servicio = Servicio.query.get_or_404(id)
+    # Asegúrate de que tu modelo Servicio tenga el método to_dict()
     return jsonify(servicio.to_dict()), 200
