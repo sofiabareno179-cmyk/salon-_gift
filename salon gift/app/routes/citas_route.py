@@ -37,8 +37,8 @@ def crono_citas():
     # 3. Mapear citas a la cuadrícula (Día, Hora)
     agenda = {}
     for cita in mis_citas:
-        dia_semana = cita.fechahora.weekday() 
-        hora_str = cita.fechahora.strftime('%H:00')
+        dia_semana = cita.fecha.weekday()
+        hora_str = cita.fecha.strftime('%H:00')
         agenda[(dia_semana, hora_str)] = cita
 
     # 4. Variables de navegación
