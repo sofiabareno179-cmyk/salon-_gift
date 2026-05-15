@@ -25,12 +25,7 @@ body.profile-page .profile-container {
 }
 
 /* Tarjeta Principal */
-<<<<<<< Updated upstream
-
-.profile-card {
-=======
 body.profile-page .profile-card {
->>>>>>> Stashed changes
     background: #ffffff;
     width: 100%;
     max-width: 480px;
