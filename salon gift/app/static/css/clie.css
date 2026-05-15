@@ -8,6 +8,7 @@
     --whatsapp-green: #25d366;
 }
 
+/* Contenedor Principal (Hero Section) */
 body.client-page .hero-content {
     display: flex;
     flex-direction: column; /* Alinea los elementos en vertical */

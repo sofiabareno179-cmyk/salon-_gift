@@ -312,7 +312,3 @@ body.profile-page .value { color: #555; } /* Un tono más suave */
   body.profile-page .profile-wrapper { grid-template-columns: 1fr; }
   body.profile-page .info-grid { grid-template-columns: 1fr; }
 }
-
-body.profile-page .bio-card {
-  grid-column: span 1;
-}
