@@ -2,10 +2,13 @@
 body.schedule-page {
     --pink-pastel: #ffd1dc;
     --mint-pastel: #e0faf1;
+    --mint-green: #a8e6cf;
     --rose-gold: linear-gradient(135deg, #e1b1b9 0%, #b76e79 100%);
+    --rose-gold-gradient: linear-gradient(135deg, #e1b1b9 0%, #b76e79 100%);
     --glass-bg: rgba(255, 255, 255, 0.75);
     --glass-border: rgba(255, 255, 255, 0.4);
     --text-dark: #4a3337;
+    --text-main: #4a3337;
     --shadow: 0 10px 35px rgba(183, 110, 121, 0.15);
     background-color: #fdf5f6;
     color: var(--text-dark);
@@ -19,9 +22,6 @@ body.schedule-page .schedule {
 }
 
 body.schedule-page .schedule__container {
-    max-width: 1100px;
-    margin: 0 auto;
-    background: var(--glass-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -36,10 +36,6 @@ body.schedule-page .schedule__nav {
     align-items: center;
     margin-bottom: 2rem;
     padding: 0 1rem;
-}
-
-body.schedule-page .schedule__header-info {
-    text-align: center;
 }
 
 body.schedule-page .btn-nav,
@@ -57,22 +53,12 @@ body.schedule-page .btn-nav {
     color: var(--text-dark);
 }
 
-body.schedule-page .btn-nav:hover {
+
+.btn-nav:hover {
     background: var(--pink-pastel);
 }
 
-body.schedule-page .schedule__title {
-    margin: 0;
-    font-size: 2rem;
-}
-
-body.schedule-page .schedule__date-range {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.95rem;
-    color: #7a5b64;
-}
-
+/* Encabezados del Calendario */
 body.schedule-page .schedule__header {
     display: grid;
     grid-template-columns: 100px repeat(5, 1fr);
@@ -93,6 +79,8 @@ body.schedule-page .schedule__day-name small {
     font-size: 0.75rem;
 }
 
+
+/* Cuadrícula de Horas */
 body.schedule-page .schedule__grid {
     display: grid;
     grid-template-columns: 100px repeat(5, 1fr);
@@ -130,22 +118,32 @@ body.schedule-page .schedule__appointment {
     flex-direction: column;
     justify-content: space-between;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
+/* Variaciones de Color Pastel para las Citas */
 body.schedule-page .status-pendiente {
     background-color: var(--pink-pastel);
     color: #8c5e67;
+    border-left: 4px solid #e1b1b9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 body.schedule-page .status-confirmada {
     background-color: var(--mint-pastel);
     color: #4a7a6a;
+    border-left: 4px solid #a8e6cf;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-body.schedule-page .appt__link {
+
+/* Contenido dentro de la cita */
+.appt__link {
     text-decoration: none;
     color: inherit;
+    display: flex;
+    flex-direction: column;
     height: 100%;
 }
 
@@ -164,6 +162,8 @@ body.schedule-page .appt__time {
     font-weight: bold;
 }
 
+
+/* Botón flotante para celdas vacías */
 body.schedule-page .appt__add {
     position: absolute;
     top: 50%;
@@ -186,6 +186,70 @@ body.schedule-page .schedule__slot:hover .appt__add {
     opacity: 1;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+    body.schedule-page .schedule__header, body.schedule-page .schedule__grid {
+        grid-template-columns: 60px repeat(5, 1fr);
+    }
+    body.schedule-page .schedule__day-name { font-size: 0.7rem; }
+}
+
+/* --- CALENDARIO: CUADRÍCULA Y CELDAS --- */
+body.schedule-page .schedule__header {
+    display: grid;
+    grid-template-columns: 80px repeat(5, 1fr);
+    background: var(--rose-gold-gradient);
+    color: white;
+    text-align: center;
+    font-weight: 600;
+}
+
+body.schedule-page .schedule__day-name {
+    padding: 1.2rem 0.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.schedule-page .schedule__grid {
+    display: grid;
+    grid-template-columns: 80px repeat(5, 1fr);
+}
+
+body.schedule-page .schedule__time {
+    background: rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-bottom: 1px solid var(--glass-border);
+    border-right: 1px solid var(--glass-border);
+}
+
+body.schedule-page .schedule__slot {
+    min-height: 90px;
+    border-bottom: 1px solid rgba(183, 110, 121, 0.1);
+    border-right: 1px solid rgba(183, 110, 121, 0.1);
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+body.schedule-page .schedule__slot:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* --- TARJETAS DE CITA (DENTRO DEL CALENDARIO) --- */
+body.schedule-page .schedule__appointment {
+    margin: 5px;
+    padding: 8px;
+    border-radius: 10px;
+    height: calc(100% - 10px);
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
 @media (max-width: 768px) {
     body.schedule-page .schedule__header,
     body.schedule-page .schedule__grid {
@@ -194,19 +258,6 @@ body.schedule-page .schedule__slot:hover .appt__add {
     body.schedule-page .schedule__day-name {
         font-size: 0.7rem;
     }
-}
-
-/* Colores Dinámicos por Estado */
-body.schedule-page .status-pendiente {
-    background-color: var(--pink-pastel);
-    border-left: 4px solid #e1b1b9;
-    color: #8c5e67;
-}
-
-body.schedule-page .status-confirmada {
-    background-color: var(--mint-green);
-    border-left: 4px solid #a8e6cf;
-    color: #4a7a6a;
 }
 
 /* --- FORMULARIO DE NUEVA CITA --- */
@@ -239,6 +290,7 @@ body.schedule-page .form-control-glass:focus {
 }
 
 /* --- BOTONES --- */
+
 body.schedule-page .btn-confirm {
     background: var(--rose-gold);
     color: white;
@@ -264,4 +316,279 @@ body.schedule-page .btn-nav {
     text-decoration: none;
     border: 1px solid var(--pink-pastel);
     font-size: 0.9rem;
+}
+
+/* Estilos para slots bloqueados */
+.schedule__blocked {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 8px rgba(238, 90, 82, 0.3);
+}
+
+.schedule__blocked i {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.btn-unblock {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    margin-top: 4px;
+    transition: 0.3s;
+}
+
+.btn-unblock:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Estilos para acciones en slots libres */
+.schedule__actions {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-block {
+    background: #ff9500;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.btn-block:hover {
+    background: #e8850b;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.form-actions {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn-confirm, .btn-cancel {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-confirm {
+    background: #28a745;
+    color: white;
+}
+
+.btn-cancel {
+    background: #6c757d;
+    color: white;
+}
+
+/* Estilos adicionales para el cliente en las citas */
+.appt__client {
+    display: block;
+    font-size: 0.7rem;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+/* Estilos para slots bloqueados */
+.schedule__blocked {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 8px rgba(238, 90, 82, 0.3);
+}
+
+.schedule__blocked i {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.btn-unblock {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    margin-top: 4px;
+    transition: 0.3s;
+}
+
+.btn-unblock:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Estilos para acciones en slots libres */
+.schedule__actions {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-block {
+    background: #ff9500;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.btn-block:hover {
+    background: #e8850b;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.form-actions {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn-confirm, .btn-cancel {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-confirm {
+    background: #28a745;
+    color: white;
+}
+
+.btn-cancel {
+    background: #6c757d;
+    color: white;
+}
+
+/* Estilos adicionales para el cliente en las citas */
+.appt__client {
+    display: block;
+    font-size: 0.7rem;
+    opacity: 0.8;
+    margin-top: 2px;
 }
