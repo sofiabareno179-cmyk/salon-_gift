@@ -1,6 +1,4 @@
-{% extends "base.html" %}
 
-{% block title %}Tratamientos & Renovación{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
@@ -11,34 +9,34 @@
     .services-container {
         padding: 80px 20px;
         text-align: center;
-        background: #f7faf9; /* Fondo menta muy sutil */
+        background: #fffafa;
         background-image: 
-            radial-gradient(at 0% 0%, rgba(200, 230, 220, 0.3) 0, transparent 50%), 
-            radial-gradient(at 100% 100%, rgba(220, 240, 235, 0.4) 0, transparent 50%);
+            radial-gradient(at 0% 0%, rgba(244, 207, 223, 0.3) 0, transparent 50%), 
+            radial-gradient(at 100% 100%, rgba(252, 228, 236, 0.4) 0, transparent 50%);
         font-family: 'Montserrat', sans-serif;
         position: relative;
         overflow: hidden;
     }
 
-    /* Decoraciones animadas (Estilo gotas de agua o spa) */
+    /* Decoraciones animadas de fondo */
     .services-container::after {
         content: "";
         position: absolute;
-        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-        filter: blur(70px);
+        border-radius: 50% 20% 50% 70%;
+        filter: blur(60px);
         z-index: 0;
-        opacity: 0.3;
-        width: 450px;
-        height: 450px;
-        background: #b2dfdb;
-        bottom: -100px;
-        left: -100px;
-        animation: float-spa 20s infinite alternate;
+        opacity: 0.5;
+        width: 350px;
+        height: 350px;
+        background: #fce4ec;
+        bottom: -50px;
+        right: -50px;
+        animation: drift 15s infinite alternate-reverse;
     }
 
-    @keyframes float-spa {
-        from { transform: translate(0,0) scale(1); }
-        to { transform: translate(50px, -40px) scale(1.1); }
+    @keyframes drift {
+        from { transform: translate(0,0) rotate(0deg); }
+        to { transform: translate(30px, 50px) rotate(15deg); }
     }
 
     .services-container h1 {
@@ -46,7 +44,7 @@
         z-index: 1;
         font-family: 'Playfair Display', serif;
         font-size: 3rem;
-        color: #1a3a34; /* Verde muy oscuro botánico */
+        color: #333;
         margin-bottom: 5px;
         font-weight: 700;
     }
@@ -56,7 +54,7 @@
         z-index: 1;
         font-family: 'Playfair Display', serif;
         font-style: italic;
-        color: #4db6ac; /* Verde menta principal */
+        color: #d4a5b9;
         font-size: 1.2rem;
         margin-bottom: 50px;
         display: block;
@@ -67,66 +65,42 @@
         display: block;
         width: 60px;
         height: 2px;
-        background: #b2dfdb;
+        background: #f4cfdf;
         margin: 15px auto;
-    }
-
-    .services-container {
-        max-width: 1200px;
-        margin: 0 auto;
     }
 
     .gallery-grid {
         position: relative;
         z-index: 1;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 30px;
         max-width: 1100px;
         margin: 0 auto;
-        justify-content: center;
     }
 
-    .card-service {
-        width: 100% !important;
-        max-width: 360px !important;
-        margin: 0 auto !important;
+    .card-treatment {
         background: white;
         border-radius: 30px 30px 10px 10px;
         padding: 20px;
         transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         border: none;
-        box-shadow: 0 10px 30px rgba(77, 182, 172, 0.1);
+        box-shadow: 0 10px 30px rgba(244, 207, 223, 0.2);
     }
 
-    .card-service:hover {
+    .card-treatment:hover {
         transform: translateY(-12px);
-        box-shadow: 0 20px 40px rgba(77, 182, 172, 0.2);
+        box-shadow: 0 20px 40px rgba(212, 165, 185, 0.3);
     }
 
     .img-placeholder {
-        width: 100% !important;
-        height: 280px !important;
-        min-height: 280px !important;
-        max-height: 280px !important;
+        width: 100%;
+        height: 280px;
         border-radius: 25px 25px 10px 10px;
         margin-bottom: 20px;
-        background: #e0f2f1;
+        background: #fce4ec;
         position: relative;
         overflow: hidden;
-    }
-
-    .img-placeholder img {
-        display: block !important;
-        width: 100% !important;
-        height: 100% !important;
-        max-width: none !important;
-        object-fit: cover !important;
-        transition: transform 0.8s ease;
-    }
-
-    .card-service:hover .img-placeholder img {
-        transform: scale(1.1);
     }
 
     .img-placeholder::after {
@@ -136,12 +110,12 @@
         left: -100%;
         width: 50%;
         height: 200%;
-        background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
         transform: rotate(30deg);
         transition: 0.6s;
     }
 
-    .card-service:hover .img-placeholder::after {
+    .card-treatment:hover .img-placeholder::after {
         left: 150%;
     }
 
@@ -152,38 +126,38 @@
         transition: transform 0.8s ease;
     }
 
-    .card-service:hover .img-placeholder img {
+    .card-treatment:hover .img-placeholder img {
         transform: scale(1.1);
     }
 
-    .card-service h3 {
+    .card-treatment h3 {
         font-family: 'Playfair Display', serif;
         font-size: 1.5rem;
-        color: #264653;
+        color: #4a4a4a;
         margin: 10px 0;
     }
 
     .details {
-        border-top: 1px solid #e0f2f1;
-        border-bottom: 1px solid #e0f2f1;
+        border-top: 1px solid #fdf0f5;
+        border-bottom: 1px solid #fdf0f5;
         padding: 12px 0;
         margin: 15px 0;
         display: flex;
         justify-content: space-around;
-        color: #666;
+        color: #777;
         font-size: 0.85rem;
     }
 
     .details strong {
         display: block;
-        color: #4db6ac;
+        color: #d4a5b9;
         font-size: 0.7rem;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
 
-    .btn-service {
-        background: linear-gradient(135deg, #80cbc4 0%, #4db6ac 100%);
+    .btn-treatment {
+        background: linear-gradient(135deg, #f4cfdf 0%, #d4a5b9 100%);
         color: white;
         border: none;
         padding: 16px;
@@ -197,53 +171,56 @@
         font-weight: 600;
     }
 
-    .btn-service:hover {
+    .btn-treatment:hover {
         filter: brightness(1.05);
-        box-shadow: 0 8px 15px rgba(77, 182, 172, 0.3);
+        box-shadow: 0 8px 15px rgba(212, 165, 185, 0.4);
     }
 </style>
 {% endblock %}
 
 {% block content %}
 <section class="services-container">
-    <h1>Tratamientos & Bienestar</h1>
-    <span class="services-subtitle">Renueva tu piel, revitaliza tu espíritu</span>
+    <h1>Tratamientos de Bienestar</h1>
+    <span class="services-subtitle">Renueva tu piel y equilibra tu cuerpo</span>
     
     <div class="gallery-grid">
-        <div class="card-service">
+        <!-- Servicio 1 -->
+        <div class="card-treatment">
             <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Limpieza Facial">
+                <img src="https://pexels.com" alt="Limpieza Facial Profunda">
             </div>
-            <h3>Limpieza Profunda</h3>
-            <div class="details">
-                <span><strong>Precio</strong> $75.000</span>
-                <span><strong>Tiempo</strong> 60 min</span>
-            </div>
-            <button class="btn-service">Reservar Experiencia</button>
-        </div>
-
-        <div class="card-service">
-            <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Masaje Relajante">
-            </div>
-            <h3>Masaje de Piedras</h3>
+            <h3>Facial Profundo</h3>
             <div class="details">
                 <span><strong>Precio</strong> $95.000</span>
-                <span><strong>Tiempo</strong> 90 min</span>
+                <span><strong>Tiempo</strong> 60 min</span>
             </div>
-            <button class="btn-service">Reservar Experiencia</button>
+            <button class="btn-treatment">Reservar Experiencia</button>
         </div>
 
-        <div class="card-service">
+        <!-- Servicio 2 -->
+        <div class="card-treatment">
             <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/6663571/pexels-photo-6663571.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Exfoliación Corporal">
+                <img src="https://pexels.com" alt="Masaje Relajante">
             </div>
-            <h3>Exfoliación Orgánica</h3>
+            <h3>Masaje Relajante</h3>
             <div class="details">
-                <span><strong>Precio</strong> $80.000</span>
+                <span><strong>Precio</strong> $120.000</span>
                 <span><strong>Tiempo</strong> 75 min</span>
             </div>
-            <button class="btn-service">Reservar Experiencia</button>
+            <button class="btn-treatment">Reservar Experiencia</button>
+        </div>
+
+        <!-- Servicio 3 -->
+        <div class="card-treatment">
+            <div class="img-placeholder">
+                <img src="https://pexels.com" alt="Exfoliación Corporal">
+            </div>
+            <h3>Exfoliación Corporal</h3>
+            <div class="details">
+                <span><strong>Precio</strong> $140.000</span>
+                <span><strong>Tiempo</strong> 90 min</span>
+            </div>
+            <button class="btn-treatment">Reservar Experiencia</button>
         </div>
     </div>
 </section>
