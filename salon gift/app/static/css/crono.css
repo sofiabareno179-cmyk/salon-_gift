@@ -339,6 +339,7 @@ body.schedule-page {
     background: white;
     color: var(--text-dark);
     border: 1px solid var(--pink-pastel);
+
     padding: 12px;
     border-radius: 50px;
     font-weight: bold;
@@ -374,4 +375,68 @@ body.schedule-page {
         gap: 1rem;
         padding: 1rem;
     }
+
+    font-size: 0.9rem;
+}
+
+/* --- CENTRAR Y LIMPIAR CONTENEDOR DEL FORMULARIO --- */
+body.schedule-page .appointment-form-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+body.schedule-page .glass-card {
+    width: 100%;
+    max-width: 600px;
+    background: var(--glass-bg);
+    border-radius: 12px;
+    padding: 1.25rem 1.25rem;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    margin: 0 auto;
+}
+
+body.schedule-page .glass-card__header h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.4rem;
+}
+
+body.schedule-page .form-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+body.schedule-page .form-actions .btn-confirm {
+    flex: 1;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+}
+
+/* Responsive: mantener márgenes en pantallas pequeñas */
+@media (max-width: 640px) {
+    body.schedule-page .glass-card {
+        max-width: 92%;
+        padding: 1rem;
+    }
+    body.schedule-page .form-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    body.schedule-page .form-actions .btn-confirm {
+        max-width: 100%;
+    }
+}
+
+body.schedule-page .form-actions .btn-cancel {
+    display: inline-block;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text-dark);
+    border: 1px solid rgba(0,0,0,0.05);
+
 }

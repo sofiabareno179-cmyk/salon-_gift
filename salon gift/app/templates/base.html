@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Salon Glitt{% endblock %}</title>
+
+     <link rel="icon" href="data:,">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% block extra_css %}{% endblock %}
@@ -15,7 +18,7 @@
         <nav class="nav-container">
             <div class="nav-logo">
              <a href="{{ url_for('user.inicio') }}">
-                    <i class="fas fa-scissors"></i> Salon<span>Gift</span>
+                    <i class="fas fa-scissors"></i> Salon<span>Glitt</span>
                 </a>
             </div>
             <ul class="nav-links">
