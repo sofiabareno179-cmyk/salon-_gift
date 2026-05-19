@@ -60,7 +60,7 @@
                             <!-- Cita Existente -->
                             <div class="schedule__appointment status-{{ cita.estado.lower() }}">
                                 <a href="{{ url_for('citas.editar_cita', id=cita.idcita) }}">
-                                    <span class="appt__time">{{ cita.fecha.strftime('%H:%M') }}</span>
+                                    <span class="appt__time">{{ cita.fechahora.strftime('%H:%M') }}</span>
                                     <strong class="appt__service">{{ cita.servicio }}</strong>
                                     <span class="appt__status">{{ cita.estado }}</span>
                                     {% if cita.user %}
