@@ -59,9 +59,9 @@
                         {% elif cita %}
                             <!-- Cita Existente -->
                             <div class="schedule__appointment status-{{ cita.estado.lower() }}">
-                                <a class="appt__link" href="{{ url_for('citas.editar_cita', id=cita.idcitas) }}">
-                                    <span class="appt__time">{{ cita.fecha_dt.strftime('%H:%M') }}</span>
-                                    <strong class="appt__service">{{ cita.servicio or 'Servicio' }}</strong>
+                                <a href="{{ url_for('citas.editar_cita', id=cita.idcita) }}">
+                                    <span class="appt__time">{{ cita.fechahora.strftime('%H:%M') }}</span>
+                                    <strong class="appt__service">{{ cita.servicio }}</strong>
                                     <span class="appt__status">{{ cita.estado }}</span>
                                     {% if cita.user %}
                                         <small class="appt__client">{{ cita.user.nombreuser }}</small>

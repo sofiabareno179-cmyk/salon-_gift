@@ -17,6 +17,9 @@ def create_app():
     def ensure_citas_servicio_column():
         with app.app_context():
             with db.engine.begin() as conn:
+                result = conn.execute(text("SELECT name FROM sqlite_master WHERE type='table' AND name='citas'"))
+                if result.first() is None:
+                    return
                 result = conn.execute(text("PRAGMA table_info(citas)"))
                 cols = [row[1] for row in result]
                 if 'servicio' not in cols:
