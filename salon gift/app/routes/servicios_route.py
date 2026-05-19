@@ -1,6 +1,13 @@
-from flask import Blueprint, request, jsonify, render_template, redirect, url_for, flash
+from flask import Blueprint, request, jsonify, render_template, redirect, url_for, flash, current_app
 from app.models.servicios import Servicio 
 from app import db
+import os
+from werkzeug.utils import secure_filename
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 bp = Blueprint('servicio', __name__, url_prefix='/Servicio')
 
@@ -30,34 +37,39 @@ def add(categoria):
         nombre = request.form.get('nombre')
         precio = request.form.get('precio')
         duracion = request.form.get('duracion')
+        categoria_form = request.form.get('categoria') or categoria
         
+        # Manejo de imagen
+        imagen_filename = None
+        if 'imagen' in request.files:
+            file = request.files['imagen']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                # Crear el directorio si no existe
+                upload_path = os.path.join(current_app.root_path, 'static', 'uploads', 'servicios')
+                if not os.path.exists(upload_path):
+                    os.makedirs(upload_path)
+                
+                file.save(os.path.join(upload_path, filename))
+                imagen_filename = filename
+
         nuevo_servicio = Servicio(
             nombre=nombre, 
             precio=precio, 
             duracion=duracion, 
-            categoria=categoria
+            categoria=categoria_form,
+            imagen=imagen_filename
         )
         db.session.add(nuevo_servicio)
         db.session.commit()
         
-        flash(f'Servicio "{nombre}" agregado exitosamente a {categoria}', 'success')
-        # Redirige a la vista de la categoría que acabas de agregar
-        if categoria == 'peluqueria':
+        flash(f'Servicio "{nombre}" agregado exitosamente a {categoria_form}', 'success')
+        
+        if categoria_form == 'peluqueria':
             return redirect(url_for('servicio.ver_peluqueria'))
-            
-        elif categoria == 'tratamiento':
-            # Esto lo enviará a la función tratamientos() que carga tratamiento.html
-            if categoria == 'peluqueria':
-               return redirect(url_for('servicio.ver_peluqueria'))
-            
-        elif categoria == 'tratamiento':
-            # Esto lo enviará a la función tratamientos() que carga tratamiento.html
-             return redirect(url_for('servicio.tratamientos'))
-            
-        elif categoria == 'manicure':
-             return redirect(url_for('servicio.manicure'))
-            
-        elif categoria == 'manicure':
+        elif categoria_form == 'tratamiento':
+            return redirect(url_for('servicio.tratamientos'))
+        elif categoria_form == 'manicure':
             return redirect(url_for('servicio.manicure'))
         return redirect(url_for('servicio.index'))
     return render_template('servicio/add_servicio.html', categoria=categoria)
@@ -69,6 +81,18 @@ def edit(id):
         servicio.nombre = request.form.get('nombre')
         servicio.precio = request.form.get('precio')
         servicio.duracion = request.form.get('duracion')
+        servicio.categoria = request.form.get('categoria')
+        
+        # Manejo de nueva imagen si se sube
+        if 'imagen' in request.files:
+            file = request.files['imagen']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                upload_path = os.path.join(current_app.root_path, 'static', 'uploads', 'servicios')
+                if not os.path.exists(upload_path):
+                    os.makedirs(upload_path)
+                file.save(os.path.join(upload_path, filename))
+                servicio.imagen = filename
         
         try:
             db.session.commit()
@@ -78,7 +102,7 @@ def edit(id):
             db.session.rollback()
             flash(f"Error al actualizar: {str(e)}", "danger")
 
-    return render_template('servicios/edit.html', servicio=servicio)
+    return render_template('servicio/edit.html', servicio=servicio)
 
 @bp.route('/delete/<int:id>')
 def delete(id):

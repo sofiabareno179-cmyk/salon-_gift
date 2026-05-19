@@ -1,12 +1,9 @@
 import os
 import secrets
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-instance_path = os.path.join(basedir, 'instance')
-os.makedirs(instance_path, exist_ok=True)
-
 class Config:
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(instance_path, 'salonglitt.sqlite')}"
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg://admin:9027865@127.0.0.1:500/salonglitt_db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secrets.token_urlsafe(24)
-    
+    UPLOAD_FOLDER = os.path.join('app', 'static', 'uploads', 'servicios')
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max limit

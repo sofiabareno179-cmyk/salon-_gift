@@ -1,5 +1,5 @@
 /* 1. Variables de Marca - Estética Boutique/Soft */
-:root {
+body.client-page {
     --pastel-pink: #fce4ec;   /* Rosa muy suave */
     --soft-pink: #f8bbd0;     /* Rosa medio delicado */
     --dark-pink: #d81b60;     /* Fucsia elegante para acentos */
@@ -61,6 +61,7 @@ body.client-page .btn-primary:hover {
     transform: translateY(-2px); /* Pequeño salto hacia arriba */
     box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
 }
+
 /* 3. Sección de Citas Próximas */
 body.client-page .appointments-reminder {
     max-width: 800px;
@@ -76,7 +77,7 @@ body.client-page .appointments-reminder {
 }
 
 /* 4. Grid de Servicios */
-body.client-page .services-grid {
+body.client-page .services-grid { 
     padding: 40px 0; 
 }
 

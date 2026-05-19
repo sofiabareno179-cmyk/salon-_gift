@@ -47,7 +47,7 @@
                 <tbody>
                     {% for s in servicios %}
                     <tr>
-                        <td class="ps-4 text-muted small">#{{ s.id }}</td>
+                        <td class="ps-4 text-muted small">#{{ s.idservicio }}</td>
                         <td class="fw-bold text-dark">{{ s.nombre }}</td>
                         <td>
                             <!-- Lógica de colores basada en el backend -->
@@ -59,16 +59,16 @@
                                 {{ s.categoria | capitalize }}
                             </span>
                         </td>
-                        <td class="text-success fw-bold">${{ "{:,.2f}".format(s.price | float) if s.price else s.precio }}</td>
+                        <td class="text-success fw-bold">${{ "{:,.2f}".format(s.precio | float) }}</td>
                         <td>
                             <i class="far fa-clock me-1 text-muted"></i>{{ s.duracion }} min
                         </td>
                         <td class="text-center">
                             <div class="btn-group" role="group">
-                                <a href="{{ url_for('servicio.edit', id=s.id) }}" class="btn btn-outline-warning btn-sm" title="Editar">
+                                <a href="{{ url_for('servicio.edit', id=s.idservicio) }}" class="btn btn-outline-warning btn-sm" title="Editar">
                                     <i class="fas fa-pen"></i>
                                 </a>
-                                <a href="{{ url_for('servicio.delete', id=s.id) }}" 
+                                <a href="{{ url_for('servicio.delete', id=s.idservicio) }}" 
                                    class="btn btn-outline-danger btn-sm" 
                                    title="Eliminar"
                                    onclick="return confirm('¿Estás seguro de que deseas eliminar el servicio: {{ s.nombre }}?')">

@@ -1,8 +1,0 @@
-# Ignorar entorno virtual y archivos sensibles
-.venv/
-.venv/.env
-
-# Ignorar instancias y caches de Python
-instance/
-__pycache__/
-*.pyc

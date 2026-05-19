@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block body_class %}servicios-page{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="premium-form-card animate-fade-in">
+                <!-- Premium Header -->
+                <div class="premium-header text-white">
+                    <h3 class="text-capitalize">
+                        <i class="fas fa-edit me-2"></i>
+                        Editar Servicio
+                    </h3>
+                    <p class="mb-0 opacity-75">Actualiza la información del servicio #{{ servicio.idservicio }}</p>
+                </div>
+                
+                <div class="card-body p-5">
+                    <form action="{{ url_for('servicio.edit', id=servicio.idservicio) }}" method="POST" enctype="multipart/form-data">
+                        
+                        <!-- Service Name -->
+                        <div class="custom-input-group">
+                            <label for="nombre">Nombre del Servicio</label>
+                            <div class="input-icon-wrapper">
+                                <i class="fas fa-magic"></i>
+                                <input type="text" id="nombre" name="nombre" class="custom-input input-with-icon" 
+                                       value="{{ servicio.nombre }}" placeholder="Ej. Corte de Cabello Premium" required autofocus>
+                            </div>
+                        </div>
+
+                        <!-- Current Image Preview -->
+                        {% if servicio.imagen %}
+                        <div class="mb-3 text-center">
+                            <img src="{{ url_for('static', filename='uploads/servicios/' + servicio.imagen) }}" 
+                                 alt="Imagen actual" class="img-thumbnail" style="max-height: 150px;">
+                            <p class="small text-muted">Imagen actual</p>
+                        </div>
+                        {% endif %}
+
+                        <!-- Image Upload -->
+                        <div class="custom-input-group">
+                            <label for="imagen">Nueva Imagen (Opcional)</label>
+                            <div class="input-icon-wrapper">
+                                <i class="fas fa-image"></i>
+                                <input type="file" id="imagen" name="imagen" class="custom-input input-with-icon" accept="image/*">
+                            </div>
+                        </div>
+
+                        <!-- Category Selection -->
+                        <div class="custom-input-group">
+                            <label for="categoria">Categoría</label>
+                            <div class="input-icon-wrapper">
+                                <i class="fas fa-list"></i>
+                                <select id="categoria" name="categoria" class="custom-input input-with-icon" required>
+                                    <option value="peluqueria" {% if servicio.categoria == 'peluqueria' %}selected{% endif %}>Peluquería</option>
+                                    <option value="manicure" {% if servicio.categoria == 'manicure' %}selected{% endif %}>Manicure</option>
+                                    <option value="tratamiento" {% if servicio.categoria == 'tratamiento' %}selected{% endif %}>Tratamiento</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <!-- Price -->
+                            <div class="col-md-6">
+                                <div class="custom-input-group">
+                                    <label for="precio">Precio ($)</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fas fa-tag"></i>
+                                        <input type="number" step="0.01" id="precio" name="precio" 
+                                               class="custom-input input-with-icon" value="{{ servicio.precio }}" placeholder="0.00" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Duration -->
+                            <div class="col-md-6">
+                                <div class="custom-input-group">
+                                    <label for="duracion">Duración (min)</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fas fa-clock"></i>
+                                        <input type="number" id="duracion" name="duracion" 
+                                               class="custom-input input-with-icon" value="{{ servicio.duracion }}" placeholder="30" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-3 mt-4">
+                            <button type="submit" class="btn-premium-save">
+                                <i class="fas fa-save me-2"></i>Guardar Cambios
+                            </button>
+                            <a href="{{ url_for('servicio.index') }}" class="btn-premium-cancel">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
