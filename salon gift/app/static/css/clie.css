@@ -1,4 +1,7 @@
-:root {
+
+body.client-page {
+
+
     --pastel-pink: #fce4ec;   /* Rosa muy suave */
     --soft-pink: #f8bbd0;     /* Rosa medio delicado */
     --dark-pink: #d81b60;     /* Fucsia elegante para acentos */
@@ -57,6 +60,7 @@ body.client-page .btn-primary:hover {
     box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
 }
 
+
 body.client-page .appointments-reminder {
     max-width: 800px;
     margin: -20px auto 30px;
@@ -70,8 +74,13 @@ body.client-page .appointments-reminder {
     border: 1px solid var(--pastel-pink);
 }
 
+/* 4. Grid de Servicios */
+body.client-page .services-grid { 
+    padding: 40px 0; 
+
 body.client-page .services-grid {
     padding: 40px 0;
+
 }
 
 body.client-page .cards-wrapper {

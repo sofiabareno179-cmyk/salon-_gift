@@ -43,7 +43,7 @@
                     {% for cita in citas %}
                     <tr>
                         <td class="id-cell">{{ cita.idcitas }}</td>
-                        <td class="datetime-cell"><strong>{{ cita.fechahora }}</strong></td>
+                        <td class="datetime-cell"><strong>{{ cita.fechahora.strftime('%d/%m/%Y %H:%M') if cita.fechahora else '' }}</strong></td>
                         <td class="status-cell">
                             {% if cita.estado == 'Pendiente' %}
                                 <span class="badge-status pending">Pendiente</span>

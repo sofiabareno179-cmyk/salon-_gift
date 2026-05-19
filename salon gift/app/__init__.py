@@ -1,7 +1,6 @@
-from flask import Flask, send_from_directory
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from sqlalchemy import text
 import os
 
 db = SQLAlchemy()
@@ -13,6 +12,7 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
+
 
     def ensure_citas_servicio_column():
         with app.app_context():
@@ -26,6 +26,7 @@ def create_app():
                     conn.execute(text("ALTER TABLE citas ADD COLUMN servicio VARCHAR(100)"))
 
     ensure_citas_servicio_column()
+
  
     @login_manager.user_loader
     def load_user(idusuario):

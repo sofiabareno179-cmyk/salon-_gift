@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app import db
 from app.models.agenda import Agenda  
 import os
@@ -22,7 +22,7 @@ def crear_agenda():
         horainicio = request.form.get('horainicio')
         horafin = request.form.get('horafin')
 
-        nueva_agenda = Agenda(diasemana=diasemana, horainicio=horainicio, horafin=horafin)
+        nueva_agenda = Agenda(diasemana=diasemana, horainicio=horainicio, horafin=horafin, idusuario=current_user.idusuario)
         nueva_agenda.save()
         
         flash('Agenda creada exitosamente', 'success')

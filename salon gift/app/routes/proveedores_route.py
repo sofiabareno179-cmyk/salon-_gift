@@ -1,14 +1,14 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required
 from app import db
-from app.models.proveedores import Proveedor
+from app.models.proveedores import Proveedores
 
 bp = Blueprint('proveedores', __name__,url_prefix='/Proveedores')
 
 @bp.route('/proveedores')
 @login_required
 def listar_proveedores():
-    todos_proveedores = Proveedor.query.order_by(Proveedor.nombre_empresa).all()
+    todos_proveedores = Proveedores.query.order_by(Proveedores.nombre_empresa).all()
     return render_template('proveedores/index.html', proveedores=todos_proveedores)
 
 @bp.route('/proveedores/nuevo', methods=['GET', 'POST'])
@@ -25,7 +25,7 @@ def nuevo_proveedor():
             flash('Por favor llena los campos obligatorios (Empresa, Contacto y Teléfono)', 'warning')
             return redirect(url_for('proveedores.nuevo_proveedor'))
 
-        proveedor = Proveedor(
+        proveedor = Proveedores(
             nombre_empresa=nombre_empresa,
             contacto_nombre=contacto_nombre,
             telefono=telefono,
@@ -42,7 +42,7 @@ def nuevo_proveedor():
 @bp.route('/proveedores/editar/<int:id>', methods=['GET', 'POST'])
 @login_required
 def editar_proveedor(id):
-    proveedor = Proveedor.query.get_or_404(id)
+    proveedor = Proveedores.query.get_or_404(id)
     
     if request.method == 'POST':
         proveedor.nombre_empresa = request.form.get('nombre_empresa')
@@ -60,7 +60,7 @@ def editar_proveedor(id):
 @bp.route('/proveedores/eliminar/<int:id>', methods=['POST'])
 @login_required
 def eliminar_proveedor(id):
-    proveedor = Proveedor.query.get_or_404(id)
+    proveedor = Proveedores.query.get_or_404(id)
     db.session.delete(proveedor)
     db.session.commit()
     flash(f'Se ha eliminado a {proveedor.nombre_empresa} de la lista', 'danger')
