@@ -18,9 +18,12 @@ def perfil_usuario():
     # Buscamos el perfil que pertenece al ID del usuario logueado
     perfil = Perfil.query.filter_by(idusuario=current_user.idusuario).first()
 
-    # Si el usuario aún no tiene un perfil creado, lo mandamos a crear uno
+    # Si no tiene perfil, lo creamos automáticamente
     if not perfil:
-        return redirect(url_for('perfil.add'))
+        perfil = Perfil(nombre=current_user.nombreuser, apellido=None, bio=None, idusuario=current_user.idusuario)
+        db.session.add(perfil)
+        db.session.commit()
+        flash("Perfil creado automáticamente.", "info")
 
     # Si existe, cargamos una plantilla que muestre solo sus datos
     return render_template('perfil/ver_perfil.html', perfil=perfil)
@@ -66,13 +69,30 @@ def add():
     return render_template('perfil/add.html')
 # Editar un perfil existente
 @bp.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
 def edit(id):
     perfil = Perfil.query.get_or_404(id)
 
     if request.method == 'POST':
+        nuevo_email = request.form.get('email')
+        nuevo_nombreuser = request.form.get('nombreuser')
+
+        if User.query.filter(User.email == nuevo_email, User.idusuario != current_user.idusuario).first():
+            flash("Ese correo electrónico ya está registrado por otro usuario.", "danger")
+            return redirect(url_for('perfil.edit', id=id))
+
+        if User.query.filter(User.nombreuser == nuevo_nombreuser, User.idusuario != current_user.idusuario).first():
+            flash("Ese nombre de usuario ya está en uso.", "danger")
+            return redirect(url_for('perfil.edit', id=id))
+
         perfil.nombre = request.form.get('nombre')
         perfil.apellido = request.form.get('apellido')
         perfil.bio = request.form.get('bio')
+
+        current_user.nombreuser = nuevo_nombreuser
+        current_user.email = nuevo_email
+        current_user.telefono = request.form.get('telefono')
+
         db.session.commit()
         flash("Perfil actualizado correctamente", "success")
         return redirect(url_for('perfil.perfil_usuario'))

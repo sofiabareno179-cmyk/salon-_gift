@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}Control de Inventario{% endblock %}
-
+{% block body_class %}inventory-page{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/inve.css') }}">
+{% endblock %}
 {% block content %}
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-primary"><i class="fas fa-boxes"></i> Inventario de Existencias</h2>
-        <a href="{{ url_for('inventario.nuevo_item') }}" class="btn btn-primary">
+<div class="inventory-container">
+    <div class="inventory-header">
+        <h2><i class="fas fa-boxes"></i> Inventario de Existencias</h2>
+        <a href="{{ url_for('inventario.nuevo_item') }}" class="btn-inventory-new">
             <i class="fas fa-plus"></i> Registrar Movimiento
         </a>
     </div>
@@ -14,7 +17,8 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
-          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          <div class="alert alert-{{ category }} inventory-alert alert-dismissible fade show" role="alert">
+            <i class="fas {% if category == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %} me-2"></i>
             {{ message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           </div>
@@ -22,36 +26,41 @@
       {% endif %}
     {% endwith %}
 
-    <div class="card shadow border-0">
-        <div class="card-body p-0">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-dark">
+    <div class="inventory-table-card">
+        <div class="table-responsive">
+            <table class="inventory-table">
+                <thead>
                     <tr>
-                        <th class="ps-4">ID</th>
+                        <th>ID</th>
                         <th>Stock Disponible</th>
                         <th>Fecha de Registro</th>
-                        <th class="text-center">Acciones</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in inventario %}
                     <tr>
-                        <td class="ps-4 text-muted">#{{ item.idinventario }}</td>
+                        <td><span class="inventory-id">#{{ item.idinventario }}</span></td>
                         <td>
-                            {% if item.stock < 10 %}
-                                <span class="badge bg-danger">Bajo Stock: {{ item.stock }}</span>
-                            {% else %}
-                                <span class="badge bg-success">{{ item.stock }} unidades</span>
-                            {% endif %}
+                            <div class="inventory-stock">
+                                {% if item.stock < 10 %}
+                                    <span class="stock-badge stock-badge-low">Bajo Stock: {{ item.stock }}</span>
+                                {% else %}
+                                    <span class="stock-badge stock-badge-ok">{{ item.stock }} unidades</span>
+                                {% endif %}
+                                <div class="stock-bar">
+                                    <div class="stock-bar-fill {% if item.stock < 10 %}stock-bar-fill-low{% else %}stock-bar-fill-ok{% endif %}" style="width: {{ item.stock|min(100) }}%"></div>
+                                </div>
+                            </div>
                         </td>
-                        <td><i class="far fa-calendar-alt me-2"></i>{{ item.fecha }}</td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <a href="{{ url_for('inventario.editar_item', id=item.idinventario) }}" class="btn btn-sm btn-outline-info">
+                        <td><span class="inventory-date"><i class="far fa-calendar-alt"></i>{{ item.fecha }}</span></td>
+                        <td>
+                            <div class="btn-group" style="gap: 6px;">
+                                <a href="{{ url_for('inventario.editar_item', id=item.idinventario) }}" class="btn-inventory-action btn-inv-edit">
                                     <i class="fas fa-sync"></i> Actualizar
                                 </a>
-                                <form action="{{ url_for('inventario.eliminar_item', id=item.idinventario) }}" method="POST" class="d-inline">
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar este registro de inventario?')">
+                                <form action="{{ url_for('inventario.eliminar_item', id=item.idinventario) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn-inventory-action btn-inv-delete" onclick="return confirm('¿Eliminar este registro de inventario?')">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
@@ -60,9 +69,11 @@
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="4" class="text-center py-5">
-                            <i class="fas fa-info-circle fa-2x text-muted mb-2"></i>
-                            <p class="text-muted">No hay registros en el inventario actualmente.</p>
+                        <td colspan="4">
+                            <div class="inventory-empty">
+                                <i class="fas fa-boxes"></i>
+                                <p>No hay registros en el inventario actualmente.</p>
+                            </div>
                         </td>
                     </tr>
                     {% endfor %}

@@ -34,6 +34,7 @@
                 <thead>
                     <tr>
                         <th><i class="fas fa-id-badge"></i> ID</th>
+                        <th><i class="fas fa-user"></i> Usuario</th>
                         <th><i class="fas fa-calendar"></i> Fecha y Hora</th>
                         <th><i class="fas fa-info-circle"></i> Estado</th>
                         <th><i class="fas fa-cogs"></i> Acciones</th>
@@ -43,6 +44,10 @@
                     {% for cita in citas %}
                     <tr>
                         <td class="id-cell">{{ cita.idcitas }}</td>
+                        <td class="user-cell">
+                            <span class="user-id">#{{ cita.cliente.idusuario }}</span>
+                            <span class="user-name">{{ cita.cliente.nombreuser }}</span>
+                        </td>
                         <td class="datetime-cell"><strong>{{ cita.fechahora.strftime('%d/%m/%Y %H:%M') if cita.fechahora else '' }}</strong></td>
                         <td class="status-cell">
                             {% if cita.estado == 'Pendiente' %}
@@ -68,7 +73,7 @@
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="4" class="empty-message">No hay citas registradas.</td>
+                        <td colspan="5" class="empty-message">No hay citas registradas.</td>
                     </tr>
                     {% endfor %}
                 </tbody>

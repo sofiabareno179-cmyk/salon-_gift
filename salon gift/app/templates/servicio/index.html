@@ -8,21 +8,17 @@
 
 {% block content %}
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold"><i class="fas fa-concierge-bell me-2 text-primary"></i>Gestión de Servicios</h2>
-        <div>
-            <!-- Botón que redirige a agregar, puedes cambiar la categoría por defecto -->
-            <a href="{{ url_for('servicio.add', categoria='peluqueria') }}" class="btn btn-primary shadow-sm">
-                <i class="fas fa-plus-circle me-1"></i> Nuevo Servicio
-            </a>
-        </div>
+    <div class="servicios-header">
+        <h2><i class="fas fa-concierge-bell"></i>Gestión de Servicios</h2>
+        <a href="{{ url_for('servicio.add', categoria='peluqueria') }}" class="btn-premium">
+            <i class="fas fa-plus-circle"></i> Nuevo Servicio
+        </a>
     </div>
 
-    <!-- Bloque de Mensajes Flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
-          <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
+          <div class="alert alert-{{ category }} premium-alert alert-dismissible fade show" role="alert">
             <i class="fas {% if category == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %} me-2"></i>
             {{ message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -31,57 +27,54 @@
       {% endif %}
     {% endwith %}
 
-    <div class="card shadow-sm border-0">
+    <div class="premium-table-card">
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-dark">
+            <table class="premium-table">
+                <thead>
                     <tr>
-                        <th class="ps-4">ID</th>
+                        <th>ID</th>
                         <th>Nombre del Servicio</th>
                         <th>Categoría</th>
                         <th>Precio</th>
                         <th>Duración</th>
-                        <th class="text-center">Acciones</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for s in servicios %}
                     <tr>
-                        <td class="ps-4 text-muted small">#{{ s.idservicio }}</td>
-                        <td class="fw-bold text-dark">{{ s.nombre }}</td>
+                        <td><span class="id-cell">#{{ s.idservicio }}</span></td>
+                        <td><span class="name-cell">{{ s.nombre }}</span></td>
                         <td>
-                            <!-- Lógica de colores basada en el backend -->
-                            <span class="badge rounded-pill 
-                                {% if s.categoria == 'peluqueria' %}bg-primary
-                                {% elif s.categoria == 'tratamiento' %}bg-info text-dark
-                                {% elif s.categoria == 'manicure' %}bg-danger
-                                {% else %}bg-secondary{% endif %} px-3">
+                            <span class="premium-badge 
+                                {% if s.categoria == 'peluqueria' %}premium-badge-peluqueria
+                                {% elif s.categoria == 'tratamiento' %}premium-badge-tratamiento
+                                {% elif s.categoria == 'manicure' %}premium-badge-manicure
+                                {% else %}premium-badge-other{% endif %}">
                                 {{ s.categoria | capitalize }}
                             </span>
                         </td>
-                        <td class="text-success fw-bold">${{ "{:,.2f}".format(s.precio | float) }}</td>
+                        <td><span class="price-cell">${{ "{:,.2f}".format(s.precio | float) }}</span></td>
+                        <td><span class="duration-cell"><i class="far fa-clock"></i>{{ s.duracion }} min</span></td>
                         <td>
-                            <i class="far fa-clock me-1 text-muted"></i>{{ s.duracion }} min
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group" role="group">
-                                <a href="{{ url_for('servicio.edit', id=s.idservicio) }}" class="btn btn-outline-warning btn-sm" title="Editar">
-                                    <i class="fas fa-pen"></i>
-                                </a>
-                                <a href="{{ url_for('servicio.delete', id=s.idservicio) }}" 
-                                   class="btn btn-outline-danger btn-sm" 
-                                   title="Eliminar"
-                                   onclick="return confirm('¿Estás seguro de que deseas eliminar el servicio: {{ s.nombre }}?')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </div>
+                            <a href="{{ url_for('servicio.edit', id=s.idservicio) }}" class="btn-action btn-action-edit" title="Editar">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                            <a href="{{ url_for('servicio.delete', id=s.idservicio) }}" 
+                               class="btn-action btn-action-delete" 
+                               title="Eliminar"
+                               onclick="return confirm('¿Estás seguro de que deseas eliminar el servicio: {{ s.nombre }}?')">
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="6" class="text-center py-5">
-                            <img src="https://cdn-icons-png.flaticon.com/512/4076/4076432.png" alt="No data" style="width: 80px; opacity: 0.5;">
-                            <p class="mt-3 text-muted">No hay servicios registrados en esta sección.</p>
+                        <td colspan="6">
+                            <div class="premium-empty">
+                                <img src="https://cdn-icons-png.flaticon.com/512/4076/4076432.png" alt="No data">
+                                <p>No hay servicios registrados en esta sección.</p>
+                            </div>
                         </td>
                     </tr>
                     {% endfor %}

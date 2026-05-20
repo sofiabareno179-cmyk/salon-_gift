@@ -168,6 +168,24 @@ body.appointments-page .id-cell {
     font-size: 0.9rem;
 }
 
+body.appointments-page .user-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+body.appointments-page .user-cell .user-id {
+    color: #bbb;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+body.appointments-page .user-cell .user-name {
+    font-weight: 700;
+    color: #5d4b1a;
+    text-transform: capitalize;
+}
+
 body.appointments-page .datetime-cell {
     font-weight: 600;
     color: var(--pink-accent);

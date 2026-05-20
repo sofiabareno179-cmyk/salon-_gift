@@ -11,9 +11,10 @@
     .services-container {
         padding: 80px 20px;
         text-align: center;
-        background: #fcfaff; /* Un fondo lavanda casi blanco */
-        background-image: 
-            radial-gradient(at 0% 0%, rgba(230, 200, 250, 0.3) 0, transparent 50%), 
+        background: #fcfaff;
+        /* Un fondo lavanda casi blanco */
+        background-image:
+            radial-gradient(at 0% 0%, rgba(230, 200, 250, 0.3) 0, transparent 50%),
             radial-gradient(at 100% 100%, rgba(243, 230, 255, 0.4) 0, transparent 50%);
         font-family: 'Montserrat', sans-serif;
         position: relative;
@@ -37,8 +38,13 @@
     }
 
     @keyframes float-hair {
-        from { transform: translate(0,0) rotate(0deg); }
-        to { transform: translate(-40px, 60px) rotate(20deg); }
+        from {
+            transform: translate(0, 0) rotate(0deg);
+        }
+
+        to {
+            transform: translate(-40px, 60px) rotate(20deg);
+        }
     }
 
     .services-container h1 {
@@ -46,7 +52,8 @@
         z-index: 1;
         font-family: 'Playfair Display', serif;
         font-size: 3rem;
-        color: #2d1b4d; /* Un morado muy oscuro para elegancia */
+        color: #2d1b4d;
+        /* Un morado muy oscuro para elegancia */
         margin-bottom: 5px;
         font-weight: 700;
     }
@@ -56,7 +63,8 @@
         z-index: 1;
         font-family: 'Playfair Display', serif;
         font-style: italic;
-        color: #9b5de5; /* Color lila principal */
+        color: #9b5de5;
+        /* Color lila principal */
         font-size: 1.2rem;
         margin-bottom: 50px;
         display: block;
@@ -113,7 +121,7 @@
         left: -100%;
         width: 50%;
         height: 200%;
-        background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
         transform: rotate(25deg);
         transition: 0.7s;
     }
@@ -185,11 +193,12 @@
 <section class="services-container">
     <h1>Peluquería & Estilo</h1>
     <span class="services-subtitle">Transformamos tu imagen, resaltamos tu esencia</span>
-    
+
     <div class="gallery-grid">
         <div class="card-hair">
             <div class="img-wrapper">
-                <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Corte de Tendencia">
+                <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Corte de Tendencia">
             </div>
             <h3>Corte de Tendencia</h3>
             <div class="details">
@@ -201,7 +210,8 @@
 
         <div class="card-hair">
             <div class="img-wrapper">
-                <img src="https://images.pexels.com/photos/3992870/pexels-photo-3992870.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coloración & Balayage">
+                <img src="https://images.pexels.com/photos/3992870/pexels-photo-3992870.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Coloración & Balayage">
             </div>
             <h3>Color & Balayage</h3>
             <div class="details">
@@ -213,7 +223,8 @@
 
         <div class="card-hair">
             <div class="img-wrapper">
-                <img src="https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tratamiento Capilar">
+                <img src="https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Tratamiento Capilar">
             </div>
             <h3>Hidratación Profunda</h3>
             <div class="details">
@@ -222,6 +233,25 @@
             </div>
             <button class="btn-hair">Reservar Experiencia</button>
         </div>
+
+        <!-- Dynamic Services Added by User -->
+        {% for s in servicios %}
+        <div class="card-hair">
+            <div class="img-wrapper">
+                {% if s.imagen %}
+                <img src="{{ url_for('static', filename='uploads/servicios/' + s.imagen) }}" alt="{{ s.nombre }}">
+                {% else %}
+                <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600" alt="{{ s.nombre }}">
+                {% endif %}
+            </div>
+            <h3>{{ s.nombre }}</h3>
+            <div class="details">
+                <span><strong>Precio</strong> ${{ "{:,.0f}".format(s.precio | float) }}</span>
+                <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
+            </div>
+            <button class="btn-hair">Reservar Experiencia</button>
+        </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

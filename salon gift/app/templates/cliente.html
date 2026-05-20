@@ -26,7 +26,7 @@
     <div class="appointments-reminder">
         <div>
             <span style="color: var(--dark-pink); font-weight: bold;"><i class="far fa-calendar-check"></i> Próxima cita:</span>
-            <p style="margin: 0;">{{ current_user.citas[0].servicio }} - {{ current_user.citas[0].fecha.strftime('%d %b, %H:%M') }}</p>
+            <p style="margin: 0;">{{ current_user.citas[0].servicio }} - {{ current_user.citas[0].fechahora.strftime('%d %b, %H:%M') }}</p>
         </div>
         <a href="#" style="color: var(--dark-pink); font-size: 0.9rem;">Ver detalles</a>
     </div>

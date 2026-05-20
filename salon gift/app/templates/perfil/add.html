@@ -15,18 +15,6 @@
             
             <form action="{{ url_for('perfil.add') }}" method="POST" class="form-group p-4 border rounded shadow-sm bg-white">
                 
-                <!-- Selector de Usuario (Obligatorio según tu Python) -->
-                <div class="mb-3">
-                    <label for="idusuario" class="form-label fw-bold">Seleccionar Usuario Asociado:</label>
-                    <select name="idusuario" id="idusuario" class="form-select rounded-pill" required>
-                        <option value="" disabled selected>Selecciona un usuario...</option>
-                        {% for user in users %}
-                            <option value="{{ user.idusuario }}">{{ user.nombreuser }}</option>
-                        {% endfor %}
-                    </select>
-                    <div class="form-text">Primero debes elegir a qué cuenta pertenece este perfil.</div>
-                </div>
-
                 <hr>
 
                 <!-- Campo: Nombre -->
