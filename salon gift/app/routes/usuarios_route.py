@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, flash, abort
 from app.models.usuario import User
+from app.models.perfil import Perfil
 from flask_login import current_user, login_required
 from functools import wraps
 from app import db
@@ -53,19 +54,25 @@ def add():
         password = request.form.get('password') 
         email = request.form.get('email')   
         telefono = request.form.get('telefono')
+        nombre = request.form.get('nombre')
+        apellido = request.form.get('apellido')
 
         if User.query.filter_by(email=email).first():
             flash(f"El correo {email} ya está registrado.", "danger")
             return redirect(url_for('user.add'))    
         
         try:
-            # Asegúrate de que los nombres de los atributos coincidan con tu modelo User
             new_user = User(nombreuser=nombreuser, email=email, telefono=telefono)
-            new_user.set_password(password) # Método para hashear la contraseña
+            new_user.set_password(password)
             db.session.add(new_user)
+            db.session.flush()
+
+            perfil = Perfil(nombre=nombre, apellido=apellido, bio=None, idusuario=new_user.idusuario)
+            db.session.add(perfil)
             db.session.commit()
+
             flash(f"Usuario {nombreuser} creado con éxito.", "success")
-            return redirect(url_for('user.index'))
+            return redirect(url_for('auth.login'))
         except Exception as e:
             db.session.rollback()
             flash(f"Error al crear usuario: {str(e)}", "danger")

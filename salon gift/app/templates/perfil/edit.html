@@ -9,49 +9,62 @@
 {% block content %}
 <div class="profile-container">
     <div class="profile-card">
-        <!-- Encabezado -->
         <header class="profile-card__header">
             <h1 class="profile-card__title">Editar Perfil</h1>
-            <p class="profile-card__subtitle">@{{ perfil.user.nombreuser }}</p>
+            <p class="profile-card__subtitle">@{{ current_user.nombreuser }}</p>
         </header>
 
-        <!-- Formulario -->
         <form method="POST" class="profile-form">
-            
+
             <div class="profile-form__group">
                 <label for="nombre" class="profile-form__label">Nombre</label>
-                <input type="text" name="nombre" id="nombre" 
-                       class="profile-form__input" 
+                <input type="text" name="nombre" id="nombre"
+                       class="profile-form__input"
                        value="{{ perfil.nombre }}" required>
             </div>
 
             <div class="profile-form__group">
                 <label for="apellido" class="profile-form__label">Apellido</label>
-                <input type="text" name="apellido" id="apellido" 
-                       class="profile-form__input" 
+                <input type="text" name="apellido" id="apellido"
+                       class="profile-form__input"
                        value="{{ perfil.apellido }}">
             </div>
 
             <div class="profile-form__group">
                 <label for="bio" class="profile-form__label">Biografía</label>
-                <textarea name="bio" id="bio" 
-                          class="profile-form__textarea" 
+                <textarea name="bio" id="bio"
+                          class="profile-form__textarea"
                           rows="4">{{ perfil.bio }}</textarea>
             </div>
 
+            <hr style="margin: 25px 0; border-color: #f0e4e1;">
+
             <div class="profile-form__group">
-                <label class="profile-form__label profile-form__label--disabled">ID de Usuario</label>
-                <input type="text" class="profile-form__input profile-form__input--readonly" 
-                       value="{{ perfil.idusuario }}" readonly>
-                <small class="profile-form__help">Este campo es informativo y no se puede editar.</small>
+                <label for="nombreuser" class="profile-form__label">Nombre de Usuario</label>
+                <input type="text" name="nombreuser" id="nombreuser"
+                       class="profile-form__input"
+                       value="{{ current_user.nombreuser }}" required>
             </div>
 
-            <!-- Acciones -->
+            <div class="profile-form__group">
+                <label for="email" class="profile-form__label">Correo Electrónico</label>
+                <input type="email" name="email" id="email"
+                       class="profile-form__input"
+                       value="{{ current_user.email }}" required>
+            </div>
+
+            <div class="profile-form__group">
+                <label for="telefono" class="profile-form__label">Teléfono</label>
+                <input type="text" name="telefono" id="telefono"
+                       class="profile-form__input"
+                       value="{{ current_user.telefono }}">
+            </div>
+
             <div class="profile-form__actions">
                 <button type="submit" class="btn-submit">Guardar Cambios</button>
                 <a href="{{ url_for('perfil.perfil_usuario') }}" class="btn-cancel">Cancelar</a>
             </div>
-            
+
         </form>
     </div>
 </div>

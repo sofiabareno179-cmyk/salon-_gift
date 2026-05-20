@@ -14,7 +14,7 @@
         <aside class="profile-sidebar">
             <div class="user-brief">
                 <div class="avatar-container">
-                    <img src="{{ perfil.foto if perfil.foto else 'https://ui-avatars.com/api/?name=' ~ perfil.nombre ~ '+' ~ perfil.apellido ~ '&background=random' }}" alt="Avatar" class="avatar-img">
+                    <img src="https://ui-avatars.com/api/?name={{ perfil.nombre }}+{{ perfil.apellido or '' }}&background=random" alt="Avatar" class="avatar-img">
                 </div>
                 <h2 class="user-name">{{ perfil.nombre }}</h2>
                 <p class="user-status">Cliente Verificado</p>
@@ -49,11 +49,11 @@
                     <h3>Información de contacto</h3>
                     <div class="detail-row">
                         <span class="label">Email</span>
-                        <span class="value">{{ perfil.email if perfil.email else 'No disponible' }}</span>
+                        <span class="value">{{ current_user.email if current_user.email else 'No disponible' }}</span>
                     </div>
                     <div class="detail-row">
                         <span class="label">Teléfono</span>
-                        <span class="value">{{ perfil.telefono if perfil.telefono else 'No registrado' }}</span>
+                        <span class="value">{{ current_user.telefono if current_user.telefono else 'No registrado' }}</span>
                     </div>
                 </div>
 
