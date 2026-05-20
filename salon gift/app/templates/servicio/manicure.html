@@ -1,51 +1,52 @@
-
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
 <style>
     /* Importación de fuentes */
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+    @import url('https://googleapis.com');
 
+    /* Fondo general en morado clarito / lila suave */
     .services-container {
-        padding: 80px 20px;
+        padding: 90px 20px;
         text-align: center;
-        background: #fffafa;
+        background: #fdfbfe;
         background-image: 
-            radial-gradient(at 0% 0%, rgba(244, 207, 223, 0.3) 0, transparent 50%), 
-            radial-gradient(at 100% 100%, rgba(252, 228, 236, 0.4) 0, transparent 50%);
+            radial-gradient(at 0% 0%, rgba(235, 217, 247, 0.4) 0, transparent 50%), 
+            radial-gradient(at 100% 100%, rgba(243, 231, 250, 0.5) 0, transparent 50%);
         font-family: 'Montserrat', sans-serif;
         position: relative;
         overflow: hidden;
     }
 
-    /* Decoraciones animadas de fondo */
+    /* Decoraciones animadas de fondo (Morado lavanda) */
     .services-container::after {
         content: "";
         position: absolute;
-        border-radius: 50% 20% 50% 70%;
-        filter: blur(60px);
+        border-radius: 50%;
+        filter: blur(80px);
         z-index: 0;
-        opacity: 0.5;
-        width: 350px;
-        height: 350px;
-        background: #fce4ec;
-        bottom: -50px;
-        right: -50px;
-        animation: drift 15s infinite alternate-reverse;
+        opacity: 0.4;
+        width: 400px;
+        height: 400px;
+        background: #e9d5ff;
+        bottom: -100px;
+        right: -100px;
+        animation: drift 18s infinite alternate-reverse;
     }
 
     @keyframes drift {
         from { transform: translate(0,0) rotate(0deg); }
-        to { transform: translate(30px, 50px) rotate(15deg); }
+        to { transform: translate(40px, 40px) rotate(20deg); }
     }
 
     .services-container h1 {
         position: relative;
         z-index: 1;
         font-family: 'Playfair Display', serif;
-        font-size: 3rem;
-        color: #333;
-        margin-bottom: 5px;
-        font-weight: 700;
+        font-size: 3.2rem;
+        color: #1e1b4b;
+        margin-bottom: 8px;
+        font-weight: 400;
+        letter-spacing: 1px;
     }
 
     .services-subtitle {
@@ -53,51 +54,54 @@
         z-index: 1;
         font-family: 'Playfair Display', serif;
         font-style: italic;
-        color: #d4a5b9;
-        font-size: 1.2rem;
-        margin-bottom: 50px;
+        color: #4c1d95; /* Morado fuerte */
+        font-size: 1.25rem;
+        margin-bottom: 60px;
         display: block;
+        letter-spacing: 0.5px;
     }
 
     .services-subtitle::after {
         content: "";
         display: block;
-        width: 60px;
-        height: 2px;
-        background: #f4cfdf;
-        margin: 15px auto;
+        width: 45px;
+        height: 1px;
+        background: #7c3aed; /* Línea divisoria morada */
+        margin: 20px auto;
     }
 
     .gallery-grid {
         position: relative;
         z-index: 1;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        max-width: 1100px;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
         margin: 0 auto;
     }
 
+    /* Diseño de Tarjeta Minimalista y Elegante */
     .card-nail {
-        background: white;
-        border-radius: 30px 30px 10px 10px;
-        padding: 20px;
-        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-        border: none;
-        box-shadow: 0 10px 30px rgba(244, 207, 223, 0.2);
+        background: #ffffff;
+        border-radius: 4px;
+        padding: 24px;
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        border: 1px solid #f3e8ff;
+        box-shadow: 0 10px 30px rgba(76, 29, 149, 0.02);
     }
 
     .card-nail:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 20px 40px rgba(212, 165, 185, 0.3);
+        transform: translateY(-8px);
+        border-color: #ddd6fe;
+        box-shadow: 0 20px 40px rgba(76, 29, 149, 0.05);
     }
 
     .img-placeholder {
         width: 100%;
-        height: 280px;
-        border-radius: 25px 25px 10px 10px;
-        margin-bottom: 20px;
-        background: #fce4ec;
+        height: 300px;
+        border-radius: 2px;
+        margin-bottom: 24px;
+        background: #f3e8ff;
         position: relative;
         overflow: hidden;
     }
@@ -109,9 +113,9 @@
         left: -100%;
         width: 50%;
         height: 200%;
-        background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
         transform: rotate(30deg);
-        transition: 0.6s;
+        transition: 0.7s;
     }
 
     .card-nail:hover .img-placeholder::after {
@@ -122,61 +126,80 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.8s ease;
+        transition: transform 1.2s ease;
     }
 
     .card-nail:hover .img-placeholder img {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 
     .card-nail h3 {
         font-family: 'Playfair Display', serif;
-        font-size: 1.5rem;
-        color: #4a4a4a;
-        margin: 10px 0;
+        font-size: 1.6rem;
+        color: #1e1b4b;
+        margin: 15px 0;
+        font-weight: 400;
+    }
+
+    .hair-tip {
+        font-size: 0.85rem;
+        color: #5b21b6;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        font-weight: 300;
+    }
+
+    .hair-tip strong {
+        color: #4c1d95; /* Morado fuerte para "Tip del estilista:" */
+        font-weight: 600;
     }
 
     .details {
-        border-top: 1px solid #fdf0f5;
-        border-bottom: 1px solid #fdf0f5;
-        padding: 12px 0;
-        margin: 15px 0;
+        border-top: 1px solid #f3e8ff;
+        border-bottom: 1px solid #f3e8ff;
+        padding: 16px 0;
+        margin: 20px 0;
         display: flex;
         justify-content: space-around;
-        color: #777;
+        color: #1e1b4b;
         font-size: 0.85rem;
     }
 
     .details strong {
         display: block;
-        color: #d4a5b9;
+        color: #7c3aed; /* Morado fuerte para las etiquetas de Precio/Tiempo */
         font-size: 0.7rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 1.5px;
+        margin-bottom: 4px;
     }
 
+    /* Botón de Alta Costura en Morado Oscuro */
     .btn-manicure {
-        background: linear-gradient(135deg, #f4cfdf 0%, #d4a5b9 100%);
-        color: white;
-        border: none;
+        display: block;
+        background: #4c1d95;
+        color: #ffffff;
+        border: 1px solid #4c1d95;
         padding: 16px;
-        border-radius: 12px;
+        border-radius: 2px;
         text-transform: uppercase;
         font-size: 0.75rem;
-        letter-spacing: 2px;
+        letter-spacing: 2.5px;
         cursor: pointer;
-        transition: 0.4s;
+        transition: all 0.3s ease;
         width: 100%;
         font-weight: 600;
+        text-decoration: none;
+        box-sizing: border-box;
     }
 
     .btn-manicure:hover {
-        filter: brightness(1.05);
-        box-shadow: 0 8px 15px rgba(212, 165, 185, 0.4);
+        background: transparent;
+        color: #4c1d95;
+        box-shadow: none;
     }
 </style>
 {% endblock %}
-
 {% block content %}
 <section class="services-container">
     <h1>Manicure & Pedicure</h1>
@@ -189,12 +212,12 @@
                 <img src="https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Semi-Permanente">
             </div>
             <h3>Semi-Permanente</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos No remojar las manos ni uses cremas previamente; el agua expande la uña natural y al volver a su tamaño real, triza el esmalte.</p>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos no remojar las manos ni usar cremas previamente; el agua expande la uña natural y altera la fijación.</p>
             <div class="details">
-                <span><strong>Precio</strong> $45.000</span>
-                <span><strong>Tiempo</strong> 60 min</span>
+                <span><strong>Precio</strong> $35.000 – $65.000</span>
+                <span><strong>Tiempo</strong> 45 a 75 min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-manicure">Reservar Experiencia</a>
         </div>
 
         <!-- Servicio 2 -->
@@ -203,12 +226,12 @@
                 <img src="https://images.pexels.com/photos/18441298/pexels-photo-18441298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pedicure Spa">
             </div>
             <h3>Pedicure Spa</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Exfoliar e hidratar profundamente la planta del pie previene grietas y mantiene la piel suave por más tiempo entre servicios.</p>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> Exfoliar e hidratar profundamente la planta del pie previene grietas y mantiene la piel suave por más tiempo.</p>
             <div class="details">
-                <span><strong>Precio</strong> $60.000</span>
-                <span><strong>Tiempo</strong> 90 min</span>
+                <span><strong>Precio</strong> $45.000 – $75.000</span>
+                <span><strong>Tiempo</strong> 50 a 80 min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-manicure">Reservar Experiencia</a>
         </div>
 
         <!-- Servicio 3 -->
@@ -217,12 +240,12 @@
                 <img src="https://images.pexels.com/photos/3997348/pexels-photo-3997348.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uñas Acrílicas">
             </div>
             <h3>Uñas Acrílicas</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Agenda tu mantenimiento estrictamente cada 2 o 3 semanas para evitar filtraciones de agua que causen hongos o desprendimientos.</p>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> Agenda tu mantenimiento estrictamente cada 2 o 3 semanas para evitar filtraciones de agua y desprendimientos.</p>
             <div class="details">
-                <span><strong>Precio</strong> $85.000</span>
-                <span><strong>Tiempo</strong> 120 min</span>
+                <span><strong>Precio</strong> $90.000 – $180.000</span>
+                <span><strong>Tiempo</strong> 2 a 3.5 horas</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-manicure">Reservar Experiencia</a>
         </div>
     </div>
 </section>
