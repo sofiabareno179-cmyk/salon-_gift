@@ -1,52 +1,51 @@
-
-
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
 <style>
     /* Importación de fuentes */
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+    @import url('https://googleapis.com');
 
     .services-container {
-        padding: 80px 20px;
+        padding: 100px 20px;
         text-align: center;
-        background: #fffafa;
+        background: #fcfcfb;
         background-image: 
-            radial-gradient(at 0% 0%, rgba(244, 207, 223, 0.3) 0, transparent 50%), 
-            radial-gradient(at 100% 100%, rgba(252, 228, 236, 0.4) 0, transparent 50%);
-        font-family: 'Montserrat', sans-serif;
+            radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.05) 0, transparent 50%), 
+            radial-gradient(at 100% 100%, rgba(26, 26, 26, 0.02) 0, transparent 50%);
+        font-family: 'Inter', sans-serif;
         position: relative;
         overflow: hidden;
     }
 
-    /* Decoraciones animadas de fondo */
+    /* Decoración de fondo sutil y madura */
     .services-container::after {
         content: "";
         position: absolute;
-        border-radius: 50% 20% 50% 70%;
-        filter: blur(60px);
+        border-radius: 50%;
+        filter: blur(80px);
         z-index: 0;
-        opacity: 0.5;
-        width: 350px;
-        height: 350px;
-        background: #fce4ec;
-        bottom: -50px;
-        right: -50px;
-        animation: drift 15s infinite alternate-reverse;
+        opacity: 0.3;
+        width: 400px;
+        height: 400px;
+        background: #dfd5c6;
+        bottom: -100px;
+        right: -100px;
+        animation: drift 20s infinite alternate-reverse;
     }
 
     @keyframes drift {
         from { transform: translate(0,0) rotate(0deg); }
-        to { transform: translate(30px, 50px) rotate(15deg); }
+        to { transform: translate(20px, 30px) rotate(10deg); }
     }
 
     .services-container h1 {
         position: relative;
         z-index: 1;
         font-family: 'Playfair Display', serif;
-        font-size: 3rem;
-        color: #333;
-        margin-bottom: 5px;
-        font-weight: 700;
+        font-size: 3.5rem;
+        color: #1a1a1a;
+        margin-bottom: 10px;
+        font-weight: 400;
+        letter-spacing: -0.5px;
     }
 
     .services-subtitle {
@@ -54,51 +53,55 @@
         z-index: 1;
         font-family: 'Playfair Display', serif;
         font-style: italic;
-        color: #d4a5b9;
-        font-size: 1.2rem;
-        margin-bottom: 50px;
+        color: #94ebc8d0;
+        font-size: 1.25rem;
+        margin-bottom: 60px;
         display: block;
     }
 
     .services-subtitle::after {
         content: "";
         display: block;
-        width: 60px;
-        height: 2px;
-        background: #f4cfdf;
-        margin: 15px auto;
+        width: 40px;
+        height: 1px;
+        background: #a9ffa1eb;
+        margin: 20px auto 0 auto;
     }
 
     .gallery-grid {
         position: relative;
         z-index: 1;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        max-width: 1100px;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
         margin: 0 auto;
     }
 
     .card-treatment {
-        background: white;
-        border-radius: 30px 30px 10px 10px;
-        padding: 20px;
-        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-        border: none;
-        box-shadow: 0 10px 30px rgba(244, 207, 223, 0.2);
+        background: #ffffff;
+        border-radius: 4px;
+        padding: 24px;
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        border: 1px solid #f0ede6;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        display: flex;
+        flex-direction: column;
+        text-align: left;
     }
 
     .card-treatment:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 20px 40px rgba(212, 165, 185, 0.3);
+        transform: translateY(-8px);
+        border-color: #36b89a;
+        box-shadow: 0 20px 40px rgba(138, 122, 95, 0.1);
     }
 
     .img-placeholder {
         width: 100%;
-        height: 280px;
-        border-radius: 25px 25px 10px 10px;
-        margin-bottom: 20px;
-        background: #fce4ec;
+        height: 300px;
+        border-radius: 2px;
+        margin-bottom: 24px;
+        background: #f5f3ef;
         position: relative;
         overflow: hidden;
     }
@@ -110,9 +113,9 @@
         left: -100%;
         width: 50%;
         height: 200%;
-        background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
         transform: rotate(30deg);
-        transition: 0.6s;
+        transition: 0.8s;
     }
 
     .card-treatment:hover .img-placeholder::after {
@@ -123,57 +126,84 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.8s ease;
+        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        filter: grayscale(15%);
     }
 
     .card-treatment:hover .img-placeholder img {
-        transform: scale(1.1);
+        transform: scale(1.05);
+        filter: grayscale(0%);
     }
 
     .card-treatment h3 {
         font-family: 'Playfair Display', serif;
-        font-size: 1.5rem;
-        color: #4a4a4a;
-        margin: 10px 0;
-    }
-
-    .details {
-        border-top: 1px solid #fdf0f5;
-        border-bottom: 1px solid #fdf0f5;
-        padding: 12px 0;
-        margin: 15px 0;
-        display: flex;
-        justify-content: space-around;
-        color: #777;
-        font-size: 0.85rem;
-    }
-
-    .details strong {
-        display: block;
-        color: #d4a5b9;
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .btn-treatment {
-        background: linear-gradient(135deg, #f4cfdf 0%, #d4a5b9 100%);
-        color: white;
-        border: none;
-        padding: 16px;
-        border-radius: 12px;
-        text-transform: uppercase;
-        font-size: 0.75rem;
-        letter-spacing: 2px;
-        cursor: pointer;
-        transition: 0.4s;
-        width: 100%;
+        font-size: 1.6rem;
+        color: #1a1a1a;
+        margin: 0 0 12px 0;
         font-weight: 600;
     }
 
+    .hair-tip {
+        font-size: 0.9rem;
+        color: #5a5a5a;
+        line-height: 1.6;
+        margin-bottom: auto; /* Empuja los detalles hacia abajo de forma limpia */
+    }
+
+    .hair-tip strong {
+        color: #8a7a5f;
+        font-weight: 500;
+    }
+
+    .details {
+        border-top: 1px solid #f0ede6;
+        border-bottom: 1px solid #f0ede6;
+        padding: 16px 0;
+        margin: 24px 0;
+        display: flex;
+        justify-content: space-between;
+        color: #333333;
+        font-size: 0.9rem;
+    }
+
+    .details span {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .details strong {
+        color: #8a7a5f;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 4px;
+        font-weight: 500;
+    }
+
+    .btn-treatment {
+        background: #1a1a1a;
+        color: #ffffff;
+        border: 1px solid #1a1a1a;
+        padding: 16px;
+        border-radius: 2px;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 2.5px;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        width: 100%;
+        font-weight: 400;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        box-sizing: border-box;
+    }
+
     .btn-treatment:hover {
-        filter: brightness(1.05);
-        box-shadow: 0 8px 15px rgba(212, 165, 185, 0.4);
+        background: #ffffff;
+        color: #1a1a1a;
+        border-color: #1a1a1a;
+        box-shadow: none;
     }
 </style>
 {% endblock %}
@@ -187,13 +217,13 @@
         <!-- Servicio 1 -->
         <div class="card-treatment">
             <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/37033485/pexels-photo-37033485.jpeg?auto=compress&cs=tinysrgb&w=600"" alt="Limpieza Facial">
+                <img src="https://images.pexels.com/photos/37033485/pexels-photo-37033485.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Limpieza Facial">
             </div>
             <h3>Limpieza Facial</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos renovar tus puntas cada 2 meses para mantener la estructura, fuerza y movimiento natural del cabello.</p>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos para una piel perfecta no es el producto más caro, sino el orden de aplicación y la temperatura del agua. Una rutina mal ejecutada puede deshidratar tu rostro o causar flacidez.</p>
             <div class="details">
-                <span><strong>Precio</strong> $95.000</span>
-                <span><strong>Tiempo</strong> 60 min</span>
+                <span><strong>Precio</strong> $60.000 – $150.000</span>
+                <span><strong>Tiempo</strong> 1 a 1.5 horas</span>
             </div>
             <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
         </div>
@@ -201,13 +231,13 @@
         <!-- Servicio 2 -->
         <div class="card-treatment">
             <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/35341712/pexels-photo-35341712.jpeg?auto=compress&cs=tinysrgb&w=600"" alt="Aplicacion de Maquillaje">
+                <img src="https://images.pexels.com/photos/35341712/pexels-photo-35341712.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Aplicacion de Maquillaje">
             </div>
             <h3>Aplicación de Maquillaje</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos renovar tus puntas cada 2 meses para mantener la estructura, fuerza y movimiento natural del cabello.</p>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos Menos es más, cariño. Si saturas la piel de base para tapar imperfecciones, solo conseguirás sumar años. Es mejor corregir puntualmente y dejar que tu piel respire.</p>
             <div class="details">
-                <span><strong>Precio</strong> $120.000</span>
-                <span><strong>Tiempo</strong> 75 min</span>
+                <span><strong>Precio</strong> $80.000 – $180.000</span>
+                <span><strong>Tiempo</strong> 45 a 90 minutos</span>
             </div>
             <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
         </div>
@@ -215,13 +245,13 @@
         <!-- Servicio 3 -->
         <div class="card-treatment">
             <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/36436445/pexels-photo-36436445.jpeg?auto=compress&cs=tinysrgb&w=600"" alt="Exfoliación">
+                <img src="https://images.pexels.com/photos/36436445/pexels-photo-36436445.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Exfoliación">
             </div>
             <h3>Exfoliación</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos renovar tus puntas cada 2 meses para mantener la estructura, fuerza y movimiento natural del cabello.</p>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos Al retirar las células muertas, tu piel queda sensible al sol. Si te exfolias de día, el protector solar es sagrado. Mi consejo de salón: hazlo siempre de noche para que la piel se regenere mientras duermes.</p>
             <div class="details">
-                <span><strong>Precio</strong> $140.000</span>
-                <span><strong>Tiempo</strong> 90 min</span>
+                <span><strong>Precio</strong> $90.000 – $180.000</span>
+                <span><strong>Tiempo</strong> 45 a 75 minutos</span>
             </div>
             <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
         </div>
