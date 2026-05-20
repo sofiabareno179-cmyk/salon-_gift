@@ -16,14 +16,22 @@ def create_app():
 
     def ensure_citas_servicio_column():
         with app.app_context():
-            with db.engine.begin() as conn:
-                result = conn.execute(text("SELECT name FROM sqlite_master WHERE type='table' AND name='citas'"))
-                if result.first() is None:
-                    return
-                result = conn.execute(text("PRAGMA table_info(citas)"))
-                cols = [row[1] for row in result]
-                if 'servicio' not in cols:
-                    conn.execute(text("ALTER TABLE citas ADD COLUMN servicio VARCHAR(100)"))
+            try:
+                with db.engine.begin() as conn:
+                    # Check if table exists (PostgreSQL compatible)
+                    result = conn.execute(text(
+                        "SELECT 1 FROM information_schema.tables WHERE table_name='citas'"
+                    ))
+                    if result.first() is None:
+                        return
+                    # Check if column exists
+                    result = conn.execute(text(
+                        "SELECT 1 FROM information_schema.columns WHERE table_name='citas' AND column_name='servicio'"
+                    ))
+                    if result.first() is None:
+                        conn.execute(text("ALTER TABLE citas ADD COLUMN servicio VARCHAR(100)"))
+            except Exception as e:
+                print(f"Warning: Could not ensure citas.servicio column: {e}")
 
     ensure_citas_servicio_column()
 
