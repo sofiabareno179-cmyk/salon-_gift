@@ -16,8 +16,9 @@ class User(db.Model, UserMixin):
 
         # Relaciones
     citas = db.relationship('Citas', backref='cliente', lazy=True)
-    perfil = db.relationship('Perfil', backref='usuario', uselist=False)
-    agenda = db.relationship('Agenda', back_populates='usuario')
+
+    perfil_asociado = db.relationship('Perfil', back_populates='user', uselist=False)
+    agenda = db.relationship('Agenda', back_populates='usuario', uselist=False)
     recordatorios = db.relationship('Recordatorios', backref='cliente', lazy=True)
 
     def __repr__(self):

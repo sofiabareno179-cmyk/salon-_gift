@@ -1,5 +1,7 @@
-/* 1. Variables de Marca - Estética Boutique/Soft */
+
 body.client-page {
+
+
     --pastel-pink: #fce4ec;   /* Rosa muy suave */
     --soft-pink: #f8bbd0;     /* Rosa medio delicado */
     --dark-pink: #d81b60;     /* Fucsia elegante para acentos */
@@ -26,7 +28,6 @@ body.client-page .hero-content {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra sutil */
 }
 
-/* Título */
 body.client-page .hero-content h1 {
     font-family: 'Playfair Display', serif; /* Opcional: una fuente elegante */
     font-size: 2.5rem;
@@ -34,14 +35,12 @@ body.client-page .hero-content h1 {
     margin-bottom: 15px;
 }
 
-/* Párrafo */
 body.client-page .hero-content p {
     font-size: 1.1rem;
     color: #666;
     margin-bottom: 30px;
 }
 
-/* Botón Principal */
 body.client-page .btn-primary {
     display: inline-block;
     background-color: #d81b60; /* Un rosa fuerte/fucsia elegante */
@@ -55,14 +54,13 @@ body.client-page .btn-primary {
     cursor: pointer;
 }
 
-/* Efecto al pasar el mouse por el botón */
 body.client-page .btn-primary:hover {
     background-color: #ad1457;
     transform: translateY(-2px); /* Pequeño salto hacia arriba */
     box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
 }
 
-/* 3. Sección de Citas Próximas */
+
 body.client-page .appointments-reminder {
     max-width: 800px;
     margin: -20px auto 30px;
@@ -79,6 +77,10 @@ body.client-page .appointments-reminder {
 /* 4. Grid de Servicios */
 body.client-page .services-grid { 
     padding: 40px 0; 
+
+body.client-page .services-grid {
+    padding: 40px 0;
+
 }
 
 body.client-page .cards-wrapper {
@@ -113,7 +115,6 @@ body.client-page .service-card i {
     display: block; /* Asegura que el icono esté arriba del texto */
 }
 
-/* 5. Banner Promocional */
 body.client-page .promo-banner {
     background: linear-gradient(135deg, #fff5f8, var(--pastel-pink));
     padding: 30px;
@@ -124,7 +125,6 @@ body.client-page .promo-banner {
     color: var(--dark-pink);
 }
 
-/* 6. Botones Generales */
 body.client-page .btn-rosa {
     display: inline-block;
     background: var(--dark-pink);
@@ -148,8 +148,8 @@ body.client-page .btn-rosa:hover {
     box-shadow: 0 6px 20px rgba(248, 187, 208, 0.4);
 }
 
-/* 7. Botones Flotantes (WhatsApp y Perfil) */
-body.client-page .whatsapp-float, body.client-page .perfil-float {
+body.client-page .whatsapp-float,
+body.client-page .perfil-float {
     position: fixed;
     right: 25px; /* Alineados a la derecha */
     width: 60px;
@@ -178,6 +178,7 @@ body.client-page .perfil-float {
     box-shadow: 0 8px 20px rgba(248, 187, 208, 0.4);
 }
 
-body.client-page .whatsapp-float:hover, body.client-page .perfil-float:hover {
+body.client-page .whatsapp-float:hover,
+body.client-page .perfil-float:hover {
     transform: scale(1.1);
 }

@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}Mi Agenda{% endblock %}
+
 {% block body_class %}schedule-page{% endblock %}
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/crono.css') }}">
 {% endblock %}
+
 {% block content %}
 <section class="schedule">
     <div class="schedule__nav">
@@ -41,7 +43,10 @@
                         {% set cita = agenda.get((dia, hora)) %}
                         {% if cita %}
                             <div class="schedule__appointment status-{{ cita.estado.lower() }}">
+
                                 <a href="{{ url_for('citas.editar_cita', id=cita.idcitas) }}">
+
+                                <a href="{{ url_for('citas.editar_cita', id=cita.idcita) }}">
                                     <span class="appt__time">{{ cita.fechahora.strftime('%H:%M') }}</span>
                                     <strong class="appt__service">{{ cita.servicio }}</strong>
                                     <span class="appt__status">{{ cita.estado }}</span>
