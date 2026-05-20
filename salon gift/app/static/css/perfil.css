@@ -24,7 +24,6 @@ body.profile-page .profile-container {
     background-color: var(--bg-body);
 }
 
-/* Tarjeta Principal */
 body.profile-page .profile-card {
     background: #ffffff;
     width: 100%;
@@ -311,4 +310,8 @@ body.profile-page .value { color: #555; } /* Un tono más suave */
 @media (max-width: 900px) {
   body.profile-page .profile-wrapper { grid-template-columns: 1fr; }
   body.profile-page .info-grid { grid-template-columns: 1fr; }
+}
+
+body.profile-page .bio-card {
+  grid-column: span 1;
 }

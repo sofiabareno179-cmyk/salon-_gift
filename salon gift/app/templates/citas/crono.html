@@ -3,10 +3,10 @@
 {% block title %}Mi Agenda{% endblock %}
 
 {% block body_class %}schedule-page{% endblock %}
-
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/crono.css') }}">
 {% endblock %}
+
 {% block content %}
 <section class="schedule">
     <div class="schedule__nav">
@@ -32,64 +32,28 @@
                 </div>
             {% endfor %}
         </div>
-
+        
         <!-- Cuerpo del Calendario -->
         <div class="schedule__grid">
             {% for hora in horas %}
                 <div class="schedule__time">{{ hora }}</div>
-
+                
                 {% for dia in range(5) %}
                     <div class="schedule__slot">
                         {% set cita = agenda.get((dia, hora)) %}
-                        {% set slot_bloqueado = slots_bloqueados.get((dia, hora)) %}
-
-                        {% if slot_bloqueado %}
-                            <!-- Slot Bloqueado -->
-                            <div class="schedule__blocked" title="Bloqueado: {{ slot_bloqueado.motivo or 'Sin motivo' }}">
-                                <i class="fas fa-lock"></i>
-                                <span>Bloqueado</span>
-                                {% if es_admin %}
-                                    <form method="POST" action="{{ url_for('citas.desbloquear_slot', slot_id=slot_bloqueado.id) }}" style="display: inline;">
-                                        <button type="submit" class="btn-unblock" title="Desbloquear">
-                                            <i class="fas fa-unlock"></i>
-                                        </button>
-                                    </form>
-                                {% endif %}
-                            </div>
-                        {% elif cita %}
-                            <!-- Cita Existente -->
+                        {% if cita %}
                             <div class="schedule__appointment status-{{ cita.estado.lower() }}">
+
+                                <a href="{{ url_for('citas.editar_cita', id=cita.idcitas) }}">
+
                                 <a href="{{ url_for('citas.editar_cita', id=cita.idcita) }}">
                                     <span class="appt__time">{{ cita.fechahora.strftime('%H:%M') }}</span>
                                     <strong class="appt__service">{{ cita.servicio }}</strong>
                                     <span class="appt__status">{{ cita.estado }}</span>
-                                    {% if cita.user %}
-                                        <small class="appt__client">{{ cita.user.nombreuser }}</small>
-                                    {% endif %}
                                 </a>
                             </div>
                         {% else %}
-                            <!-- Slot Libre -->
-                            {% if es_admin %}
-                                <!-- Admin puede bloquear o crear cita -->
-                                <div class="schedule__actions">
-                                    <a href="{{ url_for('citas.nueva_cita', fecha=(lunes + timedelta(days=dia)).strftime('%Y-%m-%d'), hora=hora) }}"
-                                       class="appt__add" title="Crear cita">
-                                        <i class="fas fa-plus"></i>
-                                    </a>
-                                    <button type="button" class="btn-block block-slot-button" title="Bloquear slot"
-                                            data-fecha="{{ (lunes + timedelta(days=dia)).strftime('%Y-%m-%d') }}"
-                                            data-hora="{{ hora }}">
-                                        <i class="fas fa-ban"></i>
-                                    </button>
-                                </div>
-                            {% else %}
-                                <!-- Usuario normal solo puede crear cita -->
-                                <a href="{{ url_for('citas.nueva_cita', fecha=(lunes + timedelta(days=dia)).strftime('%Y-%m-%d'), hora=hora) }}"
-                                   class="appt__add" title="Crear cita">
-                                    <i class="fas fa-plus"></i>
-                                </a>
-                            {% endif %}
+                            <a href="{{ url_for('citas.nueva_cita', fecha=(lunes + timedelta(days=dia)).strftime('%Y-%m-%d')) }}" class="appt__add">+</a>
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -97,55 +61,4 @@
         </div>
     </div>
 </section>
-
-<!-- Modal para bloquear slots (solo para admin) -->
-{% if es_admin %}
-<div id="blockModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="cerrarModal()">&times;</span>
-        <h3>Bloquear Slot</h3>
-        <form id="blockForm" method="POST" action="{{ url_for('citas.bloquear_slot') }}">
-            <input type="hidden" id="blockFecha" name="fecha">
-            <input type="hidden" id="blockHora" name="hora">
-
-            <div class="form-group">
-                <label for="motivo">Motivo (opcional):</label>
-                <textarea id="motivo" name="motivo" rows="3" placeholder="Ej: Cierre por mantenimiento"></textarea>
-            </div>
-
-            <div class="form-actions">
-                <button type="submit" class="btn-confirm">Bloquear</button>
-                <button type="button" class="btn-cancel" onclick="cerrarModal()">Cancelar</button>
-            </div>
-        </form>
-    </div>
-</div>
-{% endif %}
-
-<script>
-function bloquearSlot(fecha, hora) {
-    document.getElementById('blockFecha').value = fecha;
-    document.getElementById('blockHora').value = hora;
-    document.getElementById('blockModal').style.display = 'block';
-}
-
-function cerrarModal() {
-    document.getElementById('blockModal').style.display = 'none';
-}
-
-document.querySelectorAll('.block-slot-button').forEach(button => {
-    button.addEventListener('click', () => {
-        bloquearSlot(button.dataset.fecha, button.dataset.hora);
-    });
-});
-
-// Cerrar modal al hacer clic fuera
-window.onclick = function(event) {
-    const modal = document.getElementById('blockModal');
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-}
-</script>
-
 {% endblock %}

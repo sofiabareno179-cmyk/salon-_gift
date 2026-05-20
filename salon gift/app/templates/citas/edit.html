@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Nueva Cita | Salon Gift{% endblock %}
-
-
-{% block body_class %}schedule-page{% endblock %}
+{% block title %}Editar Cita | Salon Gift{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/crono.css') }}">
@@ -13,38 +10,38 @@
 <div class="appointment-form-container">
     <div class="glass-card">
         <div class="glass-card__header">
-            <h4>Agendar Nueva Cita</h4>
-            <p>Completa los detalles para el servicio</p>
+            <h4>Editar Detalles de Cita</h4>
+            <p>Modifica la información de tu cita de servicio</p>
         </div>
 
         <div class="glass-card__body">
-            <form action="{{ url_for('citas.nueva_cita') }}" method="POST">
+            <form action="{{ url_for('citas.editar_cita', id=cita.idcitas) }}" method="POST">
                 
-                <!-- Campo de Servicio (¡Importante para tu calendario!) -->
+                <!-- Campo de Servicio -->
                 <div class="form-group">
                     <label class="form-label">Servicio</label>
                     <input type="text" name="servicio" class="form-control-glass" 
-                           placeholder="Ej: Corte de cabello, Manicura..." required>
+                           placeholder="Ej: Corte de cabello, Manicura..." 
+                           value="{{ cita.servicio if cita.servicio else '' }}" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Fecha y Hora</label>
-                    <!-- El value captura la fecha si viene del calendario -->
                     <input type="datetime-local" name="fechahora" class="form-control-glass" 
-                           value="{{ request.args.get('fecha') }}T{{ request.args.get('hora') }}" required>
+                           value="{{ cita.fechahora.strftime('%Y-%m-%dT%H:%M') if cita.fechahora else '' }}" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Estado</label>
                     <select name="estado" class="form-control-glass">
-                        <option value="Pendiente" selected>Pendiente</option>
-                        <option value="Confirmada">Confirmada</option>
+                        <option value="Pendiente" {% if cita.estado == 'Pendiente' %}selected{% endif %}>Pendiente</option>
+                        <option value="Confirmada" {% if cita.estado == 'Confirmada' %}selected{% endif %}>Confirmada</option>
                     </select>
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn-confirm">Agendar Cita</button>
-                    <a href="{{ url_for('citas.crono_citas') }}" class="btn-cancel">Volver</a>
+                    <button type="submit" class="btn-confirm">Actualizar Cita</button>
+                    <a href="{{ url_for('citas.crono_citas') }}" class="btn-cancel">Cancelar</a>
                 </div>
             </form>
         </div>

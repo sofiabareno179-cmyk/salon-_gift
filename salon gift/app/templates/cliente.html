@@ -9,7 +9,7 @@
 {% block content %}
 
 <!-- Nueva Sección Hero Integrada -->
-<div class="hero-content" style="text-align: center; padding: 50px 20px; background: var(--light-pink-bg, #fff5f8); border-radius: 15px; margin-bottom: 30px;">
+<div class="hero-content">
     <h1>Reserva tu Estilo</h1>
     <p>Gestiona tus citas con la delicadeza que mereces.</p>
     
@@ -22,11 +22,20 @@
 
 <div class="container">
     <!-- Recordatorio de Citas (Dinámico) -->
-    {% if current_user.citas %}
+    {% if current_user.is_authenticated and current_user.citas %}
     <div class="appointments-reminder">
         <div>
+
+            <span style="color: var(--dark-pink); font-weight: bold;"><i class="far fa-calendar-check"></i> Próxima cita:</span>
+
+            <p style="margin: 0;">{{ current_user.citas[0].servicio }} - {{ current_user.citas[0].fechahora.strftime('%d %b, %H:%M') }}</p>
+
+            <p style="margin: 0;">{{ current_user.citas[0].servicio }} - {{ current_user.citas[0].fecha.strftime('%d %b, %H:%M') }}</p>
+
             <span style="color: var(--accent-purple); font-weight: bold;"><i class="far fa-calendar-check"></i> Próxima cita:</span>
             <p style="margin: 0;">{{ current_user.citas[0].servicio }} - {{ current_user.citas[0].fechahora.strftime('%d %b, %H:%M') }}</p>
+
+
         </div>
         <a href="#" style="color: var(--dark-pink); font-size: 0.9rem;">Ver detalles</a>
     </div>
@@ -59,7 +68,7 @@
 
     <!-- Banner de Promoción -->
     <div class="promo-banner">
-        <h3 style="color: #c2185b;">✨ Promo del Mes ✨</h3>
+        <h3 style="color: var(--dark-pink);">✨ Promo del Mes ✨</h3>
         <p>Trae a una amiga y ambas obtienen un <strong>15% de descuento</strong> en tratamientos de hidratación.</p>
     </div>
 </div>

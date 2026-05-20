@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 from app import db
 
-class Proveedor(db.Model, UserMixin): 
+class Proveedores(db.Model, UserMixin): 
     __tablename__ = 'proveedores'
     
     idproveedores = db.Column(db.Integer, primary_key=True)

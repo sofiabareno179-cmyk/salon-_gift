@@ -51,9 +51,29 @@ body.dashboard-page .hero {
     font-weight: 700;
 }
 
+.dashboard-page .hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
 .dashboard-page .btn-primary {
     display: inline-block;
     background-color: var(--rosa-fuerte);
+    color: var(--blanco);
+    padding: 18px 45px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.dashboard-page .btn-secondary {
+    display: inline-block;
+    background-color: var(--verde-fuerte);
     color: var(--blanco);
     padding: 18px 45px;
     text-decoration: none;
@@ -68,6 +88,13 @@ body.dashboard-page .hero {
     background-color: var(--blanco);
     color: var(--rosa-fuerte);
     border: 2px solid var(--rosa-fuerte);
+}
+
+.dashboard-page .btn-secondary:hover {
+    transform: translateY(-5px);
+    background-color: var(--blanco);
+    color: var(--verde-fuerte);
+    border: 2px solid var(--verde-fuerte);
 }
 
 /* --- SECCIÓN SERVICIOS --- */
@@ -145,8 +172,37 @@ body.dashboard-page .hero {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* --- SECCIÓN PROMO --- */
+.dashboard-page .promo-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--rosa-principal), var(--verde-menta));
+    color: var(--texto);
+}
+
+.dashboard-page .promo-section .container {
+    text-align: center;
+}
+
+.dashboard-page .promo-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.dashboard-page .promo-section p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
     .dashboard-page .hero { height: auto; padding: 100px 20px; }
+    .dashboard-page .hero-buttons { flex-direction: column; align-items: center; }
+    .dashboard-page .btn-primary, .dashboard-page .btn-secondary { padding: 15px 30px; font-size: 0.9rem; }
     .dashboard-page .services-grid { padding: 60px 0; }
+    .dashboard-page .promo-section { padding: 60px 0; }
+    .dashboard-page .promo-section h2 { font-size: 2rem; }
+    .dashboard-page .promo-section p { font-size: 1rem; }
 }

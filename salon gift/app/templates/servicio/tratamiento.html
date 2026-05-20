@@ -32,6 +32,14 @@
         animation: drift 20s infinite alternate-reverse;
     }
 
+    @keyframes float-spa {
+        from {
+            transform: translate(0, 0) scale(1);
+        }
+
+        to {
+            transform: translate(50px, -40px) scale(1.1);
+
     @keyframes drift {
         from { transform: translate(0,0) rotate(0deg); }
         to { transform: translate(20px, 30px) rotate(10deg); }
@@ -210,12 +218,21 @@
 
 {% block content %}
 <section class="services-container">
+
+    <h1>Tratamientos & Bienestar</h1>
+    <span class="services-subtitle">Renueva tu piel, revitaliza tu espíritu</span>
+
     <h1>Tratamientos de Bienestar</h1>
     <span class="services-subtitle">Renueva tu piel y equilibra tu cuerpo</span>
-    
+
     <div class="gallery-grid">
         <!-- Servicio 1 -->
         <div class="card-treatment">
+
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Limpieza Facial">
+
             <div class="img-placeholder">
                 <img src="https://images.pexels.com/photos/37033485/pexels-photo-37033485.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Limpieza Facial">
             </div>
@@ -230,6 +247,11 @@
 
         <!-- Servicio 2 -->
         <div class="card-treatment">
+
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Masaje Relajante">
+
             <div class="img-placeholder">
                 <img src="https://images.pexels.com/photos/35341712/pexels-photo-35341712.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Aplicacion de Maquillaje">
             </div>
@@ -244,6 +266,11 @@
 
         <!-- Servicio 3 -->
         <div class="card-treatment">
+
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/6663571/pexels-photo-6663571.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Exfoliación Corporal">
+
             <div class="img-placeholder">
                 <img src="https://images.pexels.com/photos/36436445/pexels-photo-36436445.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Exfoliación">
             </div>
@@ -255,6 +282,25 @@
             </div>
             <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
         </div>
+
+        <!-- Dynamic Services Added by User -->
+        {% for s in servicios %}
+        <div class="card-treatment">
+            <div class="img-wrapper">
+                {% if s.imagen %}
+                <img src="{{ url_for('static', filename='uploads/servicios/' + s.imagen) }}" alt="{{ s.nombre }}">
+                {% else %}
+                <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="{{ s.nombre }}">
+                {% endif %}
+            </div>
+            <h3>{{ s.nombre }}</h3>
+            <div class="details">
+                <span><strong>Precio</strong> ${{ "{:,.0f}".format(s.precio | float) }}</span>
+                <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
+            </div>
+            <button class="btn-treatment">Reservar Experiencia</button>
+        </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

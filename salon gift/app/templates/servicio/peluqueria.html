@@ -7,6 +7,13 @@
     .services-container {
         padding: 100px 20px;
         text-align: center;
+
+        background: #fcfaff;
+        /* Un fondo lavanda casi blanco */
+        background-image:
+            radial-gradient(at 0% 0%, rgba(230, 200, 250, 0.3) 0, transparent 50%),
+            radial-gradient(at 100% 100%, rgba(243, 230, 255, 0.4) 0, transparent 50%);
+
         background: #fffafa;
         background-image: 
             radial-gradient(at 0% 0%, rgba(244, 207, 223, 0.2) 0, transparent 60%), 
@@ -32,6 +39,16 @@
         animation: drift 20s infinite alternate ease-in-out;
     }
 
+
+    @keyframes float-hair {
+        from {
+            transform: translate(0, 0) rotate(0deg);
+        }
+
+        to {
+            transform: translate(-40px, 60px) rotate(20deg);
+        }
+
     @keyframes drift {
         from { transform: translate(0,0) scale(1); }
         to { transform: translate(-20px, -30px) scale(1.1); }
@@ -53,6 +70,9 @@
         z-index: 1;
         font-family: 'Playfair Display', serif;
         font-style: italic;
+
+        color: #9b5de5;
+        /* Color lila principal */
         color: #d4a5b9;
         font-size: 1.25rem;
         margin-bottom: 60px;
@@ -196,6 +216,16 @@
 
 {% block content %}
 <section class="services-container">
+
+    <h1>Peluquería & Estilo</h1>
+    <span class="services-subtitle">Transformamos tu imagen, resaltamos tu esencia</span>
+
+    <div class="gallery-grid">
+        <div class="card-hair">
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Corte de Tendencia">
+
     <h1>Cuidado Capilar & Estilo</h1>
     <span class="services-subtitle">El arte de transformar tu cabello</span>
     
@@ -216,6 +246,7 @@
         <div class="card-hair">
             <div class="img-placeholder">
                 <img src="https://images.pexels.com/photos/15659494/pexels-photo-15659494.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Corte">
+
             </div>
             <h3>Corte</h3>
             <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos renovar tus puntas cada 2 meses para mantener la estructura, fuerza y movimiento natural del cabello.</p>
@@ -227,6 +258,10 @@
         </div>
 
         <div class="card-hair">
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3992870/pexels-photo-3992870.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Coloración & Balayage">
+
             <div class="img-placeholder">
                 <img src="https://images.pexels.com/photos/8468126/pexels-photo-8468126.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tinturado básico">
             </div>
@@ -240,8 +275,14 @@
         </div>
 
         <div class="card-hair">
+
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Tratamiento Capilar">
+
             <div class="img-placeholder">
                 <img src="https://images.pexels.com/photos/10561323/pexels-photo-10561323.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Peinados">
+
             </div>
             <h3>Peinados</h3>
             <p class="hair-tip"><strong>Tip del estilista:</strong> Lava tu cabello el día anterior al evento sin usar tratamientos pesados; esto aporta mayor textura y fijación al peinado.</p>
@@ -251,6 +292,25 @@
             </div>
             <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
         </div>
+
+        <!-- Dynamic Services Added by User -->
+        {% for s in servicios %}
+        <div class="card-hair">
+            <div class="img-wrapper">
+                {% if s.imagen %}
+                <img src="{{ url_for('static', filename='uploads/servicios/' + s.imagen) }}" alt="{{ s.nombre }}">
+                {% else %}
+                <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600" alt="{{ s.nombre }}">
+                {% endif %}
+            </div>
+            <h3>{{ s.nombre }}</h3>
+            <div class="details">
+                <span><strong>Precio</strong> ${{ "{:,.0f}".format(s.precio | float) }}</span>
+                <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
+            </div>
+            <button class="btn-hair">Reservar Experiencia</button>
+        </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

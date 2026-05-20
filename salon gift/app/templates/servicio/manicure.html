@@ -204,12 +204,13 @@
 <section class="services-container">
     <h1>Manicure & Pedicure</h1>
     <span class="services-subtitle">El arte de consentir tus manos</span>
-    
+
     <div class="gallery-grid">
         <!-- Servicio 1 -->
         <div class="card-nail">
             <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Semi-Permanente">
+                <img src="https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Semi-Permanente">
             </div>
             <h3>Semi-Permanente</h3>
             <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos no remojar las manos ni usar cremas previamente; el agua expande la uña natural y altera la fijación.</p>
@@ -223,7 +224,12 @@
         <!-- Servicio 2 -->
         <div class="card-nail">
             <div class="img-placeholder">
+
+              <img src="https://images.pexels.com/photos/3997389/pexels-photo-3997389.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Pedicure Spa">
+
                 <img src="https://images.pexels.com/photos/18441298/pexels-photo-18441298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pedicure Spa">
+
             </div>
             <h3>Pedicure Spa</h3>
             <p class="hair-tip"><strong>Tip del estilista:</strong> Exfoliar e hidratar profundamente la planta del pie previene grietas y mantiene la piel suave por más tiempo.</p>
@@ -237,7 +243,8 @@
         <!-- Servicio 3 -->
         <div class="card-nail">
             <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/3997348/pexels-photo-3997348.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uñas Acrílicas">
+                <img src="https://images.pexels.com/photos/3997348/pexels-photo-3997348.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Uñas Acrílicas">
             </div>
             <h3>Uñas Acrílicas</h3>
             <p class="hair-tip"><strong>Tip del estilista:</strong> Agenda tu mantenimiento estrictamente cada 2 o 3 semanas para evitar filtraciones de agua y desprendimientos.</p>
@@ -247,6 +254,25 @@
             </div>
             <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-manicure">Reservar Experiencia</a>
         </div>
+
+        <!-- Dynamic Services Added by User -->
+        {% for s in servicios %}
+        <div class="card-nail">
+            <div class="img-placeholder">
+                {% if s.imagen %}
+                <img src="{{ url_for('static', filename='uploads/servicios/' + s.imagen) }}" alt="{{ s.nombre }}">
+                {% else %}
+                <img src="https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=600" alt="{{ s.nombre }}">
+                {% endif %}
+            </div>
+            <h3>{{ s.nombre }}</h3>
+            <div class="details">
+                <span><strong>Precio</strong> ${{ "{:,.0f}".format(s.precio | float) }}</span>
+                <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
+            </div>
+            <button class="btn-manicure">Reservar Experiencia</button>
+        </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}
