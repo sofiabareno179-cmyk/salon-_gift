@@ -1,42 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Peluquería & Estilo{% endblock %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
 <style>
     /* Importación de fuentes */
-    @import url('https://googleapis.com');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
 
     .services-container {
-        padding: 100px 20px;
+        padding: 80px 20px;
         text-align: center;
-
         background: #fcfaff;
         /* Un fondo lavanda casi blanco */
         background-image:
             radial-gradient(at 0% 0%, rgba(230, 200, 250, 0.3) 0, transparent 50%),
             radial-gradient(at 100% 100%, rgba(243, 230, 255, 0.4) 0, transparent 50%);
-
-        background: #fffafa;
-        background-image: 
-            radial-gradient(at 0% 0%, rgba(244, 207, 223, 0.2) 0, transparent 60%), 
-            radial-gradient(at 100% 100%, rgba(252, 228, 236, 0.3) 0, transparent 60%);
         font-family: 'Montserrat', sans-serif;
         position: relative;
         overflow: hidden;
     }
 
-    /* Decoraciones animadas de fondo */
+    /* Decoraciones animadas de fondo (Estilo burbujas de salón) */
     .services-container::after {
         content: "";
         position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        filter: blur(60px);
         z-index: 0;
         opacity: 0.4;
         width: 400px;
         height: 400px;
-        background: #fce4ec;
-        bottom: -100px;
-        right: -100px;
-        animation: drift 20s infinite alternate ease-in-out;
+        background: #f3e5f5;
+        bottom: -80px;
+        right: -80px;
+        animation: float-hair 18s infinite alternate-reverse;
     }
 
     @keyframes drift {
@@ -48,11 +46,11 @@
         position: relative;
         z-index: 1;
         font-family: 'Playfair Display', serif;
-        font-size: 3.2rem;
-        color: #333;
-        margin-bottom: 10px;
-        font-weight: 400;
-        letter-spacing: 1px;
+        font-size: 3rem;
+        color: #2d1b4d;
+        /* Un morado muy oscuro para elegancia */
+        margin-bottom: 5px;
+        font-weight: 700;
     }
 
     .services-subtitle {
@@ -60,24 +58,20 @@
         z-index: 1;
         font-family: 'Playfair Display', serif;
         font-style: italic;
-
         color: #9b5de5;
         /* Color lila principal */
-        color: #d4a5b9;
-        font-size: 1.25rem;
-        margin-bottom: 60px;
+        font-size: 1.2rem;
+        margin-bottom: 50px;
         display: block;
-        letter-spacing: 0.5px;
     }
 
     .services-subtitle::after {
         content: "";
         display: block;
-        width: 40px;
-        height: 1px;
-        background: #d4a5b9;
-        margin: 20px auto 0 auto;
-        opacity: 0.6;
+        width: 60px;
+        height: 2px;
+        background: #d1c4e9;
+        margin: 15px auto;
     }
 
     .gallery-grid {
@@ -85,28 +79,26 @@
         z-index: 1;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 40px;
-        max-width: 1200px;
+        gap: 30px;
+        max-width: 1100px;
         margin: 0 auto;
     }
 
     .card-hair {
         background: white;
-        border-radius: 4px;
-        padding: 24px;
-        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        border: 1px solid rgba(244, 207, 223, 0.3);
-        box-shadow: 0 15px 35px rgba(244, 207, 223, 0.15);
-        display: flex;
-        flex-direction: column;
+        border-radius: 30px 30px 10px 10px;
+        padding: 20px;
+        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: none;
+        box-shadow: 0 10px 30px rgba(155, 93, 229, 0.1);
     }
 
     .card-hair:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 25px 50px rgba(212, 165, 185, 0.25);
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(155, 93, 229, 0.2);
     }
 
-    .img-placeholder {
+    .img-wrapper {
         width: 100%;
         height: 220px;
         border-radius: 12px;
@@ -117,7 +109,24 @@
         box-shadow: 0 12px 28px rgba(28, 24, 18, 0.08);
     }
 
-    .img-placeholder img {
+    /* Efecto de brillo de seda capilar */
+    .img-wrapper::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -100%;
+        width: 50%;
+        height: 200%;
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transform: rotate(25deg);
+        transition: 0.7s;
+    }
+
+    .card-hair:hover .img-wrapper::after {
+        left: 150%;
+    }
+
+    .img-wrapper img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -131,84 +140,54 @@
 
     .card-hair h3 {
         font-family: 'Playfair Display', serif;
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         color: #333;
-        margin: 10px 0 12px 0;
-        font-weight: 400;
-        letter-spacing: 0.5px;
-    }
-
-    .hair-tip {
-        font-size: 0.85rem;
-        color: #666;
-        line-height: 1.6;
-        font-style: italic;
-        margin-bottom: 20px;
-        padding: 0 5px;
-    }
-
-    .hair-tip strong {
-        color: #d4a5b9;
-        font-weight: 500;
-        font-family: 'Playfair Display', serif;
-        font-size: 0.95rem;
+        margin: 10px 0;
     }
 
     .details {
-        border-top: 1px solid rgba(244, 207, 223, 0.4);
-        border-bottom: 1px solid rgba(244, 207, 223, 0.4);
-        padding: 14px 0;
-        margin: auto 0 20px 0;
+        border-top: 1px solid #f3e5f5;
+        border-bottom: 1px solid #f3e5f5;
+        padding: 12px 0;
+        margin: 15px 0;
         display: flex;
         justify-content: space-around;
-        color: #555;
+        color: #777;
         font-size: 0.85rem;
-    }
-
-    .details span {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
     }
 
     .details strong {
         display: block;
-        color: #d4a5b9;
+        color: #9b5de5;
         font-size: 0.7rem;
         text-transform: uppercase;
-        letter-spacing: 1.5px;
-        font-weight: 600;
+        letter-spacing: 1px;
     }
 
-    .btn-treatment {
-        display: block;
-        background: linear-gradient(135deg, #f4cfdf 0%, #d4a5b9 100%);
+    .btn-hair {
+        background: linear-gradient(135deg, #d1c4e9 0%, #9b5de5 100%);
         color: white;
         border: none;
         padding: 16px;
-        border-radius: 2px;
+        border-radius: 12px;
         text-transform: uppercase;
         font-size: 0.75rem;
-        letter-spacing: 2.5px;
+        letter-spacing: 2px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: 0.4s;
         width: 100%;
-        font-weight: 500;
-        text-decoration: none;
-        box-sizing: border-box;
+        font-weight: 600;
     }
 
-    .btn-treatment:hover {
-        filter: brightness(1.02);
-        letter-spacing: 3px;
-        box-shadow: 0 10px 20px rgba(212, 165, 185, 0.35);
+    .btn-hair:hover {
+        filter: brightness(1.05);
+        box-shadow: 0 8px 15px rgba(155, 93, 229, 0.3);
     }
 </style>
 {% endblock %}
 
 {% block content %}
 <section class="services-container">
-
     <h1>Peluquería & Estilo</h1>
     <span class="services-subtitle">Transformamos tu imagen, resaltamos tu esencia</span>
 
@@ -233,36 +212,34 @@
             <h3>Corte</h3>
             <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos renovar tus puntas cada 2 meses para mantener la estructura, fuerza y movimiento natural del cabello.</p>
             <div class="details">
-                <span><strong>Precio</strong> $20.000 – $60.000</span>
-                <span><strong>Tiempo</strong> 20 a 45 minutos</span>
+                <span><strong>Precio</strong> $35.000</span>
+                <span><strong>Tiempo</strong> 45 min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+            <button class="btn-hair">Reservar Experiencia</button>
         </div>
 
         <div class="card-hair">
             <div class="img-placeholder">
                 <img src="https://images.pexels.com/photos/8468126/pexels-photo-8468126.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tinturado básico">
             </div>
-            <h3>Tinturado básico</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Si buscas un cambio drástico, te asesoramos según tu tono de piel. Usamos fórmulas tratantes para proteger la fibra.</p>
+            <h3>Color & Balayage</h3>
             <div class="details">
-                <span><strong>Precio</strong> $40.000 – $95.000</span>
-                <span><strong>Tiempo</strong> 1.5 a 2.5 horas</span>
+                <span><strong>Precio</strong> $120.000</span>
+                <span><strong>Tiempo</strong> 180 min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+            <button class="btn-hair">Reservar Experiencia</button>
         </div>
 
         <div class="card-hair">
             <div class="img-placeholder">
                 <img src="https://images.pexels.com/photos/10561323/pexels-photo-10561323.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Peinados">
             </div>
-            <h3>Peinados</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Lava tu cabello el día anterior al evento sin usar tratamientos pesados; esto aporta mayor textura y fijación al peinado.</p>
+            <h3>Hidratación Profunda</h3>
             <div class="details">
-                <span><strong>Precio</strong> $45.000 – $90.000</span>
-                <span><strong>Tiempo</strong> 1 a 2 horas</span>
+                <span><strong>Precio</strong> $55.000</span>
+                <span><strong>Tiempo</strong> 60 min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+            <button class="btn-hair">Reservar Experiencia</button>
         </div>
 
         <!-- Dynamic Services Added by User -->

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Notificaciones{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/notificaciones.css') }}">
+{% endblock %}
+{% block content %}
+<div class="notif-container">
+    <div class="notif-header">
+        <h2><i class="fas fa-bell"></i> Notificaciones</h2>
+        {% set no_leidas = notificaciones|selectattr('leida', 'equalto', false)|list %}
+        {% if no_leidas|length > 0 %}
+        <a href="{{ url_for('notificaciones.marcar_todas') }}" class="btn-notif-read-all">
+            <i class="fas fa-check-double"></i> Marcar todas como leídas
+        </a>
+        {% endif %}
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} notif-alert alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="notif-list">
+        {% for notif in notificaciones %}
+        <div class="notif-item {% if not notif.leida %}notif-unread{% endif %}">
+            <div class="notif-icon">
+                <i class="fas {% if notif.leida %}fa-bell{% else %}fa-bell fa-shake{% endif %}"></i>
+            </div>
+            <div class="notif-content">
+                <h5>{{ notif.titulo }}</h5>
+                {% if notif.mensaje %}
+                <p>{{ notif.mensaje }}</p>
+                {% endif %}
+                <small>{{ notif.fecha_creacion.strftime('%d/%m/%Y %H:%M') }}</small>
+            </div>
+            <div class="notif-actions">
+                {% if not notif.leida %}
+                <a href="{{ url_for('notificaciones.marcar_leida', id=notif.idnotificacion) }}" class="btn-notif-mark" title="Marcar como leída">
+                    <i class="fas fa-check"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <div class="notif-empty">
+            <i class="fas fa-bell-slash"></i>
+            <p>No tienes notificaciones.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
