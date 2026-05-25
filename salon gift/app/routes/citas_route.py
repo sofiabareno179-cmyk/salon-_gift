@@ -1,8 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required,current_user
 from app import db
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from app.models.citas import Citas
+from app.models.agenda import Agenda
+from app.models.bloqueo import Bloqueo
 from app.models.notificacion import Notificacion
 
 bp = Blueprint('citas', __name__,url_prefix='/Citas')
@@ -42,7 +44,27 @@ def crono_citas():
         hora_str = cita.fechahora.strftime('%H:00')
         agenda[(dia_semana, hora_str)] = cita
 
-    # 4. Variables de navegación
+    # 4. Obtener bloqueos de la semana
+    bloqueos_set = set()
+    bloqueos_motivos = {}
+    try:
+        inicio_semana = lunes.replace(hour=0, minute=0, second=0)
+        fin_semana = viernes_fin
+        bloqueos = Bloqueo.query.filter(
+            Bloqueo.fecha >= inicio_semana.date(),
+            Bloqueo.fecha <= fin_semana.date()
+        ).all()
+
+        for b in bloqueos:
+            diff = (b.fecha - lunes.date()).days
+            if 0 <= diff <= 4:
+                hora_b = b.hora_inicio[:5]
+                bloqueos_set.add((diff, hora_b))
+                bloqueos_motivos[(diff, hora_b)] = b.motivo or 'Bloqueado'
+    except Exception:
+        pass
+
+    # 6. Variables de navegación
     horas = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"]
     anterior = (lunes - timedelta(weeks=1)).strftime('%Y-%m-%d')
     siguiente = (lunes + timedelta(weeks=1)).strftime('%Y-%m-%d')
@@ -55,7 +77,8 @@ def crono_citas():
                            anterior=anterior, 
                            siguiente=siguiente, 
                            hoy=hoy,
-                           timedelta=timedelta)
+                           timedelta=timedelta,
+                           bloqueos_set=bloqueos_set, bloqueos_motivos=bloqueos_motivos)
 @bp.route('/citas/nueva', methods=['GET', 'POST'])
 @login_required # Esto asegura que current_user tenga datos
 def nueva_cita():
@@ -78,7 +101,30 @@ def nueva_cita():
                 flash('Formato de fecha inválido', 'danger')
                 return redirect(url_for('citas.nueva_cita'))
 
-        # 2. Crear la instancia pasando explícitamente el id del usuario actual
+        # 2. Validar contra agenda y bloqueos
+        dias_map = {0:'Lunes',1:'Martes',2:'Miércoles',3:'Jueves',4:'Viernes',5:'Sábado',6:'Domingo'}
+        dia_nombre = dias_map[fechahora_dt.weekday()]
+        hora_str = fechahora_dt.strftime('%H:%M')
+
+        agenda_dia = Agenda.query.filter_by(diasemana=dia_nombre).first()
+        if not agenda_dia:
+            flash(f'No hay horario disponible para {dia_nombre}', 'danger')
+            return redirect(url_for('citas.nueva_cita'))
+
+        if hora_str < agenda_dia.horainicio or hora_str >= agenda_dia.horafin:
+            flash(f'La hora debe estar entre {agenda_dia.horainicio} y {agenda_dia.horafin} los {dia_nombre}', 'danger')
+            return redirect(url_for('citas.nueva_cita'))
+
+        bloqueado = Bloqueo.query.filter(
+            Bloqueo.fecha == fechahora_dt.date(),
+            Bloqueo.hora_inicio <= hora_str,
+            Bloqueo.hora_fin > hora_str
+        ).first()
+        if bloqueado:
+            flash(f'Horario bloqueado: {bloqueado.motivo or "no disponible"}', 'danger')
+            return redirect(url_for('citas.nueva_cita'))
+
+        # 3. Crear la instancia
         nueva_cita = Citas(
             fechahora=fechahora_dt,
             servicio=servicio,

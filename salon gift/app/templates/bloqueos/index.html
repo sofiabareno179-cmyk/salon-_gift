@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Bloqueos{% endblock %}
+{% block body_class %}bloqueos-page{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bloqueos.css') }}">
+{% endblock %}
+{% block content %}
+<div class="bloqueos-container">
+    <div class="bloqueos-header">
+        <h2><i class="fas fa-ban"></i> Horarios Bloqueados</h2>
+        <a href="{{ url_for('bloqueos.nuevo') }}" class="btn-bloqueo-new">
+            <i class="fas fa-plus-circle"></i> Bloquear Horario
+        </a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} bloqueos-alert alert-dismissible fade show" role="alert">
+            <i class="fas {% if category == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %} me-2"></i>
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="bloqueos-table-card">
+        <div class="table-responsive">
+            <table class="bloqueos-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Desde</th>
+                        <th>Hasta</th>
+                        <th>Motivo</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for b in bloqueos %}
+                    <tr>
+                        <td><span class="date-cell">{{ b.fecha.strftime('%d/%m/%Y') }}</span></td>
+                        <td>{{ b.hora_inicio }}</td>
+                        <td>{{ b.hora_fin }}</td>
+                        <td><span class="motivo-cell">{{ b.motivo or '—' }}</span></td>
+                        <td>
+                            <form action="{{ url_for('bloqueos.eliminar', id=b.idbloqueo) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn-bloqueo-action btn-bloqueo-unlock" onclick="return confirm('¿Desbloquear este horario?')">
+                                    <i class="fas fa-unlock me-1"></i> Desbloquear
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5">
+                            <div class="bloqueos-empty">
+                                <i class="fas fa-calendar-check"></i>
+                                <p>No hay horarios bloqueados.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

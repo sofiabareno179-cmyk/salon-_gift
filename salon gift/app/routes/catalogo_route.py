@@ -14,6 +14,12 @@ def admin_required(f):
 
 bp = Blueprint('catalogo', __name__, url_prefix='/Catalogo')
 
+@bp.route('/ver')
+@login_required
+def ver_catalogo():
+    items = CatalogoPrecio.query.order_by(CatalogoPrecio.categoria).all()
+    return render_template('catalogo/ver_catalogo.html', items=items)
+
 @bp.route('/')
 @login_required
 def index():

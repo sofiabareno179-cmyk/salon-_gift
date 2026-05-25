@@ -375,3 +375,15 @@ body.schedule-page {
         padding: 1rem;
     }
 }
+
+.schedule__slot--blocked {
+    background: repeating-linear-gradient(45deg, rgba(220,53,69,0.08), rgba(220,53,69,0.08) 8px, rgba(220,53,69,0.15) 8px, rgba(220,53,69,0.15) 16px);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #dc3545;
+    font-size: 1rem;
+    cursor: not-allowed;
+}

@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, flash, abort
 from app.models.usuario import User
 from app.models.perfil import Perfil
+from app.models.promocion import Promocion
 from flask_login import current_user, login_required
 from functools import wraps
 from app import db
@@ -32,7 +33,14 @@ def inicio():
 @login_required
 def index():
     data = User.query.all()
-    return render_template('cliente.html', data=data)
+    promo = Promocion.query.filter_by(activa=True).first()
+    if not promo:
+        promo = Promocion(titulo='✨ Promo del Mes ✨', descripcion='Trae a una amiga y ambas obtienen un 15% de descuento en tratamientos de hidratación.', activa=True)
+        try:
+            promo.save()
+        except Exception:
+            promo = None
+    return render_template('cliente.html', data=data, promo=promo)
 
 @bp.route('/detail/<int:id>')
 @login_required

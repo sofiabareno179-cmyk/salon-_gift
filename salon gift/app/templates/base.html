@@ -21,8 +21,15 @@
             <ul class="nav-links">
                 <li><a href="{{ url_for('user.inicio') }}">Inicio</a></li>
                 {% if current_user.is_authenticated %}
+                    {% if current_user.rol == 'admin' %}
                     <li><a href="{{ url_for('galeria.index') }}">Galería</a></li>
                     <li><a href="{{ url_for('catalogo.index') }}">Catálogo</a></li>
+                    <li><a href="{{ url_for('bloqueos.index') }}">Bloqueos</a></li>
+                    <li><a href="{{ url_for('promocion.editar') }}">Promo</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('galeria.ver_galeria') }}">Galería</a></li>
+                    <li><a href="{{ url_for('catalogo.ver_catalogo') }}">Catálogo</a></li>
+                    {% endif %}
                     <li>
                         <a href="{{ url_for('notificaciones.index') }}" class="nav-notif-link">
                             <i class="fas fa-bell"></i>

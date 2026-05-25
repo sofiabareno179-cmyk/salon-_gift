@@ -15,10 +15,12 @@ class User(db.Model, UserMixin):
     rol = db.Column(db.String(20), nullable=False, default='cliente')
 
         # Relaciones
-    citas = db.relationship('Citas', backref='cliente', lazy=True)
-    perfil = db.relationship('Perfil', backref='usuario', uselist=False)
+    citas = db.relationship('Citas', back_populates='cliente', lazy=True)
+    perfil = db.relationship('Perfil', back_populates='usuario', uselist=False)
     agenda = db.relationship('Agenda', back_populates='usuario')
-    recordatorios = db.relationship('Recordatorios', backref='cliente', lazy=True)
+    recordatorios = db.relationship('Recordatorios', back_populates='cliente', lazy=True)
+    notificaciones = db.relationship('Notificacion', back_populates='usuario', lazy=True)
+    bloqueos = db.relationship('Bloqueo', back_populates='usuario', lazy=True)
 
     def __repr__(self):
         return f'<Usuario {self.nombreuser} - Rol {self.rol}>' # Corregido

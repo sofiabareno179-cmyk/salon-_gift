@@ -10,7 +10,7 @@
         <h2><i class="fas fa-images"></i> Galería</h2>
         {% if current_user.rol == 'admin' %}
         <a href="{{ url_for('galeria.nueva') }}" class="btn-gallery-new">
-            <i class="fas fa-plus-circle"></i> Agregar Imagen
+            <i class="fas fa-plus-circle"></i> Agregar
         </a>
         {% endif %}
     </div>
@@ -28,17 +28,21 @@
     {% endwith %}
 
     <div class="gallery-grid">
-        {% for img in imagenes %}
+        {% for item in items %}
         <div class="gallery-item">
             <div class="gallery-img-wrapper">
-                <img src="{{ url_for('static', filename='uploads/galeria/' + img.imagen) }}" alt="{{ img.titulo }}">
+                {% if item.tipo == 'video' %}
+                <video src="{{ url_for('static', filename='uploads/galeria/' + item.archivo) }}" muted controls></video>
+                {% else %}
+                <img src="{{ url_for('static', filename='uploads/galeria/' + item.archivo) }}" alt="{{ item.titulo }}">
+                {% endif %}
                 {% if current_user.rol == 'admin' %}
                 <div class="gallery-overlay">
-                    <a href="{{ url_for('galeria.editar', id=img.idgaleria) }}" class="gallery-action-btn" title="Editar">
+                    <a href="{{ url_for('galeria.editar', id=item.idgaleria) }}" class="gallery-action-btn" title="Editar">
                         <i class="fas fa-pen"></i>
                     </a>
-                    <form action="{{ url_for('galeria.eliminar', id=img.idgaleria) }}" method="POST" style="display:inline;">
-                        <button type="submit" class="gallery-action-btn" onclick="return confirm('¿Eliminar esta imagen?')" title="Eliminar">
+                    <form action="{{ url_for('galeria.eliminar', id=item.idgaleria) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="gallery-action-btn" onclick="return confirm('¿Eliminar {{ item.titulo }}?')" title="Eliminar">
                             <i class="fas fa-trash"></i>
                         </button>
                     </form>
@@ -46,18 +50,20 @@
                 {% endif %}
             </div>
             <div class="gallery-info">
-                <h5>{{ img.titulo }}</h5>
-                {% if img.descripcion %}
-                <p>{{ img.descripcion }}</p>
+                <h5>{{ item.titulo }}</h5>
+                {% if item.descripcion %}
+                <p>{{ item.descripcion }}</p>
                 {% endif %}
-                <small>{{ img.fecha_subida.strftime('%d/%m/%Y') }}</small>
+                <small>{{ item.fecha_subida.strftime('%d/%m/%Y') }}</small>
             </div>
         </div>
         {% else %}
         <div class="gallery-empty">
             <i class="fas fa-camera"></i>
-            <p>No hay imágenes en la galería.</p>
-            <a href="{{ url_for('galeria.nueva') }}" class="btn-gallery-new">Subir primera imagen</a>
+            <p>No hay elementos en la galería.</p>
+            {% if current_user.rol == 'admin' %}
+            <a href="{{ url_for('galeria.nueva') }}" class="btn-gallery-new">Subir primero</a>
+            {% endif %}
         </div>
         {% endfor %}
     </div>

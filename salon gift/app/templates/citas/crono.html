@@ -47,8 +47,12 @@
                                     <span class="appt__status">{{ cita.estado }}</span>
                                 </a>
                             </div>
+                        {% elif (dia, hora) in bloqueos_set %}
+                            <div class="schedule__slot schedule__slot--blocked" title="{{ bloqueos_motivos.get((dia, hora), 'Bloqueado') }}">
+                                <i class="fas fa-ban"></i>
+                            </div>
                         {% else %}
-                            <a href="{{ url_for('citas.nueva_cita', fecha=(lunes + timedelta(days=dia)).strftime('%Y-%m-%d')) }}" class="appt__add">+</a>
+                            <a href="{{ url_for('citas.nueva_cita', fecha=(lunes + timedelta(days=dia)).strftime('%Y-%m-%d'), hora=hora) }}" class="appt__add">+</a>
                         {% endif %}
                     </div>
                 {% endfor %}

@@ -11,7 +11,7 @@ class Notificacion(db.Model):
     leida = db.Column(db.Boolean, default=False)
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
 
-    usuario = db.relationship('User', backref='notificaciones')
+    usuario = db.relationship('User', back_populates='notificaciones')
 
     def __init__(self, idusuario, titulo, mensaje=None):
         self.idusuario = idusuario
