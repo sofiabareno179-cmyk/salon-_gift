@@ -8,7 +8,7 @@ class Inventario(db.Model, UserMixin):
     stock = db.Column(db.Integer, nullable=False)
     fecha = db.Column(db.String(100), nullable=False) 
 
-    idproductos = db.Column(db.Integer, db.ForeignKey('productos.idproductos'), nullable=False, unique=True)
+    idproductos = db.Column(db.Integer, db.ForeignKey('productos.idproductos'), nullable=True, unique=True)
     producto = db.relationship('Productos', back_populates='inventario')
 
     def __init__(self, stock, fecha):

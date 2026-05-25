@@ -2,7 +2,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required,current_user
 from app import db
 from datetime import datetime, timedelta
-from app.models.citas import Citas 
+from app.models.citas import Citas
+from app.models.notificacion import Notificacion
 
 bp = Blueprint('citas', __name__,url_prefix='/Citas')
 
@@ -19,7 +20,7 @@ def crono_citas():
     if fecha_query:
         try:
             fecha_actual = datetime.strptime(fecha_query, '%Y-%m-%d')
-        except:
+        except ValueError:
             fecha_actual = datetime.now()
     else:
         fecha_actual = datetime.now()
@@ -87,6 +88,13 @@ def nueva_cita():
 
         try:
             db.session.add(nueva_cita)
+            db.session.flush()
+            notif = Notificacion(
+                idusuario=current_user.idusuario,
+                titulo='Nueva cita agendada',
+                mensaje=f'Cita de {servicio} para el {fechahora_dt.strftime("%d/%m/%Y %H:%M")}'
+            )
+            db.session.add(notif)
             db.session.commit()
             flash('Cita agendada correctamente', 'success')
             return redirect(url_for('citas.crono_citas'))
@@ -117,6 +125,12 @@ def editar_cita(id):
                     flash('Formato de fecha inválido', 'danger')
                     return redirect(url_for('citas.editar_cita', id=id))
         
+        notif = Notificacion(
+            idusuario=current_user.idusuario,
+            titulo='Cita actualizada',
+            mensaje=f'Tu cita de {cita.servicio} ha sido modificada'
+        )
+        db.session.add(notif)
         db.session.commit()
         flash('Cita actualizada con éxito', 'info')
         return redirect(url_for('citas.listar_citas'))
@@ -126,6 +140,12 @@ def editar_cita(id):
 @login_required
 def eliminar_cita(id):
     cita = Citas.query.get_or_404(id)
+    notif = Notificacion(
+        idusuario=current_user.idusuario,
+        titulo='Cita cancelada',
+        mensaje=f'Tu cita de {cita.servicio} ha sido cancelada'
+    )
+    db.session.add(notif)
     db.session.delete(cita)
     db.session.commit()
     flash('Cita eliminada permanentemente', 'danger')

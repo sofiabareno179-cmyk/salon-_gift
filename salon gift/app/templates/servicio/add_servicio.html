@@ -87,7 +87,7 @@
                             <button type="submit" class="btn-premium-save">
                                 <i class="fas fa-save me-2"></i>Guardar Servicio
                             </button>
-                            <a href="{{ url_for('servicio.ver_peluqueria' if categoria == 'peluqueria' else 'servicio.' + (categoria if categoria != 'tratamiento' else 'tratamientos')) }}" 
+                            <a href="{% if categoria == 'peluqueria' %}{{ url_for('servicio.ver_peluqueria') }}{% elif categoria == 'manicure' %}{{ url_for('servicio.manicure') }}{% else %}{{ url_for('servicio.tratamientos') }}{% endif %}" 
                                class="btn-premium-cancel">
                                 <i class="fas fa-arrow-left me-2"></i>Cancelar y Volver
                             </a>
