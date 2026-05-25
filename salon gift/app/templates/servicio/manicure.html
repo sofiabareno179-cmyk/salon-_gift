@@ -162,7 +162,7 @@
         letter-spacing: 1px;
     }
 
-    .btn-manicure {
+    .btn-treatment {
         background: linear-gradient(135deg, #f4cfdf 0%, #d4a5b9 100%);
         color: white;
         border: none;
@@ -177,7 +177,7 @@
         font-weight: 600;
     }
 
-    .btn-manicure:hover {
+    .btn-treatment:hover {
         filter: brightness(1.05);
         box-shadow: 0 8px 15px rgba(212, 165, 185, 0.4);
     }
@@ -201,7 +201,7 @@
                 <span><strong>Precio</strong> $45.000</span>
                 <span><strong>Tiempo</strong> 60 min</span>
             </div>
-            <button class="btn-manicure">Reservar Experiencia</button>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
         </div>
 
         <!-- Servicio 2 -->
@@ -215,7 +215,7 @@
                 <span><strong>Precio</strong> $60.000</span>
                 <span><strong>Tiempo</strong> 90 min</span>
             </div>
-            <button class="btn-manicure">Reservar Experiencia</button>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
         </div>
 
         <!-- Servicio 3 -->
@@ -229,7 +229,7 @@
                 <span><strong>Precio</strong> $85.000</span>
                 <span><strong>Tiempo</strong> 120 min</span>
             </div>
-            <button class="btn-manicure">Reservar Experiencia</button>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
         </div>
 
         <!-- Dynamic Services Added by User -->
@@ -247,7 +247,7 @@
                 <span><strong>Precio</strong> ${{ "{:,.0f}".format(s.precio | float) }}</span>
                 <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
             </div>
-            <button class="btn-manicure">Reservar Experiencia</button>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
         </div>
         {% endfor %}
     </div>

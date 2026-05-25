@@ -194,50 +194,19 @@
     <span class="services-subtitle">Renueva tu piel, revitaliza tu espíritu</span>
 
     <div class="gallery-grid">
+        {% for s in [
+            {'nombre': 'Limpieza Profunda', 'precio': 75000, 'duracion': 60, 'imagen': 'https://images.pexels.com/photos/37033485/pexels-photo-37033485.jpeg?auto=compress&cs=tinysrgb&w=600'},
+            {'nombre': 'Masaje de Piedras', 'precio': 95000, 'duracion': 90, 'imagen': 'https://images.pexels.com/photos/35341712/pexels-photo-35341712.jpeg?auto=compress&cs=tinysrgb&w=600'},
+            {'nombre': 'Exfoliación Orgánica', 'precio': 80000, 'duracion': 75, 'imagen': 'https://images.pexels.com/photos/36436445/pexels-photo-36436445.jpeg?auto=compress&cs=tinysrgb&w=600'}
+        ] + servicios %}
         <div class="card-treatment">
             <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/37033485/pexels-photo-37033485.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Limpieza Facial">
-            </div>
-            <h3>Limpieza Profunda</h3>
-            <div class="details">
-                <span><strong>Precio</strong> $75.000</span>
-                <span><strong>Tiempo</strong> 60 min</span>
-            </div>
-            <button class="btn-treatment">Reservar Experiencia</button>
-        </div>
-
-        <div class="card-treatment">
-            <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/35341712/pexels-photo-35341712.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Aplicación de Maquillaje">
-            </div>
-            <h3>Masaje de Piedras</h3>
-            <div class="details">
-                <span><strong>Precio</strong> $95.000</span>
-                <span><strong>Tiempo</strong> 90 min</span>
-            </div>
-            <button class="btn-treatment">Reservar Experiencia</button>
-        </div>
-
-        <div class="card-treatment">
-            <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/36436445/pexels-photo-36436445.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Exfoliación">
-            </div>
-            <h3>Exfoliación Orgánica</h3>
-            <div class="details">
-                <span><strong>Precio</strong> $80.000</span>
-                <span><strong>Tiempo</strong> 75 min</span>
-            </div>
-            <button class="btn-treatment">Reservar Experiencia</button>
-        </div>
-
-        <!-- Dynamic Services Added by User -->
-        {% for s in servicios %}
-        <div class="card-treatment">
-            <div class="img-placeholder">
-                {% if s.imagen %}
-                <img src="{{ url_for('static', filename='uploads/servicios/' + s.imagen) }}" alt="{{ s.nombre }}">
+                {% if s.imagen and 'http' in s.imagen %}
+                <img src="{{ s.imagen }}" alt="{{ s.nombre }}" loading="lazy" onerror="this.onerror=null;this.src='https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600';">
+                {% elif s.imagen %}
+                <img src="{{ url_for('static', filename='uploads/servicios/' + s.imagen) }}" alt="{{ s.nombre }}" loading="lazy" onerror="this.onerror=null;this.src='https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600';">
                 {% else %}
-                <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="{{ s.nombre }}">
+                <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="{{ s.nombre }}" loading="lazy">
                 {% endif %}
             </div>
             <h3>{{ s.nombre }}</h3>
@@ -245,7 +214,7 @@
                 <span><strong>Precio</strong> ${{ "{:,.0f}".format(s.precio | float) }}</span>
                 <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
             </div>
-            <button class="btn-treatment">Reservar Experiencia</button>
+           <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
         </div>
         {% endfor %}
     </div>
