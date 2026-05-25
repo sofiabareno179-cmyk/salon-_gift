@@ -4,6 +4,7 @@ from app.models.perfil import Perfil
 from flask_login import current_user, login_required
 from functools import wraps
 from app import db
+from app.routes.notificaciones_route import sync_proxima_cita_notification
 
 # Definición del Blueprint
 bp = Blueprint('user', __name__, url_prefix='/User')
@@ -31,6 +32,7 @@ def inicio():
 @bp.route('/dashboard')
 @login_required
 def index():
+    sync_proxima_cita_notification()
     data = User.query.all()
     return render_template('cliente.html', data=data)
 
