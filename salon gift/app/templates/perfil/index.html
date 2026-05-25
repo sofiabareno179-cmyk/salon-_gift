@@ -21,7 +21,7 @@
         <tbody>
             {% for perfil in perfiles %}
             <tr>
-                <td><strong>{{ perfil.user.nombreuser }}</strong></td>
+                <td><strong>{{ perfil.usuario.nombreuser }}</strong></td>
                 <td>{{ perfil.nombre }}</td>
                 <td>{{ perfil.apellido }}</td>
                 <td><small>{{ perfil.bio[:50] }}{% if perfil.bio|length > 50 %}...{% endif %}</small></td>

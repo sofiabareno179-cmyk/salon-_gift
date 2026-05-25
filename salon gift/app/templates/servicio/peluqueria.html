@@ -1,25 +1,95 @@
+<<<<<<< Updated upstream
 <style>
     @import url('https://googleapis.com');
+=======
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
+<style>
+    /* Importación de fuentes */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+>>>>>>> Stashed changes
 
     .hair-services-container {
         padding: 100px 20px;
         text-align: center;
+<<<<<<< Updated upstream
         background: #fdfdfd;
         /* Fondo con degradado sutil de salón premium */
         background-image: 
             radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.1) 0, transparent 50%), 
             radial-gradient(at 100% 100%, rgba(20, 20, 20, 0.05) 0, transparent 50%);
+=======
+
+        background: #fcfaff;
+        /* Un fondo lavanda casi blanco */
+        background-image:
+            radial-gradient(at 0% 0%, rgba(230, 200, 250, 0.3) 0, transparent 50%),
+            radial-gradient(at 100% 100%, rgba(243, 230, 255, 0.4) 0, transparent 50%);
+
+        background: #fffafa;
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(244, 207, 223, 0.3) 0, transparent 50%), 
+            radial-gradient(at 100% 100%, rgba(252, 228, 236, 0.4) 0, transparent 50%);
+
+>>>>>>> Stashed changes
         font-family: 'Montserrat', sans-serif;
         position: relative;
         overflow: hidden;
     }
 
+<<<<<<< Updated upstream
     .hair-services-container h1 {
         position: relative;
         z-index: 1;
         font-family: 'Playfair Display', serif;
         font-size: 3.5rem;
         color: #1a1a1a;
+=======
+    /* Decoraciones animadas de fondo */
+    .services-container::after {
+        content: "";
+        position: absolute;
+        border-radius: 50% 20% 50% 70%;
+        filter: blur(60px);
+        z-index: 0;
+        opacity: 0.5;
+        width: 350px;
+        height: 350px;
+        background: #fce4ec;
+        bottom: -50px;
+        right: -50px;
+        animation: drift 15s infinite alternate-reverse;
+    }
+
+
+    @keyframes float-hair {
+        from {
+            transform: translate(0, 0) rotate(0deg);
+        }
+
+        to {
+            transform: translate(-40px, 60px) rotate(20deg);
+        }
+
+    @keyframes drift {
+        from { transform: translate(0,0) rotate(0deg); }
+        to { transform: translate(30px, 50px) rotate(15deg); }
+
+    }
+
+    .services-container h1 {
+        position: relative;
+        z-index: 1;
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+
+        color: #2d1b4d;
+        /* Un morado muy oscuro para elegancia */
+
+        color: #333;
+
+>>>>>>> Stashed changes
         margin-bottom: 5px;
         font-weight: 700;
     }
@@ -29,7 +99,15 @@
         z-index: 1;
         font-family: 'Playfair Display', serif;
         font-style: italic;
+<<<<<<< Updated upstream
         color: #b8973d; /* Tono Dorado */
+=======
+
+        color: #9b5de5;
+        /* Color lila principal */
+        color: #d4a5b9;
+
+>>>>>>> Stashed changes
         font-size: 1.2rem;
         margin-bottom: 60px;
         display: block;
@@ -40,7 +118,11 @@
         display: block;
         width: 60px;
         height: 2px;
+<<<<<<< Updated upstream
         background: #b8973d;
+=======
+        background: #f4cfdf;
+>>>>>>> Stashed changes
         margin: 15px auto;
     }
 
@@ -58,6 +140,7 @@
         background: white;
         border-radius: 5px 40px 5px 40px; /* Corte asimétrico diferente al de uñas */
         padding: 20px;
+<<<<<<< Updated upstream
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         border: 1px solid #f0f0f0;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -79,18 +162,70 @@
     }
 
     .img-hair img {
+=======
+        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: none;
+        box-shadow: 0 10px 30px rgba(244, 207, 223, 0.2);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-hair:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(212, 165, 185, 0.3);
+    }
+
+    .img-placeholder {
+        width: 100%;
+        height: 280px;
+        border-radius: 25px 25px 10px 10px;
+        margin-bottom: 20px;
+        background: #fce4ec;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .img-placeholder::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -100%;
+        width: 50%;
+        height: 200%;
+
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transform: rotate(25deg);
+        transition: 0.7s;
+
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+        transform: rotate(30deg);
+        transition: 0.6s;
+
+    }
+
+    .card-hair:hover .img-placeholder::after {
+        left: 150%;
+    }
+
+    .img-placeholder img {
+>>>>>>> Stashed changes
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: transform 0.8s ease;
     }
 
+<<<<<<< Updated upstream
     .card-hair:hover .img-hair img {
+=======
+    .card-hair:hover .img-placeholder img {
+>>>>>>> Stashed changes
         transform: scale(1.1);
     }
 
     .card-hair h3 {
         font-family: 'Playfair Display', serif;
+<<<<<<< Updated upstream
         font-size: 1.6rem;
         color: #1a1a1a;
         margin: 10px 0;
@@ -101,6 +236,32 @@
         border-bottom: 1px solid #eee;
         padding: 15px 0;
         margin: 20px 0;
+=======
+        font-size: 1.5rem;
+        color: #4a4a4a;
+        margin: 10px 0 5px 0;
+    }
+
+    .hair-tip {
+        font-size: 0.85rem;
+        color: #666;
+        line-height: 1.4;
+        font-style: italic;
+        margin-bottom: 15px;
+        padding: 0 10px;
+    }
+
+    .hair-tip strong {
+        color: #d4a5b9;
+        font-weight: 600;
+    }
+
+    .details {
+        border-top: 1px solid #fdf0f5;
+        border-bottom: 1px solid #fdf0f5;
+        padding: 12px 0;
+        margin: auto 0 15px 0; /* Empuja los detalles y botón hacia abajo de forma uniforme */
+>>>>>>> Stashed changes
         display: flex;
         justify-content: space-around;
         color: #666;
@@ -108,15 +269,25 @@
 
     .hair-details strong {
         display: block;
+<<<<<<< Updated upstream
         color: #b8973d;
+=======
+        color: #d4a5b9;
+>>>>>>> Stashed changes
         font-size: 0.7rem;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
 
+<<<<<<< Updated upstream
     .btn-hair {
         background: #1a1a1a;
         color: #fff;
+=======
+    .btn-hairdresser {
+        background: linear-gradient(135deg, #f4cfdf 0%, #d4a5b9 100%);
+        color: white;
+>>>>>>> Stashed changes
         border: none;
         padding: 18px 30px;
         border-radius: 0 20px 0 20px;
@@ -129,20 +300,33 @@
         font-weight: 600;
     }
 
+<<<<<<< Updated upstream
     .btn-hair:hover {
         background: #b8973d;
         color: white;
         box-shadow: 0 10px 20px rgba(184, 151, 61, 0.3);
+=======
+    .btn-hairdresser:hover {
+        filter: brightness(1.05);
+        box-shadow: 0 8px 15px rgba(212, 165, 185, 0.4);
+>>>>>>> Stashed changes
     }
 </style>
 
+<<<<<<< Updated upstream
 <section class="hair-services-container">
+=======
+{% block content %}
+<section class="services-container">
+
+>>>>>>> Stashed changes
     <h1>Peluquería & Estilo</h1>
     <span class="hair-subtitle">El arte de crear belleza en cada fibra de tu cabello</span>
 
     <div class="hair-grid">
         <!-- Ejemplo 1 -->
         <div class="card-hair">
+<<<<<<< Updated upstream
             <div class="img-hair">
                 <img src="https://unsplash.com" alt="Corte Profesional">
             </div>
@@ -152,10 +336,46 @@
                 <span><strong>Tiempo</strong> 45 min</span>
             </div>
             <button class="btn-hair">Reservar Cita</button>
+=======
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Corte de Tendencia">
+
+    <h1>Cuidado Capilar & Estilo</h1>
+    <span class="services-subtitle">El arte de transformar tu cabello</span>
+    
+    <div class="gallery-grid">
+        <div class="card-hair">
+            <div class="img-placeholder">
+                <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=600&auto=format&fit=crop" alt="Cepillado">
+            </div>
+            <h3>Cepillado</h3>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> Aplica siempre un termoprotector antes del calor para sellar la cutícula, evitar el frizz y prolongar la duración del alisado.</p>
+            <div class="details">
+                <span><strong>Precio</strong> $55.000</span>
+                <span><strong>Tiempo</strong> 50 min</span>
+            </div>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+        </div>
+
+        <div class="card-hair">
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/15659494/pexels-photo-15659494.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Corte">
+
+            </div>
+            <h3>Corte</h3>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos renovar tus puntas cada 2 meses para mantener la estructura, fuerza y movimiento natural del cabello.</p>
+            <div class="details">
+                <span><strong>Precio</strong> $55.000</span>
+                <span><strong>Tiempo</strong> 50 min</span>
+            </div>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+>>>>>>> Stashed changes
         </div>
 
         <!-- Ejemplo 2 -->
         <div class="card-hair">
+<<<<<<< Updated upstream
             <div class="img-hair">
                 <img src="https://unsplash.com" alt="Colorimetría">
             </div>
@@ -165,10 +385,28 @@
                 <span><strong>Tiempo</strong> 180 min</span>
             </div>
             <button class="btn-hair">Reservar Cita</button>
+=======
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3992870/pexels-photo-3992870.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Coloración & Balayage">
+
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/8468126/pexels-photo-8468126.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tinturar">
+
+            </div>
+            <h3>Tinturar</h3>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> Si buscas un cambio drástico, te asesoramos según tu tono de piel. Usamos fórmulas tratantes para proteger la fibra.</p>
+            <div class="details">
+                <span><strong>Precio</strong> $180.000</span>
+                <span><strong>Tiempo</strong> 180 min</span>
+            </div>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+>>>>>>> Stashed changes
         </div>
 
         <!-- Ejemplo 3 -->
         <div class="card-hair">
+<<<<<<< Updated upstream
             <div class="img-hair">
                 <img src="https://unsplash.com" alt="Peinado">
             </div>
@@ -178,6 +416,24 @@
                 <span><strong>Tiempo</strong> 60 min</span>
             </div>
             <button class="btn-hair">Reservar Cita</button>
+=======
+
+            <div class="img-wrapper">
+                <img src="https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Tratamiento Capilar">
+
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/10561323/pexels-photo-10561323.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Peinados">
+
+            </div>
+            <h3>Peinados</h3>
+            <p class="hair-tip"><strong>Tip del estilista:</strong>Lava tu cabello el día anterior al evento sin usar tratamientos pesados; esto aporta mayor textura y fijación al peinado.</p>
+            <div class="details">
+                <span><strong>Precio</strong> $95.000</span>
+                <span><strong>Tiempo</strong> 90 min</span>
+            </div>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+>>>>>>> Stashed changes
         </div>
 
                 <div class="card-hair">

@@ -16,6 +16,7 @@
       {% endif %}
     {% endwith %}
 
+<<<<<<< Updated upstream
     <table class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>
@@ -47,5 +48,61 @@
             {% endfor %}
         </tbody>
     </table>
+=======
+    <div class="premium-table-card">
+        <div class="table-responsive">
+            <table class="premium-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre del Servicio</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Duración</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in servicios %}
+                    <tr>
+                        <td><span class="id-cell">#{{ s.idservicio }}</span></td>
+                        <td><span class="name-cell">{{ s.nombre }}</span></td>
+                        <td>
+                            <span class="premium-badge 
+                                {% if s.categoria == 'peluqueria' %}premium-badge-peluqueria
+                                {% elif s.categoria == 'tratamiento' %}premium-badge-tratamiento
+                                {% elif s.categoria == 'manicure' %}premium-badge-manicure
+                                {% else %}premium-badge-other{% endif %}">
+                                {{ s.categoria | capitalize }}
+                            </span>
+                        </td>
+                        <td><span class="price-cell">${{ "{:,.2f}".format(s.precio | float) }}</span></td>
+                        <td><span class="duration-cell"><i class="far fa-clock"></i>{{ s.duracion }} min</span></td>
+                        <td>
+                            <a href="{{ url_for('servicio.edit', id=s.idservicio) }}" class="btn-action btn-action-edit" title="Editar">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                            <form action="{{ url_for('servicio.delete', id=s.idservicio) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn-action btn-action-delete" title="Eliminar" onclick="return confirm('¿Estás seguro de eliminar {{ s.nombre }}?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6">
+                            <div class="premium-empty">
+                                <img src="https://cdn-icons-png.flaticon.com/512/4076/4076432.png" alt="No data">
+                                <p>No hay servicios registrados en esta sección.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+>>>>>>> Stashed changes
 </div>
 {% endblock %}

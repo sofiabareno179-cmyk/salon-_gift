@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Recordatorio{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-warning py-3">
+                    <h5 class="mb-0 text-center fw-bold"><i class="fas fa-edit me-2"></i>Editar Recordatorio</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form action="{{ url_for('recordatorios.editar_recordatorio', id=recordatorio.idrecordatorios) }}" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Título</label>
+                            <input type="text" name="titulo" class="form-control" value="{{ recordatorio.titulo }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Detalles</label>
+                            <textarea name="mensaje" class="form-control" rows="4">{{ recordatorio.mensaje }}</textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Fecha de Aviso</label>
+                            <input type="datetime-local" name="fecha_recordatorio" class="form-control" value="{{ recordatorio.fecha_recordatorio }}" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning fw-bold text-dark">Actualizar Recordatorio</button>
+                            <a href="{{ url_for('recordatorios.listar_recordatorios') }}" class="btn btn-link text-muted text-decoration-none">Volver</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

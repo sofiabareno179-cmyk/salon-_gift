@@ -9,6 +9,7 @@ bp = Blueprint('perfil', __name__, url_prefix='/perfil')
 
 # Listar todos los perfiles
 @bp.route('/')
+@login_required
 def index():
     perfiles = Perfil.query.all()
     return render_template('perfil/index.html', perfiles=perfiles)
@@ -80,6 +81,7 @@ def edit(id):
 
 # Eliminar un perfil
 @bp.route('/delete/<int:id>', methods=['POST'])
+@login_required
 def delete(id):
     perfil = Perfil.query.get_or_404(id)
     db.session.delete(perfil)

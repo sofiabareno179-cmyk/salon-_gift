@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from app.models.usuario import User
 from werkzeug.security import check_password_hash
@@ -50,5 +50,4 @@ def register():
         'title': 'Bienvenido a Flet',
         'message': 'Este es un mensaje desde Flask.'
     }
-    import json
-    return json.dumps(example_data)
+    return jsonify(example_data)

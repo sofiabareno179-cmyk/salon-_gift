@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle de Usuario{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4><i class="fas fa-user me-2"></i>{{ user.nombreuser }}</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Teléfono:</strong> {{ user.telefono or 'No registrado' }}</p>
+            <p><strong>Rol:</strong> {{ user.rol }}</p>
+            <p><strong>ID:</strong> {{ user.idusuario }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="{{ url_for('user.index') }}" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

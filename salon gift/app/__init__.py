@@ -35,6 +35,9 @@ def create_app():
     app.register_blueprint(usuarios_route.bp)
     app.register_blueprint(servicios_route.bp)
     app.register_blueprint(perfil_route.bp)
+    app.register_blueprint(galeria_route.bp)
+    app.register_blueprint(catalogo_route.bp)
+    app.register_blueprint(notificaciones_route.bp)
 
 
     @app.errorhandler(Exception)
