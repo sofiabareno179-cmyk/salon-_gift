@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from sqlalchemy import text
 import os
 
 db = SQLAlchemy()
@@ -18,13 +19,11 @@ def create_app():
         with app.app_context():
             try:
                 with db.engine.begin() as conn:
-                    # Check if table exists (PostgreSQL compatible)
                     result = conn.execute(text(
                         "SELECT 1 FROM information_schema.tables WHERE table_name='citas'"
                     ))
                     if result.first() is None:
                         return
-                    # Check if column exists
                     result = conn.execute(text(
                         "SELECT 1 FROM information_schema.columns WHERE table_name='citas' AND column_name='servicio'"
                     ))
@@ -33,7 +32,25 @@ def create_app():
             except Exception as e:
                 print(f"Warning: Could not ensure citas.servicio column: {e}")
 
+    def ensure_servicios_imagen_column():
+        with app.app_context():
+            try:
+                with db.engine.begin() as conn:
+                    result = conn.execute(text(
+                        "SELECT 1 FROM information_schema.tables WHERE table_name='servicios'"
+                    ))
+                    if result.first() is None:
+                        return
+                    result = conn.execute(text(
+                        "SELECT 1 FROM information_schema.columns WHERE table_name='servicios' AND column_name='imagen'"
+                    ))
+                    if result.first() is None:
+                        conn.execute(text("ALTER TABLE servicios ADD COLUMN imagen VARCHAR(255)"))
+            except Exception as e:
+                print(f"Warning: Could not ensure servicios.imagen column: {e}")
+
     ensure_citas_servicio_column()
+    ensure_servicios_imagen_column()
 
  
     @login_manager.user_loader
