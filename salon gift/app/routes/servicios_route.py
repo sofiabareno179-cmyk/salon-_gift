@@ -40,7 +40,7 @@ def add(categoria):
         precio = request.form.get('precio')
         duracion = request.form.get('duracion')
         categoria_form = request.form.get('categoria') or categoria
-        
+        tip = request.form.get('tip')
         # Manejo de imagen
         imagen_filename = None
         if 'imagen' in request.files:
@@ -51,7 +51,6 @@ def add(categoria):
                 upload_path = os.path.join(current_app.root_path, 'static', 'uploads', 'servicios')
                 if not os.path.exists(upload_path):
                     os.makedirs(upload_path)
-                
                 file.save(os.path.join(upload_path, filename))
                 imagen_filename = filename
 
@@ -60,13 +59,12 @@ def add(categoria):
             precio=precio, 
             duracion=duracion, 
             categoria=categoria_form,
-            imagen=imagen_filename
+            imagen=imagen_filename,
+            tip=tip
         )
         db.session.add(nuevo_servicio)
         db.session.commit()
-        
         flash(f'Servicio "{nombre}" agregado exitosamente a {categoria_form}', 'success')
-        
         if categoria_form == 'peluqueria':
             return redirect(url_for('servicio.ver_peluqueria'))
         elif categoria_form == 'tratamiento':
@@ -85,7 +83,7 @@ def edit(id):
         servicio.precio = request.form.get('precio')
         servicio.duracion = request.form.get('duracion')
         servicio.categoria = request.form.get('categoria')
-        
+        servicio.tip = request.form.get('tip')
         # Manejo de nueva imagen si se sube
         if 'imagen' in request.files:
             file = request.files['imagen']
@@ -96,7 +94,6 @@ def edit(id):
                     os.makedirs(upload_path)
                 file.save(os.path.join(upload_path, filename))
                 servicio.imagen = filename
-        
         try:
             db.session.commit()
             flash("Servicio actualizado correctamente.", "success")
