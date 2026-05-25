@@ -58,29 +58,39 @@
                         </div>
                         
                         <div class="row">
-                            <!-- Price -->
-                            <div class="col-md-6">
-                                <div class="custom-input-group">
-                                    <label for="precio">Precio ($)</label>
-                                    <div class="input-icon-wrapper">
-                                        <i class="fas fa-tag"></i>
-                                        <input type="number" step="0.01" id="precio" name="precio" 
-                                               class="custom-input input-with-icon" placeholder="0.00" required>
-                                    </div>
+                        <!-- Price -->
+                        <div class="col-md-6">
+                            <div class="custom-input-group">
+                                <label for="precio">Precio ($)</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-tag"></i>
+                                    <input type="number" step="0.01" id="precio" name="precio" 
+                                           class="custom-input input-with-icon" placeholder="0.00" required>
                                 </div>
                             </div>
-                            
-                            <!-- Duration -->
-                            <div class="col-md-6">
-                                <div class="custom-input-group">
-                                    <label for="duracion">Duración (min)</label>
-                                    <div class="input-icon-wrapper">
-                                        <i class="fas fa-clock"></i>
-                                        <input type="number" id="duracion" name="duracion" 
-                                               class="custom-input input-with-icon" placeholder="30" required>
-                                    </div>
+                        </div>
+                        <!-- Duration -->
+                        <div class="col-md-6">
+                            <div class="custom-input-group">
+                                <label for="duracion">Duración (min)</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-clock"></i>
+                                    <input type="number" id="duracion" name="duracion" 
+                                           class="custom-input input-with-icon" placeholder="30" required>
                                 </div>
                             </div>
+                        </div>
+                        <!-- Tip del estilista -->
+                        <div class="col-12">
+                            <div class="custom-input-group">
+                                <label for="tip">Tip del estilista</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <input type="text" id="tip" name="tip" class="custom-input input-with-icon" placeholder="Ej. Usa termoprotector antes del calor">
+                                </div>
+                                <small class="text-muted">Comparte un consejo especial para este servicio (opcional).</small>
+                            </div>
+                        </div>
                         </div>
 
                         <div class="d-grid gap-3 mt-4">
@@ -98,4 +108,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock %}
