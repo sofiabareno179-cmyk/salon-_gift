@@ -10,6 +10,7 @@ class Recordatorios(db.Model, UserMixin):
     fecha_recordatorio = db.Column(db.String(100), nullable=False) 
 
     idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False)
+    cliente = db.relationship('User', back_populates='recordatorios')
 
     def __init__(self, titulo, mensaje, fecha_recordatorio):
         self.titulo = titulo

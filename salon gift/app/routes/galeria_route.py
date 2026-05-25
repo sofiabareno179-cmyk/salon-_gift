@@ -14,18 +14,27 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'mp4', 'webm', 'mov', 'avi'}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def es_video(filename):
+    return filename.rsplit('.', 1)[1].lower() in {'mp4', 'webm', 'mov', 'avi'}
+
 bp = Blueprint('galeria', __name__, url_prefix='/Galeria')
+
+@bp.route('/ver')
+@login_required
+def ver_galeria():
+    items = Galeria.query.order_by(Galeria.fecha_subida.desc()).all()
+    return render_template('galeria/ver_galeria.html', items=items)
 
 @bp.route('/')
 @login_required
 def index():
-    imagenes = Galeria.query.order_by(Galeria.fecha_subida.desc()).all()
-    return render_template('galeria/index.html', imagenes=imagenes)
+    items = Galeria.query.order_by(Galeria.fecha_subida.desc()).all()
+    return render_template('galeria/index.html', items=items)
 
 @bp.route('/nueva', methods=['GET', 'POST'])
 @login_required
@@ -34,29 +43,30 @@ def nueva():
     if request.method == 'POST':
         titulo = request.form.get('titulo')
         descripcion = request.form.get('descripcion')
-        file = request.files.get('imagen')
+        tipo = request.form.get('tipo', 'imagen')
+        file = request.files.get('archivo')
 
         if not titulo:
             flash('El título es obligatorio', 'danger')
             return redirect(url_for('galeria.nueva'))
 
         if not file or not file.filename:
-            flash('Debes seleccionar una imagen', 'danger')
+            flash('Debes seleccionar un archivo', 'danger')
             return redirect(url_for('galeria.nueva'))
 
         if not allowed_file(file.filename):
-            flash('Formato de imagen no válido (png, jpg, jpeg, gif, webp)', 'danger')
+            flash('Formato no válido (png, jpg, jpeg, gif, webp, mp4, webm, mov, avi)', 'danger')
             return redirect(url_for('galeria.nueva'))
 
         filename = secure_filename(file.filename)
         upload_dir = os.path.join(current_app.root_path, 'static', 'uploads', 'galeria')
         os.makedirs(upload_dir, exist_ok=True)
-        filepath = os.path.join(upload_dir, filename)
-        file.save(filepath)
+        file.save(os.path.join(upload_dir, filename))
 
-        imagen = Galeria(titulo=titulo, imagen=filename, descripcion=descripcion)
-        imagen.save()
-        flash('Imagen agregada a la galería', 'success')
+        tipo_real = 'video' if es_video(filename) else 'imagen'
+        item = Galeria(titulo=titulo, archivo=filename, tipo=tipo_real, descripcion=descripcion)
+        item.save()
+        flash(f'{"Video" if tipo_real == "video" else "Imagen"} agregado a la galería', 'success')
         return redirect(url_for('galeria.index'))
 
     return render_template('galeria/add.html')
@@ -65,19 +75,19 @@ def nueva():
 @login_required
 @admin_required
 def editar(id):
-    imagen = Galeria.query.get_or_404(id)
+    item = Galeria.query.get_or_404(id)
 
     if request.method == 'POST':
-        imagen.titulo = request.form.get('titulo')
-        imagen.descripcion = request.form.get('descripcion')
-        file = request.files.get('imagen')
+        item.titulo = request.form.get('titulo')
+        item.descripcion = request.form.get('descripcion')
+        file = request.files.get('archivo')
 
         if file and file.filename:
             if not allowed_file(file.filename):
-                flash('Formato de imagen no válido', 'danger')
+                flash('Formato no válido', 'danger')
                 return redirect(url_for('galeria.editar', id=id))
 
-            old_path = os.path.join(current_app.root_path, 'static', 'uploads', 'galeria', imagen.imagen)
+            old_path = os.path.join(current_app.root_path, 'static', 'uploads', 'galeria', item.archivo)
             if os.path.exists(old_path):
                 os.remove(old_path)
 
@@ -85,23 +95,24 @@ def editar(id):
             upload_dir = os.path.join(current_app.root_path, 'static', 'uploads', 'galeria')
             os.makedirs(upload_dir, exist_ok=True)
             file.save(os.path.join(upload_dir, filename))
-            imagen.imagen = filename
+            item.archivo = filename
+            item.tipo = 'video' if es_video(filename) else 'imagen'
 
         db.session.commit()
-        flash('Imagen actualizada', 'info')
+        flash('Elemento actualizado', 'info')
         return redirect(url_for('galeria.index'))
 
-    return render_template('galeria/edit.html', imagen=imagen)
+    return render_template('galeria/edit.html', item=item)
 
 @bp.route('/eliminar/<int:id>', methods=['POST'])
 @login_required
 @admin_required
 def eliminar(id):
-    imagen = Galeria.query.get_or_404(id)
-    file_path = os.path.join(current_app.root_path, 'static', 'uploads', 'galeria', imagen.imagen)
+    item = Galeria.query.get_or_404(id)
+    file_path = os.path.join(current_app.root_path, 'static', 'uploads', 'galeria', item.archivo)
     if os.path.exists(file_path):
         os.remove(file_path)
-    db.session.delete(imagen)
+    db.session.delete(item)
     db.session.commit()
-    flash('Imagen eliminada de la galería', 'warning')
+    flash('Elemento eliminado de la galería', 'warning')
     return redirect(url_for('galeria.index'))

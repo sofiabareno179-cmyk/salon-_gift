@@ -1,0 +1,167 @@
+body.promo-page {
+    --pastel-gradient: linear-gradient(135deg, #fde4b3 0%, #f8d5a3 50%, #f5c98a 100%);
+    --accent: #d4a058;
+    --pastel-text: #8a6a3a;
+    --card-shadow: 0 15px 40px rgba(248, 213, 163, 0.15);
+}
+
+body.promo-page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.promo-page {
+    background: linear-gradient(135deg, #fef8f0 0%, #fdf5ee 50%, #fffaf5 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body.promo-page .container {
+    max-width: 700px;
+    width: 100%;
+    padding: 2rem;
+}
+
+body.promo-page .card-luxury {
+    border: none;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    background: linear-gradient(145deg, #ffffff 0%, #fefefe 50%, #f8f8f8 100%);
+    overflow: hidden;
+}
+
+body.promo-page .card-header-gold {
+    background: var(--pastel-gradient);
+    padding: 2rem 1rem;
+    text-align: center;
+    border-bottom: none;
+}
+
+body.promo-page .card-header-gold h5 {
+    color: var(--pastel-text);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+body.promo-page .card-body {
+    padding: 2.5rem;
+}
+
+body.promo-page .form-label {
+    display: block;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+body.promo-page .form-group {
+    margin-bottom: 25px;
+}
+
+body.promo-page .input-luxury-wrapper {
+    border: 2px solid #f5e6d0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(248, 213, 163, 0.1);
+}
+
+body.promo-page .input-luxury-wrapper:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(248, 213, 163, 0.3);
+    transform: translateY(-2px);
+}
+
+body.promo-page .input-luxury-wrapper i {
+    color: var(--accent);
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+body.promo-page .input-luxury-wrapper input,
+body.promo-page .input-luxury-wrapper textarea {
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+    color: #555;
+    outline: none;
+    resize: vertical;
+}
+
+body.promo-page .input-luxury-wrapper textarea {
+    min-height: 100px;
+}
+
+body.promo-page .action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+body.promo-page .btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.9rem;
+    border: none;
+}
+
+body.promo-page .btn-gold {
+    background: var(--pastel-gradient);
+    color: var(--pastel-text);
+}
+
+body.promo-page .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(248, 213, 163, 0.4);
+}
+
+body.promo-page .btn-outline {
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+}
+
+body.promo-page .btn-outline:hover {
+    background: var(--pastel-gradient);
+    color: var(--pastel-text);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+body.promo-page .form-check-input:checked {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+body.promo-page .form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+body.promo-page .form-check-label {
+    font-weight: 600;
+    color: var(--pastel-text);
+}

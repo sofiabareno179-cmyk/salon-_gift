@@ -57,11 +57,12 @@
         </div>
     </section>
 
-    <!-- Banner de Promoción -->
+    {% if promo %}
     <div class="promo-banner">
-        <h3 style="color: var(--dark-pink);">✨ Promo del Mes ✨</h3>
-        <p>Trae a una amiga y ambas obtienen un <strong>15% de descuento</strong> en tratamientos de hidratación.</p>
+        <h3 style="color: var(--dark-pink);">{{ promo.titulo }}</h3>
+        <p>{{ promo.descripcion }}</p>
     </div>
+    {% endif %}
 </div>
 
 <!-- Botones Flotantes -->

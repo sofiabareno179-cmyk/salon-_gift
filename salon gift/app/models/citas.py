@@ -10,7 +10,7 @@ class Citas(db.Model, UserMixin):
     servicio = db.Column(db.String(150), nullable=True)
 
     idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False)
-    # Relación 1:1 con Servicio
+    cliente = db.relationship('User', back_populates='citas')
     servicios = db.relationship('Servicio', back_populates='citas', uselist=False)
 
     def get_id(self):
