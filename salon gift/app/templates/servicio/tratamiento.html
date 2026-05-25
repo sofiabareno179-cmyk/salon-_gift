@@ -37,14 +37,9 @@
         animation: float-spa 20s infinite alternate;
     }
 
-    @keyframes float-spa {
-        from {
-            transform: translate(0, 0) scale(1);
-        }
-
-        to {
-            transform: translate(50px, -40px) scale(1.1);
-        }
+    @keyframes drift {
+        from { transform: translate(0,0) rotate(0deg); }
+        to { transform: translate(20px, 30px) rotate(10deg); }
     }
 
     .services-container h1 {
@@ -105,12 +100,13 @@
 
     .img-wrapper {
         width: 100%;
-        height: 280px;
-        border-radius: 25px 25px 15px 15px;
+        height: 220px;
+        border-radius: 12px;
         margin-bottom: 20px;
-        background: #e0f2f1;
+        background: #f5f3ef;
         position: relative;
         overflow: hidden;
+        box-shadow: 0 12px 28px rgba(28, 24, 18, 0.08);
     }
 
     /* Efecto de frescura acuática */
@@ -134,11 +130,14 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 1.2s ease;
+        object-position: center;
+        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        filter: grayscale(15%);
     }
 
-    .card-treatment:hover .img-wrapper img {
-        transform: scale(1.05);
+    .card-treatment:hover .img-placeholder img {
+        transform: scale(1.03);
+        filter: grayscale(0%);
     }
 
     .card-treatment h3 {
@@ -196,9 +195,8 @@
 
     <div class="gallery-grid">
         <div class="card-treatment">
-            <div class="img-wrapper">
-                <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    alt="Limpieza Facial">
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/37033485/pexels-photo-37033485.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Limpieza Facial">
             </div>
             <h3>Limpieza Profunda</h3>
             <div class="details">
@@ -209,9 +207,8 @@
         </div>
 
         <div class="card-treatment">
-            <div class="img-wrapper">
-                <img src="https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    alt="Masaje Relajante">
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/35341712/pexels-photo-35341712.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Aplicación de Maquillaje">
             </div>
             <h3>Masaje de Piedras</h3>
             <div class="details">
@@ -222,9 +219,8 @@
         </div>
 
         <div class="card-treatment">
-            <div class="img-wrapper">
-                <img src="https://images.pexels.com/photos/6663571/pexels-photo-6663571.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    alt="Exfoliación Corporal">
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/36436445/pexels-photo-36436445.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Exfoliación">
             </div>
             <h3>Exfoliación Orgánica</h3>
             <div class="details">
@@ -237,7 +233,7 @@
         <!-- Dynamic Services Added by User -->
         {% for s in servicios %}
         <div class="card-treatment">
-            <div class="img-wrapper">
+            <div class="img-placeholder">
                 {% if s.imagen %}
                 <img src="{{ url_for('static', filename='uploads/servicios/' + s.imagen) }}" alt="{{ s.nombre }}">
                 {% else %}

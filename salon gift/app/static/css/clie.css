@@ -77,40 +77,76 @@ body.client-page .appointments-reminder {
 }
 
 /* 4. Grid de Servicios */
-body.client-page .services-grid { 
-    padding: 40px 0; 
+body.client-page .services-grid {
+    padding: 60px 0 40px;
+}
+
+body.client-page .services-grid h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 40px;
+    color: #333;
 }
 
 body.client-page .cards-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    align-items: stretch;
+    justify-items: center;
     margin-top: 30px;
 }
 
 body.client-page .service-card {
     text-decoration: none;
-    color: var(--text-color);
-    background: var(--white);
-    padding: 30px;
-    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 350px;
+    padding: 40px 30px;
+    border-radius: 24px;
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid var(--pastel-pink);
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    min-height: 280px;
 }
 
 body.client-page .service-card:hover {
-    transform: translateY(-8px);
-    background-color: var(--nude-bg);
-    box-shadow: 0 15px 30px rgba(216, 27, 96, 0.08);
-    border-color: var(--soft-pink);
+    transform: translateY(-10px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
 }
 
 body.client-page .service-card i {
-    font-size: 2.5rem;
-    color: var(--soft-pink);
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+body.client-page .service-card h3 {
     margin-bottom: 15px;
-    display: block; /* Asegura que el icono esté arriba del texto */
+    font-size: 1.5rem;
+}
+
+body.client-page .service-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #555;
+}
+
+body.client-page .pastel-pink {
+    background-color: #FCE4EC;
+    color: #AD1457;
+}
+
+body.client-page .pastel-blue {
+    background-color: #E3F2FD;
+    color: #1565C0;
+}
+
+body.client-page .pastel-green {
+    background-color: #E8F5E9;
+    color: #2E7D32;
 }
 
 /* 5. Banner Promocional */

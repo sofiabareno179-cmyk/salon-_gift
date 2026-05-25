@@ -99,12 +99,13 @@
 
     .img-placeholder {
         width: 100%;
-        height: 280px;
-        border-radius: 25px 25px 10px 10px;
+        height: 220px;
+        border-radius: 12px;
         margin-bottom: 20px;
-        background: #fce4ec;
+        background: #f3e8ff;
         position: relative;
         overflow: hidden;
+        box-shadow: 0 12px 28px rgba(28, 24, 18, 0.08);
     }
 
     .img-placeholder::after {
@@ -127,11 +128,12 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.8s ease;
+        object-position: center;
+        transition: transform 1.2s ease;
     }
 
     .card-nail:hover .img-placeholder img {
-        transform: scale(1.1);
+        transform: scale(1.03);
     }
 
     .card-nail h3 {
