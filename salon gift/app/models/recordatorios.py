@@ -11,11 +11,10 @@ class Recordatorios(db.Model, UserMixin):
 
     idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False)
 
-    def __init__(self, titulo, mensaje, fecha_recordatorio, prioridad):
+    def __init__(self, titulo, mensaje, fecha_recordatorio):
         self.titulo = titulo
         self.mensaje = mensaje
         self.fecha_recordatorio = fecha_recordatorio
-        self.prioridad = prioridad
 
     def get_id(self):
         return str(self.idrecordatorios)

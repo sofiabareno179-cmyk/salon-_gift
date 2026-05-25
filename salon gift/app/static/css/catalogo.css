@@ -1,0 +1,398 @@
+body.catalogo-page {
+    --pastel-gradient: linear-gradient(135deg, #a8d8ea 0%, #c5e5f5 50%, #8fcbdf 100%);
+    --accent: #5fa8c7;
+    --pastel-text: #3d7a99;
+    --card-shadow: 0 15px 40px rgba(168, 216, 234, 0.15);
+}
+
+body.catalogo-page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.catalogo-page {
+    background: linear-gradient(135deg, #f0f8fc 0%, #f5fafd 50%, #edf7fb 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.catalogo-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+}
+
+.catalogo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(168, 216, 234, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(168, 216, 234, 0.12);
+}
+
+.catalogo-header h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--pastel-text);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.catalogo-header h2 i {
+    color: var(--accent);
+    font-size: 1.5rem;
+}
+
+.btn-catalogo-new {
+    background: var(--pastel-gradient);
+    border: none;
+    border-radius: 12px;
+    padding: 10px 22px;
+    color: var(--pastel-text);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 18px rgba(168, 216, 234, 0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-catalogo-new:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(168, 216, 234, 0.35);
+    color: var(--pastel-text);
+    filter: brightness(1.05);
+}
+
+.catalogo-table-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(168, 216, 234, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(168, 216, 234, 0.12);
+    overflow: hidden;
+}
+
+.catalogo-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.catalogo-table thead {
+    background: var(--pastel-gradient);
+}
+
+.catalogo-table thead th {
+    color: var(--pastel-text);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 20px 22px;
+    border: none;
+    text-align: left;
+}
+
+.catalogo-table thead th:first-child {
+    padding-left: 28px;
+}
+
+.catalogo-table tbody tr {
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(168, 216, 234, 0.1);
+}
+
+.catalogo-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.catalogo-table tbody tr:hover {
+    background: rgba(168, 216, 234, 0.06);
+}
+
+.catalogo-table tbody td {
+    padding: 18px 22px;
+    vertical-align: middle;
+    color: #555;
+    font-size: 1.05rem;
+}
+
+.catalogo-table tbody td:first-child {
+    padding-left: 28px;
+}
+
+.item-name {
+    font-weight: 700;
+    color: #3a5a6a;
+    font-size: 1rem;
+}
+
+.item-category {
+    display: inline-block;
+    padding: 5px 16px;
+    border-radius: 50px;
+    background: var(--pastel-gradient);
+    color: var(--pastel-text);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.item-price {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.05rem;
+}
+
+.item-desc {
+    color: #999;
+    font-size: 0.9rem;
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-catalogo-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-cat-edit {
+    background: rgba(168, 216, 234, 0.2);
+    color: #5a8a9a;
+}
+
+.btn-cat-edit:hover {
+    background: #8fcbdf;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(168, 216, 234, 0.3);
+}
+
+.btn-cat-delete {
+    background: rgba(248, 180, 180, 0.2);
+    color: #b06060;
+}
+
+.btn-cat-delete:hover {
+    background: #f5a0a0;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 160, 160, 0.3);
+}
+
+.catalogo-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.catalogo-empty i {
+    font-size: 3rem;
+    color: #c8dce8;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.catalogo-empty p {
+    font-size: 1rem;
+    color: #a8c0d0;
+    font-weight: 500;
+    margin: 0;
+}
+
+.catalogo-alert {
+    border-radius: 14px;
+    border: none;
+    padding: 14px 20px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+body.catalogo-page .card-luxury {
+    border: none;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    background: linear-gradient(145deg, #ffffff 0%, #fefefe 50%, #f8f8f8 100%);
+    overflow: hidden;
+}
+
+body.catalogo-page .card-header-gold {
+    background: var(--pastel-gradient);
+    padding: 2rem 1rem;
+    text-align: center;
+    border-bottom: none;
+}
+
+body.catalogo-page .card-header-gold h5 {
+    color: var(--pastel-text);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+body.catalogo-page .card-body {
+    padding: 2.5rem;
+}
+
+body.catalogo-page .form-label {
+    display: block;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+body.catalogo-page .form-group {
+    margin-bottom: 25px;
+}
+
+body.catalogo-page .input-luxury-wrapper {
+    border: 2px solid #d4edf5;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(168, 216, 234, 0.1);
+}
+
+body.catalogo-page .input-luxury-wrapper:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(168, 216, 234, 0.3);
+    transform: translateY(-2px);
+}
+
+body.catalogo-page .input-luxury-wrapper i {
+    color: var(--accent);
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+body.catalogo-page .input-luxury-wrapper input,
+body.catalogo-page .input-luxury-wrapper textarea {
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+    color: #555;
+    outline: none;
+    resize: vertical;
+}
+
+body.catalogo-page .input-prefix {
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-right: 10px;
+}
+
+body.catalogo-page .action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+body.catalogo-page .btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+body.catalogo-page .btn-gold {
+    background: var(--pastel-gradient);
+    color: var(--pastel-text);
+    border: none;
+}
+
+body.catalogo-page .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(168, 216, 234, 0.4);
+}
+
+body.catalogo-page .btn-pink-outline {
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+}
+
+body.catalogo-page .btn-pink-outline:hover {
+    background: var(--pastel-gradient);
+    color: var(--pastel-text);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .catalogo-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .catalogo-table thead {
+        display: none;
+    }
+
+    .catalogo-table tbody tr {
+        display: block;
+        padding: 16px;
+        border-bottom: 2px solid #e5f0f5;
+    }
+
+    .catalogo-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border: none;
+    }
+
+    .catalogo-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: #a8c0d0;
+    }
+
+    .catalogo-table tbody td:first-child {
+        padding-left: 0;
+    }
+}

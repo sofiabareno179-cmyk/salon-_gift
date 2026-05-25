@@ -55,7 +55,7 @@ def editar_proveedor(id):
         flash('Información del proveedor actualizada', 'info')
         return redirect(url_for('proveedores.listar_proveedores'))
     
-    return render_template('proveedores/index.html', proveedor=proveedor)
+    return redirect(url_for('proveedores.listar_proveedores'))
 
 @bp.route('/proveedores/eliminar/<int:id>', methods=['POST'])
 @login_required

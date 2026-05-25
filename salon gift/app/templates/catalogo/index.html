@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Catálogo de Precios{% endblock %}
+{% block body_class %}catalogo-page{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/catalogo.css') }}">
+{% endblock %}
+{% block content %}
+<div class="catalogo-container">
+    <div class="catalogo-header">
+        <h2><i class="fas fa-dollar-sign"></i> Catálogo de Precios</h2>
+        {% if current_user.rol == 'admin' %}
+        <a href="{{ url_for('catalogo.nuevo') }}" class="btn-catalogo-new">
+            <i class="fas fa-plus-circle"></i> Agregar al Catálogo
+        </a>
+        {% endif %}
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} catalogo-alert alert-dismissible fade show" role="alert">
+            <i class="fas {% if category == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %} me-2"></i>
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="catalogo-table-card">
+        <div class="table-responsive">
+            <table class="catalogo-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td><span class="item-name">{{ item.nombre }}</span></td>
+                        <td><span class="item-category">{{ item.categoria }}</span></td>
+                        <td><span class="item-price">${{ "%.2f"|format(item.precio) }}</span></td>
+                        <td><span class="item-desc">{{ item.descripcion[:50] }}{% if item.descripcion and item.descripcion|length > 50 %}...{% endif %}</span></td>
+                        <td>
+                            {% if current_user.rol == 'admin' %}
+                            <div class="btn-group" style="gap: 6px;">
+                                <a href="{{ url_for('catalogo.editar', id=item.idcatalogo) }}" class="btn-catalogo-action btn-cat-edit" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="{{ url_for('catalogo.eliminar', id=item.idcatalogo) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn-catalogo-action btn-cat-delete" onclick="return confirm('¿Eliminar {{ item.nombre }}?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5">
+                            <div class="catalogo-empty">
+                                <i class="fas fa-tags"></i>
+                                <p>No hay elementos en el catálogo de precios.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

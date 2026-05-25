@@ -1,51 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Tratamientos & Renovación{% endblock %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
 <style>
     /* Importación de fuentes */
-    @import url('https://googleapis.com');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
 
     .services-container {
-        padding: 100px 20px;
+        padding: 80px 20px;
         text-align: center;
-        background: #fcfcfb;
-        background-image: 
-            radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.05) 0, transparent 50%), 
-            radial-gradient(at 100% 100%, rgba(26, 26, 26, 0.02) 0, transparent 50%);
-        font-family: 'Inter', sans-serif;
+        background: #f7faf9;
+        /* Fondo menta muy sutil */
+        background-image:
+            radial-gradient(at 0% 0%, rgba(200, 230, 220, 0.3) 0, transparent 50%),
+            radial-gradient(at 100% 100%, rgba(220, 240, 235, 0.4) 0, transparent 50%);
+        font-family: 'Montserrat', sans-serif;
         position: relative;
         overflow: hidden;
     }
 
-    /* Decoración de fondo sutil y madura */
+    /* Decoraciones animadas (Estilo gotas de agua o spa) */
     .services-container::after {
         content: "";
         position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        filter: blur(70px);
         z-index: 0;
         opacity: 0.3;
-        width: 400px;
-        height: 400px;
-        background: #dfd5c6;
+        width: 450px;
+        height: 450px;
+        background: #b2dfdb;
         bottom: -100px;
-        right: -100px;
-        animation: drift 20s infinite alternate-reverse;
+        left: -100px;
+        animation: float-spa 20s infinite alternate;
     }
 
-    @keyframes drift {
-        from { transform: translate(0,0) rotate(0deg); }
-        to { transform: translate(20px, 30px) rotate(10deg); }
+    @keyframes float-spa {
+        from {
+            transform: translate(0, 0) scale(1);
+        }
+
+        to {
+            transform: translate(50px, -40px) scale(1.1);
+        }
     }
 
     .services-container h1 {
         position: relative;
         z-index: 1;
         font-family: 'Playfair Display', serif;
-        font-size: 3.5rem;
-        color: #1a1a1a;
-        margin-bottom: 10px;
-        font-weight: 400;
-        letter-spacing: -0.5px;
+        font-size: 3rem;
+        color: #1a3a34;
+        /* Verde muy oscuro botánico */
+        margin-bottom: 5px;
+        font-weight: 700;
     }
 
     .services-subtitle {
@@ -53,226 +63,175 @@
         z-index: 1;
         font-family: 'Playfair Display', serif;
         font-style: italic;
-        color: #94ebc8d0;
-        font-size: 1.25rem;
-        margin-bottom: 60px;
+        color: #4db6ac;
+        /* Verde menta principal */
+        font-size: 1.2rem;
+        margin-bottom: 50px;
         display: block;
     }
 
     .services-subtitle::after {
         content: "";
         display: block;
-        width: 40px;
-        height: 1px;
-        background: #a9ffa1eb;
-        margin: 20px auto 0 auto;
+        width: 60px;
+        height: 2px;
+        background: #b2dfdb;
+        margin: 15px auto;
     }
 
     .gallery-grid {
         position: relative;
         z-index: 1;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 40px;
-        max-width: 1200px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1100px;
         margin: 0 auto;
     }
 
     .card-treatment {
-        background: #ffffff;
-        border-radius: 4px;
-        padding: 24px;
-        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        border: 1px solid #f0ede6;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-        display: flex;
-        flex-direction: column;
-        text-align: left;
+        background: white;
+        border-radius: 30px 30px 15px 15px;
+        padding: 20px;
+        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid rgba(178, 223, 219, 0.2);
+        box-shadow: 0 10px 30px rgba(77, 182, 172, 0.08);
     }
 
     .card-treatment:hover {
-        transform: translateY(-8px);
-        border-color: #36b89a;
-        box-shadow: 0 20px 40px rgba(138, 122, 95, 0.1);
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(77, 182, 172, 0.15);
     }
 
-    .img-placeholder {
+    .img-wrapper {
         width: 100%;
-        height: 300px;
-        border-radius: 2px;
-        margin-bottom: 24px;
-        background: #f5f3ef;
+        height: 280px;
+        border-radius: 25px 25px 15px 15px;
+        margin-bottom: 20px;
+        background: #e0f2f1;
         position: relative;
         overflow: hidden;
     }
 
-    .img-placeholder::after {
+    /* Efecto de frescura acuática */
+    .img-wrapper::after {
         content: "";
         position: absolute;
         top: -50%;
         left: -100%;
         width: 50%;
         height: 200%;
-        background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
-        transform: rotate(30deg);
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+        transform: rotate(20deg);
         transition: 0.8s;
     }
 
-    .card-treatment:hover .img-placeholder::after {
+    .card-treatment:hover .img-wrapper::after {
         left: 150%;
     }
 
-    .img-placeholder img {
+    .img-wrapper img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        filter: grayscale(15%);
+        transition: transform 1.2s ease;
     }
 
-    .card-treatment:hover .img-placeholder img {
+    .card-treatment:hover .img-wrapper img {
         transform: scale(1.05);
-        filter: grayscale(0%);
     }
 
     .card-treatment h3 {
         font-family: 'Playfair Display', serif;
-        font-size: 1.6rem;
-        color: #1a1a1a;
-        margin: 0 0 12px 0;
-        font-weight: 600;
-    }
-
-    .hair-tip {
-        font-size: 0.9rem;
-        color: #5a5a5a;
-        line-height: 1.6;
-        margin-bottom: auto; /* Empuja los detalles hacia abajo de forma limpia */
-    }
-
-    .hair-tip strong {
-        color: #8a7a5f;
-        font-weight: 500;
+        font-size: 1.5rem;
+        color: #264653;
+        margin: 10px 0;
     }
 
     .details {
-        border-top: 1px solid #f0ede6;
-        border-bottom: 1px solid #f0ede6;
-        padding: 16px 0;
-        margin: 24px 0;
+        border-top: 1px solid #e0f2f1;
+        border-bottom: 1px solid #e0f2f1;
+        padding: 12px 0;
+        margin: 15px 0;
         display: flex;
-        justify-content: space-between;
-        color: #333333;
-        font-size: 0.9rem;
-    }
-
-    .details span {
-        display: flex;
-        flex-direction: column;
+        justify-content: space-around;
+        color: #666;
+        font-size: 0.85rem;
     }
 
     .details strong {
-        color: #8a7a5f;
-        font-size: 0.75rem;
+        display: block;
+        color: #4db6ac;
+        font-size: 0.7rem;
         text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 4px;
-        font-weight: 500;
+        letter-spacing: 1px;
     }
 
     .btn-treatment {
-        background: #1a1a1a;
-        color: #ffffff;
-        border: 1px solid #1a1a1a;
+        background: linear-gradient(135deg, #80cbc4 0%, #4db6ac 100%);
+        color: white;
+        border: none;
         padding: 16px;
-        border-radius: 2px;
+        border-radius: 12px;
         text-transform: uppercase;
-        font-size: 0.8rem;
-        letter-spacing: 2.5px;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
         cursor: pointer;
-        transition: all 0.4s ease;
+        transition: 0.4s;
         width: 100%;
-        font-weight: 400;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        box-sizing: border-box;
+        font-weight: 600;
     }
 
     .btn-treatment:hover {
-        background: #ffffff;
-        color: #1a1a1a;
-        border-color: #1a1a1a;
-        box-shadow: none;
+        filter: brightness(1.05);
+        box-shadow: 0 8px 15px rgba(77, 182, 172, 0.3);
     }
 </style>
 {% endblock %}
 
 {% block content %}
 <section class="services-container">
-
     <h1>Tratamientos & Bienestar</h1>
     <span class="services-subtitle">Renueva tu piel, revitaliza tu espíritu</span>
 
-    <h1>Tratamientos de Bienestar</h1>
-    <span class="services-subtitle">Renueva tu piel y equilibra tu cuerpo</span>
-
     <div class="gallery-grid">
-        <!-- Servicio 1 -->
         <div class="card-treatment">
-
             <div class="img-wrapper">
                 <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600"
                     alt="Limpieza Facial">
-
-            <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/37033485/pexels-photo-37033485.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Limpieza Facial">
             </div>
-            <h3>Limpieza Facial</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos para una piel perfecta no es el producto más caro, sino el orden de aplicación y la temperatura del agua. Una rutina mal ejecutada puede deshidratar tu rostro o causar flacidez.</p>
+            <h3>Limpieza Profunda</h3>
             <div class="details">
-                <span><strong>Precio</strong> $60.000 – $150.000</span>
-                <span><strong>Tiempo</strong> 1 a 1.5 horas</span>
+                <span><strong>Precio</strong> $75.000</span>
+                <span><strong>Tiempo</strong> 60 min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+            <button class="btn-treatment">Reservar Experiencia</button>
         </div>
 
-        <!-- Servicio 2 -->
         <div class="card-treatment">
-
             <div class="img-wrapper">
                 <img src="https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?auto=compress&cs=tinysrgb&w=600"
                     alt="Masaje Relajante">
-
-            <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/35341712/pexels-photo-35341712.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Aplicacion de Maquillaje">
             </div>
-            <h3>Aplicación de Maquillaje</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos Menos es más, cariño. Si saturas la piel de base para tapar imperfecciones, solo conseguirás sumar años. Es mejor corregir puntualmente y dejar que tu piel respire.</p>
+            <h3>Masaje de Piedras</h3>
             <div class="details">
-                <span><strong>Precio</strong> $80.000 – $180.000</span>
-                <span><strong>Tiempo</strong> 45 a 90 minutos</span>
+                <span><strong>Precio</strong> $95.000</span>
+                <span><strong>Tiempo</strong> 90 min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+            <button class="btn-treatment">Reservar Experiencia</button>
         </div>
 
-        <!-- Servicio 3 -->
         <div class="card-treatment">
-
             <div class="img-wrapper">
                 <img src="https://images.pexels.com/photos/6663571/pexels-photo-6663571.jpeg?auto=compress&cs=tinysrgb&w=600"
                     alt="Exfoliación Corporal">
-
-            <div class="img-placeholder">
-                <img src="https://images.pexels.com/photos/36436445/pexels-photo-36436445.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Exfoliación">
             </div>
-            <h3>Exfoliación</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos Al retirar las células muertas, tu piel queda sensible al sol. Si te exfolias de día, el protector solar es sagrado. Mi consejo de salón: hazlo siempre de noche para que la piel se regenere mientras duermes.</p>
+            <h3>Exfoliación Orgánica</h3>
             <div class="details">
-                <span><strong>Precio</strong> $90.000 – $180.000</span>
-                <span><strong>Tiempo</strong> 45 a 75 minutos</span>
+                <span><strong>Precio</strong> $80.000</span>
+                <span><strong>Tiempo</strong> 75 min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+            <button class="btn-treatment">Reservar Experiencia</button>
         </div>
 
         <!-- Dynamic Services Added by User -->
