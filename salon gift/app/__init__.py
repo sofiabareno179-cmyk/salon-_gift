@@ -13,45 +13,6 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
-
-
-    def ensure_citas_servicio_column():
-        with app.app_context():
-            try:
-                with db.engine.begin() as conn:
-                    result = conn.execute(text(
-                        "SELECT 1 FROM information_schema.tables WHERE table_name='citas'"
-                    ))
-                    if result.first() is None:
-                        return
-                    result = conn.execute(text(
-                        "SELECT 1 FROM information_schema.columns WHERE table_name='citas' AND column_name='servicio'"
-                    ))
-                    if result.first() is None:
-                        conn.execute(text("ALTER TABLE citas ADD COLUMN servicio VARCHAR(100)"))
-            except Exception as e:
-                print(f"Warning: Could not ensure citas.servicio column: {e}")
-
-    def ensure_servicios_imagen_column():
-        with app.app_context():
-            try:
-                with db.engine.begin() as conn:
-                    result = conn.execute(text(
-                        "SELECT 1 FROM information_schema.tables WHERE table_name='servicios'"
-                    ))
-                    if result.first() is None:
-                        return
-                    result = conn.execute(text(
-                        "SELECT 1 FROM information_schema.columns WHERE table_name='servicios' AND column_name='imagen'"
-                    ))
-                    if result.first() is None:
-                        conn.execute(text("ALTER TABLE servicios ADD COLUMN imagen VARCHAR(255)"))
-            except Exception as e:
-                print(f"Warning: Could not ensure servicios.imagen column: {e}")
-
-    ensure_citas_servicio_column()
-    ensure_servicios_imagen_column()
-
  
     @login_manager.user_loader
     def load_user(idusuario):
@@ -62,8 +23,8 @@ def create_app():
     from app.routes import (
         auth,agenda_route,citas_route,inventario_route,
         producto_route,proveedores_route,recordatorios_route,
-        usuarios_route, servicios_route,perfil_route
-    
+        usuarios_route, servicios_route,perfil_route,
+        galeria_route,catalogo_route,notificaciones_route
     )
     app.register_blueprint(auth.bp)
     app.register_blueprint(agenda_route.bp)
@@ -75,6 +36,9 @@ def create_app():
     app.register_blueprint(usuarios_route.bp)
     app.register_blueprint(servicios_route.bp)
     app.register_blueprint(perfil_route.bp)
+    app.register_blueprint(galeria_route.bp)
+    app.register_blueprint(catalogo_route.bp)
+    app.register_blueprint(notificaciones_route.bp)
 
     @app.errorhandler(Exception)
     

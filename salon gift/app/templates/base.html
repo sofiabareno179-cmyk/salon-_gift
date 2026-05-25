@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Salon Glitt{% endblock %}</title>
-
-     <link rel="icon" href="data:,">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20260525">
     {% block extra_css %}{% endblock %}
@@ -18,12 +15,23 @@
         <nav class="nav-container">
             <div class="nav-logo">
              <a href="{{ url_for('user.inicio') }}">
-                    <i class="fas fa-scissors"></i> Salon<span>Glitt</span>
+                    <i class="fas fa-scissors"></i> Salon<span>Gift</span>
                 </a>
             </div>
             <ul class="nav-links">
                 <li><a href="{{ url_for('user.inicio') }}">Inicio</a></li>
                 {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('galeria.index') }}">Galería</a></li>
+                    <li><a href="{{ url_for('catalogo.index') }}">Catálogo</a></li>
+                    <li>
+                        <a href="{{ url_for('notificaciones.index') }}" class="nav-notif-link">
+                            <i class="fas fa-bell"></i>
+                            {% set no_leidas = current_user.notificaciones|selectattr('leida', 'equalto', false)|list %}
+                            {% if no_leidas|length > 0 %}
+                            <span class="notif-badge">{{ no_leidas|length }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
                     <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a></li>
                 {% else %}
                     <li><a href="{{ url_for('auth.login') }}" class="btn-login">Iniciar Sesión</a></li>

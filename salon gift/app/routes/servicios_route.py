@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, flash, current_app
 from app.models.servicios import Servicio 
+from flask_login import login_required
 from app import db
 import os
 from werkzeug.utils import secure_filename
@@ -11,10 +12,11 @@ def allowed_file(filename):
 
 bp = Blueprint('servicio', __name__, url_prefix='/Servicio')
 
-#  VISTAS PARA EL FRONTEND 
+# --- VISTAS PARA EL FRONTEND ---
 
 @bp.route('/peluqueria')
 def ver_peluqueria():
+    # Filtramos por categoría para que la página sea específica
     servicios = Servicio.query.filter_by(categoria='peluqueria').all() 
     return render_template('servicio/peluqueria.html', servicios=servicios)
 
@@ -28,9 +30,10 @@ def manicure():
     servicios = Servicio.query.filter_by(categoria='manicure').all() 
     return render_template('servicio/manicure.html', servicios=servicios)
 
-# OPERACIONES CRUD 
+# --- OPERACIONES CRUD ---
 
 @bp.route('/servicios/add/<categoria>', methods=['GET', 'POST'])
+@login_required
 def add(categoria):
     if request.method == 'POST':
         nombre = request.form.get('nombre')
@@ -59,8 +62,9 @@ def add(categoria):
             categoria=categoria_form,
             imagen=imagen_filename
         )
+        db.session.add(nuevo_servicio)
+        db.session.commit()
         
-
         flash(f'Servicio "{nombre}" agregado exitosamente a {categoria_form}', 'success')
         
         if categoria_form == 'peluqueria':
@@ -70,28 +74,10 @@ def add(categoria):
         elif categoria_form == 'manicure':
             return redirect(url_for('servicio.manicure'))
         return redirect(url_for('servicio.index'))
-
-        try:
-            db.session.add(nuevo_servicio)
-            db.session.commit()
-            flash(f'Servicio "{nombre}" agregado exitosamente', 'success')
-            
-            # Redirección dinámica basada en la categoría
-            vistas = {
-                'peluqueria': 'servicio.ver_peluqueria',
-                'tratamiento': 'servicio.tratamientos',
-                'manicure': 'servicio.manicure'
-            }
-            # Si la categoría no está en el mapa, vuelve al index
-            return redirect(url_for(vistas.get(categoria, 'servicio.index')))
-            
-        except Exception as e:
-            db.session.rollback()
-            flash(f"Error al guardar: {str(e)}", "danger")
-
     return render_template('servicio/add_servicio.html', categoria=categoria)
 
 @bp.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
 def edit(id):
     servicio = Servicio.query.get_or_404(id)  
     if request.method == 'POST':
@@ -114,15 +100,15 @@ def edit(id):
         try:
             db.session.commit()
             flash("Servicio actualizado correctamente.", "success")
-            # Cambié 'indexjs' por 'index' que es la ruta que tienes definida abajo
-            return redirect(url_for('servicio.index')) 
+            return redirect(url_for('servicio.index'))
         except Exception as e:
             db.session.rollback()
             flash(f"Error al actualizar: {str(e)}", "danger")
 
     return render_template('servicio/edit.html', servicio=servicio)
 
-@bp.route('/delete/<int:id>')
+@bp.route('/delete/<int:id>', methods=['POST'])
+@login_required
 def delete(id):
     servicio = Servicio.query.get_or_404(id)
     try:
@@ -135,15 +121,14 @@ def delete(id):
         
     return redirect(url_for('servicio.index'))
 
-#  VISTA GENERAL Y API 
+# --- API / JSON ---
 
 @bp.route('/')
 def index():
+    # Traemos todos los servicios sin filtrar por categoría
     servicios = Servicio.query.all() 
     return render_template('servicio/index.html', servicios=servicios)
-
-@bp.route('/api/servicios/<int:id>', methods=['GET'])
+@bp.route('/servicios/<int:id>', methods=['GET'])
 def get_servicio(id):
     servicio = Servicio.query.get_or_404(id)
-    # Asegúrate de que tu modelo Servicio tenga el método to_dict()
     return jsonify(servicio.to_dict()), 200

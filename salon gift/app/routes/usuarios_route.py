@@ -8,7 +8,7 @@ from app import db
 # Definición del Blueprint
 bp = Blueprint('user', __name__, url_prefix='/User')
 
-#  DECORADOR PARA ADMINISTRADORES 
+# --- DECORADOR PARA ADMINISTRADORES ---
 # Debe ir fuera de cualquier ruta para poder usarse en todo el blueprint
 def admin_required(f):
     @wraps(f)
@@ -19,14 +19,15 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-#  RUTAS PÚBLICAS 
+# --- RUTAS PÚBLICAS ---
 
 
 @bp.route('/inicio')
 def inicio(): 
     return render_template('home.html')
 
-#  RUTAS PRIVADAS (CLIENTE) 
+# --- RUTAS PRIVADAS (CLIENTE) ---
+
 @bp.route('/dashboard')
 @login_required
 def index():
@@ -39,7 +40,7 @@ def detail(id):
     user = User.query.get_or_404(id)
     return render_template('users/detail.html', user=user)
 
-#  RUTAS DE ADMINISTRADOR 
+# --- RUTAS DE ADMINISTRADOR ---
 
 @bp.route('/admin/dashboard')
 @login_required
@@ -100,7 +101,7 @@ def edit(id):
 
     return render_template('users/edit.html', user=user)
 
-@bp.route('/delete/<int:id>')
+@bp.route('/delete/<int:id>', methods=['POST'])
 @login_required
 @admin_required
 def delete(id):
@@ -110,7 +111,7 @@ def delete(id):
     flash("Usuario eliminado.", "warning")
     return redirect(url_for('user.index'))
 
-#API / JSON 
+# --- API / JSON ---
 
 @bp.route('/js')
 def indexjs():
