@@ -98,12 +98,13 @@
 
     .img-placeholder {
         width: 100%;
-        height: 300px;
-        border-radius: 2px;
-        margin-bottom: 24px;
+        height: 220px;
+        border-radius: 12px;
+        margin-bottom: 20px;
         background: #f3e8ff;
         position: relative;
         overflow: hidden;
+        box-shadow: 0 12px 28px rgba(28, 24, 18, 0.08);
     }
 
     .img-placeholder::after {
@@ -126,11 +127,12 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
         transition: transform 1.2s ease;
     }
 
     .card-nail:hover .img-placeholder img {
-        transform: scale(1.05);
+        transform: scale(1.03);
     }
 
     .card-nail h3 {
@@ -224,12 +226,8 @@
         <!-- Servicio 2 -->
         <div class="card-nail">
             <div class="img-placeholder">
-
-              <img src="https://images.pexels.com/photos/3997389/pexels-photo-3997389.jpeg?auto=compress&cs=tinysrgb&w=600"
+                <img src="https://images.pexels.com/photos/3997389/pexels-photo-3997389.jpeg?auto=compress&cs=tinysrgb&w=600"
                     alt="Pedicure Spa">
-
-                <img src="https://images.pexels.com/photos/18441298/pexels-photo-18441298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pedicure Spa">
-
             </div>
             <h3>Pedicure Spa</h3>
             <p class="hair-tip"><strong>Tip del estilista:</strong> Exfoliar e hidratar profundamente la planta del pie previene grietas y mantiene la piel suave por más tiempo.</p>
