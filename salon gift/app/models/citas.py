@@ -20,6 +20,10 @@ class Citas(db.Model, UserMixin):
         self.estado = estado
         self.idusuario = idusuario
 
+    @property
+    def fecha(self):
+        return self.fechahora
+
     def get_id(self):
         return str(self.idcitas)
 
