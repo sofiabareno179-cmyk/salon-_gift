@@ -5,12 +5,11 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-COPY requirements.txt ./
+COPY ["salon gift/requirements.txt", "requirements.txt"]
 RUN python -m pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-COPY . ./
-
+COPY ["salon gift", "."]
 RUN mkdir -p app/static/uploads/servicios
 
 EXPOSE 5000

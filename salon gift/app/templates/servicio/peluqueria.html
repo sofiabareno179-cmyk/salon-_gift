@@ -103,6 +103,7 @@
         box-shadow: 0 20px 40px rgba(155, 93, 229, 0.2);
     }
 
+<<<<<<< Updated upstream
     .img-wrapper {
         width: 100%;
         height: 280px;
@@ -139,6 +140,10 @@
 
     .card-hair:hover .img-wrapper img {
         transform: scale(1.1);
+=======
+    .card-hair:hover .img-placeholder img {
+        transform: scale(1.03);
+>>>>>>> Stashed changes
     }
 
     .card-hair h3 {
@@ -196,42 +201,73 @@
 
     <div class="gallery-grid">
         <div class="card-hair">
+<<<<<<< Updated upstream
             <div class="img-wrapper">
                 <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600"
                     alt="Corte de Tendencia">
             </div>
             <h3>Corte de Tendencia</h3>
-            <div class="details">
-                <span><strong>Precio</strong> $35.000</span>
-                <span><strong>Tiempo</strong> 45 min</span>
+=======
+            <div class="img-placeholder">
+                <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=600&auto=format&fit=crop" alt="Cepillado" loading="lazy" onerror="this.onerror=null;this.src='https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600';">
             </div>
-            <button class="btn-hair">Reservar Experiencia</button>
+            <h3>Cepillado</h3>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> Aplica siempre un termoprotector antes del calor para sellar la cutícula, evitar el frizz y prolongar la duración del alisado.</p>
+            <div class="details">
+                <span><strong>Precio</strong> $15.000 – $45.000</span>
+                <span><strong>Tiempo</strong> 30 a 50 min</span>
+            </div>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-hair reservar-btn">Reservar Experiencia</a>
         </div>
 
         <div class="card-hair">
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/15659494/pexels-photo-15659494.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Corte de cabello" loading="lazy" onerror="this.onerror=null;this.src='https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600';">
+            </div>
+            <h3>Corte de cabello</h3>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos renovar tus puntas cada 2 meses para mantener la estructura, fuerza y movimiento natural del cabello.</p>
+>>>>>>> Stashed changes
+            <div class="details">
+                <span><strong>Precio</strong> $15.000 - $75.000</span>
+                <span><strong>Tiempo</strong> 20 a 60 min</span>
+            </div>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-hair reservar-btn">Reservar Experiencia</a>
+        </div>
+
+        <div class="card-hair">
+<<<<<<< Updated upstream
             <div class="img-wrapper">
                 <img src="https://images.pexels.com/photos/3992870/pexels-photo-3992870.jpeg?auto=compress&cs=tinysrgb&w=600"
                     alt="Coloración & Balayage">
+=======
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/8468126/pexels-photo-8468126.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tinturado básico" loading="lazy" onerror="this.onerror=null;this.src='https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600';">
+>>>>>>> Stashed changes
             </div>
             <h3>Color & Balayage</h3>
             <div class="details">
                 <span><strong>Precio</strong> $120.000</span>
                 <span><strong>Tiempo</strong> 180 min</span>
             </div>
-            <button class="btn-hair">Reservar Experiencia</button>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-hair reservar-btn">Reservar Experiencia</a>
         </div>
 
         <div class="card-hair">
+<<<<<<< Updated upstream
             <div class="img-wrapper">
                 <img src="https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?auto=compress&cs=tinysrgb&w=600"
                     alt="Tratamiento Capilar">
+=======
+            <div class="img-placeholder">
+                <img src="https://images.pexels.com/photos/10561323/pexels-photo-10561323.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Peinados" loading="lazy" onerror="this.onerror=null;this.src='https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600';">
+>>>>>>> Stashed changes
             </div>
             <h3>Hidratación Profunda</h3>
             <div class="details">
                 <span><strong>Precio</strong> $55.000</span>
                 <span><strong>Tiempo</strong> 60 min</span>
             </div>
-            <button class="btn-hair">Reservar Experiencia</button>
+           <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-hair reservar-btn">Reservar Experiencia</a>
         </div>
 
         <!-- Dynamic Services Added by User -->
@@ -239,17 +275,18 @@
         <div class="card-hair">
             <div class="img-wrapper">
                 {% if s.imagen %}
-                <img src="{{ url_for('static', filename='uploads/servicios/' + s.imagen) }}" alt="{{ s.nombre }}">
+                <img src="{{ url_for('static', filename='uploads/servicios/' + s.imagen) }}" alt="{{ s.nombre }}" loading="lazy" onerror="this.onerror=null;this.src='https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600';">
                 {% else %}
-                <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600" alt="{{ s.nombre }}">
+                <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=600" alt="{{ s.nombre }}" loading="lazy">
                 {% endif %}
             </div>
             <h3>{{ s.nombre }}</h3>
+            <p class="hair-tip"><strong>Tip del estilista:</strong> {{ s.tip if s.tip else 'Pregunta a nuestro equipo por el mejor consejo para este servicio.' }}</p>
             <div class="details">
-                <span><strong>Precio</strong> ${{ "{:,.0f}".format(s.precio | float) }}</span>
+                <span><strong>Precio</strong> ${{ '{:,.0f}'.format(s.precio|int).replace(',', '.') }}</span>
                 <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
             </div>
-            <button class="btn-hair">Reservar Experiencia</button>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-hair reservar-btn">Reservar Experiencia</a>
         </div>
         {% endfor %}
     </div>
