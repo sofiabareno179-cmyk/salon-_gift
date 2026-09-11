@@ -1,7 +1,7 @@
 .git/
 .gitignore
 .venv/
-salon gift/.venv/
+salon_gift/.venv/
 __pycache__/
 *.py[cod]
 *.pyo
@@ -11,9 +11,9 @@ __pycache__/
 .env
 .env.*
 instance/
-salon gift/instance/
+salon_gift/instance/
 app/static/uploads/
-salon gift/app/static/uploads/
+salon_gift/app/static/uploads/
 scratch/
 temp_debug.txt
 *.log
