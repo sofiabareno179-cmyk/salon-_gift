@@ -1,3 +1,5 @@
+.git/
+.gitignore
 .venv/
 salon gift/.venv/
 __pycache__/
@@ -9,10 +11,12 @@ __pycache__/
 .env
 .env.*
 instance/
+salon gift/instance/
 app/static/uploads/
 salon gift/app/static/uploads/
-.git
-.gitignore
+scratch/
+temp_debug.txt
+*.log
 .vscode/
 *.egg-info/
 build/
