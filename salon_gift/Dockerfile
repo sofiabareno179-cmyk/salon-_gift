@@ -1,24 +1,28 @@
 # Usa una imagen de Python basada en Alpine
 FROM python:3.12-alpine
 
-# Instala las herramientas de compilación necesarias
+# Instala git y las herramientas de compilación necesarias
 RUN apk add --no-cache \
+    git \
     build-base \
     linux-headers \
     gcc \
     musl-dev
 
-# Establece el directorio de trabajo
 WORKDIR /workspace
 
-# Copia el archivo de requerimientos
-COPY requirements.txt /workspace
+# Clona el repositorio en build time y coloca la aplicación en /workspace/app_src
+# (funciona sin necesidad de build context: Coolify solo envía el Dockerfile)
+RUN git clone --depth 1 --branch main \
+        https://github.com/sofiabareno179-cmyk/salon-_gift.git /repo \
+    && (cp -r /repo/salon_gift /workspace/app_src || cp -r "/repo/salon gift" /workspace/app_src) \
+    && rm -rf /repo
+
+WORKDIR /workspace/app_src
 
 # Instala las dependencias
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copia la aplicación
-COPY . /workspace
+RUN python -m pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Crea el directorio de subida de imágenes de servicios
 RUN mkdir -p app/static/uploads/servicios
