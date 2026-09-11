@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from sqlalchemy import text
+from sqlalchemy import inspect, text
 import os
 
 db = SQLAlchemy()
@@ -13,6 +13,18 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
+
+    def ensure_citas_servicio_column():
+        with app.app_context():
+            with db.engine.begin() as conn:
+                inspector = inspect(conn)
+                if not inspector.has_table('citas'):
+                    return
+                cols = [column['name'] for column in inspector.get_columns('citas')]
+                if 'servicio' not in cols:
+                    conn.execute(text("ALTER TABLE citas ADD COLUMN servicio VARCHAR(100)"))
+
+    ensure_citas_servicio_column()
  
     @login_manager.user_loader
     def load_user(idusuario):
