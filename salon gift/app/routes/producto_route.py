@@ -59,7 +59,7 @@ def editar_producto(id):
         except ValueError:
             flash('Error en el formato del precio', 'danger')
             
-    return render_template('productos/index.html', producto=producto)
+    return redirect(url_for('productos.listar_productos'))
 
 @bp.route('/productos/eliminar/<int:id>', methods=['POST'])
 @login_required

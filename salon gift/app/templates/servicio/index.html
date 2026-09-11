@@ -60,12 +60,11 @@
                             <a href="{{ url_for('servicio.edit', id=s.idservicio) }}" class="btn-action btn-action-edit" title="Editar">
                                 <i class="fas fa-pen"></i>
                             </a>
-                            <a href="{{ url_for('servicio.delete', id=s.idservicio) }}" 
-                               class="btn-action btn-action-delete" 
-                               title="Eliminar"
-                               onclick="return confirm('¿Estás seguro de que deseas eliminar el servicio: {{ s.nombre }}?')">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                            <form action="{{ url_for('servicio.delete', id=s.idservicio) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn-action btn-action-delete" title="Eliminar" onclick="return confirm('¿Estás seguro de eliminar {{ s.nombre }}?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     {% else %}

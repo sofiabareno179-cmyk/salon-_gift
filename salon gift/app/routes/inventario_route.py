@@ -47,7 +47,7 @@ def editar_item(id):
         except ValueError:
             flash('Error: El stock debe ser un número válido', 'danger')
             
-    return render_template('inventario/index.html', item=item)
+    return redirect(url_for('inventario.listar_inventario'))
 
 @bp.route('/inventario/eliminar/<int:id>', methods=['POST'])
 @login_required

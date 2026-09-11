@@ -22,8 +22,7 @@ def nuevo_recordatorio():
         nuevo_rec = Recordatorios(
             titulo=titulo, 
             mensaje=mensaje, 
-            fecha_recordatorio=fecha,
-            prioridad="Media" 
+            fecha_recordatorio=fecha
         )
         
         nuevo_rec.save()

@@ -8,12 +8,9 @@ class Perfil(db.Model):
     apellido = db.Column(db.String(50), nullable=True)
     bio = db.Column(db.Text, nullable=True)
     
+    # Llave foránea que conecta con el modelo User
     idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False, unique=True)
-
-    # Relación: "user" es el nombre del atributo en Perfil
-    # "perfil_asociado" debe ser el nombre del atributo en User
-    user = db.relationship('User', back_populates='perfil_asociado')
-
+    usuario = db.relationship('User', back_populates='perfil')
 
     def __init__(self, nombre, apellido, bio, idusuario):
         self.nombre = nombre

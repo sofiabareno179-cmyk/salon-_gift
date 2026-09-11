@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Galería{% endblock %}
+{% block body_class %}gallery-page{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/galeria.css') }}">
+{% endblock %}
+{% block content %}
+<div class="gallery-container">
+    <div class="gallery-header">
+        <h2><i class="fas fa-images"></i> Galería</h2>
+    </div>
+
+    <div class="gallery-grid">
+        {% for item in items %}
+        <div class="gallery-item">
+            <div class="gallery-img-wrapper">
+                {% if item.tipo == 'video' %}
+                <video src="{{ url_for('static', filename='uploads/galeria/' + item.archivo) }}" muted controls></video>
+                {% else %}
+                <img src="{{ url_for('static', filename='uploads/galeria/' + item.archivo) }}" alt="{{ item.titulo }}">
+                {% endif %}
+            </div>
+            <div class="gallery-info">
+                <h5>{{ item.titulo }}</h5>
+                {% if item.descripcion %}
+                <p>{{ item.descripcion }}</p>
+                {% endif %}
+                <small>{{ item.fecha_subida.strftime('%d/%m/%Y') }}</small>
+            </div>
+        </div>
+        {% else %}
+        <div class="gallery-empty">
+            <i class="fas fa-camera"></i>
+            <p>No hay elementos en la galería.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 
 {% block title %}Mi Agenda{% endblock %}
-
 {% block body_class %}schedule-page{% endblock %}
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/crono.css') }}">
 {% endblock %}
-
 {% block content %}
 <section class="schedule">
     <div class="schedule__nav">
@@ -43,17 +41,18 @@
                         {% set cita = agenda.get((dia, hora)) %}
                         {% if cita %}
                             <div class="schedule__appointment status-{{ cita.estado.lower() }}">
-
                                 <a href="{{ url_for('citas.editar_cita', id=cita.idcitas) }}">
-
-                                <a href="{{ url_for('citas.editar_cita', id=cita.idcita) }}">
                                     <span class="appt__time">{{ cita.fechahora.strftime('%H:%M') }}</span>
                                     <strong class="appt__service">{{ cita.servicio }}</strong>
                                     <span class="appt__status">{{ cita.estado }}</span>
                                 </a>
                             </div>
+                        {% elif (dia, hora) in bloqueos_set %}
+                            <div class="schedule__slot schedule__slot--blocked" title="{{ bloqueos_motivos.get((dia, hora), 'Bloqueado') }}">
+                                <i class="fas fa-ban"></i>
+                            </div>
                         {% else %}
-                            <a href="{{ url_for('citas.nueva_cita', fecha=(lunes + timedelta(days=dia)).strftime('%Y-%m-%d')) }}" class="appt__add">+</a>
+                            <a href="{{ url_for('citas.nueva_cita', fecha=(lunes + timedelta(days=dia)).strftime('%Y-%m-%d'), hora=hora) }}" class="appt__add">+</a>
                         {% endif %}
                     </div>
                 {% endfor %}

@@ -7,13 +7,6 @@
 {% endblock %}
 
 {% block content %}
-<div class="profile-container">
-    <div class="profile-card">
-        <div class="profile-card__header">
-            <h2 class="profile-card__title">Agregar Perfil</h2>
-            <p class="profile-card__subtitle">Configura la información del nuevo perfil para SalonGlitt</p>
-        </div>
-
 
 <div class="container mt-4">
     <div class="row justify-content-center">
@@ -30,29 +23,25 @@
                     <input type="text" id="nombre" name="nombre" class="form-control rounded-pill" placeholder="Ej. Juan" required>
                 </div>
 
-        <form action="{{ url_for('perfil.add') }}" method="POST" class="profile-form">
-    
-    <div class="profile-form__group">
-        <label for="nombre" class="profile-form__label">NOMBRE</label>
-        <input type="text" id="nombre" name="nombre" class="profile-form__input" placeholder="Ej. Juan" required>
-    </div>
+                <!-- Campo: Apellido -->
+                <div class="mb-3">
+                    <label for="apellido" class="form-label fw-bold">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" class="form-control rounded-pill" placeholder="Ej. Pérez">
+                </div>
 
-    <div class="profile-form__group">
-        <label for="apellido" class="profile-form__label">APELLIDO</label>
-        <input type="text" id="apellido" name="apellido" class="profile-form__input" placeholder="Ej. Pérez">
-    </div>
+                <!-- Campo: Biografía -->
+                <div class="mb-3">
+                    <label for="bio" class="form-label fw-bold">Biografía:</label>
+                    <textarea id="bio" name="bio" class="form-control" rows="3" placeholder="Cuéntanos algo sobre ti..."></textarea>
+                </div>
 
-    <div class="profile-form__group">
-        <label for="bio" class="profile-form__label">BIOGRAFÍA</label>
-        <textarea id="bio" name="bio" class="profile-form__textarea" rows="4" placeholder="Cuéntanos algo sobre ti..."></textarea>
-    </div>
-
-    <div class="profile-form__actions">
-        <button type="submit" class="btn-submit">Crear Perfil</button>
-        <br>
-        <a href="{{ url_for('perfil.index') }}" class="btn-cancel">Cancelar y volver</a>
-    </div>
-</form>
+                <div class="mt-4 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary rounded-pill px-4">Crear Perfil</button>
+                    <a href="{{ url_for('perfil.index') }}" class="btn btn-light rounded-pill px-4 border">Cancelar</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
 {% endblock %}

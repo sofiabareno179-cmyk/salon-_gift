@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, flash, current_app
 from app.models.servicios import Servicio 
+from flask_login import login_required
 from app import db
 import os
 from werkzeug.utils import secure_filename
@@ -11,10 +12,11 @@ def allowed_file(filename):
 
 bp = Blueprint('servicio', __name__, url_prefix='/Servicio')
 
-#  VISTAS PARA EL FRONTEND 
+# --- VISTAS PARA EL FRONTEND ---
 
 @bp.route('/peluqueria')
 def ver_peluqueria():
+    # Filtramos por categoría para que la página sea específica
     servicios = Servicio.query.filter_by(categoria='peluqueria').all() 
     return render_template('servicio/peluqueria.html', servicios=servicios)
 
@@ -28,16 +30,17 @@ def manicure():
     servicios = Servicio.query.filter_by(categoria='manicure').all() 
     return render_template('servicio/manicure.html', servicios=servicios)
 
-# OPERACIONES CRUD 
+# --- OPERACIONES CRUD ---
 
 @bp.route('/servicios/add/<categoria>', methods=['GET', 'POST'])
+@login_required
 def add(categoria):
     if request.method == 'POST':
         nombre = request.form.get('nombre')
         precio = request.form.get('precio')
         duracion = request.form.get('duracion')
         categoria_form = request.form.get('categoria') or categoria
-        
+        tip = request.form.get('tip')
         # Manejo de imagen
         imagen_filename = None
         if 'imagen' in request.files:
@@ -48,7 +51,6 @@ def add(categoria):
                 upload_path = os.path.join(current_app.root_path, 'static', 'uploads', 'servicios')
                 if not os.path.exists(upload_path):
                     os.makedirs(upload_path)
-                
                 file.save(os.path.join(upload_path, filename))
                 imagen_filename = filename
 
@@ -57,12 +59,12 @@ def add(categoria):
             precio=precio, 
             duracion=duracion, 
             categoria=categoria_form,
-            imagen=imagen_filename
+            imagen=imagen_filename,
+            tip=tip
         )
-        
-
+        db.session.add(nuevo_servicio)
+        db.session.commit()
         flash(f'Servicio "{nombre}" agregado exitosamente a {categoria_form}', 'success')
-        
         if categoria_form == 'peluqueria':
             return redirect(url_for('servicio.ver_peluqueria'))
         elif categoria_form == 'tratamiento':
@@ -70,28 +72,10 @@ def add(categoria):
         elif categoria_form == 'manicure':
             return redirect(url_for('servicio.manicure'))
         return redirect(url_for('servicio.index'))
-
-        try:
-            db.session.add(nuevo_servicio)
-            db.session.commit()
-            flash(f'Servicio "{nombre}" agregado exitosamente', 'success')
-            
-            # Redirección dinámica basada en la categoría
-            vistas = {
-                'peluqueria': 'servicio.ver_peluqueria',
-                'tratamiento': 'servicio.tratamientos',
-                'manicure': 'servicio.manicure'
-            }
-            # Si la categoría no está en el mapa, vuelve al index
-            return redirect(url_for(vistas.get(categoria, 'servicio.index')))
-            
-        except Exception as e:
-            db.session.rollback()
-            flash(f"Error al guardar: {str(e)}", "danger")
-
     return render_template('servicio/add_servicio.html', categoria=categoria)
 
 @bp.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
 def edit(id):
     servicio = Servicio.query.get_or_404(id)  
     if request.method == 'POST':
@@ -99,7 +83,7 @@ def edit(id):
         servicio.precio = request.form.get('precio')
         servicio.duracion = request.form.get('duracion')
         servicio.categoria = request.form.get('categoria')
-        
+        servicio.tip = request.form.get('tip')
         # Manejo de nueva imagen si se sube
         if 'imagen' in request.files:
             file = request.files['imagen']
@@ -110,19 +94,18 @@ def edit(id):
                     os.makedirs(upload_path)
                 file.save(os.path.join(upload_path, filename))
                 servicio.imagen = filename
-        
         try:
             db.session.commit()
             flash("Servicio actualizado correctamente.", "success")
-            # Cambié 'indexjs' por 'index' que es la ruta que tienes definida abajo
-            return redirect(url_for('servicio.index')) 
+            return redirect(url_for('servicio.index'))
         except Exception as e:
             db.session.rollback()
             flash(f"Error al actualizar: {str(e)}", "danger")
 
     return render_template('servicio/edit.html', servicio=servicio)
 
-@bp.route('/delete/<int:id>')
+@bp.route('/delete/<int:id>', methods=['POST'])
+@login_required
 def delete(id):
     servicio = Servicio.query.get_or_404(id)
     try:
@@ -135,15 +118,14 @@ def delete(id):
         
     return redirect(url_for('servicio.index'))
 
-#  VISTA GENERAL Y API 
+# --- API / JSON ---
 
 @bp.route('/')
 def index():
+    # Traemos todos los servicios sin filtrar por categoría
     servicios = Servicio.query.all() 
     return render_template('servicio/index.html', servicios=servicios)
-
-@bp.route('/api/servicios/<int:id>', methods=['GET'])
+@bp.route('/servicios/<int:id>', methods=['GET'])
 def get_servicio(id):
     servicio = Servicio.query.get_or_404(id)
-    # Asegúrate de que tu modelo Servicio tenga el método to_dict()
     return jsonify(servicio.to_dict()), 200

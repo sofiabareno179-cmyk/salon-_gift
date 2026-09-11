@@ -15,7 +15,7 @@ class Servicio(db.Model):
     duracion = db.Column(db.String(250), nullable=False)  
     categoria = db.Column(db.String(50), nullable=False) 
     imagen = db.Column(db.String(255), nullable=True)
-    idcitas = db.Column(db.Integer, db.ForeignKey('citas.idcitas'), nullable=True)
+    idcitas = db.Column(db.Integer, db.ForeignKey('citas.idcitas'), nullable=True, unique=True)
     citas = db.relationship('Citas', back_populates='servicios')
     
     productos = db.relationship('Productos', secondary=servicio_productos, backref='servicios')

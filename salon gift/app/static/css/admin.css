@@ -139,6 +139,10 @@
     background-blend-mode: overlay;
 }
 
+.card-stat--orange {
+    background: linear-gradient(135deg, #ffd6a5, #ffb84d);
+}
+
 .card-stat--green { 
     background: linear-gradient(135deg, #caffbf, #9bf6ff); 
 }

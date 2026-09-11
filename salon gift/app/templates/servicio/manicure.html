@@ -1,4 +1,4 @@
-
+{% extends "base.html" %}
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/servicios.css') }}">
 <style>
@@ -99,12 +99,13 @@
 
     .img-placeholder {
         width: 100%;
-        height: 280px;
-        border-radius: 25px 25px 10px 10px;
+        height: 220px;
+        border-radius: 12px;
         margin-bottom: 20px;
-        background: #fce4ec;
+        background: #f3e8ff;
         position: relative;
         overflow: hidden;
+        box-shadow: 0 12px 28px rgba(28, 24, 18, 0.08);
     }
 
     .img-placeholder::after {
@@ -127,11 +128,12 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.8s ease;
+        object-position: center;
+        transition: transform 1.2s ease;
     }
 
     .card-nail:hover .img-placeholder img {
-        transform: scale(1.1);
+        transform: scale(1.03);
     }
 
     .card-nail h3 {
@@ -160,7 +162,7 @@
         letter-spacing: 1px;
     }
 
-    .btn-manicure {
+    .btn-treatment {
         background: linear-gradient(135deg, #f4cfdf 0%, #d4a5b9 100%);
         color: white;
         border: none;
@@ -175,7 +177,7 @@
         font-weight: 600;
     }
 
-    .btn-manicure:hover {
+    .btn-treatment:hover {
         filter: brightness(1.05);
         box-shadow: 0 8px 15px rgba(212, 165, 185, 0.4);
     }
@@ -195,7 +197,6 @@
                     alt="Semi-Permanente">
             </div>
             <h3>Semi-Permanente</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Te sugerimos No remojar las manos ni uses cremas previamente; el agua expande la uña natural y al volver a su tamaño real, triza el esmalte.</p>
             <div class="details">
                 <span><strong>Precio</strong> $45.000</span>
                 <span><strong>Tiempo</strong> 60 min</span>
@@ -206,15 +207,10 @@
         <!-- Servicio 2 -->
         <div class="card-nail">
             <div class="img-placeholder">
-
-              <img src="https://images.pexels.com/photos/3997389/pexels-photo-3997389.jpeg?auto=compress&cs=tinysrgb&w=600"
+                <img src="https://images.pexels.com/photos/3997389/pexels-photo-3997389.jpeg?auto=compress&cs=tinysrgb&w=600"
                     alt="Pedicure Spa">
-
-                <img src="https://images.pexels.com/photos/18441298/pexels-photo-18441298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pedicure Spa">
-
             </div>
             <h3>Pedicure Spa</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Exfoliar e hidratar profundamente la planta del pie previene grietas y mantiene la piel suave por más tiempo entre servicios.</p>
             <div class="details">
                 <span><strong>Precio</strong> $60.000</span>
                 <span><strong>Tiempo</strong> 90 min</span>
@@ -229,7 +225,6 @@
                     alt="Uñas Acrílicas">
             </div>
             <h3>Uñas Acrílicas</h3>
-            <p class="hair-tip"><strong>Tip del estilista:</strong> Agenda tu mantenimiento estrictamente cada 2 o 3 semanas para evitar filtraciones de agua que causen hongos o desprendimientos.</p>
             <div class="details">
                 <span><strong>Precio</strong> $85.000</span>
                 <span><strong>Tiempo</strong> 120 min</span>
@@ -252,7 +247,7 @@
                 <span><strong>Precio</strong> ${{ "{:,.0f}".format(s.precio | float) }}</span>
                 <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
             </div>
-            <button class="btn-manicure">Reservar Experiencia</button>
+            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
         </div>
         {% endfor %}
     </div>
