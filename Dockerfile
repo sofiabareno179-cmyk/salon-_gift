@@ -1,25 +1,29 @@
-FROM python:3.12-slim
+# Usa una imagen de Python basada en Alpine
+FROM python:3.12-alpine
 
-WORKDIR /app
+# Instala las herramientas de compilación necesarias
+RUN apk add --no-cache \
+    build-base \
+    linux-headers \
+    gcc \
+    musl-dev
 
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+# Establece el directorio de trabajo
+WORKDIR /workspace
 
+# Copia el archivo de requerimientos
 COPY ["salon gift/requirements.txt", "requirements.txt"]
-RUN python -m pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
 
+# Instala las dependencias
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia la aplicación
 COPY ["salon gift", "."]
-# Install dependencies
-COPY requirements.txt ./
-RUN python -m pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
 
-# Copy application
-COPY . ./
-
+# Crea el directorio de subida de imágenes de servicios
 RUN mkdir -p app/static/uploads/servicios
 
 EXPOSE 5000
 
+# Ejecuta la aplicación Flask
 CMD ["python", "run.py"]
