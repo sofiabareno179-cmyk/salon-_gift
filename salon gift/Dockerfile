@@ -12,13 +12,13 @@ RUN apk add --no-cache \
 WORKDIR /workspace
 
 # Copia el archivo de requerimientos
-COPY ["salon gift/requirements.txt", "requirements.txt"]
+COPY requirements.txt /workspace
 
 # Instala las dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia la aplicación
-COPY ["salon gift", "."]
+COPY . /workspace
 
 # Crea el directorio de subida de imágenes de servicios
 RUN mkdir -p app/static/uploads/servicios
