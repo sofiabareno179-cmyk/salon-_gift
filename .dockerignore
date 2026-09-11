@@ -1,0 +1,24 @@
+.git/
+.gitignore
+.venv/
+salon gift/.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+.env
+.env.*
+instance/
+salon gift/instance/
+app/static/uploads/
+salon gift/app/static/uploads/
+scratch/
+temp_debug.txt
+*.log
+.vscode/
+*.egg-info/
+build/
+dist/
+Dockerfile.old
