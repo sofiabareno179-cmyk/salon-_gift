@@ -27,7 +27,7 @@ RUN python -m pip install --upgrade pip && \
 # Crea el directorio de subida de imágenes de servicios
 RUN mkdir -p app/static/uploads/servicios
 
-EXPOSE 5000
+EXPOSE 80
 
 # Ejecuta la aplicación Flask
 CMD ["python", "run.py"]
