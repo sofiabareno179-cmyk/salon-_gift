@@ -1,3 +1,4 @@
+from sqlalchemy import func
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required,current_user
 from app import db
@@ -106,7 +107,7 @@ def nueva_cita():
         dia_nombre = dias_map[fechahora_dt.weekday()]
         hora_str = fechahora_dt.strftime('%H:%M')
 
-        agenda_dia = Agenda.query.filter_by(diasemana=dia_nombre).first()
+        agenda_dia = Agenda.query.filter(func.lower(Agenda.diasemana) == dia_nombre.lower()).first()
         if not agenda_dia:
             flash(f'No hay horario disponible para {dia_nombre}', 'danger')
             return redirect(url_for('citas.nueva_cita'))
