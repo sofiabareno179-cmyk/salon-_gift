@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
+from sqlalchemy import func
 from app import db
 from app.models.agenda import Agenda  
 import os
@@ -21,6 +22,14 @@ def crear_agenda():
         diasemana = request.form.get('diasemana')
         horainicio = request.form.get('horainicio')
         horafin = request.form.get('horafin')
+
+        existe = Agenda.query.filter(
+            func.lower(Agenda.diasemana) == diasemana.lower(),
+            Agenda.idusuario == current_user.idusuario
+        ).first()
+        if existe:
+            flash(f'Ya existe un horario para {diasemana}', 'danger')
+            return redirect(url_for('agenda.crear_agenda'))
 
         nueva_agenda = Agenda(diasemana=diasemana, horainicio=horainicio, horafin=horafin, idusuario=current_user.idusuario)
         nueva_agenda.save()

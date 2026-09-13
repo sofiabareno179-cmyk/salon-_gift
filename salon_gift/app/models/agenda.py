@@ -3,6 +3,9 @@ from app import db
 
 class Agenda(db.Model): 
     __tablename__ = 'agenda'
+    __table_args__ = (
+        db.UniqueConstraint('idusuario', 'diasemana', name='agenda_idusuario_dia_key'),
+    )
     idagenda = db.Column(db.Integer, primary_key=True)
     diasemana = db.Column(db.String(100), nullable=False) 
     horainicio = db.Column(db.String(100), nullable=False) 
