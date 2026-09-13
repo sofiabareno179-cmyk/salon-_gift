@@ -37,9 +37,5 @@ RUN mkdir -p app/static/uploads/servicios
 
 EXPOSE 5000
 
-# Healthcheck para que Coolify reporte estado y no muestre 404 cuando la app cae
-HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/', timeout=5)" || exit 1
-
 # Ejecuta la aplicación Flask
 CMD ["python", "run.py"]
