@@ -65,6 +65,10 @@ def create_app():
     app.register_blueprint(bloqueos_route.bp)
     app.register_blueprint(promocion_route.bp)
 
+    @app.errorhandler(404)
+    def not_found(e):
+        return {"error": "404 No Encontrado"}, 404
+
     @app.errorhandler(Exception)
     
     def handle_error(e):
