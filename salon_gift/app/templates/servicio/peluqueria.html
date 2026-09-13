@@ -166,7 +166,7 @@
                 <span><strong>Precio</strong> $15.000 – $45.000</span>
                 <span><strong>Tiempo</strong> 30 a 50 min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-hair reservar-btn">Reservar Experiencia</a>
+            <a href="{{ url_for('citas.crono_citas') }}" class="btn-hair reservar-btn">Reservar Experiencia</a>
         </div>
 
         <div class="card-hair">
@@ -179,7 +179,7 @@
                 <span><strong>Precio</strong> $15.000 - $75.000</span>
                 <span><strong>Tiempo</strong> 20 a 60 min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-hair reservar-btn">Reservar Experiencia</a>
+            <a href="{{ url_for('citas.crono_citas') }}" class="btn-hair reservar-btn">Reservar Experiencia</a>
         </div>
 
         <div class="card-hair">
@@ -191,7 +191,7 @@
                 <span><strong>Precio</strong> $120.000</span>
                 <span><strong>Tiempo</strong> 180 min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-hair reservar-btn">Reservar Experiencia</a>
+            <a href="{{ url_for('citas.crono_citas') }}" class="btn-hair reservar-btn">Reservar Experiencia</a>
         </div>
 
         <div class="card-hair">
@@ -203,7 +203,7 @@
                 <span><strong>Precio</strong> $55.000</span>
                 <span><strong>Tiempo</strong> 60 min</span>
             </div>
-           <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-hair reservar-btn">Reservar Experiencia</a>
+           <a href="{{ url_for('citas.crono_citas') }}" class="btn-hair reservar-btn">Reservar Experiencia</a>
         </div>
 
         <!-- Dynamic Services Added by User -->
@@ -222,7 +222,7 @@
                 <span><strong>Precio</strong> ${{ '{:,.0f}'.format(s.precio|int).replace(',', '.') }}</span>
                 <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
             </div>
-            <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-hair reservar-btn">Reservar Experiencia</a>
+            <a href="{{ url_for('citas.crono_citas') }}" class="btn-hair reservar-btn">Reservar Experiencia</a>
         </div>
         {% endfor %}
     </div>
