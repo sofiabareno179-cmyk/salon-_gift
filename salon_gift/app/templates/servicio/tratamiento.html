@@ -214,7 +214,7 @@
                 <span><strong>Precio</strong> ${{ "{:,.0f}".format(s.precio | float) }}</span>
                 <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
             </div>
-           <a href="http://127.0.0.1:5000/Citas/citas/cronograma" class="btn-treatment">Reservar Experiencia</a>
+           <a href="{{ url_for('citas.crono_citas') }}" class="btn-treatment">Reservar Experiencia</a>
         </div>
         {% endfor %}
     </div>
