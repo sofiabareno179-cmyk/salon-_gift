@@ -15,17 +15,19 @@ class Servicio(db.Model):
     duracion = db.Column(db.String(250), nullable=False)  
     categoria = db.Column(db.String(50), nullable=False) 
     imagen = db.Column(db.String(255), nullable=True)
+    tip = db.Column(db.Text, nullable=True)
     idcitas = db.Column(db.Integer, db.ForeignKey('citas.idcitas'), nullable=True, unique=True)
     citas = db.relationship('Citas', back_populates='servicios')
     
     productos = db.relationship('Productos', secondary=servicio_productos, backref='servicios')
 
-    def __init__(self, nombre, precio, duracion, categoria, imagen=None):
+    def __init__(self, nombre, precio, duracion, categoria, imagen=None, tip=None):
         self.nombre = nombre
         self.precio = precio
         self.duracion = duracion
         self.categoria = categoria
         self.imagen = imagen
+        self.tip = tip
 
     def to_dict(self):
         return {
@@ -34,7 +36,8 @@ class Servicio(db.Model):
             "precio": float(self.precio),
             "duracion": self.duracion,
             "categoria": self.categoria,
-            "imagen": self.imagen
+            "imagen": self.imagen,
+            "tip": self.tip
         }
 
     def save(self):
