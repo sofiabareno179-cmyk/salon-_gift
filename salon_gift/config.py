@@ -2,7 +2,11 @@ import os
 import secrets
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg://admin:9027865@127.0.0.1:500/salonglitt_db'
+    _db_url = os.environ.get('DATABASE_URL')
+    if _db_url:
+        SQLALCHEMY_DATABASE_URI = _db_url
+    else:
+        SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg://admin:9027865@127.0.0.1:500/salonglitt_db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secrets.token_urlsafe(24)
     UPLOAD_FOLDER = os.path.join('app', 'static', 'uploads', 'servicios')
