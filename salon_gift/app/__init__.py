@@ -22,8 +22,12 @@ def ensure_schema_columns():
             if col.foreign_keys:
                 continue
             col_type = col.type.compile(db.engine.dialect)
-            db.session.execute(text(f'ALTER TABLE {table.name} ADD COLUMN {col.name} {col_type}'))
-            db.session.commit()
+            try:
+                db.session.execute(text(f'ALTER TABLE {table.name} ADD COLUMN {col.name} {col_type}'))
+                db.session.commit()
+            except Exception as e:
+                db.session.rollback()
+                print(f"Schema sync skipped column {table.name}.{col.name}: {e}")
 
 def create_app():
     app = Flask(__name__)    
