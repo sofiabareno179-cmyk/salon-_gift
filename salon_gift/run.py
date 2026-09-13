@@ -1,7 +1,13 @@
 import os
+import re
 from app import create_app, db
 
 app = create_app()
+
+if __name__ == '__main__':
+    url = app.config.get('SQLALCHEMY_DATABASE_URI', '')
+    masked = re.sub(r'(://[^:]+:)[^@]+(@)', r'\1****\2', url)
+    print(f"[INFO] Conectando a BD: {masked}", flush=True)
 
 with app.app_context():
     try:
