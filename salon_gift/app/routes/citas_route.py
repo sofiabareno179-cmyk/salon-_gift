@@ -58,7 +58,7 @@ def crono_citas():
         for b in bloqueos:
             diff = (b.fecha - lunes.date()).days
             if 0 <= diff <= 4:
-                hora_b = b.hora_inicio[:5]
+                hora_b = str(b.hora_inicio)[:5]
                 bloqueos_set.add((diff, hora_b))
                 bloqueos_motivos[(diff, hora_b)] = b.motivo or 'Bloqueado'
     except Exception:
