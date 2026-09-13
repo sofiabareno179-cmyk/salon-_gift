@@ -7,7 +7,9 @@ RUN apk add --no-cache \
     build-base \
     linux-headers \
     gcc \
-    musl-dev
+    musl-dev \
+    postgresql-dev \
+    libpq
 
 WORKDIR /workspace
 
@@ -24,10 +26,10 @@ WORKDIR /workspace/app_src
 RUN python -m pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Crea el directorio de subida de imágenes de servicios
+# Creamos el directorio de subida de imágenes de servicios
 RUN mkdir -p app/static/uploads/servicios
 
-EXPOSE 80
+EXPOSE 5000
 
 # Ejecuta la aplicación Flask
 CMD ["python", "run.py"]
