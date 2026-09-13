@@ -149,7 +149,9 @@ def nueva_cita():
             flash(f'Error al guardar: {str(e)}', 'danger')
             return redirect(url_for('citas.nueva_cita'))
     
-    return render_template('citas/add.html')
+    fecha_def = request.args.get('fecha') or datetime.now().strftime('%Y-%m-%d')
+    hora_def = request.args.get('hora') or '09:00'
+    return render_template('citas/add.html', fecha_def=fecha_def, hora_def=hora_def)
 
 @bp.route('/citas/editar/<int:id>', methods=['GET', 'POST'])
 @login_required
