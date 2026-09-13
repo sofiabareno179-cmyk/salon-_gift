@@ -1,8 +1,11 @@
 import os
 import secrets
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Config:
-    _db_url = os.environ.get('DATABASE_URL')
+    _db_url = os.environ.get('SQLALCHEMY_DATABASE_URI') or os.environ.get('DATABASE_URL')
     if _db_url:
         # Solo está instalado psycopg v3 (no psycopg2): normaliza el esquema
         if _db_url.startswith('postgresql://'):
