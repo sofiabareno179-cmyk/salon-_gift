@@ -68,6 +68,8 @@ def create_app():
     @app.errorhandler(Exception)
     
     def handle_error(e):
+        import traceback
+        traceback.print_exc()
         print(f"An error occurred: {str(e)}")
         return {"error": str(e)}, 500
 
