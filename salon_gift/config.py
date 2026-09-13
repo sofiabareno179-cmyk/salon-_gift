@@ -4,6 +4,9 @@ import secrets
 class Config:
     _db_url = os.environ.get('DATABASE_URL')
     if _db_url:
+        # Solo está instalado psycopg v3 (no psycopg2): normaliza el esquema
+        if _db_url.startswith('postgresql://'):
+            _db_url = _db_url.replace('postgresql://', 'postgresql+psycopg://', 1)
         SQLALCHEMY_DATABASE_URI = _db_url
     else:
         SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg://admin:9027865@127.0.0.1:500/salonglitt_db'
