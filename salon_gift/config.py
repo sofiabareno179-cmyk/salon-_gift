@@ -12,8 +12,7 @@ class Config:
             _db_url = _db_url.replace('postgresql://', 'postgresql+psycopg://', 1)
         SQLALCHEMY_DATABASE_URI = _db_url
     else:
-        # Sin variables de entorno: respaldo local de desarrollo (sin credenciales).
-        SQLALCHEMY_DATABASE_URI = 'sqlite:///salonglitt.sqlite'
+        SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg://admin:9027865@postgres-db-c38d7vwnqgy3163y3q7q9z10:5432/salonglitt_db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secrets.token_urlsafe(24)
     UPLOAD_FOLDER = os.path.join('app', 'static', 'uploads', 'servicios')
