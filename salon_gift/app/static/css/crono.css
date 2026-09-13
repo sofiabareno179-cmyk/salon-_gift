@@ -38,7 +38,25 @@ body.schedule-page {
 }
 
 .schedule__header-info {
+    flex: 1;
     text-align: center;
+}
+
+.schedule__nav-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-volver {
+    background: var(--pink-pastel);
+    color: #fff;
+    border-color: var(--pink-pastel);
+}
+
+.btn-volver:hover {
+    background: white;
+    color: var(--text-dark);
 }
 
 .schedule__title {
@@ -386,4 +404,17 @@ body.schedule-page {
     color: #dc3545;
     font-size: 1rem;
     cursor: not-allowed;
+}
+
+.schedule__appointment {
+    cursor: grab;
+}
+
+.schedule__appointment:active {
+    cursor: grabbing;
+}
+
+.schedule__slot--drag-over {
+    outline: 2px dashed var(--pink-pastel);
+    background: rgba(255, 133, 162, 0.08);
 }

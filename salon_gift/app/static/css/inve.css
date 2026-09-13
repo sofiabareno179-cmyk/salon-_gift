@@ -293,7 +293,7 @@ body.inventory-page .btn-pink-outline:hover {
     box-shadow: 0 8px 25px rgba(136, 216, 176, 0.4);
 }
 
-/* --- Premium Table List (Index) --- */
+/* --- Premium Inventory Dashboard (Index) --- */
 .inventory-container {
     width: 100%;
     max-width: 1400px;
@@ -330,6 +330,12 @@ body.inventory-page .btn-pink-outline:hover {
     font-size: 1.5rem;
 }
 
+.inventory-subtitle {
+    margin: 4px 0 0;
+    color: #8fb3a5;
+    font-size: 0.9rem;
+}
+
 .btn-inventory-new {
     background: var(--pastel-gradient);
     border: none;
@@ -354,81 +360,111 @@ body.inventory-page .btn-pink-outline:hover {
     filter: brightness(1.05);
 }
 
-.inventory-table-card {
+/* --- Tarjetas de resumen --- */
+.inventory-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.inv-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.4rem 1.6rem;
+    border-radius: 18px;
     background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(168, 230, 207, 0.3);
+    box-shadow: 0 8px 25px rgba(136, 216, 176, 0.10);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.inv-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 35px rgba(136, 216, 176, 0.2);
+}
+
+.inv-stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.inv-stat-total .inv-stat-icon { background: linear-gradient(135deg, #d5edff, #b8dcff); color: #2f6ea5; }
+.inv-stat-low .inv-stat-icon { background: linear-gradient(135deg, #ffe0e0, #ffc9c9); color: #b34747; }
+.inv-stat-ok .inv-stat-icon { background: linear-gradient(135deg, #c8f0e0, #a8e6cf); color: #3d7a66; }
+
+.inv-stat-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.inv-stat-value {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #3d7a66;
+    line-height: 1.1;
+}
+
+.inv-stat-label {
+    font-size: 0.85rem;
+    color: #8fb3a5;
+    font-weight: 600;
+}
+
+/* --- Cuadrícula de tarjetas de inventario --- */
+.inventory-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.inv-item-card {
+    background: rgba(255, 255, 255, 0.94);
     border-radius: 20px;
-    box-shadow: 0 10px 35px rgba(136, 216, 176, 0.12);
-    overflow: hidden;
+    padding: 1.6rem 1.6rem 1.4rem;
+    border: 1px solid rgba(168, 230, 207, 0.35);
+    box-shadow: 0 10px 30px rgba(136, 216, 176, 0.10);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
 }
 
-.inventory-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.95rem;
+.inv-item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 45px rgba(136, 216, 176, 0.18);
 }
 
-.inventory-table thead {
-    background: var(--pastel-gradient);
+.inv-item-card--low {
+    border-color: rgba(248, 180, 180, 0.5);
+    box-shadow: 0 10px 30px rgba(248, 180, 180, 0.12);
 }
 
-.inventory-table thead th {
-    color: var(--pastel-text);
-    font-weight: 700;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 20px 22px;
-    border: none;
-    text-align: left;
-}
-
-.inventory-table thead th:first-child {
-    padding-left: 28px;
-}
-
-.inventory-table tbody tr {
-    transition: all 0.2s ease;
-    border-bottom: 1px solid rgba(168, 230, 207, 0.1);
-}
-
-.inventory-table tbody tr:last-child {
-    border-bottom: none;
-}
-
-.inventory-table tbody tr:hover {
-    background: rgba(168, 230, 207, 0.06);
-}
-
-.inventory-table tbody td {
-    padding: 18px 22px;
-    vertical-align: middle;
-    color: #555;
-    font-size: 1.05rem;
-}
-
-.inventory-table tbody td:first-child {
-    padding-left: 28px;
+.inv-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .inventory-id {
-    color: #bbb;
-    font-weight: 600;
+    color: #b6cfc5;
+    font-weight: 700;
     font-size: 0.85rem;
-}
-
-.inventory-stock {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    letter-spacing: 0.5px;
 }
 
 .stock-badge {
     display: inline-block;
-    padding: 6px 16px;
+    padding: 6px 14px;
     border-radius: 50px;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 700;
     white-space: nowrap;
 }
@@ -443,13 +479,37 @@ body.inventory-page .btn-pink-outline:hover {
     color: var(--pastel-text);
 }
 
+.inv-item-number {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    color: #3d7a66;
+    background: linear-gradient(135deg, #3d7a66, #88b8a0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.inv-item-number--low {
+    background: linear-gradient(135deg, #b34747, #f5a0a0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.inv-item-unit {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #a0c8b8;
+}
+
 .stock-bar {
     flex: 1;
-    height: 8px;
+    height: 10px;
     background: #e8f5ee;
     border-radius: 10px;
     overflow: hidden;
-    max-width: 120px;
+    width: 100%;
 }
 
 .stock-bar-fill {
@@ -467,12 +527,19 @@ body.inventory-page .btn-pink-outline:hover {
 }
 
 .inventory-date {
-    color: #888;
+    color: #8fb3a5;
+    font-size: 0.9rem;
 }
 
 .inventory-date i {
     margin-right: 8px;
     color: #88d8b0;
+}
+
+.inv-item-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
 }
 
 .btn-inventory-action {
@@ -485,13 +552,14 @@ body.inventory-page .btn-pink-outline:hover {
     font-weight: 600;
     transition: all 0.2s ease;
     text-decoration: none;
-    gap: 4px;
+    gap: 6px;
     padding: 8px 14px;
 }
 
 .btn-inv-edit {
     background: rgba(136, 216, 176, 0.15);
     color: #3d7a66;
+    flex: 1;
 }
 
 .btn-inv-edit:hover {
@@ -514,8 +582,12 @@ body.inventory-page .btn-pink-outline:hover {
 }
 
 .inventory-empty {
+    grid-column: 1 / -1;
     text-align: center;
     padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    border: 1px dashed rgba(136, 216, 176, 0.4);
 }
 
 .inventory-empty i {
@@ -529,7 +601,7 @@ body.inventory-page .btn-pink-outline:hover {
     font-size: 1rem;
     color: #a0c8b8;
     font-weight: 500;
-    margin: 0;
+    margin: 0 0 1rem;
 }
 
 .inventory-alert {
@@ -547,37 +619,11 @@ body.inventory-page .btn-pink-outline:hover {
         text-align: center;
     }
 
-    .inventory-table thead {
-        display: none;
+    .inventory-stats {
+        grid-template-columns: 1fr;
     }
 
-    .inventory-table tbody tr {
-        display: block;
-        padding: 16px;
-        border-bottom: 2px solid #e8f5ee;
-    }
-
-    .inventory-table tbody td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 8px 0;
-        border: none;
-    }
-
-    .inventory-table tbody td::before {
-        content: attr(data-label);
-        font-weight: 700;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        color: #a0c8b8;
-    }
-
-    .inventory-table tbody td:first-child {
-        padding-left: 0;
-    }
-
-    .inventory-stock {
-        width: 100%;
+    .inventory-cards {
+        grid-template-columns: 1fr;
     }
 }

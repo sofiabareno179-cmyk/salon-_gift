@@ -10,6 +10,26 @@ from app.models.notificacion import Notificacion
 
 bp = Blueprint('citas', __name__,url_prefix='/Citas')
 
+DIAS_MAP = {0:'Lunes',1:'Martes',2:'Miércoles',3:'Jueves',4:'Viernes',5:'Sábado',6:'Domingo'}
+
+def validar_slot(dt):
+    """Devuelve mensaje de error si no se puede agendar en ese día/hora, o None si es válido."""
+    nombre = DIAS_MAP[dt.weekday()]
+    hora_str = dt.strftime('%H:%M')
+    agenda_dia = Agenda.query.filter(func.lower(Agenda.diasemana) == nombre.lower()).first()
+    if not agenda_dia:
+        return f'No hay horario disponible para {nombre}'
+    if hora_str < agenda_dia.horainicio or hora_str >= agenda_dia.horafin:
+        return f'La hora debe estar entre {agenda_dia.horainicio} y {agenda_dia.horafin} los {nombre}'
+    bloqueado = Bloqueo.query.filter(
+        Bloqueo.fecha == dt.date(),
+        Bloqueo.hora_inicio <= hora_str,
+        Bloqueo.hora_fin > hora_str
+    ).first()
+    if bloqueado:
+        return f'Horario bloqueado: {bloqueado.motivo or "no disponible"}'
+    return None
+
 @bp.route('/citas')
 @login_required
 def listar_citas():
@@ -29,13 +49,13 @@ def crono_citas():
         fecha_actual = datetime.now()
 
     lunes = fecha_actual - timedelta(days=fecha_actual.weekday())
-    viernes_fin = (lunes + timedelta(days=4)).replace(hour=23, minute=59, second=59)
+    sabado_fin = (lunes + timedelta(days=5)).replace(hour=23, minute=59, second=59)
 
     # 2. Obtener citas de la semana para el usuario
     mis_citas = Citas.query.filter(
         Citas.idusuario == current_user.idusuario,
         Citas.fechahora >= lunes.replace(hour=0, minute=0, second=0),
-        Citas.fechahora <= viernes_fin
+        Citas.fechahora <= sabado_fin
     ).all()
     
     # 3. Mapear citas a la cuadrícula (Día, Hora)
@@ -50,7 +70,7 @@ def crono_citas():
     bloqueos_motivos = {}
     try:
         inicio_semana = lunes.replace(hour=0, minute=0, second=0)
-        fin_semana = viernes_fin
+        fin_semana = sabado_fin
         bloqueos = Bloqueo.query.filter(
             Bloqueo.fecha >= inicio_semana.date(),
             Bloqueo.fecha <= fin_semana.date()
@@ -58,7 +78,7 @@ def crono_citas():
 
         for b in bloqueos:
             diff = (b.fecha - lunes.date()).days
-            if 0 <= diff <= 4:
+            if 0 <= diff <= 5:
                 hora_b = str(b.hora_inicio)[:5]
                 bloqueos_set.add((diff, hora_b))
                 bloqueos_motivos[(diff, hora_b)] = b.motivo or 'Bloqueado'
@@ -80,6 +100,29 @@ def crono_citas():
                            hoy=hoy,
                            timedelta=timedelta,
                            bloqueos_set=bloqueos_set, bloqueos_motivos=bloqueos_motivos)
+@bp.route('/citas/mover/<int:id>', methods=['POST'])
+@login_required
+def mover_cita(id):
+    data = request.get_json(silent=True) or {}
+    fecha = (data.get('fecha') or '').strip()
+    hora = (data.get('hora') or '').strip()
+    try:
+        nueva_fecha = datetime.strptime(f"{fecha} {hora}", '%Y-%m-%d %H:%M')
+    except ValueError:
+        return {"error": "Fecha u hora invalida"}, 400
+
+    cita = Citas.query.get_or_404(id)
+    if cita.idusuario != current_user.idusuario:
+        return {"error": "No autorizado"}, 403
+
+    error = validar_slot(nueva_fecha)
+    if error:
+        return {"error": error}, 400
+
+    cita.fechahora = nueva_fecha
+    db.session.commit()
+    return {"ok": True}, 200
+
 @bp.route('/citas/nueva', methods=['GET', 'POST'])
 @login_required # Esto asegura que current_user tenga datos
 def nueva_cita():
@@ -103,26 +146,9 @@ def nueva_cita():
                 return redirect(url_for('citas.nueva_cita'))
 
         # 2. Validar contra agenda y bloqueos
-        dias_map = {0:'Lunes',1:'Martes',2:'Miércoles',3:'Jueves',4:'Viernes',5:'Sábado',6:'Domingo'}
-        dia_nombre = dias_map[fechahora_dt.weekday()]
-        hora_str = fechahora_dt.strftime('%H:%M')
-
-        agenda_dia = Agenda.query.filter(func.lower(Agenda.diasemana) == dia_nombre.lower()).first()
-        if not agenda_dia:
-            flash(f'No hay horario disponible para {dia_nombre}', 'danger')
-            return redirect(url_for('citas.nueva_cita'))
-
-        if hora_str < agenda_dia.horainicio or hora_str >= agenda_dia.horafin:
-            flash(f'La hora debe estar entre {agenda_dia.horainicio} y {agenda_dia.horafin} los {dia_nombre}', 'danger')
-            return redirect(url_for('citas.nueva_cita'))
-
-        bloqueado = Bloqueo.query.filter(
-            Bloqueo.fecha == fechahora_dt.date(),
-            Bloqueo.hora_inicio <= hora_str,
-            Bloqueo.hora_fin > hora_str
-        ).first()
-        if bloqueado:
-            flash(f'Horario bloqueado: {bloqueado.motivo or "no disponible"}', 'danger')
+        error = validar_slot(fechahora_dt)
+        if error:
+            flash(error, 'danger')
             return redirect(url_for('citas.nueva_cita'))
 
         # 3. Crear la instancia

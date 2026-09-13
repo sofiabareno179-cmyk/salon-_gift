@@ -9,6 +9,17 @@ login_manager = LoginManager()
 
 def ensure_schema_columns():
     inspector = inspect(db.engine)
+    # Quita la restricción vieja que impedía un horario por día (UNIQUE idusuario)
+    try:
+        for c in inspector.get_unique_constraints('agenda'):
+            if c['name'] == 'agenda_idusuario_key':
+                db.session.execute(db.text('ALTER TABLE agenda DROP CONSTRAINT agenda_idusuario_key'))
+                db.session.commit()
+                print('Dropped legacy constraint agenda_idusuario_key')
+                break
+    except Exception as e:
+        db.session.rollback()
+        print(f"Agenda constraint cleanup skipped: {e}")
     existing_tables = set(inspector.get_table_names())
     for table in db.metadata.sorted_tables:
         if table.name not in existing_tables:

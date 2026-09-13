@@ -3,12 +3,15 @@
 {% block title %}Control de Inventario{% endblock %}
 {% block body_class %}inventory-page{% endblock %}
 {% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/inve.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/inve.css') }}?v=2">
 {% endblock %}
 {% block content %}
 <div class="inventory-container">
     <div class="inventory-header">
-        <h2><i class="fas fa-boxes"></i> Inventario de Existencias</h2>
+        <div>
+            <h2><i class="fas fa-boxes"></i> Inventario de Existencias</h2>
+            <p class="inventory-subtitle">Control de stock y movimientos registrados</p>
+        </div>
         <a href="{{ url_for('inventario.nuevo_item') }}" class="btn-inventory-new">
             <i class="fas fa-plus"></i> Registrar Movimiento
         </a>
@@ -26,60 +29,75 @@
       {% endif %}
     {% endwith %}
 
-    <div class="inventory-table-card">
-        <div class="table-responsive">
-            <table class="inventory-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Stock Disponible</th>
-                        <th>Fecha de Registro</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in inventario %}
-                    <tr>
-                        <td><span class="inventory-id">#{{ item.idinventario }}</span></td>
-                        <td>
-                            <div class="inventory-stock">
-                                {% if item.stock < 10 %}
-                                    <span class="stock-badge stock-badge-low">Bajo Stock: {{ item.stock }}</span>
-                                {% else %}
-                                    <span class="stock-badge stock-badge-ok">{{ item.stock }} unidades</span>
-                                {% endif %}
-                                <div class="stock-bar">
-                                    <div class="stock-bar-fill {% if item.stock < 10 %}stock-bar-fill-low{% else %}stock-bar-fill-ok{% endif %}" style="width: {{ [0, [item.stock, 100]|min]|max }}%"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="inventory-date"><i class="far fa-calendar-alt"></i>{{ item.fecha }}</span></td>
-                        <td>
-                            <div class="btn-group" style="gap: 6px;">
-                                <a href="{{ url_for('inventario.editar_item', id=item.idinventario) }}" class="btn-inventory-action btn-inv-edit">
-                                    <i class="fas fa-sync"></i> Actualizar
-                                </a>
-                                <form action="{{ url_for('inventario.eliminar_item', id=item.idinventario) }}" method="POST" style="display:inline;">
-                                    <button type="submit" class="btn-inventory-action btn-inv-delete" onclick="return confirm('¿Eliminar este registro de inventario?')">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="4">
-                            <div class="inventory-empty">
-                                <i class="fas fa-boxes"></i>
-                                <p>No hay registros en el inventario actualmente.</p>
-                            </div>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+    {% set total_items = inventario|length %}
+    {% set low_items = inventario|selectattr('stock', 'lt', 10)|list|length %}
+    {% set ok_items = inventario|selectattr('stock', 'ge', 10)|list|length %}
+
+    <div class="inventory-stats">
+        <div class="inv-stat-card inv-stat-total">
+            <div class="inv-stat-icon"><i class="fas fa-boxes"></i></div>
+            <div class="inv-stat-body">
+                <span class="inv-stat-value">{{ total_items }}</span>
+                <span class="inv-stat-label">Registros</span>
+            </div>
         </div>
+        <div class="inv-stat-card inv-stat-low">
+            <div class="inv-stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="inv-stat-body">
+                <span class="inv-stat-value">{{ low_items }}</span>
+                <span class="inv-stat-label">Bajo Stock (&lt;10)</span>
+            </div>
+        </div>
+        <div class="inv-stat-card inv-stat-ok">
+            <div class="inv-stat-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="inv-stat-body">
+                <span class="inv-stat-value">{{ ok_items }}</span>
+                <span class="inv-stat-label">En buen estado</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="inventory-cards">
+        {% for item in inventario %}
+        <article class="inv-item-card {% if item.stock < 10 %}inv-item-card--low{% endif %}">
+            <div class="inv-item-top">
+                <span class="inventory-id">#{{ item.idinventario }}</span>
+                {% if item.stock < 10 %}
+                    <span class="stock-badge stock-badge-low">Bajo Stock</span>
+                {% else %}
+                    <span class="stock-badge stock-badge-ok">Disponible</span>
+                {% endif %}
+            </div>
+
+            <div class="inv-item-number {{ 'inv-item-number--low' if item.stock < 10 else '' }}">{{ item.stock }}</div>
+            <div class="inv-item-unit">unidades</div>
+
+            <div class="stock-bar">
+                <div class="stock-bar-fill {% if item.stock < 10 %}stock-bar-fill-low{% else %}stock-bar-fill-ok{% endif %}" style="width: {{ [0, [item.stock, 100]|min]|max }}%"></div>
+            </div>
+
+            <div class="inventory-date"><i class="far fa-calendar-alt"></i>{{ item.fecha or 'Sin fecha' }}</div>
+
+            <div class="inv-item-actions">
+                <a href="{{ url_for('inventario.editar_item', id=item.idinventario) }}" class="btn-inventory-action btn-inv-edit">
+                    <i class="fas fa-sync"></i> Actualizar
+                </a>
+                <form action="{{ url_for('inventario.eliminar_item', id=item.idinventario) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn-inventory-action btn-inv-delete" onclick="return confirm('¿Eliminar este registro de inventario?')">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </div>
+        </article>
+        {% else %}
+        <div class="inventory-empty">
+            <i class="fas fa-box-open"></i>
+            <p>No hay registros en el inventario actualmente.</p>
+            <a href="{{ url_for('inventario.nuevo_item') }}" class="btn-inventory-new">
+                <i class="fas fa-plus"></i> Registrar el primer movimiento
+            </a>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
