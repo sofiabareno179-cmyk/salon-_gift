@@ -1,7 +1,7 @@
 from app import db
 from datetime import datetime
 
-class Promocion(db.Model):
+class Frase(db.Model):
     __tablename__ = 'promociones'
 
     idpromocion = db.Column(db.Integer, primary_key=True)

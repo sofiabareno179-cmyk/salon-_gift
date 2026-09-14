@@ -149,15 +149,51 @@ body.client-page .pastel-green {
     color: #2E7D32;
 }
 
-/* 5. Banner Promocional */
-body.client-page .promo-banner {
+/* 5. Sección Frase Motivadora */
+body.client-page .frase-motivadora {
     background: linear-gradient(135deg, #fff5f8, var(--pastel-pink));
-    padding: 30px;
+    padding: 40px 30px;
     border-radius: 20px;
     margin-top: 40px;
     text-align: center;
     border: 1.5px dashed var(--soft-pink);
     color: var(--dark-pink);
+    position: relative;
+}
+
+body.client-page .frase-icon {
+    font-size: 2.2rem;
+    color: var(--soft-pink);
+    display: block;
+    margin-bottom: 10px;
+}
+
+body.client-page .frase-label {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--dark-pink);
+    opacity: 0.7;
+    margin-bottom: 12px;
+}
+
+body.client-page .frase-texto {
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--dark-pink);
+    margin: 0;
+}
+
+body.client-page .frase-autor {
+    display: block;
+    margin-top: 14px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--soft-pink);
 }
 
 /* 6. Botones Generales */

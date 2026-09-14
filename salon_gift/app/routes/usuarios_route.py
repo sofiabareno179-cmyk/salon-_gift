@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, flash, abort
 from app.models.usuario import User
 from app.models.perfil import Perfil
-from app.models.promocion import Promocion
+from app.models.frases import Frase
 from flask_login import current_user, login_required
 from functools import wraps
 from app import db
@@ -35,9 +35,9 @@ def inicio():
 def index():
     sync_proxima_cita_notification()
     data = User.query.all()
-    promo = Promocion.query.filter_by(activa=True).first()
+    promo = Frase.query.filter_by(activa=True).first()
     if not promo:
-        promo = Promocion(titulo='✨ Frase del Día ✨', descripcion='El éxito es la suma de pequeños esfuerzos repetidos día tras día.', activa=True)
+        promo = Frase(titulo='✨ Frase del Día ✨', descripcion='El éxito es la suma de pequeños esfuerzos repetidos día tras día.', activa=True)
         try:
             promo.save()
         except Exception:

@@ -13,23 +13,23 @@
                     <h5><i class="fas fa-quote-right"></i> Editar Frases Motivadoras</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url_for('promocion.editar') }}" method="POST">
+                    <form action="{{ url_for('frases.editar') }}" method="POST">
                         <div class="form-group">
                             <label class="form-label">Título</label>
                             <div class="input-luxury-wrapper">
                                 <i class="fas fa-heading"></i>
-                                <input type="text" name="titulo" value="{{ promo.titulo }}" required>
+                                <input type="text" name="titulo" value="{{ frase.titulo }}" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Descripción</label>
                             <div class="input-luxury-wrapper">
                                 <i class="fas fa-align-left"></i>
-                                <textarea name="descripcion" rows="4" required>{{ promo.descripcion }}</textarea>
+                                <textarea name="descripcion" rows="4" required>{{ frase.descripcion }}</textarea>
                             </div>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" name="activa" class="form-check-input" id="activa" {% if promo.activa %}checked{% endif %}>
+                            <input type="checkbox" name="activa" class="form-check-input" id="activa" {% if frase.activa %}checked{% endif %}>
                             <label class="form-check-label" for="activa">Frase activa</label>
                         </div>
                         <div class="action-buttons">

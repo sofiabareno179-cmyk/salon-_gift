@@ -58,7 +58,7 @@ def create_app():
         producto_route,proveedores_route,recordatorios_route,
         usuarios_route, servicios_route,perfil_route,
         galeria_route,catalogo_route,notificaciones_route,
-        bloqueos_route,promocion_route
+        bloqueos_route,frases_route
     )
     app.register_blueprint(auth.bp)
     app.register_blueprint(agenda_route.bp)
@@ -74,7 +74,7 @@ def create_app():
     app.register_blueprint(catalogo_route.bp)
     app.register_blueprint(notificaciones_route.bp)
     app.register_blueprint(bloqueos_route.bp)
-    app.register_blueprint(promocion_route.bp)
+    app.register_blueprint(frases_route.bp)
 
     @app.errorhandler(404)
     def not_found(e):
