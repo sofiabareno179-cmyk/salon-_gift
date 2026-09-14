@@ -47,10 +47,12 @@
     </section>
 
     {% if promo %}
-    <div class="promo-banner">
-        <h3 style="color: var(--dark-pink);">{{ promo.titulo }}</h3>
-        <p>{{ promo.descripcion }}</p>
-    </div>
+    <section class="frase-motivadora">
+        <i class="fas fa-quote-left frase-icon"></i>
+        <span class="frase-label">Frase Motivadora</span>
+        <p class="frase-texto">"{{ promo.descripcion }}"</p>
+        <span class="frase-autor">{{ promo.titulo }}</span>
+    </section>
     {% endif %}
 </div>
 
