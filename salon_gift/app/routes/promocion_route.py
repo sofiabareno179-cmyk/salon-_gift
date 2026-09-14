@@ -20,7 +20,7 @@ bp = Blueprint('promocion', __name__, url_prefix='/Promocion')
 def editar():
     promo = Promocion.query.first()
     if not promo:
-        promo = Promocion(titulo='✨ Promo del Mes ✨', descripcion='Trae a una amiga y ambas obtienen un 15% de descuento en tratamientos de hidratación.', activa=True)
+        promo = Promocion(titulo='✨ Frase del Día ✨', descripcion='El éxito es la suma de pequeños esfuerzos repetidos día tras día.', activa=True)
         promo.save()
 
     if request.method == 'POST':
@@ -28,7 +28,7 @@ def editar():
         promo.descripcion = request.form.get('descripcion')
         promo.activa = 'activa' in request.form
         db.session.commit()
-        flash('Promoción actualizada', 'success')
+        flash('Frase motivadora actualizada', 'success')
         return redirect(url_for('promocion.editar'))
 
     return render_template('promocion/edit.html', promo=promo)

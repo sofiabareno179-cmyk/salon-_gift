@@ -37,7 +37,7 @@ def index():
     data = User.query.all()
     promo = Promocion.query.filter_by(activa=True).first()
     if not promo:
-        promo = Promocion(titulo='✨ Promo del Mes ✨', descripcion='Trae a una amiga y ambas obtienen un 15% de descuento en tratamientos de hidratación.', activa=True)
+        promo = Promocion(titulo='✨ Frase del Día ✨', descripcion='El éxito es la suma de pequeños esfuerzos repetidos día tras día.', activa=True)
         try:
             promo.save()
         except Exception:
