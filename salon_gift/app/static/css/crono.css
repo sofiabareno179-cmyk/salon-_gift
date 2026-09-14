@@ -106,7 +106,7 @@ body.schedule-page {
 /* Calendar Header */
 .schedule__header {
     display: grid;
-    grid-template-columns: 80px repeat(5, 1fr);
+    grid-template-columns: 80px repeat(6, 1fr);
     background: var(--rose-gold);
     color: white;
 }
@@ -133,7 +133,7 @@ body.schedule-page {
 /* Calendar Grid */
 .schedule__grid {
     display: grid;
-    grid-template-columns: 80px repeat(5, 1fr);
+    grid-template-columns: 80px repeat(6, 1fr);
 }
 
 .schedule__time {
@@ -375,7 +375,7 @@ body.schedule-page {
 /* Responsive Grid styling */
 @media (max-width: 768px) {
     .schedule__header, .schedule__grid {
-        grid-template-columns: 60px repeat(5, 1fr);
+        grid-template-columns: 60px repeat(6, 1fr);
     }
     .schedule__day-name {
         font-size: 0.75rem;

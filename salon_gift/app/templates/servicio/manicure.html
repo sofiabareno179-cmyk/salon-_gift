@@ -244,7 +244,7 @@
             </div>
             <h3>{{ s.nombre }}</h3>
             <div class="details">
-                <span><strong>Precio</strong> ${{ "{:,.0f}".format(s.precio | float) }}</span>
+                <span><strong>Precio</strong> {{ s.precio|format_cop }}</span>
                 <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
             </div>
             <a href="{{ url_for('citas.crono_citas') }}" class="btn-treatment">Reservar Experiencia</a>

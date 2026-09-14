@@ -54,7 +54,7 @@
                                 {{ s.categoria | capitalize }}
                             </span>
                         </td>
-                        <td><span class="price-cell">${{ "{:,.2f}".format(s.precio | float) }}</span></td>
+                        <td><span class="price-cell">{{ s.precio|format_cop }}</span></td>
                         <td><span class="duration-cell"><i class="far fa-clock"></i>{{ s.duracion }} min</span></td>
                         <td>
                             <a href="{{ url_for('servicio.edit', id=s.idservicio) }}" class="btn-action btn-action-edit" title="Editar">

@@ -219,7 +219,7 @@
             <h3>{{ s.nombre }}</h3>
             <p class="hair-tip"><strong>Tip del estilista:</strong> {{ s.tip if s.tip else 'Pregunta a nuestro equipo por el mejor consejo para este servicio.' }}</p>
             <div class="details">
-                <span><strong>Precio</strong> ${{ '{:,.0f}'.format(s.precio|int).replace(',', '.') }}</span>
+                <span><strong>Precio</strong> {{ s.precio|format_cop }}</span>
                 <span><strong>Tiempo</strong> {{ s.duracion }} min</span>
             </div>
             <a href="{{ url_for('citas.crono_citas') }}" class="btn-hair reservar-btn">Reservar Experiencia</a>
