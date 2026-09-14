@@ -296,7 +296,7 @@ body.inventory-page .btn-pink-outline:hover {
 /* --- Premium Inventory Dashboard (Index) --- */
 .inventory-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1720px;
     margin: 2rem auto;
     padding: 0 1.5rem;
     box-sizing: border-box;
@@ -316,7 +316,7 @@ body.inventory-page .btn-pink-outline:hover {
 }
 
 .inventory-header h2 {
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: 800;
     color: #3d7a66;
     margin: 0;
@@ -327,7 +327,7 @@ body.inventory-page .btn-pink-outline:hover {
 
 .inventory-header h2 i {
     color: #88d8b0;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
 }
 
 .inventory-subtitle {
@@ -364,16 +364,16 @@ body.inventory-page .btn-pink-outline:hover {
 .inventory-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1.8rem;
     margin-bottom: 2rem;
 }
 
 .inv-stat-card {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
-    padding: 1.4rem 1.6rem;
-    border-radius: 18px;
+    gap: 1.4rem;
+    padding: 1.8rem 2rem;
+    border-radius: 20px;
     background: rgba(255, 255, 255, 0.92);
     border: 1px solid rgba(168, 230, 207, 0.3);
     box-shadow: 0 8px 25px rgba(136, 216, 176, 0.10);
@@ -386,13 +386,13 @@ body.inventory-page .btn-pink-outline:hover {
 }
 
 .inv-stat-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     flex-shrink: 0;
 }
 
@@ -406,14 +406,14 @@ body.inventory-page .btn-pink-outline:hover {
 }
 
 .inv-stat-value {
-    font-size: 1.9rem;
+    font-size: 2.6rem;
     font-weight: 800;
     color: #3d7a66;
     line-height: 1.1;
 }
 
 .inv-stat-label {
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: #8fb3a5;
     font-weight: 600;
 }
@@ -421,20 +421,20 @@ body.inventory-page .btn-pink-outline:hover {
 /* --- Cuadrícula de tarjetas de inventario --- */
 .inventory-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.8rem;
 }
 
 .inv-item-card {
     background: rgba(255, 255, 255, 0.94);
-    border-radius: 20px;
-    padding: 1.6rem 1.6rem 1.4rem;
+    border-radius: 22px;
+    padding: 2rem 2rem 1.8rem;
     border: 1px solid rgba(168, 230, 207, 0.35);
     box-shadow: 0 10px 30px rgba(136, 216, 176, 0.10);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 1.1rem;
 }
 
 .inv-item-card:hover {
@@ -480,7 +480,7 @@ body.inventory-page .btn-pink-outline:hover {
 }
 
 .inv-item-number {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 900;
     line-height: 1;
     color: #3d7a66;

@@ -26,7 +26,7 @@
                     <p>{{ item.descripcion }}</p>
                     {% endif %}
                 </div>
-                <div class="cat-item-price">${{ "%.2f"|format(item.precio) }}</div>
+                <div class="cat-item-price">{{ item.precio|format_cop }}</div>
             </div>
             {% endfor %}
         </div>

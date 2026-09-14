@@ -80,6 +80,19 @@ def create_app():
     def not_found(e):
         return {"error": "404 No Encontrado"}, 404
 
+    @app.template_filter('format_cop')
+    def format_cop(value):
+        try:
+            num = float(value)
+        except (TypeError, ValueError):
+            return ''
+        signo = '-' if num < 0 else ''
+        num = abs(num)
+        if num == int(num):
+            return f"{signo}${int(num):,}".replace(',', '.')
+        s = f"{num:,.2f}".replace(',', 'X').replace('.', ',')
+        return f"{signo}${s.replace('X', '.')}"
+
     @app.errorhandler(Exception)
     
     def handle_error(e):

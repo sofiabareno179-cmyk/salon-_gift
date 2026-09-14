@@ -43,7 +43,7 @@
                     <tr>
                         <td><span class="product-name">{{ p.nombre }}</span></td>
                         <td><span class="product-category">{{ p.categoria }}</span></td>
-                        <td><span class="product-price">${{ "%.2f"|format(p.precio) }}</span></td>
+                        <td><span class="product-price">{{ p.precio|format_cop }}</span></td>
                         <td><span class="product-desc">{{ p.descripcion[:50] }}{% if p.descripcion|length > 50 %}...{% endif %}</span></td>
                         <td>
                             <div class="btn-group" style="gap: 6px;">
