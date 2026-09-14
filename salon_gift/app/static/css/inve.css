@@ -294,11 +294,16 @@ body.inventory-page .btn-pink-outline:hover {
 }
 
 /* --- Premium Inventory Dashboard (Index) --- */
+body.inventory-page .content-wrapper {
+    width: 100%;
+    align-self: stretch;
+}
+
 .inventory-container {
     width: 100%;
-    max-width: 1720px;
+    max-width: none;
     margin: 2rem auto;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
     box-sizing: border-box;
 }
 
