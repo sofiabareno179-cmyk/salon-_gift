@@ -299,6 +299,20 @@ body.inventory-page .content-wrapper {
     align-self: stretch;
 }
 
+/* La lista usa todo el alto y ancho disponibles (sin centrado vertical que deje huecos) */
+body.inventory-list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+body.inventory-list .inventory-container {
+    max-width: none;
+    padding: 0 2rem;
+    flex: 1;
+}
+
 .inventory-container {
     width: 100%;
     max-width: 1400px;
