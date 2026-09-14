@@ -80,6 +80,10 @@ def create_app():
     def not_found(e):
         return {"error": "404 No Encontrado"}, 404
 
+    @app.errorhandler(403)
+    def forbidden(e):
+        return {"error": "403 Acceso denegado"}, 403
+
     @app.template_filter('format_cop')
     def format_cop(value):
         try:
@@ -94,8 +98,10 @@ def create_app():
         return f"{signo}${s.replace('X', '.')}"
 
     @app.errorhandler(Exception)
-    
     def handle_error(e):
+        from werkzeug.exceptions import HTTPException
+        if isinstance(e, HTTPException):
+            return {"error": e.description}, e.code
         import traceback
         traceback.print_exc()
         print(f"An error occurred: {str(e)}")
