@@ -21,12 +21,12 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: salon_gilft/salon_gift/requirements.txt
+          cache-dependency-path: salon_gift/requirements.txt
 
       - name: Instalar dependencias
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -r salon_gilft/salon_gift/requirements.txt
+          python -m pip install -r salon_gift/requirements.txt
           python -m pip install pytest
 
       - name: Ejecutar pruebas
