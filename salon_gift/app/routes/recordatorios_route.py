@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import login_required
+from flask_login import current_user, login_required
 from app import db
 from app.models.recordatorios import Recordatorios
 
@@ -24,6 +24,7 @@ def nuevo_recordatorio():
             mensaje=mensaje, 
             fecha_recordatorio=fecha
         )
+        nuevo_rec.idusuario = current_user.idusuario
         
         nuevo_rec.save()
         flash('Recordatorio programado con éxito', 'success')
