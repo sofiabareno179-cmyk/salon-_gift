@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Editar Elemento{% endblock %}
+{% block body_class %}gallery-page{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/galeria.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card card-luxury">
+                <div class="card-header-gold">
+                    <h5><i class="fas fa-edit"></i> Editar Elemento</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('galeria.editar', id=item.idgaleria) }}" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="form-label">Título</label>
+                            <div class="input-luxury-wrapper">
+                                <i class="fas fa-heading"></i>
+                                <input type="text" name="titulo" value="{{ item.titulo }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Descripción</label>
+                            <div class="input-luxury-wrapper">
+                                <i class="fas fa-align-left"></i>
+                                <textarea name="descripcion" rows="3">{{ item.descripcion }}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Cambiar archivo (opcional)</label>
+                            <div class="input-luxury-wrapper">
+                                <i class="fas fa-file"></i>
+                                <input type="file" name="archivo" accept="image/*,video/*">
+                            </div>
+                            <small class="text-muted">Actual: {{ item.archivo }}</small>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="{{ url_for('galeria.index') }}" class="btn btn-pink-outline">Cancelar</a>
+                            <button type="submit" class="btn btn-gold">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

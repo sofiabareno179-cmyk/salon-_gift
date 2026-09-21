@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Agenda{% endblock %}
+{% block body_class %}schedule-page{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/crono.css') }}">
+{% endblock %}
+{% block content %}
+<section class="schedule">
+    <div class="schedule__nav">
+        <div class="schedule__nav-group">
+            <a href="javascript:history.back()" class="btn-nav btn-volver"><i class="fas fa-arrow-left"></i> Volver</a>
+            <a href="{{ url_for('citas.crono_citas', fecha=anterior) }}" class="btn-nav">« Anterior</a>
+        </div>
+        <div class="schedule__header-info">
+            <h2 class="schedule__title">Calendario de Citas</h2>
+            <span class="schedule__date-range">Semana del {{ lunes.strftime('%d de %b, %Y') }}</span>
+            <br>
+            <a href="{{ url_for('citas.crono_citas', fecha=hoy) }}" class="btn-today">Hoy</a>
+        </div>
+        <div class="schedule__nav-group">
+            <a href="{{ url_for('citas.crono_citas', fecha=siguiente) }}" class="btn-nav">Siguiente »</a>
+        </div>
+    </div>
+
+    <div class="schedule__container">
+        <!-- Encabezado de Días -->
+        <div class="schedule__header">
+            <div class="schedule__day-name">Hora</div>
+            {% set nombres_dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'] %}
+            {% for i in range(6) %}
+                <div class="schedule__day-name">
+                    {{ nombres_dias[i] }}
+                    <small>{{ (lunes + timedelta(days=i)).strftime('%d/%m') }}</small>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Cuerpo del Calendario -->
+        <div class="schedule__grid">
+            {% for hora in horas %}
+                <div class="schedule__time">{{ hora }}</div>
+                
+                {% for dia in range(6) %}
+                    <div class="schedule__slot"
+                         data-fecha="{{ (lunes + timedelta(days=dia)).strftime('%Y-%m-%d') }}"
+                         data-hora="{{ hora }}">
+                        {% set cita = agenda.get((dia, hora)) %}
+                        {% if cita %}
+                            <div class="schedule__appointment status-{{ cita.estado.lower() }}"
+                                 draggable="true" data-id="{{ cita.idcitas }}"
+                                 title="Arrastra para reubicar la cita">
+                                <a href="{{ url_for('citas.editar_cita', id=cita.idcitas) }}" draggable="false">
+                                    <span class="appt__time">{{ cita.fechahora.strftime('%H:%M') }}</span>
+                                    <strong class="appt__service">{{ cita.servicio }}</strong>
+                                    <span class="appt__status">{{ cita.estado }}</span>
+                                </a>
+                            </div>
+                        {% elif (dia, hora) in bloqueos_set %}
+                            <div class="schedule__slot schedule__slot--blocked" title="{{ bloqueos_motivos.get((dia, hora), 'Bloqueado') }}">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                        {% else %}
+                            <a href="{{ url_for('citas.nueva_cita', fecha=(lunes + timedelta(days=dia)).strftime('%Y-%m-%d'), hora=hora) }}" class="appt__add">+</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<script>
+(function () {
+    var moverUrl = "{{ url_for('citas.mover_cita', id=0) }}";
+    var baseUrl = moverUrl.substring(0, moverUrl.lastIndexOf('/'));
+    var appointments = document.querySelectorAll('.schedule__appointment');
+    var slots = document.querySelectorAll('.schedule__slot:not(.schedule__slot--blocked)');
+    var draggedId = null;
+    var origin = null;
+
+    appointments.forEach(function (a) {
+        a.addEventListener('dragstart', function (e) {
+            draggedId = a.getAttribute('data-id');
+            var os = a.closest('.schedule__slot');
+            origin = os ? { f: os.getAttribute('data-fecha'), h: os.getAttribute('data-hora') } : null;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', draggedId);
+        });
+        a.addEventListener('dragend', function () {
+            draggedId = null;
+            origin = null;
+            slots.forEach(function (s) { s.classList.remove('schedule__slot--drag-over'); });
+        });
+    });
+
+    slots.forEach(function (slot) {
+        slot.addEventListener('dragover', function (e) {
+            if (!draggedId) return;
+            if (slot.querySelector('.schedule__appointment')) return;
+            if (origin && origin.f === slot.getAttribute('data-fecha') && origin.h === slot.getAttribute('data-hora')) return;
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            slot.classList.add('schedule__slot--drag-over');
+        });
+        slot.addEventListener('dragleave', function () {
+            slot.classList.remove('schedule__slot--drag-over');
+        });
+        slot.addEventListener('drop', function (e) {
+            e.preventDefault();
+            slot.classList.remove('schedule__slot--drag-over');
+            if (!draggedId) return;
+            if (slot.querySelector('.schedule__appointment')) return;
+            var fecha = slot.getAttribute('data-fecha');
+            var hora = slot.getAttribute('data-hora');
+            if (!fecha || !hora) return;
+            if (origin && origin.f === fecha && origin.h === hora) return;
+            fetch(baseUrl + '/' + draggedId, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ fecha: fecha, hora: hora })
+            }).then(function (r) {
+                if (r.ok) { window.location.reload(); return; }
+                return r.json().then(function (d) {
+                    alert((d && d.error) || 'No se pudo mover la cita');
+                });
+            }).catch(function () { alert('Error de conexión'); });
+        });
+    });
+})();
+</script>
+{% endblock %}

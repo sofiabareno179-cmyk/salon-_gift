@@ -1,0 +1,32 @@
+from flask_login import UserMixin
+from app import db
+
+class Citas(db.Model, UserMixin): 
+    __tablename__ = 'citas'
+    
+    idcitas = db.Column(db.Integer, primary_key=True)
+    fechahora = db.Column(db.DateTime, nullable=False) 
+    estado = db.Column(db.String(100), nullable=False) 
+    servicio = db.Column(db.String(150), nullable=True)
+
+    idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False)
+    cliente = db.relationship('User', back_populates='citas')
+    servicios = db.relationship('Servicio', back_populates='citas', uselist=False)
+
+
+    def __init__(self, fechahora, servicio=None, estado='Pendiente', idusuario=None):
+        self.fechahora = fechahora
+        self.servicio = servicio
+        self.estado = estado
+        self.idusuario = idusuario
+
+    @property
+    def fecha(self):
+        return self.fechahora
+
+    def get_id(self):
+        return str(self.idcitas)
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()

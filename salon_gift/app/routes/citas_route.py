@@ -1,0 +1,227 @@
+from sqlalchemy import func
+from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import login_required,current_user
+from app import db
+from datetime import datetime, timedelta, date
+from app.models.citas import Citas
+from app.models.agenda import Agenda
+from app.models.bloqueo import Bloqueo
+from app.models.notificacion import Notificacion
+
+bp = Blueprint('citas', __name__,url_prefix='/Citas')
+
+DIAS_MAP = {0:'Lunes',1:'Martes',2:'Miércoles',3:'Jueves',4:'Viernes',5:'Sábado',6:'Domingo'}
+
+def validar_slot(dt):
+    """Devuelve mensaje de error si no se puede agendar en ese día/hora, o None si es válido."""
+    nombre = DIAS_MAP[dt.weekday()]
+    hora_str = dt.strftime('%H:%M')
+    agenda_dia = Agenda.query.filter(func.lower(Agenda.diasemana) == nombre.lower()).first()
+    if not agenda_dia:
+        return f'No hay horario disponible para {nombre}'
+    if hora_str < agenda_dia.horainicio or hora_str >= agenda_dia.horafin:
+        return f'La hora debe estar entre {agenda_dia.horainicio} y {agenda_dia.horafin} los {nombre}'
+    bloqueado = Bloqueo.query.filter(
+        Bloqueo.fecha == dt.date(),
+        Bloqueo.hora_inicio <= hora_str,
+        Bloqueo.hora_fin > hora_str
+    ).first()
+    if bloqueado:
+        return f'Horario bloqueado: {bloqueado.motivo or "no disponible"}'
+    return None
+
+@bp.route('/citas')
+@login_required
+def listar_citas():
+    todas_las_citas = Citas.query.all()
+    return render_template('citas/index.html', citas=todas_las_citas)
+@bp.route('/citas/cronograma')
+@login_required
+def crono_citas():
+    # 1. Gestión de fechas
+    fecha_query = request.args.get('fecha')
+    if fecha_query:
+        try:
+            fecha_actual = datetime.strptime(fecha_query, '%Y-%m-%d')
+        except ValueError:
+            fecha_actual = datetime.now()
+    else:
+        fecha_actual = datetime.now()
+
+    lunes = fecha_actual - timedelta(days=fecha_actual.weekday())
+    sabado_fin = (lunes + timedelta(days=5)).replace(hour=23, minute=59, second=59)
+
+    # 2. Obtener citas de la semana para el usuario
+    mis_citas = Citas.query.filter(
+        Citas.idusuario == current_user.idusuario,
+        Citas.fechahora >= lunes.replace(hour=0, minute=0, second=0),
+        Citas.fechahora <= sabado_fin
+    ).all()
+    
+    # 3. Mapear citas a la cuadrícula (Día, Hora)
+    agenda = {}
+    for cita in mis_citas:
+        dia_semana = cita.fechahora.weekday() 
+        hora_str = cita.fechahora.strftime('%H:00')
+        agenda[(dia_semana, hora_str)] = cita
+
+    # 4. Obtener bloqueos de la semana
+    bloqueos_set = set()
+    bloqueos_motivos = {}
+    try:
+        inicio_semana = lunes.replace(hour=0, minute=0, second=0)
+        fin_semana = sabado_fin
+        bloqueos = Bloqueo.query.filter(
+            Bloqueo.fecha >= inicio_semana.date(),
+            Bloqueo.fecha <= fin_semana.date()
+        ).all()
+
+        for b in bloqueos:
+            diff = (b.fecha - lunes.date()).days
+            if 0 <= diff <= 5:
+                hora_b = str(b.hora_inicio)[:5]
+                bloqueos_set.add((diff, hora_b))
+                bloqueos_motivos[(diff, hora_b)] = b.motivo or 'Bloqueado'
+    except Exception:
+        pass
+
+    # 6. Variables de navegación
+    horas = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"]
+    anterior = (lunes - timedelta(weeks=1)).strftime('%Y-%m-%d')
+    siguiente = (lunes + timedelta(weeks=1)).strftime('%Y-%m-%d')
+    hoy = datetime.now().strftime('%Y-%m-%d')
+    
+    return render_template('citas/crono.html', 
+                           agenda=agenda, 
+                           horas=horas, 
+                           lunes=lunes, 
+                           anterior=anterior, 
+                           siguiente=siguiente, 
+                           hoy=hoy,
+                           timedelta=timedelta,
+                           bloqueos_set=bloqueos_set, bloqueos_motivos=bloqueos_motivos)
+@bp.route('/citas/mover/<int:id>', methods=['POST'])
+@login_required
+def mover_cita(id):
+    data = request.get_json(silent=True) or {}
+    fecha = (data.get('fecha') or '').strip()
+    hora = (data.get('hora') or '').strip()
+    try:
+        nueva_fecha = datetime.strptime(f"{fecha} {hora}", '%Y-%m-%d %H:%M')
+    except ValueError:
+        return {"error": "Fecha u hora invalida"}, 400
+
+    cita = Citas.query.get_or_404(id)
+    if cita.idusuario != current_user.idusuario:
+        return {"error": "No autorizado"}, 403
+
+    error = validar_slot(nueva_fecha)
+    if error:
+        return {"error": error}, 400
+
+    cita.fechahora = nueva_fecha
+    db.session.commit()
+    return {"ok": True}, 200
+
+@bp.route('/citas/nueva', methods=['GET', 'POST'])
+@login_required # Esto asegura que current_user tenga datos
+def nueva_cita():
+    if request.method == 'POST':
+        fechahora = request.form.get('fechahora')
+        servicio = request.form.get('servicio')
+        estado = request.form.get('estado', 'Pendiente') 
+
+        # 1. Validar que los datos no estén vacíos
+        if not fechahora:
+            flash('La fecha es obligatoria', 'warning')
+            return redirect(url_for('citas.nueva_cita'))
+
+        try:
+            fechahora_dt = datetime.strptime(fechahora, '%Y-%m-%dT%H:%M')
+        except ValueError:
+            try:
+                fechahora_dt = datetime.strptime(fechahora, '%Y-%m-%d %H:%M:%S')
+            except ValueError:
+                flash('Formato de fecha inválido', 'danger')
+                return redirect(url_for('citas.nueva_cita'))
+
+        # 2. Validar contra agenda y bloqueos
+        error = validar_slot(fechahora_dt)
+        if error:
+            flash(error, 'danger')
+            return redirect(url_for('citas.nueva_cita'))
+
+        # 3. Crear la instancia
+        nueva_cita = Citas(
+            fechahora=fechahora_dt,
+            servicio=servicio,
+            estado=estado,
+            idusuario=current_user.idusuario
+        )
+
+        try:
+            db.session.add(nueva_cita)
+            db.session.flush()
+            notif = Notificacion(
+                idusuario=current_user.idusuario,
+                titulo='Nueva cita agendada',
+                mensaje=f'Cita de {servicio} para el {fechahora_dt.strftime("%d/%m/%Y %H:%M")}'
+            )
+            db.session.add(notif)
+            db.session.commit()
+            flash('Cita agendada correctamente', 'success')
+            return redirect(url_for('citas.crono_citas'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error al guardar: {str(e)}', 'danger')
+            return redirect(url_for('citas.nueva_cita'))
+    
+    fecha_def = request.args.get('fecha') or datetime.now().strftime('%Y-%m-%d')
+    hora_def = request.args.get('hora') or '09:00'
+    return render_template('citas/add.html', fecha_def=fecha_def, hora_def=hora_def)
+
+@bp.route('/citas/editar/<int:id>', methods=['GET', 'POST'])
+@login_required
+def editar_cita(id):
+    cita = Citas.query.get_or_404(id)
+    
+    if request.method == 'POST':
+        fechahora = request.form.get('fechahora')
+        cita.estado = request.form.get('estado')
+        cita.servicio = request.form.get('servicio')
+        
+        if fechahora:
+            try:
+                cita.fechahora = datetime.strptime(fechahora, '%Y-%m-%dT%H:%M')
+            except ValueError:
+                try:
+                    cita.fechahora = datetime.strptime(fechahora, '%Y-%m-%d %H:%M:%S')
+                except ValueError:
+                    flash('Formato de fecha inválido', 'danger')
+                    return redirect(url_for('citas.editar_cita', id=id))
+        
+        notif = Notificacion(
+            idusuario=current_user.idusuario,
+            titulo='Cita actualizada',
+            mensaje=f'Tu cita de {cita.servicio} ha sido modificada'
+        )
+        db.session.add(notif)
+        db.session.commit()
+        flash('Cita actualizada con éxito', 'info')
+        return redirect(url_for('citas.listar_citas'))
+    
+    return render_template('citas/edit.html', cita=cita)
+@bp.route('/citas/eliminar/<int:id>', methods=['POST'])
+@login_required
+def eliminar_cita(id):
+    cita = Citas.query.get_or_404(id)
+    notif = Notificacion(
+        idusuario=current_user.idusuario,
+        titulo='Cita cancelada',
+        mensaje=f'Tu cita de {cita.servicio} ha sido cancelada'
+    )
+    db.session.add(notif)
+    db.session.delete(cita)
+    db.session.commit()
+    flash('Cita eliminada permanentemente', 'danger')
+    return redirect(url_for('citas.listar_citas'))
