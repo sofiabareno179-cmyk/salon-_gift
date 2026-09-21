@@ -30,4 +30,5 @@ jobs:
           python -m pip install pytest
 
       - name: Ejecutar pruebas
-        run: pytest -q
+        working-directory: salon_gift
+        run: pytest -q app/test
